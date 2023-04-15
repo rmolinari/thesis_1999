@@ -22,7 +22,7 @@ to remind myself how to do things, and sometimes run into instability.
 
 ## Plan
 
-I plan to retypset as much of my thesis as I can, working from my hard copy.
+I plan to retypeset as much of my thesis as I can, working from my hard copy.
 
 My submitted thesis has more typos that I care to admit, even after all the proofreading I did back in the day. After a certain
 point I became blind to them. For now I'm aiming to reproduce the thesis, errors and all, so that I can fix them as later
@@ -30,3 +30,5 @@ commits. Of course, the very process of typsetting it again means I'll introduce
 
 Typst is still in beta and in flux. Things will surely change, and I'm sure that things I want to be able to do aren't (yet)
 possible.
+
+I may get too frustrated to continue, or I may just run out of steam. We'll have to see how it goes.

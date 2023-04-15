@@ -2,19 +2,19 @@
 #let thesis_title = "Properties of relative recursive enumerability"
 #let author = "Rory Molinari"
 
-#let setdiff(a, b) = [$#a tilde.op #b$]
-#let turinginterval(a, b) = [ $[#a, #b]_T$ ]
-#let leqt = [ $lt.eq_T$ ]
-#let emptyset = [ $nothing$ ]
+#let setdiff(a, b) = $#a tilde.op #b$
+#let turinginterval(a, b) = $[#a, #b]_T$
+#let leqt = $lt.eq_T$
+#let emptyset = $nothing$
 
-// TODO: need one-barb arrow here
-#let restr(a, b) = [ $#a arrow.t #b$ ]
+#let restr(a, b) = $#a harpoon.tr #b$
+#let concat(a, b) = $#a paren.t #b$
 
-#let concat(a, b) = [ $#a paren.t #b$ ]
+#let reIn(z) = $"r.e."[#z]$
+#let reInAbove(z) = $"REA"[#z]$
+#let dreInAbove(z) = $"d"reInAbove(#z)$
 
-#let reIn(z) = [ $"r.e."[#z]$ ]
-#let reInAbove(z) = [ $"REA"[#z]$ ]
-#let dreInAbove(z) = [ $"dREA"[#z]$ ]
+#let phi = sym.phi.alt
 
 // Global formatting
 #set par(justify: true)
@@ -89,21 +89,21 @@ University possible, and whose unfailing hospitality made me feel welcome.
     v(2in)
     set text(weight: "bold")
     align(center)[
-      CHAPTER #counter(heading).display()
+      CHAPTER #counter(heading).display()\
       #v(0.5em)
-      #block(it.body)
+      #it.body
       #v(0.2em)
     ]
 }
 
-= Introduction <intro>
-== Definintions and notation
+= Introduction
+== Definitions and notation
 
 The notation used in this paper is largely standand, and the reader is directed to @Soare1987 for an exposition. We note the
 following.
 
-Uppercase Greek letters, $Phi, Psi, dots$ will denote recursive functionals, with associated uses $phi.alt, psi, dots$ where the oracle
-will be understood from context. Without loss of generality we assume that $phi(x, s)$ is increasing in both arguments.
+Uppercase Greek letters, $Phi, Psi, dots$ will denote recursive functionals, with associated uses $phi, psi, dots$ where the
+oracle will be understood from context. Without loss of generality we assume that $phi(x, s)$ is increasing in both arguments.
 
 We use $subset$ to denote the subset relation, and $subset.neq$ to denote a proper subset. Set difference is denoted
 $setdiff(X, Y)$. It will be convenient to use the notation $turinginterval(X, Y) = { Z bar.v X leqt Z leqt Y }$.
@@ -127,8 +127,8 @@ $
 and
 $
 hat(phi)(x,s) = cases(
-    phi.alt(x, s) #h(1em) & "if" hat(Phi)(C_s; x) arrow.b,
-    0                     & "otherwise."
+    phi(x, s) #h(1em) & "if" hat(Phi)(C_s; x) arrow.b,
+    0                 & "otherwise."
 )
 $
 The point of all this is the following. If $Phi(C; x) arrow.b$, then confinitely often $hat(Phi)_s(C; x) arrow.b$, and for every
@@ -147,7 +147,7 @@ $
 X = U^C = { x bar.v (exists e)[ (restr(C, e), x, e) in U] }
 $
 is $reIn(C)$. The axiom $(restr(C, e), x, e)$ _witnesses_ the fact that $x in U^C$, and $e$ is the _use_ of the enumeration. All
-$reIn(C)$ sets are realizable in this way (up to degree).p
+$reIn(C)$ sets are realizable in this way (up to degree).
 
 Note that, once it is defined, $U$ does not depend essentially in any way on $C$. Thus we may consider, for _any_ set $Y$, the
 $reIn(Y)$ set $U^Y$. $U$ then becomes a _pseudojump operator_, $U : Y arrow.r.bar Y plus.circle U^Y$. These operators will appear in
