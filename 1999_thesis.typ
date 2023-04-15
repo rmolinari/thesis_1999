@@ -83,7 +83,9 @@ University possible, and whose unfailing hospitality made me feel welcome.
 #pagebreak()
 
 // Experimental. Based on something I found it in the Discord from user Heinenen 04/05/2023
+#set heading(numbering: "1.")
 #show heading.where(level: 1): it => {
+    set heading(numbering: "I")
     pagebreak()
     v(2in)
     set text(weight: "bold")
