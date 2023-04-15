@@ -54,16 +54,15 @@
 
     #pagebreak()
     #pagebreak()
-    #box(width: 2in)[
-        #sym.copyright
-        #h(3em)
-        #box[
-            #align(horizon + left)[
-              #underline[Rory Molinari] #h(1em) 1999 \
-              All Rights Reserved
-             ]
-        ]
-    ]
+
+    #grid(
+        columns: (0.5in, 2in),
+        sym.copyright,
+        align(horizon + left)[
+          #underline[Rory Molinari] #h(1em) 1999 \
+          All Rights Reserved
+       ]
+    )
     #pagebreak()
 ]
 
@@ -112,22 +111,22 @@ We will make frequent use of Lachlan's hat-trick. Given an enumeration ${C_s}_(s
 $s gt.eq 0$
 $
 c_s = cases(
-    min(setdiff(C_s, C_(s-1))) #h(1em) & "if" setdiff(C_s, C_(s-1)) eq.not emptyset,
-    max(C_s union {s})         & "otherwise,"
+    min(setdiff(C_s, C_(s-1))) quad &"if" setdiff(C_s, C_(s-1)) eq.not emptyset\,,
+    max(C_s union {s})              &"otherwise,"
 )
 $
 where we take $C_(-1) = emptyset$. We say that the stage $s$ is $C$-_true_ if $restr(C_s, c_s) = restr(C, c_s)$. Now for the
 $C$-recursive function $Phi(C)$ we define
 $
 hat(Phi)_s(C; x) = cases(
-    Phi_s(C_s; x) #h(1em) & "if this computation converges and" phi(x, s) < c_s,
-    "undefined"           & "otherwise,"
+    Phi_s(C_s; x) quad & "if this computation converges and" phi(x, s) < c_s\,,
+    "undefined"        & "otherwise,"
 )
 $
 and
 $
 hat(phi)(x,s) = cases(
-    phi(x, s) #h(1em) & "if" hat(Phi)(C_s; x) arrow.b,
+    phi(x, s) quad & "if" hat(Phi)(C_s; x) arrow.b\,,
     0                 & "otherwise."
 )
 $
