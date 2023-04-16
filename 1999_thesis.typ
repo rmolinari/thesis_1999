@@ -2,7 +2,19 @@
 #let thesis_title = "Properties of relative recursive enumerability"
 #let author = "Rory Molinari"
 
-// Set difference
+////////////////////////////////////////
+// Theorem envinroment
+// https://github.com/sahasatvik/typst-theorems
+#import "theorems.typ": *
+
+#let theorem = thmbox(
+    "theorem",
+    "Theorem",
+    titlefmt: strong,
+    bodyfmt: emph
+)
+
+    // Set difference
 #let setdiff(a, b) = $#a tilde.op #b$
 // Turing interval
 #let turinginterval(a, b) = $[#a, #b]_T$
@@ -168,5 +180,82 @@ $reIn(Y)$ set $U^Y$. $U$ then becomes a _pseudojump operator_, $U : Y arrow.r.ba
 
 A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(x)$ and $X leqt(Y)$.
 If, instead, $Y$ is the difference of two $reIn(x)$ sets, and $X leqt(Y)$ then Y is said to be $dreInAbove(X)$.
+
+= A patched proof of the weak density of the properly d.r.e. degrees
+== Introduction
+
+In @CLW1989 a proof is given of the weak density of the properly d.r.e. degrees:
+#theorem[
+Given recursively enumerable sets $C <_T G$ there is a d.r.e. set $D$ not of r.e. degree such that $C <_T D <_T G$.
+]
+
+The proof given in @CLW1989 has two technical but important flaws. The first, involving the timing of injuries caused by different
+strategies competing on the priorty tree, was noted and fixed by LaForte in @LaForte. The second, involving the claim that the
+various functionals defined in the construction (specifically, the $Delta(C)$ functionals) are always defined consistently, was
+noted by the present author and is discussed here. We assume the reader has access to a copy of @CLW1989.
+
+When discussing the construction in @CLW1989 during the remainder of this section we will use notation matching the rest of this
+thesis.  This notation varies slightly from that used in @CLW1989. We do, however, refer to the cycle-state numbers as defined in
+@CLW1989, rather than their equivalents (if any) in this paper.
+
+=== The central claim
+
+The argument in @CLW1989 constructs a d.r.e. set $A$ satisfying each of the requirements
+$
+  R_e: quad A eq.not Theta_e(E_e) or E_e eq.not Phi_e(C plus.circle A)
+$
+where $E_e$ is an r.e. set, and $Theta_e$ and $Phi_e$ are partial recursive functionals.
+
+The basic module presented to satisfy $E_e$ consists of an infinite collection of _cycles_, indexed by $omega^2$. Together, these
+cycles attempt to define fuctionals $Delta(C)$ and $Gamma_j(C)$ (for $j in omega$) such that, if the strategy fails to satisfy
+$R_e$, one of these functionals demonstrates $G leqt(C)$, contrary to assumption. Cycle $(j, k)$ is allowed to define the values
+$Delta(C\; j)$ and $Gamma_j(C; k)$.
+
+After the description of the basic module (@CLW1989[p141]) two claims are made:
+
++ "Whenever cycle $(j,k)$ is started, any previous version of it has been cancelled and its functionals have become undefined
+  through $C$-changes."
++ Because of 1, "$Gamma_j$ and $Delta$ are defined consistently."
+
+We will demonstrate that both of these claims are false. In the case of claim 2 this means that, even if claim 1 were true,
+this still wouldn't be enough to show that the functional $Delta$ is defined consistently.
+
+=== Counterexamples
+
+Consider the case in which $C = emptyset$, so that no $C$-change ever occurs, and once we define a value for a functional
+we are stuck with it. Write $Delta(j)$ for $Delta(emptyset \;  j)$.
+
+We first show that 1 does not hold.
+
+Consider the situation in which, at stage $t$, cycle $(j,k)$ is in state (5), cycle $(j, k+1)$ is in state (10) and cycle $(j+1,0)$
+is in state (7). Now suppose that there are stages $t < s < s' < s''$, which are the next three stages and which any of the cycles
+of the strategy act, such that those actions are:
+
+- Stage $s$:   #h(1em) Cycle $(j+1, 0)$ defines $Delta(j+1)$ with use $v$.
+- Stage $s'$:  #h(1em) Cycle $(j, k)$ sees the $G$-permission it has been waiting for and stops cycles $(j, k+1)$ and $(j+1, 0)$.
+  At this point, cycle $(j,k)$ advances to state (7).
+- Stage $s''$: #h(1em) Cycle $(j,k)$ sees the stage (which it calls $s_2$) it has been waiting for, and so (re)starts cycle $(j+1, 0)$.
+The value for $Delta(j+1)$ that cycle $(j+1, 0)$ defined at stage $s$ has not become undefined, and claim 1 is false.
+
+#v(1em)
+
+Now suppose that somehow we patch the algorithm so that claim 1 holds, without changing any of the other essential features of the
+construction. We show that it still may be that the functional $Delta$ is not defined consistently. Now the problem is that, for
+a given value $j$, any of the cycles $(j, k)$ (for $k in omega$) may define $Delta(j)$, and it is these definitions which clash.
+
+So consider the situation in which, at stage $t$, cycle $(j, k)$ is in state (5) and cycle $(j, k+1)$ is in state (7). Suppose
+also that there are stages $t < s < s' < s''$, which are the next three stages at which any of the cycles of the strategy act,
+such that these actions are:
+
+- Stage $s$:   #h(1em) Cycle $(j, k+1)$ sees the stage (called $s_2$) it is waiting for, and so defines $Delta(j)$ with use $v'$,
+  advancing to state (10).
+- Stage $s'$:  #h(1em) Cycle $(j, k)$ gets the $G$-permission it has been waiting for and advances to state (7), stopping cycle
+  $(j, k+1)$.
+- Stage $s''$: #h(1em) Cycle $(j, k)$ sees _its_ version of stage $s_2$ (this is what it waits for in state (7)), and so attempts
+  to define its own value of $Delta(j)$.
+
+We further suppose that $G_s(j) eq.not G_(s'')(j)$ (this assumption is independent of any of the activity at stages $s$, $s'$ and
+$s''$). Then the values of $Delta(j)$ that cycles $(j,k)$ and $(j, k+1)$ define will differ, but will both be present at stage
+$s''$.
 
 #bibliography("works.yml")

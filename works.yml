@@ -5,3 +5,25 @@ Soare1987:
   title: Recursively Enumerable Sets and Degrees
   series: Pespectives in Mathematical Logic
   date: 1987
+
+CLW1989:
+  type: Article
+  author:
+    - Cooper, S. Barry
+    - Lempp, Steffen
+    - Watson, Philip
+  title:
+    value: Weak density and cupping in the d-r.e. degrees
+    verbatim: true
+  page-range: 137-152
+  parent:
+    title: Israel Journal of Mathematics
+    volume: 67
+    number: 2
+    serial-number: 3
+
+LaForte:
+  type: thesis
+  author: LaForte, Geoffrey L.
+  title: Phenomena in the n-R.E. and n-REA degrees
+  date: 1996
