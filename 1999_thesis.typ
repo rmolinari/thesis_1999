@@ -2,16 +2,28 @@
 #let thesis_title = "Properties of relative recursive enumerability"
 #let author = "Rory Molinari"
 
+// Set difference
 #let setdiff(a, b) = $#a tilde.op #b$
+// Turing interval
 #let turinginterval(a, b) = $[#a, #b]_T$
-#let leqt = $lt.eq_T$
+// Turing less than or equal
+// Need the provide the argument. Othewise $leqt Z$ ends up roughly as $leqt$ $Z$, with too much space
+#let leqt(z) = $lt.eq_T #z$
 #let emptyset = $nothing$
 
+// Calculation converges
+#let converge = $#h(0em) arrow.b #h(0.05em)$
+
+// Restriction of a to b
 #let restr(a, b) = $#a harpoon.tr #b$
+// Concatenation of sequences a and b
 #let concat(a, b) = $#a paren.t #b$
 
+// r.e.[Z]
 #let reIn(z) = $"r.e."[#z]$
+// REA[Z]
 #let reInAbove(z) = $"REA"[#z]$
+// dREA[Z]
 #let dreInAbove(z) = $"d"reInAbove(#z)$
 
 #let phi = sym.phi.alt
@@ -107,9 +119,9 @@ Uppercase Greek letters, $Phi, Psi, dots$ will denote recursive functionals, wit
 oracle will be understood from context. Without loss of generality we assume that $phi(x, s)$ is increasing in both arguments.
 
 We use $subset$ to denote the subset relation, and $subset.neq$ to denote a proper subset. Set difference is denoted
-$setdiff(X, Y)$. It will be convenient to use the notation $turinginterval(X, Y) = { Z bar.v X leqt Z leqt Y }$.
+$setdiff(X, Y)$. It will be convenient to use the notation $turinginterval(X, Y) = { Z bar.v X leqt(Z) leqt(Y) }$.
 
-We will make frequent use of Lachlan's hat-trick. Given an enumeration ${C_s}_(s gt.eq 0}$ of an r.e. set $C$ define for each stage
+We will make frequent use of Lachlan's hat-trick. Given an enumeration ${C_s}_(s gt.eq 0)$ of an r.e. set $C$ define for each stage
 $s gt.eq 0$
 $
 c_s = cases(
@@ -128,12 +140,12 @@ $
 and
 $
 hat(phi)(x,s) = cases(
-    phi(x, s) quad & "if" hat(Phi)(C_s; x) arrow.b\,,
-    0                 & "otherwise."
+    phi(x, s) quad & "if" hat(Phi)(C_s; x) converge\,,
+    0              & "otherwise."
 )
 $
-The point of all this is the following. If $Phi(C; x) arrow.b$, then confinitely often $hat(Phi)_s(C; x) arrow.b$, and for every
-$C$-true stage $s$, $hat(Phi)_s(C_s; x) arrow.r.double hat(Phi)(C; x) arrow.b$. The hattrick serves to weed out at $C$-true stages
+The point of all this is the following. If $Phi\(C; x) converge$, then confinitely often $hat(Phi)_s(C; x) converge$, and for every
+$C$-true stage $s$, $hat(Phi)_s(C_s; x) arrow.r.double hat(Phi)(C; x) converge$. The hattrick serves to weed out at $C$-true stages
 all but the correct computations.
 
 Finte sequences are denoted variously with parentheses, $(x_0, dots, x_(n-1))$ and angle brackets $angle.l x_0, dots, x_(n-1)
@@ -154,7 +166,7 @@ Note that, once it is defined, $U$ does not depend essentially in any way on $C$
 $reIn(Y)$ set $U^Y$. $U$ then becomes a _pseudojump operator_, $U : Y arrow.r.bar Y plus.circle U^Y$. These operators will appear in
 (TBD).
 
-A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(x)$ and $X leqt Y$.
-If, instead, $Y$ is the difference of two $reIn(x)$ sets, and $X leqt Y$ then Y is said to be $dreInAbove(X)$.
+A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(x)$ and $X leqt(Y)$.
+If, instead, $Y$ is the difference of two $reIn(x)$ sets, and $X leqt(Y)$ then Y is said to be $dreInAbove(X)$.
 
 #bibliography("works.yml")
