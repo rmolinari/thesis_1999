@@ -15,7 +15,7 @@
     bodyfmt: emph
 )
 
-    // Set difference
+// Set difference
 #let setdiff(a, b) = $#a tilde.op #b$
 // Turing interval
 #let turinginterval(a, b) = $[#a, #b]_T$
@@ -65,9 +65,32 @@
     )
 }
 
+////////////////////////////////////////
 // Global formatting
 #set par(justify: true)
 
+
+// Based on an answer in the Discord from PgSuper (2023-04-13 1:43 PM)
+#let setupenum(doc, prefix: "") = {
+  set enum(
+    full: true,
+    numbering: (..n) => {
+      let n = n.pos()
+      if n.len() > 2 {
+        numbering("i.", n.last())
+      } else if n.len() == 2 {
+        numbering("(a)", n.last())
+      } else {
+        numbering(prefix + "1.", ..n)
+      }
+    }
+  )
+  doc
+}
+
+#show: doc => setupenum(doc)
+
+////////////////////////////////////////
 // Title page
 #align(horizon + center)[
     #[
@@ -376,7 +399,6 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   with use $gamma_j(k) = u$ and start cycle $(j, k+1)$ to run simultaneously. Advance to state 2.
 
 + Wait for a stage $t_1$ at which either
-  #set enum(numbering: "(a)")
   + $restr(C_(t_1), u) neq restr(C_(s_1), u)$; or
   + $G_(t_1)(k) neq G_(s_1)(k)$.
 
@@ -402,7 +424,6 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   + $restr(C, u)$ changes first, reset all cycles $> (j, k)$, drop the $A$- and $B$-restraint of cycle $(j, k)$ back to 0, and
     return to state 1. While if
   + $G(k)$ changes first, it it time to see if we need to hedge our bets. There are two subcases.
-    #set enum(numbering: "i.")
     + If some cycle $(j, k')$ of $row(j)$ is currently in stage 5 or 6 (there is at most one, by Lemma TBD below) we cannot
       act on the $G(k)$ change yet. We set the marker $mu(x) = v_(s_1)(j, k')$, defined below, (with the intention of allowing
       $x$ to enter $A$ later with a a $restr(C, mu(x))$ change) and advance to state 3. Recall that this transition does
@@ -429,7 +450,6 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   Advance to state 5.
 
 + Wait for a stage $t_3$ at which either
-  #set enum(numbering: "(a)")
   + $restr(C_(t_3), v) neq restr(C_(s_2), v)$; or
   + $G_(t_3)(j) neq G_(s_2)(j)$.
 
@@ -483,9 +503,11 @@ as we have no equivalent of the bookkeeping state 3 to worry about.
 
 To distinguish the names of the states from those in the module for the $R_e$-requirements we will prefix the numbers here with
 the letter P. Cycle $k$ proceeds as follows.
-#set enum(numbering: "P1")
 
-0. Until given the go-ahead, do nothing. When told to start check if cycle $k$ has been abandoned in the past. If so, jump straight
+// TODO: this is hacky. We set up num for the rest of the document with a P prefix, and then undo that below. How can we restrict
+// the scope?
+#show: doc => setupenum(doc, prefix: "P")
++ Until given the go-ahead, do nothing. When told to start check if cycle $k$ has been abandoned in the past. If so, jump straight
   to state P4 and follow the instructions there. Otherwise, choose a new witness $y$ larger than any number mentioned in the
   construction so far (including all currently defined $B$-restraints, and the current stage) and larger than $k$. Advance to state
   P1.
@@ -500,7 +522,6 @@ the letter P. Cycle $k$ proceeds as follows.
   [Note that if there is no such stage $s_1$ we immediately satisfy the requirement, by diagonalization.]
 
 + Wait for a stage $t_1$ at which either
-  #set enum(numbering: "(a)")
   + $restr(C_(t_1), u) neq restr(C_(s_1), u)$; or
   + $G_(t_1)(k) neq G_(s_1)(k)$.
 
@@ -523,6 +544,9 @@ the letter P. Cycle $k$ proceeds as follows.
   cycle $k$, and start cycle $k+1$.
 
   [This is just like state 7 in the basic module for the $R_e$ requirements.]
+
+// TODO: hacky (see above)
+#show: doc => setupenum(doc)
 
 === Combining the modules <sec233>
 
