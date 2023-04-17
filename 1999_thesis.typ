@@ -45,6 +45,9 @@
 // Row j of an omega^2 set of cycles
 #let row(j) = $cal(R)_j$
 
+// The "equality" property
+#let Eq(x, y) = $sans("Eq")(#x, #y)$
+
 // Convenience symbols
 #let phi = sym.phi.alt
 #let join = sym.plus.circle
@@ -361,7 +364,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   construction (including all currently imposed $A$-restraints, and the current stage) and larger than both $j$ and $k$.
   Advance to state 1.
 
-+ Wait for a stage $s_1$ at which the following statement, which we call $sans("Eq")(x, s_1)$, holds:
++ Wait for a stage $s_1$ at which the following statement, which we call $Eq(x, s_1)$, holds:
   $
     ( A(x) = Phi(E \; x) )[s_1] and (restr(E, phi(x)) = ( restr(hat(Psi)(C join A join B), phi(x)) )[s_1]
   $
@@ -405,6 +408,34 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
       $x$ to enter $A$ later with a a $restr(C, mu(x))$ change) and advance to state 3. Recall that this transition does
       _not_ count as an action.
     + If no such $(j, k')$ exists we reset all cycles $> (j, k)$, enumerate $x$ into $A$ and advance to state 4.
+
++ Wait for a stage $t_2$ such that $restr(C_(t_2), mu(x)) neq restr(C_(t_1), mu(x))$.
+  (The idea here is that the change in $restr(C, mu(x))$ has undefined the computation of $Delta(j)$ previously set by
+   cycle $(j, k')$, allowing it be redefined in the future. This is how we avoid the $Delta$-inconsistency of the
+   original paper, @CLW1989.)
+  Reset all cycles $> (j, k)$, enumerate $x$ into $A$ and advance to state 4.
+
++ Wait for a stage $s_2$ such that $Eq(x, s_2)$. [As before, if $s_2$ doesn't exist we automatically satisfy the requirement.]
+
+  If $G_(s_2)(j) = 1$ we jump straight to state 8 and follow the instructions there.
+
+  Otherwise, we note that since
+  $
+    (Phi(E\; x))[s_2] = A_(s_2)(x) neq A_(s_1)(x) = (Phi(E\; x))[s_1]
+  $
+  we must have $restr(E_(s_2), phi_(s_1)(x)) neq restr(E_(s_1), phi_(s_1)(x))$, and since $E$ is r.e. this change is permanent
+  and hence a target. Put $v = (hat(psi) phi(x))[s_2]$, restrain $restr(A, v)$ and $restr(B, v)$, put
+  $Delta(C\; j) = G_(s_2)(j) thick (= 0)$ with use $delta(j) = v$ and start cycle $(j+1, 0)$ to run simultaneously.
+  Advance to state 5.
+
++ Wait for a stage $t_3$ at which either
+  #set enum(numbering: "(a)")
+  + $restr(C_(t_3), v) neq restr(C_(s_2), v)$; or
+  + $G_(t_3)(j) neq G_(s_2)(j)$.
+
+  On reaching stage $t_3$ reset all cycles $> (j, k)$. Then
+  + If $restr(C, v)$ changes first, return the $A$- and $B$-restraints to $u$, and return to state 4.
+  + Otherwise, remove $x$ from $A$ and advance to state 6.  Note that now $restr(A_(t_3 + 1), u) = restr(A_(s_1), u)$.
 
 === The basic module for $P_e$
 === Combining the modules <sec233>
