@@ -39,11 +39,18 @@
 // dREA[Z]
 #let dreInAbove(z) = $"d"reInAbove(#z)$
 
+// Tuple with angle brackets
+#let angletup(..z) = $angle.l #z.pos().join(", ") angle.r$
+
+// Row j of an omega^2 set of cycles
+#let row(j) = $cal(R)_j$
+
 // Convenience symbols
 #let phi = sym.phi.alt
 #let join = sym.plus.circle
 #let neq = sym.eq.not // not equal
 #let geq = sym.gt.eq  // greater than or equal
+#let st = sym.bar.v   // vertical bar: "such that"
 
 ////////////////////////////////////////
 // Placeholder for things that aren't supported yet or that I don't know how to do
@@ -146,7 +153,7 @@ Uppercase Greek letters, $Phi, Psi, dots$ will denote recursive functionals, wit
 oracle will be understood from context. Without loss of generality we assume that $phi(x, s)$ is increasing in both arguments.
 
 We use $subset$ to denote the subset relation, and $subset.neq$ to denote a proper subset. Set difference is denoted
-$setdiff(X, Y)$. It will be convenient to use the notation $turinginterval(X, Y) = { Z bar.v X leqt(Z) leqt(Y) }$.
+$setdiff(X, Y)$. It will be convenient to use the notation $turinginterval(X, Y) = { Z st X leqt(Z) leqt(Y) }$.
 
 We will make frequent use of Lachlan's hat-trick. Given an enumeration ${C_s}_(s geq 0)$ of an r.e. set $C$ define for each stage
 $s geq 0$
@@ -184,7 +191,7 @@ We will commonly be constructing a set, $X$, to be recursively enumerable relati
 convenient way to do this is as follows. We actually construct an r.e. set, $U$, of _axioms_. Each axiom is (a code for) an ordered
 triple $(D, x, e)$ where $D$ is a finite set and $x$ and $e$ are both natural numbers. Then the set
 $
-X = U^C = { x bar.v (exists e)[ (restr(C, e), x, e) in U] }
+X = U^C = { x st (exists e)[ (restr(C, e), x, e) in U] }
 $
 is $reIn(C)$. The axiom $(restr(C, e), x, e)$ _witnesses_ the fact that $x in U^C$, and $e$ is the _use_ of the enumeration. All
 $reIn(C)$ sets are realizable in this way (up to degree).
@@ -307,6 +314,99 @@ $
 $
 where ${angle.l E_e, Phi_e, Psi_e angle.r}_(e geq 0)$ enumerates all triples in which $E_e$ is an r.e. set and
 $Phi_e$ and $Psi_e$ are recursive functionals. ${Theta_e}_(e geq 0)$ merely enumerates the recursive functionals.
+We will ensure that $A leqt(G)$ and $B leqt(G)$ by delayed, direct permitting.
 
+The first thing we do is to give basic modules for each of the two types of requirement.  It is useful to note here
+that elements are enumerated into or out of $A$ only in satisfying $R_e$ requirements, and $B$ receives elements
+only in satisfying $P_e$ requirements. We also note that $B$ turns out to be r.e., and not just d.r.e., as we
+never need to remove elements from $B$ once they are enumerated in.
+
+=== The basic module for $R_e$
+
+The basic module is very nearly the same as the one given in @CLW1989. (It appears to be somewhat differend here,
+as we use slightly different notation, and a reduction in the number of states.) There is an extra state
+necessary to avoid $Delta$-inconsistency.
+
+Suppose $e$ is fixed and write $angletup(E, Phi, Psi)$ for $angletup(E_e, Phi_e, Psi_e)$. We will describe the strategy for
+satisfying $R_e$. It consists of a $(omega^2)$-sequence of cycles ordered lexicographically. Cycle $(0,0)$ starts first, and each
+cycle $(j,k)$ may start cycles $(j, k+1)$ and $(j+1, 0)$, as well as stopping all cycles $> (j,k)$.  The strategy as a whole
+threatens to demonstrate that, if no cycle satisfies the requirement, then $G leqt(C)$ _via_ one of the functionals $Gamma_j(C)$
+(for $j in omega$) or $Delta(C)$.  The cycle $(j, k)$ may define the values $Gamma_j(C\; k)$ and $Delta(C\; k)$. We refer to the
+collection $row(j) = { (j, k) st k in omega }$ as the _$j$-th row of cycles_.
+
+All cycles begin in state 0. A cycle is _started_ by letting it pass from state 0 to another state, as determined by its history. In
+starting, a given cycle $(j, k)$ may in fact start subsequent cycles at the same stage, depending on whether cycle $(j, k)$ has been
+abandoned in the past. This may start a "cascade" of cycle-startings. See state 0, below. A cycle is _reset_ by putting it back into
+state 0, returing its restraints to 0 and undefining the values of its parameters $u$ and $v$.
+//
+(Note that the paper @CLW1989 uses
+"_cancelled_" for this operation. We reserve this word for another purpose: see the description of the priority tree construction in
+@sec233 below.)
+//
+A cycle is _abandoned_ by returing its restraints to 0 and stopping all activity for that cycle. This is done when a cycle has
+categorically failed to satisfy $R_e$, due to the squandering of the various $G$-changes to which it has access. We gain through
+this failure the correct definition of a value for one of the functionals $Gamma_j(C)$ or $Delta(C)$. A cycle is said to _act_
+whenever it moves from one state to another. An exception to this is the transition from state 2 to state 3: this transition is made
+purely for bookkeeping purposes.
+
+Also, when (say) cycle $(j, k)$ acts and in doing so resets cycles to its right, we enirely discard any functionals $Gamma_l(C)$
+for $l > j$, starting them completely afresh if ever needed.
+
+Cycle $(j,k)$ of the strategy proceeds as follows.
+
+0. Until given the go-ahead, do nothing. When told to start, if $k = 0$ we check if row $row(j)$ has been previously abandoned
+  _en masse_. If so, advance directly to state 8 and follow the instructions at that state. Otherwise check if cycle $(j, k)$
+  itself has been abandoned. If so, there is no point in trying to satisfy $R_e$ with this cycle, so jump straight to state 7
+  and follow the instructions at that state. Otherwise, choose a new witness $x$ larger than any number used so far in the
+  construction (including all currently imposed $A$-restraints, and the current stage) and larger than both $j$ and $k$.
+  Advance to state 1.
+
++ Wait for a stage $s_1$ at which the following statement, which we call $sans("Eq")(x, s_1)$, holds:
+  $
+    ( A(x) = Phi(E \; x) )[s_1] and (restr(E, phi(x)) = ( restr(hat(Psi)(C join A join B), phi(x)) )[s_1]
+  $
+  [Note that if $s_1$ doesn't exist, we automatically satisify the requirement.]
+
+  If $G_(s_1)(k) = 1$ we jump straight to state 7 and follow the instructions there.
+
+  Otherwise put $u = (hat(psi) phi(x))[s_1]$. Restrain $restr(A, u)$ and $restr(B, u)$, put $Gamma_j(C; k) = G_(s_1)(k) thin (= 0)$
+  with use $gamma_j(k) = u$ and start cycle $(j, k+1)$ to run simultaneously. Advance to state 2.
+
++ Wait for a stage $t_1$ at which either
+  #set enum(numbering: "(a)")
+  + $restr(C_(t_1), u) neq restr(C_(s_1), u)$; or
+  + $G_(t_1)(k) neq G_(s_1)(k)$.
+
+  [Note that we do not wait for a stage $t_1$ at which $C_(t_1) neq C_(t_1 - 1)$, (or where there is similar change in $G$) but
+   rather for a change from the situation at stage $s_1$. In either case, once we combine the various strategies using a priority
+   tree (see @sec233 below) strategy $alpha$ is not "accessible" at every stage. There may be times at which a relevant $G$- or
+   $C$-change occurs but $alpha$ is not accessible, only to become accessible later. The reaction to the change, and hence
+   permission, is "delayed" until the strategy is accessible.
+
+   It is common in these situations to account for the "gaps" in the accessibility of $alpha$ by defining for each node $beta$
+   in the priority tree an auxiliary enumeration for the r.e. set $C$:
+   $
+     C_s^beta = cases(
+       C_s               &"if node" beta "is accessible at stage" s\, ,
+       C_(s-1)^beta quad &"otherwise"
+     )
+   $
+   where we take $C_(-1)^beta = emptyset$. Here we do _not_ use this construct. The part of the verification argument, below,
+   which deals with the permission delays inherient with our set up (Lemma TBD) would only be complicated by the use of
+   such variant enumerations.]
+
+  Now, if
+  + $restr(C, u)$ changes first, reset all cycles $> (j, k)$, drop the $A$- and $B$-restraint of cycle $(j, k)$ back to 0, and
+    return to state 1. While if
+  + $G(k)$ changes first, it it time to see if we need to hedge our bets. There are two subcases.
+    #set enum(numbering: "i.")
+    + If some cycle $(j, k')$ of $row(j)$ is currently in stage 5 or 6 (there is at most one, by Lemma TBD below) we cannot
+      act on the $G(k)$ change yet. We set the marker $mu(x) = v_(s_1)(j, k')$, defined below, (with the intention of allowing
+      $x$ to enter $A$ later with a a $restr(C, mu(x))$ change) and advance to state 3. Recall that this transition does
+      _not_ count as an action.
+    + If no such $(j, k')$ exists we reset all cycles $> (j, k)$, enumerate $x$ into $A$ and advance to state 4.
+
+=== The basic module for $P_e$
+=== Combining the modules <sec233>
 
 #bibliography("works.yml")
