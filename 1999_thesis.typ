@@ -476,6 +476,54 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
 The $P_e$ requriements are simpler than those of the first kind, and we implement a standard diagonalisation approach to satisfy
 them. To ensure that $B leqt(G)$ we again use a system of cycles, but now we only have a one-dimensional arrangement.
 
+Again, suppose $e$ is fixed, and write $Theta$ for $Theta_e$. We have a $omega$-sequence of cycles, and again threaten
+to show $G leqt(C)$, by means of a functional $Xi(C)$. _Starting_ and _abandoning_ have the same definitions as before. _Resetting_
+is similar, but now we need only worry about the single parameter, $u$. _Acting_ now happens with any change of state,
+as we have no equivalent of the bookkeeping state 3 to worry about.
+
+To distinguish the names of the states from those in the module for the $R_e$-requirements we will prefix the numbers here with
+the letter P. Cycle $k$ proceeds as follows.
+#set enum(numbering: "P1")
+
+0. Until given the go-ahead, do nothing. When told to start check if cycle $k$ has been abandoned in the past. If so, jump straight
+  to state P4 and follow the instructions there. Otherwise, choose a new witness $y$ larger than any number mentioned in the
+  construction so far (including all currently defined $B$-restraints, and the current stage) and larger than $k$. Advance to state
+  P1.
+
++ Wait for a stage $s_1$ at which
+  $
+    (B(y) = hat(Theta)(C join A\; y))[s_1]
+  $
+  and let $u = hat(theta)_(s_1)(y)$. Restrain $restr(A, u)$, put $Xi(C\; k) = G_(s_1)(k)$ with use $xi(k) = u$ and start
+  cycle $k+1$ to run simultaneously. Advance to state P2.
+
+  [Note that if there is no such stage $s_1$ we immediately satisfy the requirement, by diagonalization.]
+
++ Wait for a stage $t_1$ at which either
+  #set enum(numbering: "(a)")
+  + $restr(C_(t_1), u) neq restr(C_(s_1), u)$; or
+  + $G_(t_1)(k) neq G_(s_1)(k)$.
+
+  On reaching $t_1$, reset all cycles $k' > k$. Then
+  + If $restr(C, u)$ changes first, set the $B$-restraint of this cycle back to 0 and return to state P1.
+  + Otherwise, enumerate $y$ into $B$. This has been permitted (perhaps after a delay) by the change in $G(k)$. Proceed to state P3.
+
++ Wait for a stage $s_2$ at which
+  $ (B(y) = hat(Theta)(C join A\; y))[s_2] $
+  If there is no such stage, $y$ again witnesses the success of our strategy.
+
+  If such an $s_2$ exists, note that we have
+  $
+    (hat(Theta)(C join A\; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1) = (hat(Theta)(C join A\; y))[s_1].
+  $
+  By the restraint on $A$, $restr(A_(s_2), u) = restr(A_(s_1), u)$ so we must have $restr(C_(s_2), u) neq restr(C_(s_1), u)$.
+  This change in $C$ allows us to redefine $Xi(C\; k)$, which we do after advancing to state P4.
+
++ It is now safe and correct to define $Xi(C\; k) = 1$ with use 0. Do so, unless this has already been done, permanently abandon
+  cycle $k$, and start cycle $k+1$.
+
+  [This is just like state 7 in the basic module for the $R_e$ requirements.]
+
 === Combining the modules <sec233>
 
 #bibliography("works.yml")
