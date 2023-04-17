@@ -437,7 +437,45 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   + If $restr(C, v)$ changes first, return the $A$- and $B$-restraints to $u$, and return to state 4.
   + Otherwise, remove $x$ from $A$ and advance to state 6.  Note that now $restr(A_(t_3 + 1), u) = restr(A_(s_1), u)$.
 
++ Wait for $restr(C_(t_4), u) neq restr(C_(s_1), u)$. If this ever occurs, advance to state 7.
+
+  If $restr(C, u) = restr(C_(s_1), u)$ we satisfy the requirement by
+  $
+    restr(hat(Psi)(C join A join B), phi_(s_1)(x))
+               &= (restr(hat(Psi)(C join A join B), phi(x)))[s_1] \
+               &= (restr(E, phi(x)))[s_1] \
+               &= restr(E, phi_(s_1)(x))
+  $
+
++ We only reach this state if it is safe (in terms of the consistency of $Gamma_j(C)$) and accurate
+  to set $Gamma_j(C; k) = 1$ with use 0. Do so, unless it has already been done, (permanently) abandon cycle (j, k)
+  and start cycle $(j, k+1)$.
+
+  Once we reach this state, we define a value for $Gamma_j(C; k)$ which we _know_ to be correct, since $G(k)$ has already changed,
+  and won't change again, $G$ being r.e.  Also, the "once-off" nature of the $G$-change means that the only way cycle $(j,k)$ is
+  going to be able to satisfy requirement $R_e$ in the future, even with a new witness, is by being infinitely often in state 1; it
+  cannot enumerate its witness into $A$, as the $G$-change it needs has already come and gone.  Although it is posisble that $(j,
+  k)$ will be able to succeed in this manner, it is improbable. More likely is that cycle $(j, k)$ will be eventually stuck in state
+  2, waiting forlornly for an impossible $G$-change, but in the meantime computing a correct value for $Gamma_j(C; k)$. We may as
+  well cut our losses and simplify by abandoning this cycle: we content ourselves with the modest gain of a single correct value for
+  $Gamma_j(C; k)$ and the knowledge that if we end up permanently abandoning _all_ cycles like this, we'll be able to compute $G$
+  from $C$ (see Lemma TBD below), a contradiction.
+
++ We only reach _this_ state if it is similarly safe to set $Delta(C\; j) = 1$ with use 0. Do so, unless it has already been done.
+  We permanently abandon the whole of row $row(j)$, and since there is no need to keep any of this row in business, it is convenient
+  for technical reasons to reset every cycle in row $row(j)$, put cycle $(j, 0)$ into stage 8, and start cycle $(j+1, 0)$.
+
+  The same comments as in state 7 just above apply here, but the result of the failure of cycle $(j, k)$ is even more stark. Now we
+  have defined a correct value for $Delta(C, j)$, and have seen (and "wasted") the only change in $G(j)$ that will ever occur. Thus
+  all cycles which rely on a change in $G(j)$ at some point are our of luck in the future, and we may as well not bother with
+  them. These cycles include _all_ of row $row(j)$, which is why we permanently abandon this whole row. We content ourselves now
+  with the single correct value $Delta(C\; j)$.
+
 === The basic module for $P_e$
+
+The $P_e$ requriements are simpler than those of the first kind, and we implement a standard diagonalisation approach to satisfy
+them. To ensure that $B leqt(G)$ we again use a system of cycles, but now we only have a one-dimensional arrangement.
+
 === Combining the modules <sec233>
 
 #bibliography("works.yml")
