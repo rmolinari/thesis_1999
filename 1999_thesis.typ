@@ -589,4 +589,51 @@ Later, on seeing $Eq(x, s_2)$, it further restrains $A$ and $B$ as far as $v$. T
 have _two_ outcomes, $((j, k), 1)$ and $((j, k), 2)$, progressively used to respect these two waves of restraint. $P_e$-restraints
 impose only one wave of restraint and so need only one outcome per cycle on the tree.
 
+So, let $Lambda = {-1} union ((omega^2) times {1, 2}) union omega$. We partially order $Lambda$ lexicographically on
+$(omega^2) times {1, 2}$, with the natural ordering on $omega$, and making -1 come before everything. We don't define any relative
+order between elements of $(omega^2) times {1, 2}$ and $omega$, as this won't be necessary. Let
+$
+T = {f in Lambda^(< omega) st f(n) in {-1} union (omega^2) times {1, 2} "if" n "is even", f(n) in {-1} union omega "if" n "is odd" }
+$
+
+be the priority tree, with the started partial ordering $<_L$ inherited from the order imposed on $Lambda$ above. If $alpha in T$
+has even length $|alpha| = 2e$ then $alpha$ aims to satisfy requirement $R_e$, while if $|alpha| = 2e + 1$ then $alpha$ works
+towards satisfying $P_e$. Recall that we make no distinction between a node on the tree and the (instance of the) strategy it is
+using. A strategy is _cancelled_ by resetting all of its cycles and discarding any functionals it may have (partially) defined. Any
+paramater, once defined, keeps that value until it is redefined or undefined.
+
+The construction proceeds as follows.
+
+Stage 0: #h(1em) All parameters are undefined or $emptyset$ as appropriate, and all cycles are in state 0 or state P0.
+
+#let nextval = $f_(s+1)(t)$
+Stage $s+1$: #h(1em) We define, in substages $t < s$, a finite path $nextval$ through the tree, of length $s$. So, suppose $alpha =
+(restr(nextval, t)) in T$ is defined. If no cycle of strategy $alpha$ has been started since $alpha$ was last cancelled, start
+$alpha$'s cycle $(0, 0)$ or $0$, as appropriate, and put $nextval(t) = -1$.
+
+Otherwise, first suppose that $|alpha|$ is even, so that $alpha$ is using an $R_e$ strategy. Allow any cycles of strategy $alpha$
+able to make the transition from state 2 to state 3 do so. Now there are 2 cases.
+- #smallcaps("Case 1") #h(1em) Some least cycle $nu$ of strategy $alpha$ is able (or forced by a $C$-change) to act.
+
+  We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of strategy $alpha$ now imposing restraint (if there is any such
+  cycle.) It is not necessarily the case that $lambda = nu$. If cycle $lambda$ is now in state 2, 3, or 4 then put
+  $nextval = (lambda, 1)$. If instead, $lambda$ is in stage 5 or 6 then put $nextval = (lambda, 2)$. Cancel all strategies
+  $beta$ with $concatone(alpha, nextval) <_L beta$. If $lambda = nu$ and the action of cycle $nu$ involved enumerating a number into
+  or out of $A$ or into $B$ we also cancel all strategies $beta supset concatone(alpha, nextval)$.
+
+  If there is no such cycle $lambda$ then put $nextval = -1$ and cancel all strategies $beta$ with $concatone(alpha, -1) <_L beta$.
+
+- #smallcaps("Case 2") #h(1em) No cycle of strategy $alpha$ is able, or forced, to act.
+
+  We do nothing, and nothing needs to be cancelled. Define $nextval$ just as above. No strategies need to be cancelled.
+
+If $|alpha|$ is odd, then we behave similarly. Now, given the rightmost cycle, $lambda$, imposing restraint, we simply put
+$nextval = lambda$, rather than worrying about two kinds of restraint.
+
+If $t + 1 < s$ we advance to substage $t + 1$.
+
+We say tha the strategies $alpha subset f_(s+1)$ are _accessible_ at stage $s+1$.
+
+
+
 #bibliography("works.yml")
