@@ -31,6 +31,7 @@
 #let restr(a, b) = $#a harpoon.tr #b$
 // Concatenation of sequences a and b
 #let concat(a, b) = $#a paren.t #b$
+#let concatone(a, b) = $concat(#a, #angletup(b))$
 
 // r.e.[Z]
 #let reIn(z) = $"r.e."[#z]$
@@ -41,6 +42,12 @@
 
 // Tuple with angle brackets
 #let angletup(..z) = $angle.l #z.pos().join(", ") angle.r$
+
+// Restriction of a to b
+#let restr(a, b) = $#a harpoon.tr #b$
+// Concatenation of sequences a and b
+#let concat(a, b) = $#a paren.t #b$
+#let concatone(a, b) = $concat(#a, #angletup(b))$
 
 // Row j of an omega^2 set of cycles
 #let row(j) = $cal(R)_j$
@@ -71,6 +78,7 @@
 
 
 // Based on an answer in the Discord from PgSuper (2023-04-13 1:43 PM)
+// See issue #9 on GitHub
 #let setupenum(doc, prefix: "") = {
   set enum(
     full: true,
@@ -549,5 +557,36 @@ the letter P. Cycle $k$ proceeds as follows.
 #show: doc => setupenum(doc)
 
 === Combining the modules <sec233>
+
+Now that we have desribed the strategy for satisfying a single requirement in isolation we must consider how to satisfy all
+requirements simultaneously. Since each strategy may well act infinitely often we must use a _priority tree_ to manage this. The
+standard reference fo this technique is Chapter XIV of Soare @Soare1987.
+
+#let outcome = $concatone(alpha, (j, k))$
+
+In @LaForte LaForte introduced a path restraint to deal with a problem in the original construction in @CLW1989. Basically, that
+construction worked the tree angle in an "obvious" way. As soon a strategy $alpha$'s cycle $(j, k)$ became "active" we use #outcome
+as the outcome; this happens as soon as cycle $(j, k)$ chooses a witness. (For the moment the consider the case of
+$R_e$-strategies.) However, if cycle $(j, k)$ later sees a relevant computation converge and imposes a restraint $r$, those
+strategies in the subtree below #outcome started in the meantime will not have chosen witnesses to respect this new restraint. This
+is naturally a Bad Thing. LaForte ingeniously solves the problem by introducing the path restraint: as the new restraint is imposed
+it is incorporated into the path restraint for strategies below #outcome and respected "after the fact."  Strategies below #outcome
+constantly check the extent of the path restraint being imposed on them.
+
+#let outcome = none
+
+This method works fine, as seen in @LaForte. However, it not particulary pretty. In particular, the point of tree-based arguments is
+to remove the need for strategies to themselves keep an eye on the restraints set by other strategies. If possible, we would like to
+avoid the path restraint, and there is a simple trick that lets us do so. We only follow a child corresponding to cycle $(j,k)$ when
+cycle $(j, k)$ has actually imposed a restraint. Until that happen we follow a child corresponding to the rightmost cycle to the
+left of $(j, k)$ which imposes restraint. This is perfectly safe, as, so long as $(j, k)$ imposes no restraint, we cannot injure any
+computions by letting the strategies below the leftward cycle operate. Once such a restraint is imposed, we automatically respect it
+by starting to follow a child corresponding to $(j, k)$. The only trick we actually need is to add a new child,
+$concatone(alpha, -1)$, to be followed when no cycles at all of strategy $alpha$ impose a restraint.
+
+Each cycle can impose restraint in two "waves". By seeing $Eq(x, s_1)$ cycle $(j, k)$ restrains $restr(A, u)$ and $restr(B, u)$.
+Later, on seeing $Eq(x, s_2)$, it further restrains $A$ and $B$ as far as $v$. Thus, corresponding to each cycle $(j, k)$ we will
+have _two_ outcomes, $((j, k), 1)$ and $((j, k), 2)$, progressively used to respect these two waves of restraint. $P_e$-restraints
+impose only one wave of restraint and so need only one outcome per cycle on the tree.
 
 #bibliography("works.yml")
