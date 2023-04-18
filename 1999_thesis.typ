@@ -15,6 +15,23 @@
     bodyfmt: emph
 )
 
+#let lemma = thmbox(
+    "theorem",
+    "Lemma",
+    base_level: 1,
+)
+
+#let proof = thmplain(
+    "proof",
+    "Proof",
+    base: "theorem",
+    titlefmt: strong,
+    bodyfmt: body => [
+        #body #h(1fr) $square$
+    ]
+).with(numbering: none)
+
+
 // Set difference
 #let setdiff(a, b) = $#a tilde.op #b$
 // Turing interval
@@ -50,7 +67,7 @@
 #let concatone(a, b) = $concat(#a, #angletup(b))$
 
 // Row j of an omega^2 set of cycles
-#let row(j) = $cal(R)_j$
+#let row(j) = $cal(R)_#j$
 
 // The "equality" property
 #let Eq(x, y) = $sans("Eq")(#x, #y)$
@@ -634,6 +651,42 @@ If $t + 1 < s$ we advance to substage $t + 1$.
 
 We say tha the strategies $alpha subset f_(s+1)$ are _accessible_ at stage $s+1$.
 
+== Verification
 
+The verification of the construction is a long and tedious one, and is broken up into a sequence of lemmas. As the arguments for the
+two types of module are of necessity quite different, for the first part of the verification we discuss the modules separately.
+
+We will refer to the parameters associated with cycle $nu$ of strategy $alpha$ as they are defined at stage $s$ like so:
+$u_s(alpha, nu)$, $v_s(alpha, nu)$, _etc_. When the strategy is clear from context (as it usually will be), we will drop it.
+
+=== Lemmas for the $R_e$ strategy
+
+==== The layout of the cycle states
+
+We begin with a sequence of lemmas which describes the different arrangements possible of the states of the various cycles at any time.
+The aim is to formalize the intuitive ideas that develop from an understanding of the way the construction works.
+
+We assume that we have a certain, fixed strategy, $alpha$, of even length in mind, and that all cycles mentioned belong to this
+strategy. Also, we ignore the fact that strategy $alpha$ may not be accessible at all (or even all sufficiently large) stages: we
+just treat the stages mentioned as being the successive ones at which strategy $alpha$ _is_ accessible.
+
+It will be convenient to refer to a cycle with is in either stage 5 or state 6 as being "in state 5/6".
+
+#lemma[
+    For any row $row(j)$, at most one cycle $(j, k)$ is in cycle 5/6.
+    <lemma23>
+]
+#proof[
+    We show that if cycle $(j, k)$ is in state 5 or state 6 at stage $s$ then nothing to the right of $(j, k)$ in row $row(j)$
+    (namely, a cycle $(j, k') > (j, k)$) is in either of these states at stage $s$.
+
+    If cycle $(j, k)$ entered state 5 from state 4 (and there is no other way), no cycles to the right of $(j, k)$ are in any state
+    other than 0 at the start of stage $s$, because by entereing state 4, cycle $(j, k)$ reset every cycle to its right, and no new
+    cycles were started so long as $(j, k)$ remained in state 4. Upon entering state 5, cycle $(j, k)$ starts cycle $(j+1, 0)$,
+    and no cycle to the right of $(j, k)$ in row $row(j)$ is started so long as $(j, k)$ stays in state 5.
+
+    On entering state 6, cycle $(j, k)$ resets every cycle to its right (including those in rows $row(j')$ for $j' > j$), and no
+    cycle to its right will be started so long as $(j, k)$ remains in this state.
+]
 
 #bibliography("works.yml")
