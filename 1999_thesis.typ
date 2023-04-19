@@ -10,13 +10,12 @@
 #let myresult = thmbox.with(
     base_level: 1,
     titlefmt: strong,
-    bodyfmt: emph,
     inset: 0em,
     padding: (top: 0.5em),
     separator: [#h(0.5em)] // using my change to theorems.typ - pull requested
 )
 
-#let theorem = myresult("theorem", "Theorem")
+#let theorem = myresult("theorem", "Theorem", bodyfmt: emph)
 #let lemma = myresult("theorem", "Lemma")
 
 #let proof = thmplain(
