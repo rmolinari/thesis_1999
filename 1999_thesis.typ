@@ -78,6 +78,8 @@
 #let neq = sym.eq.not // not equal
 #let geq = sym.gt.eq  // greater than or equal
 #let st = sym.bar.v   // vertical bar: "such that"
+#let dubpr = sym.prime.double // double primes
+#let trippr = sym.prime.triple // triple!
 
 ////////////////////////////////////////
 // Placeholder for things that aren't supported yet or that I don't know how to do
@@ -688,5 +690,53 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
     On entering state 6, cycle $(j, k)$ resets every cycle to its right (including those in rows $row(j')$ for $j' > j$), and no
     cycle to its right will be started so long as $(j, k)$ remains in this state.
 ]
+
+#lemma[
+    Suppose cycle $(j, k)$ enters state 3 at stage $s$ due to cycle $(j, k')$ being in state 5/6. If at stage $t > s$ cycle $(j, k')$
+    leaves state 5/6 for the first time, for any reason, then cycle $(j, k)$ is no longer in state 3 at the end of stage $t$.
+    <lemma24>
+]
+#proof[
+    Note that $mu_s(x(j, k)) = v_s(j, k')$.
+
+    Cycle $(j, k')$ leaves state 5/6 either through acting or through being reset. If $(j, k') < (j, k)$ then we see that the
+    action/resetting of $(j, k')$ also resets $(j, k)$, and the latter is no longer in state 3. (It will turn out later that a cycle
+    can't be in stage 3 when something in the same row to its left is in state 5/6, but we can't rule out that possibility yet.)
+
+    If $(j, k) < (j, k')$ we must work substantially harder.
+
+    In this case, if $(j, k')$ is able to get out of state 5/6 without being reset, we must have a change in $restr(C, v_t(j, k'))$
+    (if $(j, k')$ goes to state 4) or in $restr(C, u_t(j, k')) subset restr(C, v_t(j, k'))$
+    (if it goes to state 7). This very change in $C$ allows $(j, k)$
+    to move to state 4, unless another cycle to its left acts for this same reason, resetting cycle $(j, k)$ completely.
+
+    If $(j, k')$ is reset at $t$ by the action of a cycle to the left of $(j, k)$, cycle $(j, k)$ is reset also.
+
+    Thus, aiming for a contradiction, we need only consider the case in which for some $k dubpr$ with
+    $k < k dubpr < k'$, cycle $(j, k dubpr)$ acts at stage $t$,
+    but $restr(C, v_t(j, k'))$ does not change at stage $t$. (Note that $v_t(j, k') = v_s(j, k')$.)
+    Without loss of generality we may assume that $t$ is minimal in witnessing the failure of this lemma.
+    Since cycle $(j, k')$ is "awake" (that is, in a state other than 0) between stages $s$ and $t$, cycle $(j, k dubpr)$
+    must be in one of the states 2, 3 or 7, and cannot change states (other than going from 2 to 3) during this time, for otherwise
+    cycle $(j, k')$ would be reset. We may may immediately discount the possibility that $(j, k dubpr)$ in state 7,
+    because a cycle in this state cannot act. Thus, as stage $t$ starts, cycle $(j, k dubpr)$ is in state 2 or state 3.
+
+    We first claim that $(j, k dubpr)$ can't make the transition from state 2 to state 1. Indeed, such a transition indicates a change
+    in $restr(C, u(j, k dubpr))$. But cycle $(j, k')$ starts after cycle $(j, k dubpr)$ enters state 2, so by construction,
+    $v_t(j, k') > x(j, k') > u(j, k dubpr)$, and we have a change in $restr(C, v_t(j, k'))$ at stage $t$, which is a contradiction.
+
+    Cycle $(j, k dubpr)$ can't go from state 2 to state 3 at stage $t$, as this does not count as an action, so the only remaining
+    possibility is the $3 arrow.r.bar 4$ transition, so that there is a change in $restr(C, mu_t(x(j, k dubpr)))$.
+    We claim that $mu_t(x(j, k dubpr)) = v_t(j, k')$, and objtain the contradiciton of a change in $restr(C, v_t(j, k'))$.
+
+    Suppose otherwise, so that $(j, k dubpr)$ enters state 3 for the sake of yet another cycle $(j, k trippr)$ being
+    in state 5/6, or for another "incarnation" of cycle $(j, k')$; that is, for the sake of cycle $(j, k')$ being in state 5/6
+    based on another computation. Well, if we are in the former case, cycle $(j, k trippr)$ must leave state 5/6 by stage $s$,
+    by #thmref(<lemma23>)[Lemma], forcing cycle $(j, k dubpr)$ out of state 3, by the assumption of the minimality of $t$.
+    The same argument applies to another "incarnation" of cycle $(j, k')$. Thus, cycle $(j, k dubpr)$ enters state 3 for
+    the sake of the same $(j, k')$-related computations that force cycle $(j, k)$ to do likewise, and
+    $mu_t(x(j, k dubpr)) = mu_s(x(j, k')) = v_s(j, k') = v_t(j, k')$. We are done.
+]
+
 
 #bibliography("works.yml")
