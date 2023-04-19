@@ -65,9 +65,16 @@
 // Concatenation of sequences a and b
 #let concat(a, b) = $#a paren.t #b$
 #let concatone(a, b) = $concat(#a, #angletup(b))$
+// "Finite sequences of"
+#let finseq(a) = $#a^(< infinity)$
 
 // Row j of an omega^2 set of cycles
 #let row(j) = $cal(R)_#j$
+// A cycle pattern
+#let pattern(s) = $cal(P)_s$
+
+// A "term" from the pattern definitions
+#let patternname(n) = $sans(#n)$
 
 // The "equality" property
 #let Eq(x, y) = $sans("Eq")(#x, #y)$
@@ -543,34 +550,34 @@ the letter P. Cycle $k$ proceeds as follows.
   $
     (B(y) = hat(Theta)(C join A\; y))[s_1]
   $
-  and let $u = hat(theta)_(s_1)(y)$. Restrain $restr(A, u)$, put $Xi(C\; k) = G_(s_1)(k)$ with use $xi(k) = u$ and start
-  cycle $k+1$ to run simultaneously. Advance to state P2.
+and let $u = hat(theta)_(s_1)(y)$. Restrain $restr(A, u)$, put $Xi(C\; k) = G_(s_1)(k)$ with use $xi(k) = u$ and start
+cycle $k+1$ to run simultaneously. Advance to state P2.
 
-  [Note that if there is no such stage $s_1$ we immediately satisfy the requirement, by diagonalization.]
+[Note that if there is no such stage $s_1$ we immediately satisfy the requirement, by diagonalization.]
 
 + Wait for a stage $t_1$ at which either
-  + $restr(C_(t_1), u) neq restr(C_(s_1), u)$; or
-  + $G_(t_1)(k) neq G_(s_1)(k)$.
++ $restr(C_(t_1), u) neq restr(C_(s_1), u)$; or
++ $G_(t_1)(k) neq G_(s_1)(k)$.
 
-  On reaching $t_1$, reset all cycles $k' > k$. Then
-  + If $restr(C, u)$ changes first, set the $B$-restraint of this cycle back to 0 and return to state P1.
-  + Otherwise, enumerate $y$ into $B$. This has been permitted (perhaps after a delay) by the change in $G(k)$. Proceed to state P3.
+On reaching $t_1$, reset all cycles $k' > k$. Then
++ If $restr(C, u)$ changes first, set the $B$-restraint of this cycle back to 0 and return to state P1.
++ Otherwise, enumerate $y$ into $B$. This has been permitted (perhaps after a delay) by the change in $G(k)$. Proceed to state P3.
 
 + Wait for a stage $s_2$ at which
-  $ (B(y) = hat(Theta)(C join A\; y))[s_2] $
-  If there is no such stage, $y$ again witnesses the success of our strategy.
+$ (B(y) = hat(Theta)(C join A\; y))[s_2] $
+If there is no such stage, $y$ again witnesses the success of our strategy.
 
-  If such an $s_2$ exists, note that we have
-  $
-    (hat(Theta)(C join A\; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1) = (hat(Theta)(C join A\; y))[s_1].
-  $
-  By the restraint on $A$, $restr(A_(s_2), u) = restr(A_(s_1), u)$ so we must have $restr(C_(s_2), u) neq restr(C_(s_1), u)$.
-  This change in $C$ allows us to redefine $Xi(C\; k)$, which we do after advancing to state P4.
+If such an $s_2$ exists, note that we have
+$
+(hat(Theta)(C join A\; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1) = (hat(Theta)(C join A\; y))[s_1].
+$
+By the restraint on $A$, $restr(A_(s_2), u) = restr(A_(s_1), u)$ so we must have $restr(C_(s_2), u) neq restr(C_(s_1), u)$.
+This change in $C$ allows us to redefine $Xi(C\; k)$, which we do after advancing to state P4.
 
 + It is now safe and correct to define $Xi(C\; k) = 1$ with use 0. Do so, unless this has already been done, permanently abandon
-  cycle $k$, and start cycle $k+1$.
+cycle $k$, and start cycle $k+1$.
 
-  [This is just like state 7 in the basic module for the $R_e$ requirements.]
+[This is just like state 7 in the basic module for the $R_e$ requirements.]
 
 // TODO: hacky (see above)
 #show: doc => setupenum(doc)
@@ -586,7 +593,7 @@ standard reference fo this technique is Chapter XIV of Soare @Soare1987.
 In @LaForte LaForte introduced a path restraint to deal with a problem in the original construction in @CLW1989. Basically, that
 construction worked the tree angle in an "obvious" way. As soon a strategy $alpha$'s cycle $(j, k)$ became "active" we use #outcome
 as the outcome; this happens as soon as cycle $(j, k)$ chooses a witness. (For the moment the consider the case of
-$R_e$-strategies.) However, if cycle $(j, k)$ later sees a relevant computation converge and imposes a restraint $r$, those
+                                                                           $R_e$-strategies.) However, if cycle $(j, k)$ later sees a relevant computation converge and imposes a restraint $r$, those
 strategies in the subtree below #outcome started in the meantime will not have chosen witnesses to respect this new restraint. This
 is naturally a Bad Thing. LaForte ingeniously solves the problem by introducing the path restraint: as the new restraint is imposed
 it is incorporated into the path restraint for strategies below #outcome and respected "after the fact."  Strategies below #outcome
@@ -634,17 +641,17 @@ Otherwise, first suppose that $|alpha|$ is even, so that $alpha$ is using an $R_
 able to make the transition from state 2 to state 3 do so. Now there are 2 cases.
 - #smallcaps("Case 1") #h(1em) Some least cycle $nu$ of strategy $alpha$ is able (or forced by a $C$-change) to act.
 
-  We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of strategy $alpha$ now imposing restraint (if there is any such
-  cycle.) It is not necessarily the case that $lambda = nu$. If cycle $lambda$ is now in state 2, 3, or 4 then put
-  $nextval = (lambda, 1)$. If instead, $lambda$ is in stage 5 or 6 then put $nextval = (lambda, 2)$. Cancel all strategies
-  $beta$ with $concatone(alpha, nextval) <_L beta$. If $lambda = nu$ and the action of cycle $nu$ involved enumerating a number into
-  or out of $A$ or into $B$ we also cancel all strategies $beta supset concatone(alpha, nextval)$.
+We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of strategy $alpha$ now imposing restraint (if there is any such
+                                                                                                            cycle.) It is not necessarily the case that $lambda = nu$. If cycle $lambda$ is now in state 2, 3, or 4 then put
+$nextval = (lambda, 1)$. If instead, $lambda$ is in stage 5 or 6 then put $nextval = (lambda, 2)$. Cancel all strategies
+$beta$ with $concatone(alpha, nextval) <_L beta$. If $lambda = nu$ and the action of cycle $nu$ involved enumerating a number into
+or out of $A$ or into $B$ we also cancel all strategies $beta supset concatone(alpha, nextval)$.
 
-  If there is no such cycle $lambda$ then put $nextval = -1$ and cancel all strategies $beta$ with $concatone(alpha, -1) <_L beta$.
+If there is no such cycle $lambda$ then put $nextval = -1$ and cancel all strategies $beta$ with $concatone(alpha, -1) <_L beta$.
 
 - #smallcaps("Case 2") #h(1em) No cycle of strategy $alpha$ is able, or forced, to act.
 
-  We do nothing, and nothing needs to be cancelled. Define $nextval$ just as above. No strategies need to be cancelled.
+We do nothing, and nothing needs to be cancelled. Define $nextval$ just as above. No strategies need to be cancelled.
 
 If $|alpha|$ is odd, then we behave similarly. Now, given the rightmost cycle, $lambda$, imposing restraint, we simply put
 $nextval = lambda$, rather than worrying about two kinds of restraint.
@@ -701,7 +708,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
 
     Cycle $(j, k')$ leaves state 5/6 either through acting or through being reset. If $(j, k') < (j, k)$ then we see that the
     action/resetting of $(j, k')$ also resets $(j, k)$, and the latter is no longer in state 3. (It will turn out later that a cycle
-    can't be in stage 3 when something in the same row to its left is in state 5/6, but we can't rule out that possibility yet.)
+                                                                                                 can't be in stage 3 when something in the same row to its left is in state 5/6, but we can't rule out that possibility yet.)
 
     If $(j, k) < (j, k')$ we must work substantially harder.
 
@@ -737,6 +744,64 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
     the sake of the same $(j, k')$-related computations that force cycle $(j, k)$ to do likewise, and
     $mu_t(x(j, k dubpr)) = mu_s(x(j, k')) = v_s(j, k') = v_t(j, k')$. We are done.
 ]
+#lemma[
+    For all $j$, if cycles $(j, k) neq (j, k')$ are both in state 3 at stage $s$, then
+    $(mu(x(j, k)))[s] = (mu(x(j, k')))[s]$.
+]
+#proof[
+    Suppose $(j, k)$ enteres state 3 at stage $t$ and remains there until $(j, k')$ does the same at stage $t' > t$, and
+    that they both stay in this state until at least stage $s$. By Lemmas #thmref(<lemma23>) and #thmref(<lemma24>),
+    both cycles must enter state 3 for the sake of the same cycle being in stage 5/6, and for the same computations.
+    The lemma follows.
+]
 
+We are now ready to describe the various patterns made by the successive
+cycle-states.#footnote[Such as Athens, Sparta, Hamburg, #sym.dots.h. Oh, no, that's something else.]
+To do this we first need to introduce some definitions and notation.
 
+Consider a stage $s$, and the states that all the various cycles of strategy $alpha$ are in at the end of stage $s$.  We will call
+this arrangement the _pattern of strategy $alpha$ at stage $s$_, and denote it by $pattern(s) = pattern(s)(alpha)$.  The notation
+used to represent patterns is based on the row structure of the cycles, $pattern(s)$ will be given as a finite sequence, one term
+each for those rows $row(j)$ of the strategy with at least one cycle in a state other than 0. Each term in this sequence will itself
+be a finite sequence, one term each for the cycles of row $row(j)$ (say) in a state other than 0.
+
+Let $X = {0, 1, 2, dots, 8}$. For sets $M, N$ of finite sequences (of unspecified type) we let
+$M; N = {concat(theta, sigma) st theta in M and sigma in N}$,
+the finite sequences got by appending a sequence from $N$ to a sequence from $M$. For convenience we also allow the notation
+$angletup(M) = { angletup(theta) | theta in M }$, the length 1 sequences consisting of single terms from $M$. We define the
+following subsets of $finseq(X)$:
+#let prelimCramp = patternname("prelimCrampedRow")
+#let finalCramp = patternname("finalCrampedRow")
+#let crampedRow = patternname("crampedRow")
+#let uncrampedRow = patternname("uncrampedRow")
+#let abandonedrow = patternname("abandonedRow")
+#let prelimRow = patternname("prelimRow")
+#let finalRow = patternname("finalRow")
+#let validPattern = patternname("validPattern")
+$
+  prelimCramp  &= finseq({2, 3, 7}); angletup({5}), \
+  finalCramp   &= finseq({2, 3, 7}); angletup({6}), \
+  crampedRow   &= prelimCramp union finalCramp, \
+  uncrampedRow &= finseq({2, 7}); angletup({1, 4}), \
+  abandonedrow &= angletup({8}), \
+  prelimRow    &= prelimCramp union abandonedrow, \
+  finalRow     &= finalCramp union uncrampedRow,
+$
+and a subset of $finseq((finseq(X)))$
+$
+  validPattern = finseq(prelimRow); angletup(finalRow).
+$
+The names are intended to be somewhat mnemonic. "Cramped" refers to a row in which cycles are prevented from reaching state 4 by the
+presence of a cycle in that row in state 5/6. These cycles have their style cramped: they must bide their time in state 3 waiting
+for the chance to go to state 4 later. A "#patternname("prelim")" row is one that isn't the last in the list: the row after it also
+has at least one cycle not in state 0.
+
+When we want to make it clear how long a finite sequence is, we subscript the sequence with its length, like so:
+$angletup(0, 1, dots, 7)_8$.
+
+The claim is now that if strategy $alpha$ has been started since last being cancelled, its pattern in "valid":
+#lemma(name: "Pattern Lemma")[
+    If strategy $alpha$ has at least one cycle not in state 0 at stage $s$, $pattern(s) in validPattern$.
+    <patternLemma>
+]
 #bibliography("works.yml")
