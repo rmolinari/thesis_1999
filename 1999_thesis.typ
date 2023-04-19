@@ -19,9 +19,8 @@
 #let lemma = myresult("theorem", "Lemma")
 
 #let proof = thmplain(
-    "proof",
+    none,
     "Proof",
-    base: "theorem",
     titlefmt: strong,
     bodyfmt: body => [
         #body #h(1fr) $square$
@@ -71,8 +70,8 @@
 
 // Row j of an omega^2 set of cycles
 #let row(j) = $cal(R)_#j$
-// A cycle pattern
-#let pattern(s) = $cal(P)_s$
+// A cycle pattern. Note awkward negative space to get good placement of the subscript
+#let pattern(s) = $cal(P)#h(-0.2em)_s$
 
 // A "term" from the pattern definitions
 #let patternname(n) = $sans(#n)$
@@ -312,13 +311,13 @@ we are stuck with it. Write $Delta(j)$ for $Delta(emptyset \;  j)$.
 We first show that 1 does not hold.
 
 Consider the situation in which, at stage $t$, cycle $(j,k)$ is in state (5), cycle $(j, k+1)$ is in state (10) and cycle $(j+1,0)$
-is in state (7). Now suppose that there are stages $t < s < s' < s''$, which are the next three stages and which any of the cycles
-of the strategy act, such that those actions are:
+is in state (7). Now suppose that there are stages $t < s < s' < s dubpr$, which are the next three stages and which any of the
+cycles of the strategy act, such that those actions are:
 
 - Stage $s$:   #h(1em) Cycle $(j+1, 0)$ defines $Delta(j+1)$ with use $v$.
 - Stage $s'$:  #h(1em) Cycle $(j, k)$ sees the $G$-permission it has been waiting for and stops cycles $(j, k+1)$ and $(j+1, 0)$.
   At this point, cycle $(j,k)$ advances to state (7).
-- Stage $s''$: #h(1em) Cycle $(j,k)$ sees the stage (which it calls $s_2$) it has been waiting for, and so (re)starts cycle $(j+1, 0)$.
+- Stage $s dubpr$: #h(1em) Cycle $(j,k)$ sees the stage (which it calls $s_2$) it has been waiting for, and so (re)starts cycle $(j+1, 0)$.
 The value for $Delta(j+1)$ that cycle $(j+1, 0)$ defined at stage $s$ has not become undefined, and claim 1 is false.
 
 #v(1em)
@@ -328,19 +327,19 @@ construction. We show that it still may be that the functional $Delta$ is not de
 a given value $j$, any of the cycles $(j, k)$ (for $k in omega$) may define $Delta(j)$, and it is these definitions which clash.
 
 So consider the situation in which, at stage $t$, cycle $(j, k)$ is in state (5) and cycle $(j, k+1)$ is in state (7). Suppose
-also that there are stages $t < s < s' < s''$, which are the next three stages at which any of the cycles of the strategy act,
+also that there are stages $t < s < s' < s dubpr$, which are the next three stages at which any of the cycles of the strategy act,
 such that these actions are:
 
 - Stage $s$:   #h(1em) Cycle $(j, k+1)$ sees the stage (called $s_2$) it is waiting for, and so defines $Delta(j)$ with use $v'$,
   advancing to state (10).
 - Stage $s'$:  #h(1em) Cycle $(j, k)$ gets the $G$-permission it has been waiting for and advances to state (7), stopping cycle
   $(j, k+1)$.
-- Stage $s''$: #h(1em) Cycle $(j, k)$ sees _its_ version of stage $s_2$ (this is what it waits for in state (7)), and so attempts
+- Stage $s dubpr$: #h(1em) Cycle $(j, k)$ sees _its_ version of stage $s_2$ (this is what it waits for in state (7)), and so attempts
   to define its own value of $Delta(j)$.
 
-We further suppose that $G_s(j) neq G_(s'')(j)$ (this assumption is independent of any of the activity at stages $s$, $s'$ and
-$s''$). Then the values of $Delta(j)$ that cycles $(j,k)$ and $(j, k+1)$ define will differ, but will both be present at stage
-$s''$.
+We further suppose that $G_s(j) neq G_(s dubpr)(j)$ (this assumption is independent of any of the activity at stages $s$, $s'$ and
+$s dubpr$). Then the values of $Delta(j)$ that cycles $(j,k)$ and $(j, k+1)$ define will differ, but will both be present at stage
+$s dubpr$.
 
 When boiled down, the problem is the tension between the definitions of the functions $Delta(C)$ and $Gamma_j(C)$.  The apparent
 need to keep the definition of $Gamma_j(C)$ synchronozed with enumerations into the set $G$ conflicts with the more subdued approach
@@ -750,7 +749,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
     $(mu(x(j, k)))[s] = (mu(x(j, k')))[s]$.
 ]
 #proof[
-    Suppose $(j, k)$ enteres state 3 at stage $t$ and remains there until $(j, k')$ does the same at stage $t' > t$, and
+    Suppose $(j, k)$ enters state 3 at stage $t$ and remains there until $(j, k')$ does the same at stage $t' > t$, and
     that they both stay in this state until at least stage $s$. By Lemmas #thmref(<lemma23>) and #thmref(<lemma24>),
     both cycles must enter state 3 for the sake of the same cycle being in stage 5/6, and for the same computations.
     The lemma follows.
@@ -805,4 +804,4 @@ The claim is now that if strategy $alpha$ has been started since last being canc
     If strategy $alpha$ has at least one cycle not in state 0 at stage $s$, $pattern(s) in validPattern$.
     <patternLemma>
 ]
-#bibliography("works.yml")
+#bibliography("works.yml", style: "ieee")
