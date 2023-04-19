@@ -36,9 +36,10 @@
 #let setdiff(a, b) = $#a tilde.op #b$
 // Turing interval
 #let turinginterval(a, b) = $[#a, #b]_T$
-// Turing less than or equal
-// Need the provide the argument. Othewise $leqt Z$ ends up roughly as $leqt$ $Z$, with too much space
-#let leqt(z) = $lt.eq_T #z$
+// Turing less than and leq. Note that we have extra space after this symbol. See https://github.com/typst/typst/issues/877. The
+// workaround is to specify 0 space ourselves.
+#let ltt = $<_T #h(0em)$
+#let leqt = $lt.eq_T #h(0em)$
 #let emptyset = $nothing$
 
 // Calculation converges
@@ -213,7 +214,7 @@ Uppercase Greek letters, $Phi, Psi, dots$ will denote recursive functionals, wit
 oracle will be understood from context. Without loss of generality we assume that $phi(x, s)$ is increasing in both arguments.
 
 We use $subset$ to denote the subset relation, and $subset.neq$ to denote a proper subset. Set difference is denoted
-$setdiff(X, Y)$. It will be convenient to use the notation $turinginterval(X, Y) = { Z st X leqt(Z) leqt(Y) }$.
+$setdiff(X, Y)$. It will be convenient to use the notation $turinginterval(X, Y) = { Z st X leqt Z leqt Y }$.
 
 We will make frequent use of Lachlan's hat-trick. Given an enumeration ${C_s}_(s geq 0)$ of an r.e. set $C$ define for each stage
 $s geq 0$
@@ -260,15 +261,15 @@ Note that, once it is defined, $U$ does not depend essentially in any way on $C$
 $reIn(Y)$ set $U^Y$. $U$ then becomes a _pseudojump operator_, $U : Y arrow.r.bar Y join U^Y$. These operators will appear in
 (TBD).
 
-A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(x)$ and $X leqt(Y)$.
-If, instead, $Y$ is the difference of two $reIn(x)$ sets, and $X leqt(Y)$ then Y is said to be $dreInAbove(X)$.
+A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(x)$ and $X leqt Y$.
+If, instead, $Y$ is the difference of two $reIn(x)$ sets, and $X leqt Y$ then Y is said to be $dreInAbove(X)$.
 
 = A patched proof of the weak density of the properly d.r.e. degrees
 == Introduction
 
 In @CLW1989 a proof is given of the weak density of the properly d.r.e. degrees:
 #theorem[
-Given recursively enumerable sets $C <_T G$ there is a d.r.e. set $D$ not of r.e. degree such that $C <_T D <_T G$.
+Given recursively enumerable sets $C ltt G$ there is a d.r.e. set $D$ not of r.e. degree such that $C ltt D ltt G$.
 <thm2.1>
 ]
 
@@ -291,7 +292,7 @@ where $E_e$ is an r.e. set, and $Theta_e$ and $Phi_e$ are partial recursive func
 
 The basic module presented to satisfy $E_e$ consists of an infinite collection of _cycles_, indexed by $omega^2$. Together, these
 cycles attempt to define fuctionals $Delta(C)$ and $Gamma_j(C)$ (for $j in omega$) such that, if the strategy fails to satisfy
-$R_e$, one of these functionals demonstrates $G leqt(C)$, contrary to assumption. Cycle $(j, k)$ is allowed to define the values
+$R_e$, one of these functionals demonstrates $G leqt C$, contrary to assumption. Cycle $(j, k)$ is allowed to define the values
 $Delta(C\; j)$ and $Gamma_j(C; k)$.
 
 After the description of the basic module (@CLW1989[p141]) two claims are made:
@@ -356,7 +357,7 @@ the correct compromise: we back both horses, hedging our bets until we have a be
 
 This chapter, then, gives a correct proof of #thmref(<thm2.1>)[Theorem], slightly strengthening it to obtain the following result:
 #theorem[
-Given r.e. sets $C <_T G$ there are d.r.e. sets $D <_T E$ such that $turinginterval(D, F) subset turinginterval(C, G)$
+Given r.e. sets $C ltt G$ there are d.r.e. sets $D ltt E$ such that $turinginterval(D, F) subset turinginterval(C, G)$
 and there is no r.e. set $E in turinginterval(D, F)$.
 <thm2.2>
 ]
@@ -374,7 +375,7 @@ $
 $
 where ${angle.l E_e, Phi_e, Psi_e angle.r}_(e geq 0)$ enumerates all triples in which $E_e$ is an r.e. set and
 $Phi_e$ and $Psi_e$ are recursive functionals. ${Theta_e}_(e geq 0)$ merely enumerates the recursive functionals.
-We will ensure that $A leqt(G)$ and $B leqt(G)$ by delayed, direct permitting.
+We will ensure that $A leqt G$ and $B leqt G$ by delayed, direct permitting.
 
 The first thing we do is to give basic modules for each of the two types of requirement.  It is useful to note here
 that elements are enumerated into or out of $A$ only in satisfying $R_e$ requirements, and $B$ receives elements
@@ -390,7 +391,7 @@ necessary to avoid $Delta$-inconsistency.
 Suppose $e$ is fixed and write $angletup(E, Phi, Psi)$ for $angletup(E_e, Phi_e, Psi_e)$. We will describe the strategy for
 satisfying $R_e$. It consists of a $(omega^2)$-sequence of cycles ordered lexicographically. Cycle $(0,0)$ starts first, and each
 cycle $(j,k)$ may start cycles $(j, k+1)$ and $(j+1, 0)$, as well as stopping all cycles $> (j,k)$.  The strategy as a whole
-threatens to demonstrate that, if no cycle satisfies the requirement, then $G leqt(C)$ _via_ one of the functionals $Gamma_j(C)$
+threatens to demonstrate that, if no cycle satisfies the requirement, then $G leqt C$ _via_ one of the functionals $Gamma_j(C)$
 (for $j in omega$) or $Delta(C)$.  The cycle $(j, k)$ may define the values $Gamma_j(C\; k)$ and $Delta(C\; k)$. We refer to the
 collection $row(j) = { (j, k) st k in omega }$ as the _$j$-th row of cycles_.
 
@@ -528,10 +529,10 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
 === The basic module for $P_e$
 
 The $P_e$ requriements are simpler than those of the first kind, and we implement a standard diagonalisation approach to satisfy
-them. To ensure that $B leqt(G)$ we again use a system of cycles, but now we only have a one-dimensional arrangement.
+them. To ensure that $B leqt G$ we again use a system of cycles, but now we only have a one-dimensional arrangement.
 
 Again, suppose $e$ is fixed, and write $Theta$ for $Theta_e$. We have a $omega$-sequence of cycles, and again threaten
-to show $G leqt(C)$, by means of a functional $Xi(C)$. _Starting_ and _abandoning_ have the same definitions as before. _Resetting_
+to show $G leqt C$, by means of a functional $Xi(C)$. _Starting_ and _abandoning_ have the same definitions as before. _Resetting_
 is similar, but now we need only worry about the single parameter, $u$. _Acting_ now happens with any change of state,
 as we have no equivalent of the bookkeeping state 3 to worry about.
 
