@@ -105,17 +105,17 @@
 
 // Based on an answer in the Discord from PgSuper (2023-04-13 1:43 PM)
 // See issue #9 on GitHub
-#let setupenum(doc, prefix: "") = {
+#let setupenum(doc, prefix: "", formats: ("1.", "(a)", "i.")) = {
   set enum(
     full: true,
     numbering: (..n) => {
       let n = n.pos()
       if n.len() > 2 {
-        numbering("i.", n.last())
+        numbering(formats.at(2), n.last())
       } else if n.len() == 2 {
-        numbering("(a)", n.last())
+        numbering(formats.at(1), n.last())
       } else {
-        numbering(prefix + "1.", ..n)
+        numbering(prefix + formats.at(0), ..n)
       }
     }
   )
@@ -541,7 +541,7 @@ the letter P. Cycle $k$ proceeds as follows.
 // TODO: this is hacky. We set up num for the rest of the document with a P prefix, and then undo that below. How can we restrict
 // the scope?
 #show: doc => setupenum(doc, prefix: "P")
-+ Until given the go-ahead, do nothing. When told to start check if cycle $k$ has been abandoned in the past. If so, jump straight
+0. Until given the go-ahead, do nothing. When told to start check if cycle $k$ has been abandoned in the past. If so, jump straight
   to state P4 and follow the instructions there. Otherwise, choose a new witness $y$ larger than any number mentioned in the
   construction so far (including all currently defined $B$-restraints, and the current stage) and larger than $k$. Advance to state
   P1.
@@ -550,34 +550,34 @@ the letter P. Cycle $k$ proceeds as follows.
   $
     (B(y) = hat(Theta)(C join A\; y))[s_1]
   $
-and let $u = hat(theta)_(s_1)(y)$. Restrain $restr(A, u)$, put $Xi(C\; k) = G_(s_1)(k)$ with use $xi(k) = u$ and start
-cycle $k+1$ to run simultaneously. Advance to state P2.
+  and let $u = hat(theta)_(s_1)(y)$. Restrain $restr(A, u)$, put $Xi(C\; k) = G_(s_1)(k)$ with use $xi(k) = u$ and start
+  cycle $k+1$ to run simultaneously. Advance to state P2.
 
-[Note that if there is no such stage $s_1$ we immediately satisfy the requirement, by diagonalization.]
+  [Note that if there is no such stage $s_1$ we immediately satisfy the requirement, by diagonalization.]
 
 + Wait for a stage $t_1$ at which either
-+ $restr(C_(t_1), u) neq restr(C_(s_1), u)$; or
-+ $G_(t_1)(k) neq G_(s_1)(k)$.
+  + $restr(C_(t_1), u) neq restr(C_(s_1), u)$; or
+  + $G_(t_1)(k) neq G_(s_1)(k)$.
 
-On reaching $t_1$, reset all cycles $k' > k$. Then
-+ If $restr(C, u)$ changes first, set the $B$-restraint of this cycle back to 0 and return to state P1.
-+ Otherwise, enumerate $y$ into $B$. This has been permitted (perhaps after a delay) by the change in $G(k)$. Proceed to state P3.
+  On reaching $t_1$, reset all cycles $k' > k$. Then
+  + If $restr(C, u)$ changes first, set the $B$-restraint of this cycle back to 0 and return to state P1.
+  + Otherwise, enumerate $y$ into $B$. This has been permitted (perhaps after a delay) by the change in $G(k)$. Proceed to state P3.
 
 + Wait for a stage $s_2$ at which
-$ (B(y) = hat(Theta)(C join A\; y))[s_2] $
-If there is no such stage, $y$ again witnesses the success of our strategy.
+  $ (B(y) = hat(Theta)(C join A\; y))[s_2] $
+  If there is no such stage, $y$ again witnesses the success of our strategy.
 
-If such an $s_2$ exists, note that we have
-$
-(hat(Theta)(C join A\; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1) = (hat(Theta)(C join A\; y))[s_1].
-$
-By the restraint on $A$, $restr(A_(s_2), u) = restr(A_(s_1), u)$ so we must have $restr(C_(s_2), u) neq restr(C_(s_1), u)$.
-This change in $C$ allows us to redefine $Xi(C\; k)$, which we do after advancing to state P4.
+  If such an $s_2$ exists, note that we have
+  $
+  (hat(Theta)(C join A\; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1) = (hat(Theta)(C join A\; y))[s_1].
+  $
+  By the restraint on $A$, $restr(A_(s_2), u) = restr(A_(s_1), u)$ so we must have $restr(C_(s_2), u) neq restr(C_(s_1), u)$.
+  This change in $C$ allows us to redefine $Xi(C\; k)$, which we do after advancing to state P4.
 
 + It is now safe and correct to define $Xi(C\; k) = 1$ with use 0. Do so, unless this has already been done, permanently abandon
-cycle $k$, and start cycle $k+1$.
+  cycle $k$, and start cycle $k+1$.
 
-[This is just like state 7 in the basic module for the $R_e$ requirements.]
+  [This is just like state 7 in the basic module for the $R_e$ requirements.]
 
 // TODO: hacky (see above)
 #show: doc => setupenum(doc)
