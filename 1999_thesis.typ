@@ -748,6 +748,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
 #lemma[
     For all $j$, if cycles $(j, k) neq (j, k')$ are both in state 3 at stage $s$, then
     $(mu(x(j, k)))[s] = (mu(x(j, k')))[s]$.
+    <lemma25>
 ]
 #proof[
     Suppose $(j, k)$ enters state 3 at stage $t$ and remains there until $(j, k')$ does the same at stage $t' > t$, and
@@ -892,7 +893,44 @@ The claim is now that if strategy $alpha$ has been started since last being canc
        right of $(j, k)$ are reset and the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_(k-1), b')$,
        where $b = 1$ or $b = 4$ according as how the cycle acted. In either case, $f' in uncrampedRow$,
        and the new pattern for the strategy $pattern(s) = angletup(p_0, dots, p_n, f')$ is still valid.
+
+  + $j < n+1$. Row $row(j)$ can't ever have been abandoned, as otherwise no cycle it in could act, so
+    $p_j = angletup(h_0, dots, h_m, 5) in prelimCrampedRow$. Note that for $i leq m$, $h_i in {2, 3, 7}$.
+
+    + $k = m+1$, so cycle $(j, k)$ is in state 5.
+
+      If the action consists of returning to state 4, no cycles in row $row(j)$ to the left of
+      $(j, k)$ can still be in state 3, by Lemmas #thmref(<lemma24>) and #thmref(<lemma25>).
+      Thus $h_i in {2, 7}$ for $i < m+1$. The action resets all cycles to the right of $(j, k)$ (including
+      those is rows $row(l)$, $l > j$), so the new pattern for row $row(j)$ is
+      $p'_j = angletup(h_0, dots, h_m, 4) in uncrampedRow$, and the pattern for the whole strategy is
+      $pattern(s) = angletup(p_0, dots, p_(j-1), p'_j) in validPattern$.
+
+      If instead the action of $(j, k)$ consists of advancing to state 6, again all cycles to the right
+      of $(j, k)$ are reset, but now we can't say anything new about the status of cycles in row $row(j)$
+      to the left of $(j, k)$. This doesn't matter though, since the new pattern for row $row(j)$ is
+      $p'_j = angletup(h_0, dots, h_m, 6) in finalCrampedRow$, and the pattern for the strategy is
+      $pattern(s) = angletup(p_0, dots, p_(j-1), p'_j) in validPattern$.
+
+    + $k < m + 1$. Clearly $h_k neq 7$, so we have two cases, $h_k = 2$ and $h_k = 3$.
+
+      + $h_k = 2$.
+
+        Cycle $(j, k)$ can't advance to state 4, as the row is cramped, and it can't go to state 3,
+        as such a transition doesn't count as acting. Thus the action must consist of cycle $(j, k)$
+        returning to state 1 on the basis of a change in $restr(C, u_s(j, k))$. As above (case I.1.b)
+        we conclude that the new pattern for row $row(j)$ is
+        $p'_j = angletup(h_0, dots, h_(k-1), 1) in uncrampedRow$. As all cycles to the right of $(j, k)$
+        are reset, the pattern for the whole strategy is therefore
+        $pattern(s) = angletup(p_0, dots, p_(j-1), p'_j) in validPattern$.
+
+      + $h_k = 3$.
+
+        This case is to case I.1.c as case II.2.a is to case I.1.b.
+
+  Thus the new pattern $pattern(s)$ is valid, and we are done.
 ]
+
 #show: doc => setupenum(doc)
 
 
