@@ -682,7 +682,7 @@ just treat the stages mentioned as being the successive ones at which strategy $
 It will be convenient to refer to a cycle with is in either stage 5 or state 6 as being "in state 5/6".
 
 #lemma[
-    For any row $row(j)$, at most one cycle $(j, k)$ is in cycle 5/6.
+    For any row $row(j)$, at most one cycle $(j, k)$ is in state 5/6.
     <lemma23>
 ]
 #proof[
@@ -708,7 +708,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
 
     Cycle $(j, k')$ leaves state 5/6 either through acting or through being reset. If $(j, k') < (j, k)$ then we see that the
     action/resetting of $(j, k')$ also resets $(j, k)$, and the latter is no longer in state 3. (It will turn out later that a cycle
-                                                                                                 can't be in stage 3 when something in the same row to its left is in state 5/6, but we can't rule out that possibility yet.)
+    can't be in state 3 when something in the same row to its left is in state 5/6, but we can't rule out that possibility yet.)
 
     If $(j, k) < (j, k')$ we must work substantially harder.
 
@@ -734,7 +734,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
 
     Cycle $(j, k dubpr)$ can't go from state 2 to state 3 at stage $t$, as this does not count as an action, so the only remaining
     possibility is the $3 arrow.r.bar 4$ transition, so that there is a change in $restr(C, mu_t(x(j, k dubpr)))$.
-    We claim that $mu_t(x(j, k dubpr)) = v_t(j, k')$, and objtain the contradiciton of a change in $restr(C, v_t(j, k'))$.
+    We claim that $mu_t(x(j, k dubpr)) = v_t(j, k')$, and obtain the contradiciton of a change in $restr(C, v_t(j, k'))$.
 
     Suppose otherwise, so that $(j, k dubpr)$ enters state 3 for the sake of yet another cycle $(j, k trippr)$ being
     in state 5/6, or for another "incarnation" of cycle $(j, k')$; that is, for the sake of cycle $(j, k')$ being in state 5/6
@@ -756,12 +756,12 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
 ]
 
 We are now ready to describe the various patterns made by the successive
-cycle-states.#footnote[Such as Athens, Sparta, Hamburg, #sym.dots.h. Oh, no, that's something else.]
+cycle-states.#footnote[Such as Athens, Sparta, Hamburg, #sym.dots . Oh, no, that's something else.]
 To do this we first need to introduce some definitions and notation.
 
 Consider a stage $s$, and the states that all the various cycles of strategy $alpha$ are in at the end of stage $s$.  We will call
 this arrangement the _pattern of strategy $alpha$ at stage $s$_, and denote it by $pattern(s) = pattern(s)(alpha)$.  The notation
-used to represent patterns is based on the row structure of the cycles, $pattern(s)$ will be given as a finite sequence, one term
+used to represent patterns is based on the row structure of the cycles. $pattern(s)$ will be given as a finite sequence, one term
 each for those rows $row(j)$ of the strategy with at least one cycle in a state other than 0. Each term in this sequence will itself
 be a finite sequence, one term each for the cycles of row $row(j)$ (say) in a state other than 0.
 
