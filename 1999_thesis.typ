@@ -1014,6 +1014,40 @@ Now we can prove that the functionals are defined consistently.
     at stage $s$. But such an undefinition#footnote[This is only marginally a word.] can only occur through a change in
     $restr(C, delta_t(i))$ which implies a change in $restr(C, delta_s(j))$ and the undefinition of the computation
     $(Delta(C\; j))[t]$, contradicting our assumption. This verifies (I) for $j$.
+
+    For the sake of contradiction, suppose (II) fails at $j$. That is, suppose that at stage $s$ cycle $(j, k)$
+    defines $Delta(C\; j)$, and another computation for this value is still current, having been defined at stage
+    $t < s$ by cycle $(j, k')$ with use $delta_t(j) = v_t(j, k')$. We note the following:
+
+    - $restr(C_s, v_t(j, k')) = restr(C_t, v_t(j, k'))$.
+
+    - For all $i < j$, $(Delta(C\; i))[t] converge$ and by (I) $delta_t(i) < delta_t(j) = v_t(j, k')$.
+
+    - We know that $delta_t(j) > 0$, for a definition of $Delta(C\; j)$ with use 0 would have
+      led to the abandoning of row $row(j)$ in its entirety at stage $t$ and the consequent impossibility of
+      cycle $(j, k)$ acting now.
+
+    - All cycles in row $row(j)$ to the left of $(j, k')$ must be in state 2 or state 7 at stage $t$.
+      This follows from the Pattern Lemma, as the definition of the $Delta(C\; j)$ computation at stage $t$
+      implies that cycle $(j, k')$ started that stage in state 4, and so the pattern for row $row(j)$ formed
+      an #uncrampedRow at $t$.
+
+    - Because of the constraints listed at state 2, no cycle of row $row(j)$, except perhaps for cycle $(j, k')$
+      itself, may act so long as cycle $(j, k')$ remains in state 5 or 6. (The $C$-change which allows a cycle
+      to the left of $(j, k')$ to leave state 3 is precisely the change that forces cycle $(j, k')$ out of state
+      5 or 6. The cycles in row $row(j)$ to the right of cycle $(j, k')$ cannot act, as the "next" cycle
+      to the right of $(j, k')$ allowed to act under these circumstances is cycle $(j+1, 0)$, in row $row(j+1)$.)
+
+    Now, cycle $(j, k')$ does not exit cycle 5/6 before stage $s$ "under its own steam", as this would involve
+    a change in $restr(C, v_t(j, k'))$, which we have seen does not occur. Thus the only way that _any_
+    cycle in row $row(j)$ can act at stage $s$ is if all the cycles of the row are first reset by the action
+    of a cycle in row $row(i)$, for $i < j$, at stage $t'$, where $t < t' < s$. When row $row(i)$ later
+    starts row $row(i+1)$ (which is must do before stage $s$) it in the process defines a new computation
+    for $Delta(C\; i)$. By the inductive hypothesis, the previous computation must have become undefined,
+    which means that $restr(C_s, delta_t(i)) neq restr(C_t, delta_t(i))$ and hence
+    $restr(C_s, v_t(j, k')) neq restr(C_t, v_t(j, k'))$, contradicting our assumption.
+
+    Thus such an attempted redefinition never occurs, and the inductive step in complete.
 ]
 
 #bibliography("works.yml", style: "ieee")
