@@ -771,8 +771,8 @@ $M; N = {concat(theta, sigma) st theta in M and sigma in N}$,
 the finite sequences got by appending a sequence from $N$ to a sequence from $M$. For convenience we also allow the notation
 $angletup(M) = { angletup(theta) | theta in M }$, the length 1 sequences consisting of single terms from $M$. We define the
 following subsets of $finseq(X)$:
-#let prelimCramp = patternname("prelimCrampedRow")
-#let finalCramp = patternname("finalCrampedRow")
+#let prelimCrampedRow = patternname("prelimCrampedRow")
+#let finalCrampedRow = patternname("finalCrampedRow")
 #let crampedRow = patternname("crampedRow")
 #let uncrampedRow = patternname("uncrampedRow")
 #let abandonedrow = patternname("abandonedRow")
@@ -780,13 +780,13 @@ following subsets of $finseq(X)$:
 #let finalRow = patternname("finalRow")
 #let validPattern = patternname("validPattern")
 $
-  prelimCramp  &= finseq({2, 3, 7}); angletup({5}), \
-  finalCramp   &= finseq({2, 3, 7}); angletup({6}), \
-  crampedRow   &= prelimCramp union finalCramp, \
-  uncrampedRow &= finseq({2, 7}); angletup({1, 4}), \
-  abandonedrow &= angletup({8}), \
-  prelimRow    &= prelimCramp union abandonedrow, \
-  finalRow     &= finalCramp union uncrampedRow,
+  prelimCrampedRow  &= finseq({2, 3, 7}); angletup({5}), \
+  finalCrampedRow   &= finseq({2, 3, 7}); angletup({6}), \
+  crampedRow        &= prelimCrampedRow union finalCrampedRow, \
+  uncrampedRow      &= finseq({2, 7}); angletup({1, 4}), \
+  abandonedrow      &= angletup({8}), \
+  prelimRow         &= prelimCrampedRow union abandonedrow, \
+  finalRow          &= finalCrampedRow union uncrampedRow,
 $
 and a subset of $finseq((finseq(X)))$
 $
@@ -843,6 +843,55 @@ The claim is now that if strategy $alpha$ has been started since last being canc
           of stage $s$ would have left that state, by #thmref(<lemma24>)[Lemma]. Let $k' = min_(kappa > k) { "cycle" (j, kappa) "never abandoned" }$.
           Then the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_m, 7, dots, 7, 1)_(k' + 1) in finalRow$.
           Thus $pattern(s) = angletup(p_0, dots, p_n, f')$ in validPattern.
+
+        + $k < m+1$ and cycle $(j, k)$ is in state 2.
+
+          The action of $(j, k)$ can't just be to enter state 3, as such a transition does not count as an action.
+          Neither can $(j, k)$ enter state 4, as the row is cramped, and such a transition is prohibited. Thus the
+          action is to go back to state 1 due to a change in $restr(C, u_s(j, k))$. Now, since the action of cycle $(j, k)$
+          resets cycle $(j, m+1)$, by #thmref(<lemma24>)[Lemma] we cannot have $h_i = 3$ for any $i < k$. Thus $h_i in {2, 7}$
+          for $i < k$. But now the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_(k-1), 1) in uncrampedRow$
+          and again $pattern(s) in validPattern$.
+
+        + $k < m+1$ and cycle $(j, k)$ is in state 3.
+
+          First note that, as in the previous case, $h_i in {2, 7}$ for $i < k$. In entering state 4 cycle $(j, k)$ resets
+          all cycles to its right, so the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_(k-1), 4) in uncrampedRow$.
+          Again $pattern(s) in validPattern$.
+
+       We don't need a case for cycle $(j, k)$ being in state 7, as such a state can't act.
+
+     + Row $row(j)$ is uncramped: $f = angletup(h_0, h_1, dots, h_m, b)$, $h_i in {2, 7}, b in {1, 4}$.
+
+       + $k = m + 1$, and cycle $(j, k)$ is in state 1.
+
+         The action of $(j, k)$ must take it to state 2, starting cycle $(j, k+1)$.
+         Let $k' = min_(kappa > k) { "cycle" (j, kappa) "never abandoned" }$. The new pattern for row $row(j)$ is
+         $f = angletup(h_0, dots, h_m, 7, dots, 7, 1)_(k' + 1) in finalRow$. Thus $pattern(s) in validPattern$.
+
+       + $k = m + 1$, and cycle $(j, k)$ is in state 4.
+
+         If the action of $(j, k)$ is to go to state 5, the new pattern for row $row(j)$ must be
+         $f' = angletup(h_0, dots, h_m, 5) in prelimCrampedRow subset prelimRow$. In the same way as above,
+         let $j' = min_(iota > j) { "row" row(iota) "never abandoned" }$
+         and $k' = min_kappa { "cycle" (j', kappa) "never abandoned" }$.
+         Then the new pattern for the strategy is
+         $
+           pattern(s) = angletup(p_0, dots, p_n, f', angle8, dots, angle8, angletup(7, dots, 7, 1)_(k' + 1))_(j' + 1).
+         $
+         If, instead, $(j, k)$'s action is to go to state 8, row $row(j)$ is abandoned as a whole, and its new pattern
+         will simple be angle8. Define $j'$ and $k'$ as before and the new pattern for the strategy will be
+         $
+           pattern(s) = angletup(p_0, dots, p_n, angle8, dots, angle8, angletup(7, dots, 7, 1)_(k' + 1))_(j' + 1).
+         $
+         In either case, the new pattern is valid.
+
+     + $k < m+1$. We have that cycle $(j, k)$ is in state 2, since a cycle can't act if it is in state 7.
+
+       This action can take cycle $(j, k)$ to either state 1 or state 4. In either case, all cycles to the
+       right of $(j, k)$ are reset and the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_(k-1), b')$,
+       where $b = 1$ or $b = 4$ according as how the cycle acted. In either case, $f' in uncrampedRow$,
+       and the new pattern for the strategy $pattern(s) = angletup(p_0, dots, p_n, f')$ is still valid.
 ]
 #show: doc => setupenum(doc)
 
