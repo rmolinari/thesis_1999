@@ -30,6 +30,7 @@
     separator: [:#h(1em)]
 ).with(numbering: none)
 
+#let lemmaRef(name) = thmref(name)[Lemma]
 
 // Set difference
 #let setdiff(a, b) = $#a tilde.op #b$
@@ -594,7 +595,7 @@ standard reference fo this technique is Chapter XIV of Soare @Soare1987.
 In @LaForte LaForte introduced a path restraint to deal with a problem in the original construction in @CLW1989. Basically, that
 construction worked the tree angle in an "obvious" way. As soon a strategy $alpha$'s cycle $(j, k)$ became "active" we use #outcome
 as the outcome; this happens as soon as cycle $(j, k)$ chooses a witness. (For the moment the consider the case of
-                                                                           $R_e$-strategies.) However, if cycle $(j, k)$ later sees a relevant computation converge and imposes a restraint $r$, those
+$R_e$-strategies.) However, if cycle $(j, k)$ later sees a relevant computation converge and imposes a restraint $r$, those
 strategies in the subtree below #outcome started in the meantime will not have chosen witnesses to respect this new restraint. This
 is naturally a Bad Thing. LaForte ingeniously solves the problem by introducing the path restraint: as the new restraint is imposed
 it is incorporated into the path restraint for strategies below #outcome and respected "after the fact."  Strategies below #outcome
@@ -684,7 +685,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
 
 #lemma[
     For any row $row(j)$, at most one cycle $(j, k)$ is in state 5/6.
-    <lemma23>
+    <lemma2-3>
 ]
 #proof[
     We show that if cycle $(j, k)$ is in state 5 or state 6 at stage $s$ then nothing to the right of $(j, k)$ in row $row(j)$
@@ -702,7 +703,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
 #lemma[
     Suppose cycle $(j, k)$ enters state 3 at stage $s$ due to cycle $(j, k')$ being in state 5/6. If at stage $t > s$ cycle $(j, k')$
     leaves state 5/6 for the first time, for any reason, then cycle $(j, k)$ is no longer in state 3 at the end of stage $t$.
-    <lemma24>
+    <lemma2-4>
 ]
 #proof[
     Note that $mu_s(x(j, k)) = v_s(j, k')$.
@@ -740,7 +741,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
     Suppose otherwise, so that $(j, k dubpr)$ enters state 3 for the sake of yet another cycle $(j, k trippr)$ being
     in state 5/6, or for another "incarnation" of cycle $(j, k')$; that is, for the sake of cycle $(j, k')$ being in state 5/6
     based on another computation. Well, if we are in the former case, cycle $(j, k trippr)$ must leave state 5/6 by stage $s$,
-    by #thmref(<lemma23>)[Lemma], forcing cycle $(j, k dubpr)$ out of state 3, by the assumption of the minimality of $t$.
+    by #lemmaRef(<lemma2-3>), forcing cycle $(j, k dubpr)$ out of state 3, by the assumption of the minimality of $t$.
     The same argument applies to another "incarnation" of cycle $(j, k')$. Thus, cycle $(j, k dubpr)$ enters state 3 for
     the sake of the same $(j, k')$-related computations that force cycle $(j, k)$ to do likewise, and
     $mu_t(x(j, k dubpr)) = mu_s(x(j, k')) = v_s(j, k') = v_t(j, k')$. We are done.
@@ -748,11 +749,11 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
 #lemma[
     For all $j$, if cycles $(j, k) neq (j, k')$ are both in state 3 at stage $s$, then
     $(mu(x(j, k)))[s] = (mu(x(j, k')))[s]$.
-    <lemma25>
+    <lemma2-5>
 ]
 #proof[
     Suppose $(j, k)$ enters state 3 at stage $t$ and remains there until $(j, k')$ does the same at stage $t' > t$, and
-    that they both stay in this state until at least stage $s$. By Lemmas #thmref(<lemma23>) and #thmref(<lemma24>),
+    that they both stay in this state until at least stage $s$. By Lemmas #thmref(<lemma2-3>) and #thmref(<lemma2-4>),
     both cycles must enter state 3 for the sake of the same cycle being in stage 5/6, and for the same computations.
     The lemma follows.
 ]
@@ -841,7 +842,7 @@ The claim is now that if strategy $alpha$ has been started since last being canc
 
           The only way that cycle $(j, k)$ to act is to go to stage 7, starting cycle $(j, k+1)$. This means that
           we can't have any $j_i = 3$ for $i leq m$, since any cycle $(j, i) < (j, k)$ in state 3 at the start
-          of stage $s$ would have left that state, by #thmref(<lemma24>)[Lemma]. Let $k' = min_(kappa > k) { "cycle" (j, kappa) "never abandoned" }$.
+          of stage $s$ would have left that state, by #lemmaRef(<lemma2-4>). Let $k' = min_(kappa > k) { "cycle" (j, kappa) "never abandoned" }$.
           Then the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_m, 7, dots, 7, 1)_(k' + 1) in finalRow$.
           Thus $pattern(s) = angletup(p_0, dots, p_n, f')$ in validPattern.
 
@@ -850,7 +851,7 @@ The claim is now that if strategy $alpha$ has been started since last being canc
           The action of $(j, k)$ can't just be to enter state 3, as such a transition does not count as an action.
           Neither can $(j, k)$ enter state 4, as the row is cramped, and such a transition is prohibited. Thus the
           action is to go back to state 1 due to a change in $restr(C, u_s(j, k))$. Now, since the action of cycle $(j, k)$
-          resets cycle $(j, m+1)$, by #thmref(<lemma24>)[Lemma] we cannot have $h_i = 3$ for any $i < k$. Thus $h_i in {2, 7}$
+          resets cycle $(j, m+1)$, by #lemmaRef(<lemma2-4>) we cannot have $h_i = 3$ for any $i < k$. Thus $h_i in {2, 7}$
           for $i < k$. But now the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_(k-1), 1) in uncrampedRow$
           and again $pattern(s) in validPattern$.
 
@@ -900,7 +901,7 @@ The claim is now that if strategy $alpha$ has been started since last being canc
     + $k = m+1$, so cycle $(j, k)$ is in state 5.
 
       If the action consists of returning to state 4, no cycles in row $row(j)$ to the left of
-      $(j, k)$ can still be in state 3, by Lemmas #thmref(<lemma24>) and #thmref(<lemma25>).
+      $(j, k)$ can still be in state 3, by Lemmas #thmref(<lemma2-4>) and #thmref(<lemma2-5>).
       Thus $h_i in {2, 7}$ for $i < m+1$. The action resets all cycles to the right of $(j, k)$ (including
       those is rows $row(l)$, $l > j$), so the new pattern for row $row(j)$ is
       $p'_j = angletup(h_0, dots, h_m, 4) in uncrampedRow$, and the pattern for the whole strategy is
@@ -930,8 +931,89 @@ The claim is now that if strategy $alpha$ has been started since last being canc
 
   Thus the new pattern $pattern(s)$ is valid, and we are done.
 ]
-
 #show: doc => setupenum(doc)
 
+==== Consistency of the functions $Gamma_j(C)$ and $Delta(C)$
+
+Here we show that the functionals $Gamma_j$ and $Delta$ are defined in a such a way that at every stage
+$s$ $(Gamma_j(C))[s]$ and $(Delta(C))[s]$ are well defined (partial) functions. The failure of this property
+was one of the technical flaws in the original paper @CLW1989.
+
+For the following lemmas we again assume that we have fixed in our minds a specific node/strategy of the construction,
+and restrict our attention to the functionals associated with this strategy.
+#lemma[
+    For all $j$ and $k$, if cycle $(j, k)$ is in state 5 at stage $s$, then $(Delta(C\; j))[s] converge$.
+    The same conclusion can be made if row $row(j)$ was abandoned at some stage before $s$.
+    <lemma2-7>
+]
+#proof[
+    If cycle $(j, k)$ is in state 5, we must have in particular $restr(C_s, v(j, k)) = restr(C_(s_2), v(j, k))$.
+    But $v(j, k) = delta_(s_0)(j)$, so the computation for $Delta(C\; j)$ that was defined by cycle $(j, k)$
+    when it entered state 5 is still defined.
+
+    If, instead, row $row(j)$ was abandoned at some earlier stage, this abandonment was accompanied by
+    a definition of $Delta(C\; j)$ with use 0. Such a computation can never become undefined, and must persist to stage $s$.
+]
+
+#lemma[
+    If some cycle $(j, k)$ acts at stage $s$ to define a computation for $Delta(C\; j)$,
+    then for eaach $i < j$, ($Delta(C\; i))[s] converge$.
+    <lemma2-8>
+]
+#proof[
+    Such a cycle can act in this way only by moving from state 4 to either state 5 or state 8. In either case,
+    the pattern corresponding to row $row(j)$ coming into stage $s$ must have been an uncrampedRow.
+    So, by the Pattern Lemma, for each $i < j$, the pattern for row $row(i)$ must either be angle8
+    (indiciating that row $row(i)$ was abandoned at some time) or an element of prelimCrampedRow. In the latter
+    case, each row $row(i)$ has some cycle in state 5 as we enter stage $s$. But no cycle in any row $row(i)$, $i < j$
+    acts at stage $s$, as othwerwise cycle $(j, k)$ would be reset and unable to act. Thus the pattern of each of these rows
+    is unchanged (except perhaps for 2 changing to 3) during stage $s$, and each has a cycle in state 5 at the end of the stage.
+
+    So, by #lemmaRef(<lemma2-7>), $(Delta(C\; i))[s] converge$.
+]
+
+A similar argument establishes the following.
+#lemma[
+    If some cycle $(j, k)$ acts at stage $s$ to define a computation for $Gamma_j(C; k)$,
+    then for each $i < k$, ($Gamma_j(C; i))[s] converge$.
+]
+
+Now we can prove that the functionals are defined consistently.
+
+#show: doc => setupenum(doc, formats: ("(I)", "a"))
+#lemma[
+    For all $j in omega$,
+
+    + For $i < j$, if $(Delta(C\; i))[s] converge$ and $(Delta(C\; j))[s] converge$ with $delta_s(j) > 0$
+      then $delta_s(i) < delta_s(j)$.
+    + Row $row(j)$ defines a computation for $Delta(C\; j)$ only when no other such computation is currently defined.
+    <lemma2--10>
+]
+#proof[
+    Notice that we may assume that the strategy in questino is not cancelled during
+    any of the stages of interest to us in this lemma. If such a cancellation were to occur, all functionals
+    associated with our strategy would be discarded and the lemma follows trivially.
+
+    We proceed by induction. Assume that (I) and (II) hold for $0, 1, dots, j-1$.
+
+    First note that when any cycle $(j, k)$ of $row(j)$ starts it chooses a witness $x(j, k)$ larger than
+    any number mentioned so far. In particular, $x(j, k)$ is larger than the use of any $Delta(C\; i)$
+    computation (for $i < j$) still defined when the witness is chosen. As the defintition of such
+    a new computation would involve the resetting of cycle $(j, k)$ (by the Pattern Lemma), $x(j, k)$
+    will remain larger than the use of any currently defined $Delta(C\; i)$ computation. But
+    if cycle $(j, k)$ ever defines a compuation for $Delta(C\; j)$, then $delta(j) = v(j, k) > x(j, k)$
+    will also be larger than the uses of prior $Delta(C\; i)$ computations. So (I) will never be violated
+    by a row defining a $Delta$-computation with a use smaller than the uses of computations defined by earlier rows.
+
+    So, suppose that for the first time, at stage $s$, (I) is about to be violated by a row defining a
+    computation with a use larger than the use currently defined by a later row:
+    $Delta(C\; j)[s] converge$, $i < j$, and we are about to define $Delta(C\; i)$ such that $delta_s(i) geq delta_s(j) > 0$.
+    Let $t < s$ be the stage at which the computation $(Delta(C\; j))[s]$ was defined.
+    By #lemmaRef(<lemma2-8>), $(Delta(C\; i))[t] converge$ and by the minimality of $s$, $delta_t(i) < delta_t(j) = delta_s(j)$.
+    By the inductive hypothesis, $(Delta(C\; i))[t]$ must get undefined before stage $s$, as we redefine this value
+    at stage $s$. But such an undefinition#footnote[This is only marginally a word.] can only occur through a change in
+    $restr(C, delta_t(i))$ which implies a change in $restr(C, delta_s(j))$ and the undefinition of the computation
+    $(Delta(C\; j))[t]$, contradicting our assumption. This verifies (I) for $j$.
+]
 
 #bibliography("works.yml", style: "ieee")
