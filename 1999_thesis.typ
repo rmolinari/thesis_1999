@@ -83,6 +83,7 @@
 #let phi = sym.phi.alt
 #let join = sym.plus.circle
 #let neq = sym.eq.not // not equal
+#let leq = sym.lt.eq  // greater than or equal
 #let geq = sym.gt.eq  // greater than or equal
 #let st = sym.bar.v   // vertical bar: "such that"
 #let dubpr = sym.prime.double // double primes
@@ -381,7 +382,7 @@ that elements are enumerated into or out of $A$ only in satisfying $R_e$ require
 only in satisfying $P_e$ requirements. We also note that $B$ turns out to be r.e., and not just d.r.e., as we
 never need to remove elements from $B$ once they are enumerated in.
 
-=== The basic module for $R_e$
+=== The basic module for $R_e$ <basicModuleRe>
 
 The basic module is very nearly the same as the one given in @CLW1989. (It appears to be somewhat differend here,
 as we use slightly different notation, and a reduction in the number of states.) There is an extra state
@@ -804,4 +805,46 @@ The claim is now that if strategy $alpha$ has been started since last being canc
     If strategy $alpha$ has at least one cycle not in state 0 at stage $s$, $pattern(s) in validPattern$.
     <patternLemma>
 ]
+
+#proof[
+    #let angle8 = angletup(8)
+    We proceed by induction on the number of stages since the last time strategy $alpha$ had a cycle started after previously being
+    cancelled.
+
+    When a strategy is started up (perhaps not for the first time), as stage $s$, cycle $(0, 0)$ is started. If this cycle, or row
+    $row(0)$, has been abandoned before, subsequent cycles are automatically started as well in the cascading effect mentioned at
+    the start of @basicModuleRe. Let $j = min_iota{ "row" row(iota) "never abandoned" }$,
+    and let $k = min_kappa { "cycle" (j, k) "never abandoned" }$. Then the pattern at stage $s$ is
+    $
+      pattern(s) = angletup(angle8, angle8, dots, angle8, angletup(7, 7, dots, 7, 1)_(k+1))_(j+1).
+    $
+    This is a valid pattern, as $angle8 in prelimRow$ and $angletup(7, dots, 7, 1) in uncrampedRow subset finalRow$.
+
+    Now suppose that $alpha$'s pattern is valid coming into stage $s$, that strategy $alpha$ is not cancelled at $s$, and that something
+    actually appens: some cycle of the strategy changes state.  We let $pattern(s-1) = angletup(p_0, p_1, dots, p_n, f)$, where
+    $p_i in prelimRow$ and $f in finalRow$. First consider any $2 arrow.r.bar 3$ transitions. These can occur only in a crampedRow,
+    as only such rows have anything in state 5/6. But a 3 in place of a 2 leaves the type of crampedRow
+    (either #patternname("prelim") or #patternname("final")) unchanged, so the pattern is still valid after such changes.  From now on let
+    $pattern(s-1)$ represent the pattern after all $2 arrow.r.bar 3$ state transitions are taken into accout, bet before any action is
+    recorded.
+
+    If no cycle of the strategy actually acts at stage $s$ we are done. Otherwise, let $(j, k)$ be the leftmost cycle which acts. We
+    have a large collection of cases and subcases.
+
+    #show: doc => setupenum(doc, formats: ("I.", "1.", "a."))
+    + $j = n + 1$, so the action is in the last row.
+
+      + Row $row(j)$ is cramped: $f = angletup(h_0, h_1, dots, h_m, 6)$, $h_i in {2, 3, 7}$.
+
+        + $k = m + 1$, so cycle $(j, k)$ is in state 6.
+
+          The only way that cycle $(j, k)$ to act is to go to stage 7, starting cycle $(j, k+1)$. This means that
+          we can't have any $j_i = 3$ for $i leq m$, since any cycle $(j, i) < (j, k)$ in state 3 at the start
+          of stage $s$ would have left that state, by #thmref(<lemma24>)[Lemma]. Let $k' = min_(kappa > k) { "cycle" (j, kappa) "never abandoned" }$.
+          Then the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_m, 7, dots, 7, 1)_(k' + 1) in finalRow$.
+          Thus $pattern(s) = angletup(p_0, dots, p_n, f')$ in validPattern.
+]
+#show: doc => setupenum(doc)
+
+
 #bibliography("works.yml", style: "ieee")
