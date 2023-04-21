@@ -976,6 +976,7 @@ A similar argument establishes the following.
 #lemma[
     If some cycle $(j, k)$ acts at stage $s$ to define a computation for $Gamma_j(C; k)$,
     then for each $i < k$, ($Gamma_j(C; i))[s] converge$.
+    <lemma2-9>
 ]
 
 Now we can prove that the functionals are defined consistently.
@@ -987,7 +988,7 @@ Now we can prove that the functionals are defined consistently.
     + For $i < j$, if $(Delta(C\; i))[s] converge$ and $(Delta(C\; j))[s] converge$ with $delta_s(j) > 0$
       then $delta_s(i) < delta_s(j)$.
     + Row $row(j)$ defines a computation for $Delta(C\; j)$ only when no other such computation is currently defined.
-    <lemma2--10>
+    <lemma2-10>
 ]
 #proof[
     Notice that we may assume that the strategy in questino is not cancelled during
@@ -1048,6 +1049,56 @@ Now we can prove that the functionals are defined consistently.
     $restr(C_s, v_t(j, k')) neq restr(C_t, v_t(j, k'))$, contradicting our assumption.
 
     Thus such an attempted redefinition never occurs, and the inductive step in complete.
+]
+
+We have the analogous result for the $Gamma$ functionals.
+
+#lemma[
+    For each $j$ and each $k$
+
+    + For $i < k$, if $(Gamma_j(C; i))[s] converge$ and $(Gamma_j(C; k))[s] converge$ with $gamma_(j,s)(k) > 0$
+      then $gamma_(j,s)(i) < gamma_(j,s)(k)$.
+
+    + Cycle $(j, k)$ defines a computation for $Gamma_j(C; k)$ only when no other such computation is currently defined.
+    <lemma2-11>
+]
+#proof[
+    Again we may assume that the strategy is not cancelled during stages that concern us.
+
+    We proceed as before, by induction. So, fix $j$ and assume that (I) and (II) hold for $0, 1, dots, k-1$.
+
+    The comments at the start of the proof of #lemmaRef(<lemma2-10>) are valid here too: a computation for
+    $Gamma_j(C; k)$ will never be defined with a a non-zero use less than the use of a previously defined
+    computation for $Gamma_j(C; i)$, where $i < k$.
+
+    Suppose that at stage $s$, $(Gamma_j(C; k))[s] converge$ and for the first time we are about to violate (I): we define
+    $Gamma_j(C; i)$ with $i < j$ such that $gamma_(j,s)(i) geq gamma_(j,s)(k) > 0$. Let $t < s$ be the stage at which the current
+    computation for $Gamma_j(C; k)$ was defined. By #lemmaRef(<lemma2-9>), $(Gamma_j(C; i))[t] converge$ and by the minimality of
+    $s$, $gamma_(j,t)(i) < gamma_(j,t)(k) = gamma_(j,s)(k)$.  But the computation for $Gamma_j(C; i)$ valid at stage $t$ must get
+    undefined before stage $s$, by the inductive hypothesis, so $restr(C_s, gamma_(j,t)(i)) neq restr(C_t, gamma_(j,t)(i))$ which
+    implies $restr(C_s, gamma_(j,s)(k)) neq restr(C_t, gamma_(j,s)(k))$.  This means that the computation $(Gamma_j(C; k))[s]$
+    actually becomes undefined at some stage between $t$ and $s$, a contradiction. This establishes (I) for $k$.
+
+    Now suppose that (II) fails for k: at stage $s$ cycle $(j, k)$ defines $Gamma_j(C; k)$ but another
+    computation, $(Gamma_j(C; k))[t]$, exists from an earlier stage $t < s$. Note that
+    $restr(C_s, u_t(j, k)) = restr(C_t, u_t(j, k))$. Note also that $gamma_(j,t)(k) > 0$, since the definition
+    of a computation of use 0 would lead to the permenent abandonment of cycle $(j, k)$ at stage $t$. This cycle
+    would therefore be unable to act at stage $s$.
+
+    Now, only cycle $(j, k)$ can define a computation for $Gamma_j(C; k)$. It cannot merely have returned to state 1 and again to
+    state 2 between stages $t$ and $s$, as this requires a change in $restr(C, u_t(j, k))$. Neither can it advance from state 2 to
+    state 7 between stages $t$ and $s$, as entering state 7 entails the same $C$-change. Thus in order to have another crack at
+    defining $Gamma_j(C; k)$, cycle $(j, k)$ must be reset and later restarted. If ever something in row $row(i)$, for $i < j$,
+    acts, the functional $Gamma_j(C)$ is discarded wholesale, preventing any conflicting definition
+    at stage $s$. So, at some stage $t' in (t, s)$ some cycle $(j, k') < (j, k)$ acts, resetting $(j, k)$
+    (if it hadn't been reset since stage $t$ already.) By #lemmaRef(<lemma2-9>), $(Gamma_j(C; k'))[t] converge$ and by part (I)
+    $gamma_(j,t)(k') < gamma_(j,t)(k)$. Before stage $s$ cycle $(j, k')$ must restart cycle $(j, k' + 1)$, and at the same
+    time define a new computation for $Gamma_j(C; k')$. But by the inductive hypothesis the previous such computation
+    (_i.e._ that valid at stage $t$) must have become undefined. This meanst hat there has been a change
+    since stage $t$ in $restr(C, gamma_(j,t)(k')) subset restr(C, gamma_(j,t)(k))$. But $gamma_(j,t)(k) = u_t(j, k)$,
+    so this is a contradiction.
+
+    The lemma is proved.
 ]
 
 #bibliography("works.yml", style: "ieee")
