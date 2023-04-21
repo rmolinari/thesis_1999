@@ -45,12 +45,6 @@
 // Calculation converges
 #let converge = $#h(0em) arrow.b #h(0.05em)$
 
-// Restriction of a to b
-#let restr(a, b) = $#a harpoon.tr #b$
-// Concatenation of sequences a and b
-#let concat(a, b) = $#a paren.t #b$
-#let concatone(a, b) = $concat(#a, #angletup(b))$
-
 // r.e.[Z]
 #let reIn(z) = $"r.e."[#z]$
 // REA[Z]
@@ -72,7 +66,7 @@
 // Row j of an omega^2 set of cycles
 #let row(j) = $cal(R)_#j$
 // A cycle pattern. Note awkward negative space to get good placement of the subscript
-#let pattern(s) = $cal(P)#h(-0.2em)_s$
+#let pattern(s) = $cal(P)#h(-0.2em)_#s$
 
 // A "term" from the pattern definitions
 #let patternname(n) = $sans(#n)$
@@ -403,7 +397,7 @@ state 0, returing its restraints to 0 and undefining the values of its parameter
 //
 (Note that the paper @CLW1989 uses
 "_cancelled_" for this operation. We reserve this word for another purpose: see the description of the priority tree construction in
-@sec2.3.3 below.)
+@section2.3.3 below.)
 //
 A cycle is _abandoned_ by returing its restraints to 0 and stopping all activity for that cycle. This is done when a cycle has
 categorically failed to satisfy $R_e$, due to the squandering of the various $G$-changes to which it has access. We gain through
@@ -440,7 +434,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
 
   [Note that we do not wait for a stage $t_1$ at which $C_(t_1) neq C_(t_1 - 1)$, (or where there is similar change in $G$) but
    rather for a change from the situation at stage $s_1$. In either case, once we combine the various strategies using a priority
-   tree (see @sec2.3.3 below) strategy $alpha$ is not "accessible" at every stage. There may be times at which a relevant $G$- or
+   tree (see @section2.3.3 below) strategy $alpha$ is not "accessible" at every stage. There may be times at which a relevant $G$- or
    $C$-change occurs but $alpha$ is not accessible, only to become accessible later. The reaction to the change, and hence
    permission, is "delayed" until the strategy is accessible.
 
@@ -584,7 +578,7 @@ the letter P. Cycle $k$ proceeds as follows.
 // TODO: hacky (see above)
 #show: doc => setupenum(doc)
 
-=== Combining the modules <sec2.3.3>
+=== Combining the modules <section2.3.3>
 
 Now that we have desribed the strategy for satisfying a single requirement in isolation we must consider how to satisfy all
 requirements simultaneously. Since each strategy may well act infinitely often we must use a _priority tree_ to manage this. The
@@ -643,8 +637,8 @@ Otherwise, first suppose that $|alpha|$ is even, so that $alpha$ is using an $R_
 able to make the transition from state 2 to state 3 do so. Now there are 2 cases.
 - #smallcaps("Case 1") #h(1em) Some least cycle $nu$ of strategy $alpha$ is able (or forced by a $C$-change) to act.
 
-We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of strategy $alpha$ now imposing restraint (if there is any such
-                                                                                                            cycle.) It is not necessarily the case that $lambda = nu$. If cycle $lambda$ is now in state 2, 3, or 4 then put
+We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of strategy $alpha$ now imposing restraint
+(if there is any such cycle.) It is not necessarily the case that $lambda = nu$. If cycle $lambda$ is now in state 2, 3, or 4 then put
 $nextval = (lambda, 1)$. If instead, $lambda$ is in stage 5 or 6 then put $nextval = (lambda, 2)$. Cancel all strategies
 $beta$ with $concatone(alpha, nextval) <_L beta$. If $lambda = nu$ and the action of cycle $nu$ involved enumerating a number into
 or out of $A$ or into $B$ we also cancel all strategies $beta supset concatone(alpha, nextval)$.
@@ -670,7 +664,7 @@ two types of module are of necessity quite different, for the first part of the 
 We will refer to the parameters associated with cycle $nu$ of strategy $alpha$ as they are defined at stage $s$ like so:
 $u_s(alpha, nu)$, $v_s(alpha, nu)$, _etc_. When the strategy is clear from context (as it usually will be), we will drop it.
 
-=== Lemmas for the $R_e$ strategy
+=== Lemmas for the $R_e$ strategy <section2.3.1>
 
 ==== The layout of the cycle states
 
@@ -1101,6 +1095,96 @@ We have the analogous result for the $Gamma$ functionals.
     The lemma is proved.
 ]
 
-=== Lemmas for the $P_e$ strategy <section2-3-3>
+=== Lemmas for the $P_e$ strategy <section2.3.2>
+
+@section2.3.1 was a long and complicated one. As the $P_e$ strategy is so much simpler than the $R_e$ one,
+the corresponding set of lemmas is also. We assume we have fixed a strategy $alpha$ of odd length. Again
+we streat all stages mentioned as being the succissive ones at which strategy $alpha$ is actually accessible.
+We start by discussing the patterns that the cycle states can make. We again refer to the pattern at stage $s$
+as $pattern(s)$.
+
+As the $P_e$ strategy involves a one-dimensional array of cycles, the pattern formed by the cycle-states
+in this case is simply a finite sequence of state-names. There is no need for the sequence of sequences
+used in the $R_e$ strategy argument.
+
+#let plabel(n) = [P$#n$] // TODO: get the P upright in math context
+#let validPatternForP = patternname("validPatternForP")
+Let $Y = {plabel(0), plabel(1), ..., plabel(4)}$. Using the same notation as in the definition of #validPattern we may
+define a single subset of $finseq(Y)$:
+$
+  validPatternForP = finseq({plabel(2), plabel(4)}) ; angletup({plabel(1), plabel(3)})
+$
+We then have the following analogue to the Pattern Lemma.#footnote[We don't refer to this result as a "Pattern Lemma",
+                                                                   as it is too simple to deserve a name.]
+
+#lemma[
+    If strategy $alpha$ has at least one cycle not in state #plabel(0) at stage $s$, $pattern(s) in validPatternForP$.
+    <lemma2.12>
+]
+#show: doc => setupenum(doc, formats: ("I.", "1.", "a."))
+#proof[
+    If strategy $alpha$ is started at stage $s$, cycle 0 is started, perhaps having been abandoned in the past.
+    Let $j = min_iota{ "cycle" iota "never abandoned" }$. Then the pattern at the end of stage $s$
+    is $pattern(s) = angletup(plabel(4), dots, plabel(4), plabel(1))_(j+1) in validPatternForP$.
+
+    Now suppose that $pattern(s-1)$, $alpha$'s pattern coming into stage $s$, was valid and that strategy $alpha$
+    is not cancelled at $s$. If no cycle of $alpha$ acts at stage $s$ then $pattern(s) = pattern(s-1)$ and there
+    is nothing to prove. So, suppose some cycle does act, let $k$ be the leftmost one, and write
+    $pattern(s-1) = angletup(h_0, dots, h_m, b)$, where $h_i in {plabel(2), plabel(4)}$ and $b in {plabel(1), plabel(3)}$.
+    We again have several cases.
+
+    + $k = m+1$. There are two subcases.
+      + $b = plabel(1)$.
+
+        Cycle $k$ must act by advancing to state #plabel(2), starting cycle $k+1$ in the process.
+        Let $j = min_(j' > k){"cycle" j' "never abandoned"}$. Then the new pattern is
+        $
+          pattern(s) = angletup(h_0, dots, h_m, plabel(2), plabel(4), dots, plabel(4), plabel(1))_(j+1) in validPatternForP.
+        $
+
+      + $b = plabel(3)$.
+
+        Now cycle $k$ acts by advancing to state $plabel(4)$, again starting cycle $k+1$. Using the same definition for $j$
+        as in the previous case we have
+        $
+          pattern(s) = angletup(h_0, dots, h_m, plabel(4), dots, plabel(4), plabel(1))_(j+1) in validPatternForP.
+        $
+
+    + $k < m + 1$. Now there is only one case, $h_k = plabel(2)$, as a cycle already in state $plabel(4)$ cannot act.
+      However cycle $k$ acts, all cycles to the right of $k$ are reset. If cycle $k$ acts by returning to state #plabel(1)
+      the new pattern is
+      $
+        pattern(s) = angletup(h_0, dots, h_(k-1), plabel(1)).
+      $
+      If, however, cycle $k$ enters state #plabel(3) we have
+      $
+        pattern(s) = angletup(h_0, dots, h_(k-1), plabel(3)).
+      $
+      Either way, $pattern(s) in validPatternForP$, and we are done.
+]
+
+Now there are some results corresopnding to Lemmas #thmref(<lemma2.7>)--#thmref(<lemma2.11>).
+
+#lemma[
+    If cycle $k$ is in state #plabel(2) or state #plabel(4) at stage $s$ then $Xi(C\; j)[s] converge$.
+    <lemma2.13>
+]
+#proof[
+    If cycle $k$ is in state #plabel(2) at stage $s$ then, in particular, $restr(C_s, u_t(k)) = restr(C_t, u_t(k))$
+    where $t < s$ is the stage at which cycle $k$ last entered state #plabel(2). This means that $(Xi(C\; k))[t]$,
+    the computation defined at $t$, is still valid at $s$.
+
+    If cycle $k$ is in state #plabel(4) then it must have been abandoned at some earlier stage.
+    The abandonment was accompanies by a definition of $Xi(C\; K)$ with use 0, so this computation must persist to stage $s$.
+]
+
+#lemma[
+    If cycle $k$ is in any state other than #plabel(0) at stage $s$, then $(Xi(C\; k'))[s] converge$ for all $k' < k$.
+    <lemma2.14>
+]
+#proof[
+    Lemmas #thmref(<lemma2.12>) and #thmref(<lemma2.13>).
+]
+
 
 #bibliography("works.yml", style: "ieee")
