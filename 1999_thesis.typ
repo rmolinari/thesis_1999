@@ -69,7 +69,7 @@
 #let pattern(s) = $cal(P)#h(-0.2em)_#s$
 
 // A "term" from the pattern definitions
-#let patternname(n) = $sans(#n)$
+#let patternName(n) = $sans(#n)$
 
 // The "equality" property
 #let Eq(x, y) = $sans("Eq")(#x, #y)$
@@ -402,7 +402,7 @@ state 0, returing its restraints to 0 and undefining the values of its parameter
 A cycle is _abandoned_ by returing its restraints to 0 and stopping all activity for that cycle. This is done when a cycle has
 categorically failed to satisfy $R_e$, due to the squandering of the various $G$-changes to which it has access. We gain through
 this failure the correct definition of a value for one of the functionals $Gamma_j(C)$ or $Delta(C)$. A cycle is said to _act_
-whenever it moves from one state to another. An exception to this is the transition from state 2 to state 3: this transition is made
+whenever it moves from one state to another. An exception to this is the transition from state~2 to state~3: this transition is made
 purely for bookkeeping purposes.
 
 Also, when (say) cycle $(j, k)$ acts and in doing so resets cycles to its right, we enirely discard any functionals $Gamma_l(C)$
@@ -411,11 +411,11 @@ for $l > j$, starting them completely afresh if ever needed.
 Cycle $(j,k)$ of the strategy proceeds as follows.
 
 0. Until given the go-ahead, do nothing. When told to start, if $k = 0$ we check if row $row(j)$ has been previously abandoned
-  _en masse_. If so, advance directly to state 8 and follow the instructions at that state. Otherwise check if cycle $(j, k)$
-  itself has been abandoned. If so, there is no point in trying to satisfy $R_e$ with this cycle, so jump straight to state 7
+  _en masse_. If so, advance directly to state~8 and follow the instructions at that state. Otherwise check if cycle $(j, k)$
+  itself has been abandoned. If so, there is no point in trying to satisfy $R_e$ with this cycle, so jump straight to state~7
   and follow the instructions at that state. Otherwise, choose a new witness $x$ larger than any number used so far in the
   construction (including all currently imposed $A$-restraints, and the current stage) and larger than both $j$ and $k$.
-  Advance to state 1.
+  Advance to state~1.
 
 + Wait for a stage $s_1$ at which the following statement, which we call $Eq(x, s_1)$, holds:
   $
@@ -423,10 +423,10 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   $
   [Note that if $s_1$ doesn't exist, we automatically satisify the requirement.]
 
-  If $G_(s_1)(k) = 1$ we jump straight to state 7 and follow the instructions there.
+  If $G_(s_1)(k) = 1$ we jump straight to state~7 and follow the instructions there.
 
   Otherwise put $u = (hat(psi) phi(x))[s_1]$. Restrain $restr(A, u)$ and $restr(B, u)$, put $Gamma_j(C; k) = G_(s_1)(k) thin (= 0)$
-  with use $gamma_j(k) = u$ and start cycle $(j, k+1)$ to run simultaneously. Advance to state 2.
+  with use $gamma_j(k) = u$ and start cycle $(j, k+1)$ to run simultaneously. Advance to state~2.
 
 + Wait for a stage $t_1$ at which either
   + $restr(C_(t_1), u) neq restr(C_(s_1), u)$; or
@@ -452,23 +452,23 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
 
   Now, if
   + $restr(C, u)$ changes first, reset all cycles $> (j, k)$, drop the $A$- and $B$-restraint of cycle $(j, k)$ back to 0, and
-    return to state 1. While if
+    return to state~1. While if
   + $G(k)$ changes first, it it time to see if we need to hedge our bets. There are two subcases.
     + If some cycle $(j, k')$ of $row(j)$ is currently in stage 5 or 6 (there is at most one, by #lemmaRef(<lemma2.3>) below) we cannot
       act on the $G(k)$ change yet. We set the marker $mu(x) = v_(s_1)(j, k')$, defined below, (with the intention of allowing
-      $x$ to enter $A$ later with a a $restr(C, mu(x))$ change) and advance to state 3. Recall that this transition does
+      $x$ to enter $A$ later with a a $restr(C, mu(x))$ change) and advance to state~3. Recall that this transition does
       _not_ count as an action.
-    + If no such $(j, k')$ exists we reset all cycles $> (j, k)$, enumerate $x$ into $A$ and advance to state 4.
+    + If no such $(j, k')$ exists we reset all cycles $> (j, k)$, enumerate $x$ into $A$ and advance to state~4.
 
 + Wait for a stage $t_2$ such that $restr(C_(t_2), mu(x)) neq restr(C_(t_1), mu(x))$.
   (The idea here is that the change in $restr(C, mu(x))$ has undefined the computation of $Delta(j)$ previously set by
    cycle $(j, k')$, allowing it be redefined in the future. This is how we avoid the $Delta$-inconsistency of the
    original paper, @CLW1989.)
-  Reset all cycles $> (j, k)$, enumerate $x$ into $A$ and advance to state 4.
+  Reset all cycles $> (j, k)$, enumerate $x$ into $A$ and advance to state~4.
 
 + Wait for a stage $s_2$ such that $Eq(x, s_2)$. [As before, if $s_2$ doesn't exist we automatically satisfy the requirement.]
 
-  If $G_(s_2)(j) = 1$ we jump straight to state 8 and follow the instructions there.
+  If $G_(s_2)(j) = 1$ we jump straight to state~8 and follow the instructions there.
 
   Otherwise, we note that since
   $
@@ -477,17 +477,17 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   we must have $restr(E_(s_2), phi_(s_1)(x)) neq restr(E_(s_1), phi_(s_1)(x))$, and since $E$ is r.e. this change is permanent
   and hence a target. Put $v = (hat(psi) phi(x))[s_2]$, restrain $restr(A, v)$ and $restr(B, v)$, put
   $Delta(C\; j) = G_(s_2)(j) thick (= 0)$ with use $delta(j) = v$ and start cycle $(j+1, 0)$ to run simultaneously.
-  Advance to state 5.
+  Advance to state~5.
 
 + Wait for a stage $t_3$ at which either
   + $restr(C_(t_3), v) neq restr(C_(s_2), v)$; or
   + $G_(t_3)(j) neq G_(s_2)(j)$.
 
   On reaching stage $t_3$ reset all cycles $> (j, k)$. Then
-  + If $restr(C, v)$ changes first, return the $A$- and $B$-restraints to $u$, and return to state 4.
-  + Otherwise, remove $x$ from $A$ and advance to state 6.  Note that now $restr(A_(t_3 + 1), u) = restr(A_(s_1), u)$.
+  + If $restr(C, v)$ changes first, return the $A$- and $B$-restraints to $u$, and return to state~4.
+  + Otherwise, remove $x$ from $A$ and advance to state~6.  Note that now $restr(A_(t_3 + 1), u) = restr(A_(s_1), u)$.
 
-+ Wait for $restr(C_(t_4), u) neq restr(C_(s_1), u)$. If this ever occurs, advance to state 7.
++ Wait for $restr(C_(t_4), u) neq restr(C_(s_1), u)$. If this ever occurs, advance to state~7.
 
   If $restr(C, u) = restr(C_(s_1), u)$ we satisfy the requirement by
   $
@@ -498,12 +498,12 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   $
 
 + We only reach this state if it is safe (in terms of the consistency of $Gamma_j(C)$) and accurate
-  to set $Gamma_j(C; k) = 1$ with use 0. Do so, unless it has already been done, (permanently) abandon cycle (j, k)
+  to set $Gamma_j(C; k) = 1$ with use 0. Do so, unless it has already been done, (permanently) abandon cycle $(j, k)$
   and start cycle $(j, k+1)$.
 
   Once we reach this state, we define a value for $Gamma_j(C; k)$ which we _know_ to be correct, since $G(k)$ has already changed,
   and won't change again, $G$ being r.e.  Also, the "once-off" nature of the $G$-change means that the only way cycle $(j,k)$ is
-  going to be able to satisfy requirement $R_e$ in the future, even with a new witness, is by being infinitely often in state 1; it
+  going to be able to satisfy requirement $R_e$ in the future, even with a new witness, is by being infinitely often in state~1; it
   cannot enumerate its witness into $A$, as the $G$-change it needs has already come and gone.  Although it is posisble that $(j,
   k)$ will be able to succeed in this manner, it is improbable. More likely is that cycle $(j, k)$ will be eventually stuck in state
   2, waiting forlornly for an impossible $G$-change, but in the meantime computing a correct value for $Gamma_j(C; k)$. We may as
@@ -515,7 +515,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   We permanently abandon the whole of row $row(j)$, and since there is no need to keep any of this row in business, it is convenient
   for technical reasons to reset every cycle in row $row(j)$, put cycle $(j, 0)$ into stage 8, and start cycle $(j+1, 0)$.
 
-  The same comments as in state 7 just above apply here, but the result of the failure of cycle $(j, k)$ is even more stark. Now we
+  The same comments as in state~7 just above apply here, but the result of the failure of cycle $(j, k)$ is even more stark. Now we
   have defined a correct value for $Delta(C, j)$, and have seen (and "wasted") the only change in $G(j)$ that will ever occur. Thus
   all cycles which rely on a change in $G(j)$ at some point are our of luck in the future, and we may as well not bother with
   them. These cycles include _all_ of row $row(j)$, which is why we permanently abandon this whole row. We content ourselves now
@@ -529,7 +529,7 @@ them. To ensure that $B leqt G$ we again use a system of cycles, but now we only
 Again, suppose $e$ is fixed, and write $Theta$ for $Theta_e$. We have a $omega$-sequence of cycles, and again threaten
 to show $G leqt C$, by means of a functional $Xi(C)$. _Starting_ and _abandoning_ have the same definitions as before. _Resetting_
 is similar, but now we need only worry about the single parameter, $u$. _Acting_ now happens with any change of state,
-as we have no equivalent of the bookkeeping state 3 to worry about.
+as we have no equivalent of the bookkeeping state~3 to worry about.
 
 To distinguish the names of the states from those in the module for the $R_e$-requirements we will prefix the numbers here with
 the letter P. Cycle $k$ proceeds as follows.
@@ -573,7 +573,7 @@ the letter P. Cycle $k$ proceeds as follows.
 + It is now safe and correct to define $Xi(C\; k) = 1$ with use 0. Do so, unless this has already been done, permanently abandon
   cycle $k$, and start cycle $k+1$.
 
-  [This is just like state 7 in the basic module for the $R_e$ requirements.]
+  [This is just like state~7 in the basic module for the $R_e$ requirements.]
 
 // TODO: hacky (see above)
 #show: doc => setupenum(doc)
@@ -634,11 +634,11 @@ Stage $s+1$: #h(1em) We define, in substages $t < s$, a finite path $nextval$ th
 $alpha$'s cycle $(0, 0)$ or $0$, as appropriate, and put $nextval(t) = -1$.
 
 Otherwise, first suppose that $|alpha|$ is even, so that $alpha$ is using an $R_e$ strategy. Allow any cycles of strategy $alpha$
-able to make the transition from state 2 to state 3 do so. Now there are 2 cases.
+able to make the transition from state~2 to state~3 do so. Now there are 2 cases.
 - #smallcaps("Case 1") #h(1em) Some least cycle $nu$ of strategy $alpha$ is able (or forced by a $C$-change) to act.
 
 We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of strategy $alpha$ now imposing restraint
-(if there is any such cycle.) It is not necessarily the case that $lambda = nu$. If cycle $lambda$ is now in state 2, 3, or 4 then put
+(if there is any such cycle.) It is not necessarily the case that $lambda = nu$. If cycle $lambda$ is now in state~2, 3, or 4 then put
 $nextval = (lambda, 1)$. If instead, $lambda$ is in stage 5 or 6 then put $nextval = (lambda, 2)$. Cancel all strategies
 $beta$ with $concatone(alpha, nextval) <_L beta$. If $lambda = nu$ and the action of cycle $nu$ involved enumerating a number into
 or out of $A$ or into $B$ we also cancel all strategies $beta supset concatone(alpha, nextval)$.
@@ -675,43 +675,43 @@ We assume that we have a certain, fixed strategy, $alpha$, of even length in min
 strategy. Also, we ignore the fact that strategy $alpha$ may not be accessible at all (or even all sufficiently large) stages: we
 just treat the stages mentioned as being the successive ones at which strategy $alpha$ _is_ accessible.
 
-It will be convenient to refer to a cycle with is in either stage 5 or state 6 as being "in state 5/6".
+It will be convenient to refer to a cycle with is in either stage 5 or state~6 as being "in state~5/6".
 
 #lemma[
-    For any row $row(j)$, at most one cycle $(j, k)$ is in state 5/6.
+    For any row $row(j)$, at most one cycle $(j, k)$ is in state~5/6.
     <lemma2.3>
 ]
 #proof[
-    We show that if cycle $(j, k)$ is in state 5 or state 6 at stage $s$ then nothing to the right of $(j, k)$ in row $row(j)$
+    We show that if cycle $(j, k)$ is in state~5 or state~6 at stage $s$ then nothing to the right of $(j, k)$ in row $row(j)$
     (namely, a cycle $(j, k') > (j, k)$) is in either of these states at stage $s$.
 
-    If cycle $(j, k)$ entered state 5 from state 4 (and there is no other way), no cycles to the right of $(j, k)$ are in any state
-    other than 0 at the start of stage $s$, because by entereing state 4, cycle $(j, k)$ reset every cycle to its right, and no new
-    cycles were started so long as $(j, k)$ remained in state 4. Upon entering state 5, cycle $(j, k)$ starts cycle $(j+1, 0)$,
-    and no cycle to the right of $(j, k)$ in row $row(j)$ is started so long as $(j, k)$ stays in state 5.
+    If cycle $(j, k)$ entered state~5 from state~4 (and there is no other way), no cycles to the right of $(j, k)$ are in any state
+    other than 0 at the start of stage $s$, because by entereing state~4, cycle $(j, k)$ reset every cycle to its right, and no new
+    cycles were started so long as $(j, k)$ remained in state~4. Upon entering state~5, cycle $(j, k)$ starts cycle $(j+1, 0)$,
+    and no cycle to the right of $(j, k)$ in row $row(j)$ is started so long as $(j, k)$ stays in state~5.
 
-    On entering state 6, cycle $(j, k)$ resets every cycle to its right (including those in rows $row(j')$ for $j' > j$), and no
+    On entering state~6, cycle $(j, k)$ resets every cycle to its right (including those in rows $row(j')$ for $j' > j$), and no
     cycle to its right will be started so long as $(j, k)$ remains in this state.
 ]
 
 #lemma[
-    Suppose cycle $(j, k)$ enters state 3 at stage $s$ due to cycle $(j, k')$ being in state 5/6. If at stage $t > s$ cycle $(j, k')$
-    leaves state 5/6 for the first time, for any reason, then cycle $(j, k)$ is no longer in state 3 at the end of stage $t$.
+    Suppose cycle $(j, k)$ enters state~3 at stage $s$ due to cycle $(j, k')$ being in state~5/6. If at stage $t > s$ cycle $(j, k')$
+    leaves state~5/6 for the first time, for any reason, then cycle $(j, k)$ is no longer in state~3 at the end of stage $t$.
     <lemma2.4>
 ]
 #proof[
     Note that $mu_s(x(j, k)) = v_s(j, k')$.
 
-    Cycle $(j, k')$ leaves state 5/6 either through acting or through being reset. If $(j, k') < (j, k)$ then we see that the
-    action/resetting of $(j, k')$ also resets $(j, k)$, and the latter is no longer in state 3. (It will turn out later that a cycle
-    can't be in state 3 when something in the same row to its left is in state 5/6, but we can't rule out that possibility yet.)
+    Cycle $(j, k')$ leaves state~5/6 either through acting or through being reset. If $(j, k') < (j, k)$ then we see that the
+    action/resetting of $(j, k')$ also resets $(j, k)$, and the latter is no longer in state~3. (It will turn out later that a cycle
+    can't be in state~3 when something in the same row to its left is in state~5/6, but we can't rule out that possibility yet.)
 
     If $(j, k) < (j, k')$ we must work substantially harder.
 
-    In this case, if $(j, k')$ is able to get out of state 5/6 without being reset, we must have a change in $restr(C, v_t(j, k'))$
-    (if $(j, k')$ goes to state 4) or in $restr(C, u_t(j, k')) subset restr(C, v_t(j, k'))$
-    (if it goes to state 7). This very change in $C$ allows $(j, k)$
-    to move to state 4, unless another cycle to its left acts for this same reason, resetting cycle $(j, k)$ completely.
+    In this case, if $(j, k')$ is able to get out of state~5/6 without being reset, we must have a change in $restr(C, v_t(j, k'))$
+    (if $(j, k')$ goes to state~4) or in $restr(C, u_t(j, k')) subset restr(C, v_t(j, k'))$
+    (if it goes to state~7). This very change in $C$ allows $(j, k)$
+    to move to state~4, unless another cycle to its left acts for this same reason, resetting cycle $(j, k)$ completely.
 
     If $(j, k')$ is reset at $t$ by the action of a cycle to the left of $(j, k)$, cycle $(j, k)$ is reset also.
 
@@ -721,34 +721,34 @@ It will be convenient to refer to a cycle with is in either stage 5 or state 6 a
     Without loss of generality we may assume that $t$ is minimal in witnessing the failure of this lemma.
     Since cycle $(j, k')$ is "awake" (that is, in a state other than 0) between stages $s$ and $t$, cycle $(j, k dubpr)$
     must be in one of the states 2, 3 or 7, and cannot change states (other than going from 2 to 3) during this time, for otherwise
-    cycle $(j, k')$ would be reset. We may may immediately discount the possibility that $(j, k dubpr)$ in state 7,
-    because a cycle in this state cannot act. Thus, as stage $t$ starts, cycle $(j, k dubpr)$ is in state 2 or state 3.
+    cycle $(j, k')$ would be reset. We may may immediately discount the possibility that $(j, k dubpr)$ in state~7,
+    because a cycle in this state cannot act. Thus, as stage $t$ starts, cycle $(j, k dubpr)$ is in state~2 or state~3.
 
-    We first claim that $(j, k dubpr)$ can't make the transition from state 2 to state 1. Indeed, such a transition indicates a change
-    in $restr(C, u(j, k dubpr))$. But cycle $(j, k')$ starts after cycle $(j, k dubpr)$ enters state 2, so by construction,
+    We first claim that $(j, k dubpr)$ can't make the transition from state~2 to state~1. Indeed, such a transition indicates a change
+    in $restr(C, u(j, k dubpr))$. But cycle $(j, k')$ starts after cycle $(j, k dubpr)$ enters state~2, so by construction,
     $v_t(j, k') > x(j, k') > u(j, k dubpr)$, and we have a change in $restr(C, v_t(j, k'))$ at stage $t$, which is a contradiction.
 
-    Cycle $(j, k dubpr)$ can't go from state 2 to state 3 at stage $t$, as this does not count as an action, so the only remaining
+    Cycle $(j, k dubpr)$ can't go from state~2 to state~3 at stage $t$, as this does not count as an action, so the only remaining
     possibility is the $3 arrow.r.bar 4$ transition, so that there is a change in $restr(C, mu_t(x(j, k dubpr)))$.
     We claim that $mu_t(x(j, k dubpr)) = v_t(j, k')$, and obtain the contradiciton of a change in $restr(C, v_t(j, k'))$.
 
-    Suppose otherwise, so that $(j, k dubpr)$ enters state 3 for the sake of yet another cycle $(j, k trippr)$ being
-    in state 5/6, or for another "incarnation" of cycle $(j, k')$; that is, for the sake of cycle $(j, k')$ being in state 5/6
-    based on another computation. Well, if we are in the former case, cycle $(j, k trippr)$ must leave state 5/6 by stage $s$,
-    by #lemmaRef(<lemma2.3>), forcing cycle $(j, k dubpr)$ out of state 3, by the assumption of the minimality of $t$.
-    The same argument applies to another "incarnation" of cycle $(j, k')$. Thus, cycle $(j, k dubpr)$ enters state 3 for
+    Suppose otherwise, so that $(j, k dubpr)$ enters state~3 for the sake of yet another cycle $(j, k trippr)$ being
+    in state~5/6, or for another "incarnation" of cycle $(j, k')$; that is, for the sake of cycle $(j, k')$ being in state~5/6
+    based on another computation. Well, if we are in the former case, cycle $(j, k trippr)$ must leave state~5/6 by stage $s$,
+    by #lemmaRef(<lemma2.3>), forcing cycle $(j, k dubpr)$ out of state~3, by the assumption of the minimality of $t$.
+    The same argument applies to another "incarnation" of cycle $(j, k')$. Thus, cycle $(j, k dubpr)$ enters state~3 for
     the sake of the same $(j, k')$-related computations that force cycle $(j, k)$ to do likewise, and
     $mu_t(x(j, k dubpr)) = mu_s(x(j, k')) = v_s(j, k') = v_t(j, k')$. We are done.
 ]
 #lemma[
-    For all $j$, if cycles $(j, k) neq (j, k')$ are both in state 3 at stage $s$, then
+    For all $j$, if cycles $(j, k) neq (j, k')$ are both in state~3 at stage $s$, then
     $(mu(x(j, k)))[s] = (mu(x(j, k')))[s]$.
     <lemma2.5>
 ]
 #proof[
-    Suppose $(j, k)$ enters state 3 at stage $t$ and remains there until $(j, k')$ does the same at stage $t' > t$, and
+    Suppose $(j, k)$ enters state~3 at stage $t$ and remains there until $(j, k')$ does the same at stage $t' > t$, and
     that they both stay in this state until at least stage $s$. By Lemmas #thmref(<lemma2.3>) and #thmref(<lemma2.4>),
-    both cycles must enter state 3 for the sake of the same cycle being in stage 5/6, and for the same computations.
+    both cycles must enter state~3 for the sake of the same cycle being in stage 5/6, and for the same computations.
     The lemma follows.
 ]
 
@@ -767,14 +767,14 @@ $M; N = {concat(theta, sigma) st theta in M and sigma in N}$,
 the finite sequences got by appending a sequence from $N$ to a sequence from $M$. For convenience we also allow the notation
 $angletup(M) = { angletup(theta) | theta in M }$, the length 1 sequences consisting of single terms from $M$. We define the
 following subsets of $finseq(X)$:
-#let prelimCrampedRow = patternname("prelimCrampedRow")
-#let finalCrampedRow = patternname("finalCrampedRow")
-#let crampedRow = patternname("crampedRow")
-#let uncrampedRow = patternname("uncrampedRow")
-#let abandonedrow = patternname("abandonedRow")
-#let prelimRow = patternname("prelimRow")
-#let finalRow = patternname("finalRow")
-#let validPattern = patternname("validPattern")
+#let prelimCrampedRow = patternName("prelimCrampedRow")
+#let finalCrampedRow = patternName("finalCrampedRow")
+#let crampedRow = patternName("crampedRow")
+#let uncrampedRow = patternName("uncrampedRow")
+#let abandonedrow = patternName("abandonedRow")
+#let prelimRow = patternName("prelimRow")
+#let finalRow = patternName("finalRow")
+#let validPattern = patternName("validPattern")
 $
   prelimCrampedRow  &= finseq({2, 3, 7}); angletup({5}), \
   finalCrampedRow   &= finseq({2, 3, 7}); angletup({6}), \
@@ -788,9 +788,9 @@ and a subset of $finseq((finseq(X)))$
 $
   validPattern = finseq(prelimRow); angletup(finalRow).
 $
-The names are intended to be somewhat mnemonic. "Cramped" refers to a row in which cycles are prevented from reaching state 4 by the
-presence of a cycle in that row in state 5/6. These cycles have their style cramped: they must bide their time in state 3 waiting
-for the chance to go to state 4 later. A "#patternname("prelim")" row is one that isn't the last in the list: the row after it also
+The names are intended to be somewhat mnemonic. "Cramped" refers to a row in which cycles are prevented from reaching state~4 by the
+presence of a cycle in that row in state~5/6. These cycles have their style cramped: they must bide their time in state~3 waiting
+for the chance to go to state~4 later. A "#patternName("prelim")" row is one that isn't the last in the list: the row after it also
 has at least one cycle not in state 0.
 
 When we want to make it clear how long a finite sequence is, we subscript the sequence with its length, like so:
@@ -819,8 +819,8 @@ The claim is now that if strategy $alpha$ has been started since last being canc
     Now suppose that $alpha$'s pattern is valid coming into stage $s$, that strategy $alpha$ is not cancelled at $s$, and that something
     actually appens: some cycle of the strategy changes state.  We let $pattern(s-1) = angletup(p_0, p_1, dots, p_n, f)$, where
     $p_i in prelimRow$ and $f in finalRow$. First consider any $2 arrow.r.bar 3$ transitions. These can occur only in a crampedRow,
-    as only such rows have anything in state 5/6. But a 3 in place of a 2 leaves the type of crampedRow
-    (either #patternname("prelim") or #patternname("final")) unchanged, so the pattern is still valid after such changes.  From now on let
+    as only such rows have anything in state~5/6. But a 3 in place of a 2 leaves the type of crampedRow
+    (either #patternName("prelim") or #patternName("final")) unchanged, so the pattern is still valid after such changes.  From now on let
     $pattern(s-1)$ represent the pattern after all $2 arrow.r.bar 3$ state transitions are taken into accout, bet before any action is
     recorded.
 
@@ -832,42 +832,42 @@ The claim is now that if strategy $alpha$ has been started since last being canc
 
       + Row $row(j)$ is cramped: $f = angletup(h_0, h_1, dots, h_m, 6)$, $h_i in {2, 3, 7}$.
 
-        + $k = m + 1$, so cycle $(j, k)$ is in state 6.
+        + $k = m + 1$, so cycle $(j, k)$ is in state~6.
 
           The only way that cycle $(j, k)$ to act is to go to stage 7, starting cycle $(j, k+1)$. This means that
-          we can't have any $j_i = 3$ for $i leq m$, since any cycle $(j, i) < (j, k)$ in state 3 at the start
+          we can't have any $j_i = 3$ for $i leq m$, since any cycle $(j, i) < (j, k)$ in state~3 at the start
           of stage $s$ would have left that state, by #lemmaRef(<lemma2.4>). Let $k' = min_(kappa > k) { "cycle" (j, kappa) "never abandoned" }$.
           Then the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_m, 7, dots, 7, 1)_(k' + 1) in finalRow$.
           Thus $pattern(s) = angletup(p_0, dots, p_n, f')$ in validPattern.
 
-        + $k < m+1$ and cycle $(j, k)$ is in state 2.
+        + $k < m+1$ and cycle $(j, k)$ is in state~2.
 
-          The action of $(j, k)$ can't just be to enter state 3, as such a transition does not count as an action.
-          Neither can $(j, k)$ enter state 4, as the row is cramped, and such a transition is prohibited. Thus the
-          action is to go back to state 1 due to a change in $restr(C, u_s(j, k))$. Now, since the action of cycle $(j, k)$
+          The action of $(j, k)$ can't just be to enter state~3, as such a transition does not count as an action.
+          Neither can $(j, k)$ enter state~4, as the row is cramped, and such a transition is prohibited. Thus the
+          action is to go back to state~1 due to a change in $restr(C, u_s(j, k))$. Now, since the action of cycle $(j, k)$
           resets cycle $(j, m+1)$, by #lemmaRef(<lemma2.4>) we cannot have $h_i = 3$ for any $i < k$. Thus $h_i in {2, 7}$
           for $i < k$. But now the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_(k-1), 1) in uncrampedRow$
           and again $pattern(s) in validPattern$.
 
-        + $k < m+1$ and cycle $(j, k)$ is in state 3.
+        + $k < m+1$ and cycle $(j, k)$ is in state~3.
 
-          First note that, as in the previous case, $h_i in {2, 7}$ for $i < k$. In entering state 4 cycle $(j, k)$ resets
+          First note that, as in the previous case, $h_i in {2, 7}$ for $i < k$. In entering state~4 cycle $(j, k)$ resets
           all cycles to its right, so the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_(k-1), 4) in uncrampedRow$.
           Again $pattern(s) in validPattern$.
 
-       We don't need a case for cycle $(j, k)$ being in state 7, as such a state can't act.
+       We don't need a case for cycle $(j, k)$ being in state~7, as such a state can't act.
 
      + Row $row(j)$ is uncramped: $f = angletup(h_0, h_1, dots, h_m, b)$, $h_i in {2, 7}, b in {1, 4}$.
 
-       + $k = m + 1$, and cycle $(j, k)$ is in state 1.
+       + $k = m + 1$, and cycle $(j, k)$ is in state~1.
 
-         The action of $(j, k)$ must take it to state 2, starting cycle $(j, k+1)$.
+         The action of $(j, k)$ must take it to state~2, starting cycle $(j, k+1)$.
          Let $k' = min_(kappa > k) { "cycle" (j, kappa) "never abandoned" }$. The new pattern for row $row(j)$ is
          $f = angletup(h_0, dots, h_m, 7, dots, 7, 1)_(k' + 1) in finalRow$. Thus $pattern(s) in validPattern$.
 
-       + $k = m + 1$, and cycle $(j, k)$ is in state 4.
+       + $k = m + 1$, and cycle $(j, k)$ is in state~4.
 
-         If the action of $(j, k)$ is to go to state 5, the new pattern for row $row(j)$ must be
+         If the action of $(j, k)$ is to go to state~5, the new pattern for row $row(j)$ must be
          $f' = angletup(h_0, dots, h_m, 5) in prelimCrampedRow subset prelimRow$. In the same way as above,
          let $j' = min_(iota > j) { "row" row(iota) "never abandoned" }$
          and $k' = min_kappa { "cycle" (j', kappa) "never abandoned" }$.
@@ -875,16 +875,16 @@ The claim is now that if strategy $alpha$ has been started since last being canc
          $
            pattern(s) = angletup(p_0, dots, p_n, f', angle8, dots, angle8, angletup(7, dots, 7, 1)_(k' + 1))_(j' + 1).
          $
-         If, instead, $(j, k)$'s action is to go to state 8, row $row(j)$ is abandoned as a whole, and its new pattern
+         If, instead, $(j, k)$'s action is to go to state~8, row $row(j)$ is abandoned as a whole, and its new pattern
          will simple be angle8. Define $j'$ and $k'$ as before and the new pattern for the strategy will be
          $
            pattern(s) = angletup(p_0, dots, p_n, angle8, dots, angle8, angletup(7, dots, 7, 1)_(k' + 1))_(j' + 1).
          $
          In either case, the new pattern is valid.
 
-     + $k < m+1$. We have that cycle $(j, k)$ is in state 2, since a cycle can't act if it is in state 7.
+     + $k < m+1$. We have that cycle $(j, k)$ is in state~2, since a cycle can't act if it is in state~7.
 
-       This action can take cycle $(j, k)$ to either state 1 or state 4. In either case, all cycles to the
+       This action can take cycle $(j, k)$ to either state~1 or state~4. In either case, all cycles to the
        right of $(j, k)$ are reset and the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_(k-1), b')$,
        where $b = 1$ or $b = 4$ according as how the cycle acted. In either case, $f' in uncrampedRow$,
        and the new pattern for the strategy $pattern(s) = angletup(p_0, dots, p_n, f')$ is still valid.
@@ -892,16 +892,16 @@ The claim is now that if strategy $alpha$ has been started since last being canc
   + $j < n+1$. Row $row(j)$ can't ever have been abandoned, as otherwise no cycle it in could act, so
     $p_j = angletup(h_0, dots, h_m, 5) in prelimCrampedRow$. Note that for $i leq m$, $h_i in {2, 3, 7}$.
 
-    + $k = m+1$, so cycle $(j, k)$ is in state 5.
+    + $k = m+1$, so cycle $(j, k)$ is in state~5.
 
-      If the action consists of returning to state 4, no cycles in row $row(j)$ to the left of
-      $(j, k)$ can still be in state 3, by Lemmas #thmref(<lemma2.4>) and #thmref(<lemma2.5>).
+      If the action consists of returning to state~4, no cycles in row $row(j)$ to the left of
+      $(j, k)$ can still be in state~3, by Lemmas #thmref(<lemma2.4>) and #thmref(<lemma2.5>).
       Thus $h_i in {2, 7}$ for $i < m+1$. The action resets all cycles to the right of $(j, k)$ (including
       those is rows $row(l)$, $l > j$), so the new pattern for row $row(j)$ is
       $p'_j = angletup(h_0, dots, h_m, 4) in uncrampedRow$, and the pattern for the whole strategy is
       $pattern(s) = angletup(p_0, dots, p_(j-1), p'_j) in validPattern$.
 
-      If instead the action of $(j, k)$ consists of advancing to state 6, again all cycles to the right
+      If instead the action of $(j, k)$ consists of advancing to state~6, again all cycles to the right
       of $(j, k)$ are reset, but now we can't say anything new about the status of cycles in row $row(j)$
       to the left of $(j, k)$. This doesn't matter though, since the new pattern for row $row(j)$ is
       $p'_j = angletup(h_0, dots, h_m, 6) in finalCrampedRow$, and the pattern for the strategy is
@@ -911,9 +911,9 @@ The claim is now that if strategy $alpha$ has been started since last being canc
 
       + $h_k = 2$.
 
-        Cycle $(j, k)$ can't advance to state 4, as the row is cramped, and it can't go to state 3,
+        Cycle $(j, k)$ can't advance to state~4, as the row is cramped, and it can't go to state~3,
         as such a transition doesn't count as acting. Thus the action must consist of cycle $(j, k)$
-        returning to state 1 on the basis of a change in $restr(C, u_s(j, k))$. As above (case I.1.b)
+        returning to state~1 on the basis of a change in $restr(C, u_s(j, k))$. As above (case I.1.b)
         we conclude that the new pattern for row $row(j)$ is
         $p'_j = angletup(h_0, dots, h_(k-1), 1) in uncrampedRow$. As all cycles to the right of $(j, k)$
         are reset, the pattern for the whole strategy is therefore
@@ -936,14 +936,14 @@ was one of the technical flaws in the original paper @CLW1989.
 For the following lemmas we again assume that we have fixed in our minds a specific node/strategy of the construction,
 and restrict our attention to the functionals associated with this strategy.
 #lemma[
-    For all $j$ and $k$, if cycle $(j, k)$ is in state 5 at stage $s$, then $(Delta(C\; j))[s] converge$.
+    For all $j$ and $k$, if cycle $(j, k)$ is in state~5 at stage $s$, then $(Delta(C\; j))[s] converge$.
     The same conclusion can be made if row $row(j)$ was abandoned at some stage before $s$.
     <lemma2.7>
 ]
 #proof[
-    If cycle $(j, k)$ is in state 5, we must have in particular $restr(C_s, v(j, k)) = restr(C_(s_2), v(j, k))$.
+    If cycle $(j, k)$ is in state~5, we must have in particular $restr(C_s, v(j, k)) = restr(C_(s_2), v(j, k))$.
     But $v(j, k) = delta_(s_0)(j)$, so the computation for $Delta(C\; j)$ that was defined by cycle $(j, k)$
-    when it entered state 5 is still defined.
+    when it entered state~5 is still defined.
 
     If, instead, row $row(j)$ was abandoned at some earlier stage, this abandonment was accompanied by
     a definition of $Delta(C\; j)$ with use 0. Such a computation can never become undefined, and must persist to stage $s$.
@@ -955,13 +955,13 @@ and restrict our attention to the functionals associated with this strategy.
     <lemma2.8>
 ]
 #proof[
-    Such a cycle can act in this way only by moving from state 4 to either state 5 or state 8. In either case,
+    Such a cycle can act in this way only by moving from state~4 to either state~5 or state~8. In either case,
     the pattern corresponding to row $row(j)$ coming into stage $s$ must have been an uncrampedRow.
     So, by the Pattern Lemma, for each $i < j$, the pattern for row $row(i)$ must either be angle8
     (indiciating that row $row(i)$ was abandoned at some time) or an element of prelimCrampedRow. In the latter
-    case, each row $row(i)$ has some cycle in state 5 as we enter stage $s$. But no cycle in any row $row(i)$, $i < j$
+    case, each row $row(i)$ has some cycle in state~5 as we enter stage $s$. But no cycle in any row $row(i)$, $i < j$
     acts at stage $s$, as othwerwise cycle $(j, k)$ would be reset and unable to act. Thus the pattern of each of these rows
-    is unchanged (except perhaps for 2 changing to 3) during stage $s$, and each has a cycle in state 5 at the end of the stage.
+    is unchanged (except perhaps for 2 changing to 3) during stage $s$, and each has a cycle in state~5 at the end of the stage.
 
     So, by #lemmaRef(<lemma2.7>), $(Delta(C\; i))[s] converge$.
 ]
@@ -1022,14 +1022,14 @@ Now we can prove that the functionals are defined consistently.
       led to the abandoning of row $row(j)$ in its entirety at stage $t$ and the consequent impossibility of
       cycle $(j, k)$ acting now.
 
-    - All cycles in row $row(j)$ to the left of $(j, k')$ must be in state 2 or state 7 at stage $t$.
+    - All cycles in row $row(j)$ to the left of $(j, k')$ must be in state~2 or state~7 at stage $t$.
       This follows from the Pattern Lemma, as the definition of the $Delta(C\; j)$ computation at stage $t$
-      implies that cycle $(j, k')$ started that stage in state 4, and so the pattern for row $row(j)$ formed
+      implies that cycle $(j, k')$ started that stage in state~4, and so the pattern for row $row(j)$ formed
       an #uncrampedRow at $t$.
 
-    - Because of the constraints listed at state 2, no cycle of row $row(j)$, except perhaps for cycle $(j, k')$
-      itself, may act so long as cycle $(j, k')$ remains in state 5 or 6. (The $C$-change which allows a cycle
-      to the left of $(j, k')$ to leave state 3 is precisely the change that forces cycle $(j, k')$ out of state
+    - Because of the constraints listed at state~2, no cycle of row $row(j)$, except perhaps for cycle $(j, k')$
+      itself, may act so long as cycle $(j, k')$ remains in state~5 or 6. (The $C$-change which allows a cycle
+      to the left of $(j, k')$ to leave state~3 is precisely the change that forces cycle $(j, k')$ out of state
       5 or 6. The cycles in row $row(j)$ to the right of cycle $(j, k')$ cannot act, as the "next" cycle
       to the right of $(j, k')$ allowed to act under these circumstances is cycle $(j+1, 0)$, in row $row(j+1)$.)
 
@@ -1079,9 +1079,9 @@ We have the analogous result for the $Gamma$ functionals.
     of a computation of use 0 would lead to the permenent abandonment of cycle $(j, k)$ at stage $t$. This cycle
     would therefore be unable to act at stage $s$.
 
-    Now, only cycle $(j, k)$ can define a computation for $Gamma_j(C; k)$. It cannot merely have returned to state 1 and again to
-    state 2 between stages $t$ and $s$, as this requires a change in $restr(C, u_t(j, k))$. Neither can it advance from state 2 to
-    state 7 between stages $t$ and $s$, as entering state 7 entails the same $C$-change. Thus in order to have another crack at
+    Now, only cycle $(j, k)$ can define a computation for $Gamma_j(C; k)$. It cannot merely have returned to state~1 and again to
+    state~2 between stages $t$ and $s$, as this requires a change in $restr(C, u_t(j, k))$. Neither can it advance from state~2 to
+    state~7 between stages $t$ and $s$, as entering state~7 entails the same $C$-change. Thus in order to have another crack at
     defining $Gamma_j(C; k)$, cycle $(j, k)$ must be reset and later restarted. If ever something in row $row(i)$, for $i < j$,
     acts, the functional $Gamma_j(C)$ is discarded wholesale, preventing any conflicting definition
     at stage $s$. So, at some stage $t' in (t, s)$ some cycle $(j, k') < (j, k)$ acts, resetting $(j, k)$
@@ -1107,8 +1107,8 @@ As the $P_e$ strategy involves a one-dimensional array of cycles, the pattern fo
 in this case is simply a finite sequence of state-names. There is no need for the sequence of sequences
 used in the $R_e$ strategy argument.
 
-#let plabel(n) = [P$#n$] // TODO: get the P upright in math context
-#let validPatternForP = patternname("validPatternForP")
+#let plabel(n) = $upright(P)#n$
+#let validPatternForP = patternName("validPatternForP")
 Let $Y = {plabel(0), plabel(1), ..., plabel(4)}$. Using the same notation as in the definition of #validPattern we may
 define a single subset of $finseq(Y)$:
 $
