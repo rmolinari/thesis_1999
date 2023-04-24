@@ -81,6 +81,7 @@
 
 // Convenience symbols
 #let phi = sym.phi.alt
+#let epsilon = sym.epsilon.alt
 #let join = sym.plus.circle
 #let neq = sym.eq.not // not equal
 #let leq = sym.lt.eq  // greater than or equal
@@ -1337,4 +1338,48 @@ We extract part of the proof of the preceeding lemma as a separate result.
     But now now there must be infinite action among the cycles $(j, 0), dots (j, k-1)$. But this is impossible,
     as one of these cycles must act infinitely often, contradicting the definition of~$chi$.
 ]
+
+#lemma[
+    Some (leftmost) successor of $alpha$ is accessible infinitely often.
+    <lemma2.19>
+]
+#proof[
+    If $alpha$ acts finitely, then after some stage~$s$ no cycle of $alpha$ ever acts again.
+    If $nu$ is the rightmost cycle of $alpha$ imposing restraint at stage~$s$, then
+    $concatone(alpha, (nu, 1))$, $concatone(alpha, (nu, 2))$, or $concatone(alpha, nu)$
+    (as appropriate to the parity of $|alpha|$ and the behavior of cycle $nu$) will be accessible
+    at every stage after $s$ at which $alpha$ is accessible. If there is no such $nu$
+    then $concatone(alpha, -1)$ will be accessible in the same way. But $alpha$ is accessible
+    at every $C$-true stage $t > s_0$.
+
+    Otherwise $alpha$ acts infinitely. Suppose first that $|alpha|$ is even and (by #lemmaRef(<lemma2.17>))
+    let $nu$ be the leftmost cycle of strategy $alpha$ which acts infinitely often. By #lemmaRef(<lemma2.18>)
+    choose $s > s_0$ large enough that cycle $nu$ is not reset after stage $s$ by the action of any $alpha$-cycles
+    to its left. Suppose for the moment that $nu^-$ is the rightmost cycle of $alpha$ to the left of $nu$
+    imposing restraint at stage $s$. (That is, suppose such $nu^-$ exists.) Note that cycle~$nu^-$ will never
+    change state after stage $s$, and so will impose the same restraint forever more. Cycle $nu$ must return
+    infinitely often either to #state(1)
+    (at which time either $concatone(alpha, (nu^-, 1))$ or $concatone(alpha, (nu^-, 2))$ will be accessible
+     as appropriate to the state in which $nu^-$ finds itself,) or to
+    state 4 (so that $concatone(alpha, (nu, 1))$ will be accessible.)
+    If there is no such $nu^-$ then the respective cases find $concatone(alpha, -1)$ and $concatone(alpha, (nu, 1))$
+    accessible.
+
+    If $|alpha|$ is odd then the argument similar, simpler, and omitted.
+]
+
+This establishes part 1 of the Proposition for $n = eta$ and we may assume that there is a value, $epsilon$, for $f(eta)$.  We write
+this value variously as $epsilon = (nu_eta, i_eta)$ (for some $nu_eta in omega^2$ and $i_eta in {1, 2}$, if $|alpha|$ is even),
+$epsilon = nu_eta$ (if $|alpha|$ is odd), or $epsilon = -1$ (if appropriate.) If there is a cycle of
+strategy $alpha$ which acts infinitely often then we denote the leftmost one by $nu^+$.
+
+It will be convenient to make the following definition. If $|alpha|$ is even and $i = 1$, or 2, then
+we say that cycle $nu$ of strategy $alpha$ is _lacking for $i$ at stage~$s$_ if, at that stage,
+cycle $nu$ imposes less restraint than is indicated by an outcome of $(nu, i)$. That is, if $i = 1$
+and $nu$ imposes no restraint at stage $s$, or if $i = 2$ and $nu$ imposes only the restraints
+$restr(A, u)$ and $restr(B, u)$. If $|alpha|$ is odd then we say that cycle $nu$ is _lacking_ at stage~$s$
+if it imposed no restraint at that stage.
+
+
+
 #bibliography("works.yml", style: "ieee")
