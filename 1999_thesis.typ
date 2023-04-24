@@ -1225,5 +1225,16 @@ Now there are some results corresopnding to Lemmas #thmref(<lemma2.7>)--#thmref(
     We are done.
 ]
 
+=== Satisfaction of the requirements <sec2.3.3>
+
+The following sequence of lemmas derives from~@LaForte, but we do not here concern ourselves with path restraint.
+
+At the point, many of the fundamental differences between the two types of strategy have been abstracted away into the preceding
+lemmas. From now on th we discuss both types in each lemma: there is no need for separation.
+
+The key object in the verification is the _true path_, $f$, through the priority tree $T$, defined by
+$f(n) = xi$, where $concatone((restr(f, n)), xi)$ is the leftmost successor of $restr(f, n)$ accessible infinitely often.
+
+The following result is the key one.
 
 #bibliography("works.yml", style: "ieee")
