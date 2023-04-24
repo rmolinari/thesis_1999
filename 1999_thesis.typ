@@ -17,6 +17,7 @@
 
 #let theorem = myresult("theorem", "Theorem", bodyfmt: emph)
 #let lemma = myresult("theorem", "Lemma")
+#let proposition = myresult("theorem", "Proposition", bodyfmt: emph)
 
 #let proof = thmplain(
     none,
@@ -44,6 +45,9 @@
 
 // Calculation converges
 #let converge = $#h(0em) arrow.b #h(0.05em)$
+
+// State number, with nonbreaking space
+#let state(num) = [state~#num]
 
 // r.e.[Z]
 #let reIn(z) = $"r.e."[#z]$
@@ -116,6 +120,10 @@
     }
   )
   doc
+}
+
+#let defEnum(..fmts) = {
+    show: doc => setupenum(doc, formats: fmts)
 }
 
 #show: doc => setupenum(doc)
@@ -1236,5 +1244,83 @@ The key object in the verification is the _true path_, $f$, through the priority
 $f(n) = xi$, where $concatone((restr(f, n)), xi)$ is the leftmost successor of $restr(f, n)$ accessible infinitely often.
 
 The following result is the key one.
+
+#proposition[
+    #show: doc => setupenum(doc, formats: ("1.", "a."))
+    For all $n in omega$
+    + $f(n)$ is defined;
+
+    + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
+
+    + strategy $restr(f, n)$ satisfies the requirement towards which it works;
+
+    + for all sufficiently large $C$-true stages $t$, $restr(f, (n+1)) subset f_t$.
+    <prop2.16>
+]
+
+So, inductively assume 1, 2, 3 and 4 for $n = eta - 1$, and let $alpha = restr(f, eta)$. Fix a stage $s_0$
+so large that $alpha$ is not cancelled after $s_0$, and for every $C$-true stage $t > s_0$, $alpha subset f_t$.
+
+We say that strategy $alpha$ _acts finitely_ if there is a stage $s$ after which no cycle of $alpha$ every
+acts. Otherwise we say that $alpha$ _acts infinitely_.
+
+#lemma[
+    If $alpha$ acts infinitely then some specific cycle of $alpha$ acts infinitely often.
+    <lemma2.17>
+]
+#proof[
+    Suppose otherwise, and begin by assuming that $|alpha| = 2e$. Infinitely many individual cycles of $alpha$
+    eventually act, but each does so only finitely often. So, each of these cycles must eventually get
+    permanently stuck in a state which does not prevent subsequent cycles from acting in turn. There are two
+    basic possibilities.
+
+    #show: doc => setupenum(doc, formats: ("(A)",))
+    + Some (leftmost) row $row(j)$ acts infinitely often. That is, infinitely often a cycle of the form
+      $(j, k)$ acts, but no single cycle of this form acts infinitely often.
+
+    + Every row acts, but each acts only finitely often.
+
+    We consider (A) first.
+
+    Fix $j$ minimal so that row $row(j)$ acts infinitely, and let $t_0 > s_0$ be so large that no cycle
+    of the form $(i, k)$ for $i < j$ acts after stage~$t_0$. Since row~$row(j)$ acts infinitely, but each
+    cycle in it acts only finitely often, _every_ cycle $(j, k)$ must eventually act, and get stuck in a way
+    which does not prevent cycle~$(j, k+1)$ from acting. This means that each cycle in the row
+    must eventually get parmanently stuck in state~2 or state~3, or is abandoned.
+
+    By #lemmaRef(<lemma2.4>) a cycle gets permanently stuck in #state(3) only if another cycle in its
+    row gets permanently stuck in #state(5) or #state(6), which we have seen does not happen to row~$row(j)$.
+    Thus in fact every cycle of row~$row(j)$ eventually gets permanently stuck in #state(2) or is
+    abandoned in #state(7). In the latter case, $Gamma_j(C; k)$ is correctly defined to be
+    $1 = G(k)$ with use~0. We claim that the cycles which get permantently stuck in #state(2) also
+    compute a correct value. Well, suppose that $(j, k)$ gets so stuck. It must be that
+    $restr(C, u(j,k)) = restr(C_(s_1(j,k)), u(j, k))$ _and_ $G(k) = G_(s_1(j,k))(k)$. But then
+    $
+    Gamma_j(C; k) &= (Gamma_j(C; k))[s_1] \
+                  &= (G(k))[s_1] \
+                  &= G(k)
+    $
+    and we have a correct definition again. Now, by~#lemmaRef(<lemma2.11>), $Gamma_j(C)$ is
+    a well-defined, $C$-recursive function. By the argument above, for all $k in omega$,
+    $G(k) = Gamma_j(C; k)$, and we see that $G leqt C$, a contradiction.
+
+    Suppose outcome (B) happens. We aim for a similar contradiction. Each row acts only finitely,
+    but every row eventually acts, so given $j in omega$ there are $k_j$ and $t_j > t_(j-1)$
+    such that cycle $(j, k_j)$ starts cycle $(j+1, 0)$ at stage $t_j$ and no cycle of
+    row $row(j)$ ever acts again. So, at stage $t_j$, cycle $(j, k_j)$ must enter #state(5) never
+    to leave, or #state(8), abandoning row $row(j)$.
+
+    In the latter case, $Delta(C\; j) = 1 = G(j)$. In the former, we may argue as above that
+    each such cycle computes a value for $Delta(C\; j)$ with agrees with $G(j)$. So again
+    $G leqt C$, which is a contradiction, and outcome (B) cannot occur.
+
+    For the case $|alpha| = 2e + 1$ the argument is much simpler. Since the cycle sequence
+    is one-dimensional, _every_ cycle must end up getting stuck in #state(plabel(2)) or #state(plabel(4)).
+    As before, each cycle will compute a value for $Xi(C)$ which agrees with $G$, and we see
+    that $G leqt C$ again.
+
+    The lemma is proved.
+]
+
 
 #bibliography("works.yml", style: "ieee")
