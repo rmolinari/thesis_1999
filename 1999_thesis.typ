@@ -10,14 +10,15 @@
 #let myresult = thmbox.with(
     base_level: 1,
     titlefmt: strong,
+    bodyfmt: emph,
     inset: 0em,
     padding: (top: 0.5em),
     separator: [#h(0.5em)] // using my change to theorems.typ - pull requested
 )
 
-#let theorem = myresult("theorem", "Theorem", bodyfmt: emph)
-#let lemma = myresult("theorem", "Lemma")
-#let proposition = myresult("theorem", "Proposition", bodyfmt: emph)
+#let theorem = myresult("theorem", "Theorem")
+#let lemma = myresult("theorem", "Lemma", bodyfmt: text)
+#let proposition = myresult("theorem", "Proposition")
 
 #let proof = thmplain(
     none,
@@ -1322,5 +1323,18 @@ acts. Otherwise we say that $alpha$ _acts infinitely_.
     The lemma is proved.
 ]
 
+We extract part of the proof of the preceeding lemma as a separate result.
+#lemma[
+    Given s strategy $alpha$, if $chi$ is the leftmost cycle of strategy $alpha$ to act infinitely
+    often then only finitely often can _any_ cycle to the left of $chi$ act.
+    <lemma2.18>
+]
+#proof[
+    Suppose otherwise, and write $chi = (j, k)$. If there is infinitely much action
+    involving cycles to the left of cycle~$(j, 0)$ then one of the rows $row(0), dots, row(j-1)$
+    must act infinitely, and we find ourselves in the impossible case (A) of~#lemmaRef(<lemma2.17>).
 
+    But now now there must be infinite action among the cycles $(j, 0), dots (j, k-1)$. But this is impossible,
+    as one of these cycles must act infinitely often, contradicting the definition of~$chi$.
+]
 #bibliography("works.yml", style: "ieee")
