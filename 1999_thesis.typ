@@ -1187,4 +1187,43 @@ Now there are some results corresopnding to Lemmas #thmref(<lemma2.7>)--#thmref(
 ]
 
 
+#lemma[
+    #show: doc => setupenum(doc, formats: ("(I)", "1.", "a."))
+    + For $i < k$, if $(Xi(C\; i))[s] converge$ and $(Xi(C\; k))[s] converge$ with $xi_s(k) > 0$ then $xi_s(i) < xi_s(k)$.
+    + Cycle $k$ defines a computation for $Xi(C\; k)$ only when no such other computation is currently defined.
+    <lemma2.15>
+]
+#proof[
+    As in Lemmas~#thmref(<lemma2.10>) and~#thmref(<lemma2.11>) we may assume that strategy $alpha$ is not cancelled during
+    the stages that concern us.
+
+    We proceed by induction. Fix $k$ and assume (I) and (II) for $0, 1, dots, k-1$. Statement (I) holds for $k$
+    by the same argument as in #lemmaRef(<lemma2.11>), which we don't repeat.
+
+    Suppose that (II) fails for $k$: that is, as some (least) stage $s$, cycle $k$ defines a computation $Xi(C\; k)$
+    while another computation $(Xi(C\; k))[t]$ is still valid from an earlier stage.
+    Note that $restr(C_s, u_t(k)) = restr(C_t, u_t(k))$ and that $u_t(k) = xi_t(k) > 0$.
+
+    Now, since $C$ did not change below $u_t(k)$ between stages $t$ and $s$, cycle $k$ cannot merely have
+    returned to state #plabel(1) and then attempted to redefine $Xi(C\; k)$.
+    The only possibility is that cycle $k$ is reset by the action of some cycle to the left, at some stage
+    between $t$ and $s$. Let $k' < k$ be the leftmost cycle to act between stages $t$ and $s$, and let
+    it so act for the first time at stage $t' in (t, s)$. Since it is leftmost in acting, it is not itself
+    reset between $t$ and $s$. We note that $(Xi(C\; k'))[t] converge$ (by #lemmaRef(<lemma2.14>))
+    and $u_t(k') = xi_t(k') < xi_t(k)$, by (I).
+
+    Now cycle $k'$ must have been in state #plabel(2) by stage~$t$, by #lemmaRef(<lemma2.12>), as cycles in
+    state~#plabel(4) cannot act again before being reset. Cycle $k'$ cannot act at $t'$ by returning
+    to state~#plabel(1) as this would mean a change in $restr(C, xi_t(k')) subset restr(C, xi_t(k))$
+    which contradicts our assumption. Thus cycle $k'$ acts by reaching state~#plabel(3). As cycle $k'$
+    is not reset before stage $s$ it can not reenter state~#plabel(1) before $s$. It must
+    therefore enter #plabel(4) before stage~$s$, by #lemmaRef(<lemma2.12>), as cycle $k$
+    is not in state~#plabel(0) at stage~$s$. But cycle $k'$ passes from state~#plabel(3) to state~#plabel(4)
+    only when it sees a change in $restr(C, xi_t(k'))$, which again leads to the contradiction of
+    a change in $restr(C, xi_t(k))$.
+
+    We are done.
+]
+
+
 #bibliography("works.yml", style: "ieee")
