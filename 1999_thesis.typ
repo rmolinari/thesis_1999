@@ -1410,4 +1410,79 @@ if it imposed no restraint at that stage.
     In the case $|alpha| = 2e + 1$ the argument is again similar and simpler.
 ]
 
+#lemma[
+    $restr(f, (eta + 1)) = concatone(alpha, epsilon)$ is cancelled only finitely often.
+    <lemma2.21>
+]
+#proof[
+    If $alpha$ acts only finitely, then $concatone(alpha, epsilon)$ is certainly not
+    cancelled after the last time any cycle of stretegy $alpha$ acts.
+
+    Otherwise, we note that by assumption $alpha$ is cancelled only finitely often, so
+    ofter stage $s_0$, $concatone(alpha, -1)$ is never cancelled. For other possible
+    values of $epsilon$, $concatone(alpha, epsilon)$ is cancelled only when
+
+    #show: doc => setupenum(doc, formats: ("1.",))
+    + cycle $nu_eta$ is lacking for $i_eta$ (or just lacking, if $|alpha|$ is odd); or
+
+    + cycle $nu_eta$ of strategy $|alpha|$ enumerates something into or out of $A$,
+      or something into $B$.
+
+    By #lemmaRef(<lemma2.20>) cancellations of the first kind happen only finitely often.
+
+    We claim also that cancellations of the second kind can happen only finitely often.
+    By #lemmaRef(<lemma2.20>) choose $s > s_0$ so large that $nu_eta$ is not lacking for $i_eta$
+    (or just lacking) after stage~$s$. In particular, cycle $nu_eta$ is not reset after stage~$s$,
+    as in being reset it would (temporarily) be lacking. Thus $eta_nu$ works only with its final witness, $x$ (resp.~$y$),
+    after $s$. But the worst $nu_eta$ can now do is ennumerate $x$ into $A$ and out again (or into $B$) once.
+
+    Thus $concatone(alpha, epsilon)$ is cancelled only finitely often.
+]
+
+This establishes part 2 of the Proposition for $n = eta$.
+
+#lemma[
+    Strategy $alpha$ satisfies the requirement towards which it was working.
+    <lemma2.22>
+]
+#proof[
+    By Lemmas #thmref(<lemma2.17>), #thmref(<lemma2.18>), and #thmref(<lemma2.21>) we have just two possibilities.
+
+    #show: doc => setupenum(doc, formats: ("1.",))
+    + Only finitely often does any cycle of strategy $alpha$ act.
+
+    + Either $epsilon neq -1$ and cycle $nu^+$ acts infinitely often, but is only reset finitely often,
+      or $epsilon = -1$ and cycle $(0, 0)$ (resp. 0) returnes infinitely often to #state(1) (resp. #state(plabel(0))).
+
+    We start with the argument for $|alpha| = 2e$.
+
+    In the first case, some cycle gets permanently stuck in #state(1), #state(4), or #state(6). In any of these cases,
+    we satisfy the requirement through a successful diagonalization.
+
+    In the second case, let $sigma = nu^+$ if $epsilon neq -1$, and $sigma = (0,0)$ otherwise. Let $s > s_0$ be
+    large enough that cycle~$sigma$ is not reset after stage~$s$, so that it works with the same witness, $x$, after~$s$.
+    The only way that cycle $sigma$ can act infinitely often is if it alternates infinitely
+    between states~1 and~2, or (if $epsilon neq -1$) between states~4 and~5. This implies that at least one of
+    $Phi_e(E_e)$ and $hat(Psi)_e(C join A join B)$ is partial.
+
+    Indeed, suppose that both functions are total and that we bounce infinitely often between #state(1) and #state(2).
+    Let $t > s$ be so large that
+    $(Phi_e(E_e; x))[t] converge$,
+    $restr(E_(e,t), phi_t(x)) = restr(E_e, phi_t(x)) = (restr(hat(Psi)_e(C join A join B), phi_t(x)))[t]$,
+    and each of $C$, $A$, and $B$ have reached their final values on the use of the $hat(Psi)_e(C join A join B)$ computations.
+    Then there is no way that a $C$-change will ever subsequently cause cycle $sigma$ to jump from #state(2) back to #state(1).
+    The case in which $epsilon neq -1$ and $sigma$ alternates infinitely between states~4 and~5 is the same.
+
+    If $|alpha| = 2e + 1$, finite action again leads to success through diagonalization. The only way that
+    cycle~$nu^+$ can act infinitely often is if it alternates infinitely often between states~#plabel(1)
+    and~#plabel(2). We argue as above that in this case $Xi_e(C join A)$ is partial.
+]
+
+This establishes part 3 of the Proposition for $n = eta$.
+
+Naturally, #lemmaRef(<lemma2.22>) describes what "really" happens to strategy $alpha$: the construction
+of $Gamma_j$ and $Delta$ is only a threat to ensure that get $G$ changes when we need them, and not too
+many $C$-changes. If $Phi(E)$ and $Psi(C join A join B)$ are both total, then we actually win by diagonalization.
+If not, we track down a witness to the partialness.
+
 #bibliography("works.yml", style: "ieee")
