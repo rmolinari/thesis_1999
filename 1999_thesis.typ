@@ -58,7 +58,7 @@
 #let dreInAbove(z) = $"d"reInAbove(#z)$
 
 // Tuple with angle brackets
-#let angletup(..z) = $angle.l #z.pos().join(", ") angle.r$
+#let angletup(..z) = $lr(angle.l #z.pos().join(", ") angle.r)$
 
 // Restriction of a to b
 #let restr(a, b) = $#a harpoon.tr #b$
@@ -1481,8 +1481,45 @@ This establishes part 2 of the Proposition for $n = eta$.
 This establishes part 3 of the Proposition for $n = eta$.
 
 Naturally, #lemmaRef(<lemma2.22>) describes what "really" happens to strategy $alpha$: the construction
-of $Gamma_j$ and $Delta$ is only a threat to ensure that get $G$ changes when we need them, and not too
+of $Gamma_j$ and $Delta$ is only a threat to ensure that we get $G$ changes when we need them, and not too
 many $C$-changes. If $Phi(E)$ and $Psi(C join A join B)$ are both total, then we actually win by diagonalization.
 If not, we track down a witness to the partialness.
+
+#lemma[
+    For all sufficiently large $C$-true stages $t$, $restr(f, (eta + 1)) = concatone(alpha, epsilon) subset f_t$.
+    <lemma2.23>
+]
+#proof[
+    Again we start with the case $alpha = 2e$.
+
+    First suppose that $alpha$ acts finitely. Let $q > s_0$ be so large that no cycle of $alpha$ acts after stage~$q$.
+
+    Then $concatone(alpha, epsilon) subset f_t$ whenever $alpha$ is accessible, provided that also $t > q$.
+    But $alpha subset f_t$ at every $C$-true stage $t$ after $s_0$.
+
+    Now suppose that $alpha$ acts infinitely, and that $alpha$'s cycle $nu^+$ jumps infinitely often between
+    states~1 and~2. By #lemmaRef(<lemma2.18>) we may choose $q > s_0$ so that no cycle $(j, k) < nu_eta$ acts
+    after stage $q$, and cycle $nu_eta$ is not in #state(0) at $q$. Notice that, since cycle~$nu_eta$ is not
+    reset after stage $q$, it can never advance past #state(2), for otherwise nothing could ever cause
+    it to return to #state(1).
+
+    Now, if $nu^+$ remains in #state(2) at a $C$-true stage $t > q$ then it will never never subsequently
+    see a change in $restr(C, u)$. (We use $hat(Psi)$ instead of just $Psi$ in the definition of $Eq(x, s_1)$
+                                    for just this purpose.)
+    But this means that $nu^+$ will never return to #state(1). So, as $nu^+$ doesn't advance past
+    #state(2), and doesn't get reset (and hence returned to #state(0)) after $q$, $nu^+$
+    must be in #state(1) at stage~$t$. But $nu^+$'s being in #state(1) implies that $nu_eta = (nu^+)^-$ (if any)
+    is rightmost in imposing restraint, and $concatone(alpha, epsilon) subset f_t$.
+    If there is no cycle to left of $nu^+$ imposing restraint after $q$ then $epsilon = -1$ and
+    $concatone(alpha, -1) subset f_t$.
+
+    If $nu^+$ jumps between states~4 and~5 then a similar argument shows that $nu^+$ is in #state(4) at
+    every $C$-true stage $t > q$. But in this case $nu^+ = nu_eta$ and $i_eta = 1$, so at such
+    stages~$t$, $concatone(alpha, epsilon) = concatone(alpha, (nu_eta, i_eta)) subset f_t$.
+
+    The case for $|alpha| = 2e + 1$ is essentially identical, and is omitted.
+
+    The lemma is proved.
+]
 
 #bibliography("works.yml", style: "ieee")
