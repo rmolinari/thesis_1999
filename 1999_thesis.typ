@@ -1380,6 +1380,34 @@ and $nu$ imposes no restraint at stage $s$, or if $i = 2$ and $nu$ imposes only 
 $restr(A, u)$ and $restr(B, u)$. If $|alpha|$ is odd then we say that cycle $nu$ is _lacking_ at stage~$s$
 if it imposed no restraint at that stage.
 
+#lemma[
+    Suppose that $nu_eta$ is defined. If $|alpha|$ is even then $nu_eta$ is lacking for $i_eta$ at only finitely many stages.
+    If $|alpha|$ is odd then $nu_eta$ is lacking at only finitely many stages.
+    <lemma2.20>
+]
+#proof[
+    If $alpha$ acts only finitely then the result is trivial.
 
+    Otherwise, by #lemmaRef(<lemma2.17>) $nu^+$ is defined, and $nu^+ geq nu_eta$. Thus, by #lemmaRef(<lemma2.18>) we
+    may choose $s > s_0$ so large that no $alpha$-cycle to the left of $nu_eta$ acts after stage~$s$.
+
+    We first give the argument for $|alpha|$ even. Cycle~$nu_eta$ can be lacking at infinitely many stages after $s$ in
+    two ways.
+
+    #show: doc => setupenum(doc, formats: ("1.",))
+    + $i_eta = 1$ and $nu_eta$ returns infinitely often to #state(1).
+
+     But in this case, either $concatone(alpha, nu_eta^-)$ is accessible infinitely often
+     (if there is such a $nu_eta^-$ as defined in the proof #lemmaRef(<lemma2.19>),) or $concatone(alpha, -1)$
+     is accessible infinitely often. Both of these contradict the definition of $nu_eta$.
+
+    + $i_eta = 2$ and $nu_eta$ is infinitely often in a state numbered less than 4.
+
+     Once cycle $nu_eta$ reaches #state(4) it can only return to a lower numbered state by being reset.
+     But by defintion this cycle is not reset after state~$s$, so the only way it can infinitely often
+     be in a state numbered less than 4 is if it never reaches #state(4). This contradicts the definition of $i_eta$.
+
+    In the case $|alpha| = 2e + 1$ the argument is again similar and simpler.
+]
 
 #bibliography("works.yml", style: "ieee")
