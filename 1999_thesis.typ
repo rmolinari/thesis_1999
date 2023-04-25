@@ -1616,6 +1616,31 @@ again. This allows us to get a handle on the delayed permitting nature of the ar
 
 Now we can show that the permitting works.
 
+#lemma[
+    $A join B leqt G$.
+    <lemma2.26>
+]
+#proof[
+    Let $x in omega$. If $x$ is not chosen as a witness by stage~$x$ then it never will be, and $x in.not A union B$.
+    Otherwise, suppose $x$ is chosen at stage $s_0$ to be the witness for a cycle $nu = (j,k)$ of strategy~$alpha$
+    of even length. Note that $alpha subset f_(s_0)$, and that $x in.not B$.
 
+    If $k in.not G$ or $G_(s_0)(k) = 1$ then $alpha$'s cycle~$nu$ will never get the first permission that it needs,
+    and $x in.not A$.
+
+    Suppose now that $k in setdiff(G_s, G_(s-1))$. Let $t$ be the first $C$-true stage larger than each of
+    $s$, $s_0$, and $s^(concatone(alpha, nu))$. We claim that if $x$ is not enumerated into $A$ by stage $t$
+    it never will be. Well, if $alpha subset.not f_t$ then by #lemmaRef(<lemma2.25>) strategy~$alpha$ will be
+    cancelled (and witness $x$ forgotten) before $alpha$ gets a chance to act again. So if $x$ hasn't entered $A$
+    before~$t$, we must have $alpha subset f_t$ if $x$ is ever to have a chance. If some cycle $(j', k') < nu$
+    of strategy~$alpha$ acts at $t$ then cycle~$nu$ will be reset, and its witness forgotten. Otherwise, if cycle $nu$
+    acts at or after stage~$t$ due only to $Eq(x, s_1)$ holding, then certainly $x in.not A$, as by construction
+    cycle~$(j,k)$ will jump straight to #state(7) rather than attempt to enumerate $x$ into $A$. If $nu$ is in #state(4)
+    at stage~$t$ then $x$ would have already entered $A$.  So we may assume that cycle~$nu$ is in a state
+    other than 0, 1, and~4 at stage~$t$, and by #lemmaRef(<lemma2.24>) is unable ever to act again without getting
+    reset first.
+
+    So if $x in.not A_t$, $x in.not A$.
+]
 
 #bibliography("works.yml", style: "ieee")
