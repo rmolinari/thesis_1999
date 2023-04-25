@@ -48,6 +48,9 @@
 // Calculation converges
 #let converge = $#h(0em) arrow.b #h(0.05em)$
 
+// "State transition"
+#let trans(a, b) = $#a arrow.r.bar #b$
+
 // State number, with nonbreaking space
 #let state(num) = [state~#num]
 
@@ -1545,5 +1548,74 @@ after stage $s^alpha$.
 The following two lemmas are technical, but basically say that if $t > s^alpha$ is a $C$-true stage,
 then either strategy $alpha$ is accessible at stage~$t$, or is cancelled before ever being accessible
 again. This allows us to get a handle on the delayed permitting nature of the argument.
+
+#lemma[
+    Suppose that $t > s^(concatone(alpha, nu))$ is a $C$-true stage, and that $alpha$'s cycle $nu$ is in a state
+    other than 0, 1, and~4 (if $|alpha|$ is even), or a state other than #plabel(0) and~#plabel(1) (if $|alpha|$ is odd).
+    Then if cycle $nu$ does not act at stage $t$ it will never act subsequently without first being reset.
+    <lemma2.24>
+]
+#proof[
+    We consider the case $|alpha| = 2e$. The case $|alpha| = 2e + 1$ is much the same, and simpler, as we don't have to worry
+    about the parameter,~$mu$.
+
+    We immediately dispense with the case in which $nu$ is in #state(7) or #state(8) at stage~$t$, as by construction such
+    a cycle needs to be reset to act again. Thus $nu$ is in #state(2), 3, 5, or~6.
+
+    Since $t$ is $C$-true, $nu$'s failure to act at $t$ due to a $C$-change
+    (so as to make a state-transition #trans(2, 1), #trans(3, 4), #trans(5, 4), or #trans(6, 7))
+    means that such action is also impossible in the future.
+    Also, $t > s^(concatone(alpha, nu))$, so (writing $nu = (j,k)$), ${j, k} sect G = {j, k} sect G_t$,
+    and so by stage~$t$ cycle~$nu$ will have seen all of the explicit $G$-permission it will ever see.
+    Finally, if $nu$ makes the trasition #trans(2, 3) at stage~$t$, then the value of $mu$ just calculated
+    is based on some computations in some cycle to the right, and these computations will never be subsequently injuired by
+    a $C$-change, as $t$ is $C$-true. Thus cycle $nu$ will be stuck in #state(3) until it is reset.
+
+    The upshot of all of this is that by not acting at $t$, cycle $nu$ has demonstrated that it is unable
+    ever subsequently to act without first being reset.
+]
+
+#lemma[
+    Suppose that $alpha subset f_s$, $t > max{s, s^alpha}$ is $C$-true, and $s' > t$. Then for $beta subset alpha$,
+    if $beta subset.not f_t$ but $beta subset f_(s')$ then there is a $tau in (s, s']$ such that $beta$ is cancelled
+    at stage~$tau$.
+    <lemma2.25>
+]
+#proof[
+    We proceed by induction on the length of $beta subset alpha$. As $emptyset$ is always accessible we assume the
+    result for $beta$ and first consider $beta^+ = concat(beta, nu) subset alpha$. So assume
+    $beta^+ subset f_(s')$ but $beta^+ subset.not f_t$. If also $beta subset.not f_t$ then by the inductive
+    hypothesis $beta$ is cancelled at some stage in $(s, s']$ which leads to $beta^+$ being cancelled as well. So
+    it suffices to assume that $beta subset f_t$ and that $beta$ is never cancelled in $(s, s']$.
+
+    Suppose cycle~$nu$ of strategy $beta$ is reset at some $tau in (s, s']$. As $beta$ isn't cancelled at $tau$,
+    $nu$ is reset by some the action at $tau$ of some cycle $nu' < nu$ of strategy $beta$. By construction,
+    this leads to the cancellation of node $beta^+$.
+
+    (In what follows it will be convenient to refer to a cycle which is not in #state(0) or #state(plabel(0))
+     as _awake_. Cycles in #state(0) or #state(plabel(0)) are _asleep_.)
+
+    So it remains to consider the case in which $nu$ is not reset at any $tau in (s, s']$. The following
+    argument applies necessarily to the case $|alpha| = 2e$. The case $|alpha| = 2e + 1$ is much the same;
+    and simpler, as do not have to worry about the parameter~$mu$.
+
+    Write $nu = (j, k)$. $beta^+ = concatone(beta, nu) subset f_s$, so cycle $nu$ is awake at stage $s$.
+    As it is not reset in $(s, s']$ it remains awake during this period, and in particular is awake at
+    stage~$t$. But $beta^+ subset.not f_t$, so some cycle to the right of $nu$ must also be awake at $t$.
+    This means that $(j, k)$ must be in one of the states 2, 3, 5, 7, and~8 by the Pattern Lemma.
+    Now, $t > s^alpha geq s^(beta^+)$, so we may apply #lemmaRef(<lemma2.24>) to see that cycle~$nu$
+    does not act before being first reset. As it is not reset in $(s, s']$, it cannot act at or before $s'$,
+    and $concatone(beta, (j, k)) subset.not f_(s')$, a contradiction.
+
+    If, instead, $beta^+ = concatone(beta, -1) subset alpha$, assume that $beta^+ subset.not f_t$. This means
+    that, at stage $t$, some (leftmost) cycle~$chi$ of strategy~$beta$ is imposing restraint $r$. As $t$
+    is $C$-true this restraint is based on computations which will never be injured by a later $C$-change.
+    Thus $chi$ will always impose at least $r$-much restraint unless strategy~$beta$ (and hence strategy $beta^+$)
+    is cancelled. Thus, if $beta^+ subset f_(s')$ then strategy~$beta^+$ is canclled by stage~$s'$.
+]
+
+Now we can show that the permitting works.
+
+
 
 #bibliography("works.yml", style: "ieee")
