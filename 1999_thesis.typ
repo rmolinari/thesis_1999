@@ -20,12 +20,13 @@
 #let lemma = myresult("theorem", "Lemma", bodyfmt: text)
 #let proposition = myresult("theorem", "Proposition")
 
+#let qed = [#h(1fr) $square$]
 #let proof = thmplain(
     none,
     "Proof",
     titlefmt: strong,
     bodyfmt: body => [
-        #body #h(1fr) $square$
+        #body #qed
     ],
     padding: (top: 0em, bottom: 0em),
     inset: 0em,
@@ -1521,5 +1522,28 @@ If not, we track down a witness to the partialness.
 
     The lemma is proved.
 ]
+
+This establishes the last part of the Proposition for $n = eta$ and the inductive step is complete.
+#thmref(<prop2.16>)[Proposition] is proved. #qed
+
+Thus all the requirements are satisfied, and we have constructed $D = C join A$ and $F = C join A join B$,
+d.r.e.~sets forming a proper interval $turinginterval(D, F) subset turinginterval(C, nothing')$ free of r.e.~degrees.
+It remains to show that there is enough permitting in the construction to ensure that $F leqt G$.
+
+We follow the method and notation of~@LaForte. For $alpha in T$ we let
+$
+e^alpha = max({j, k st (exists beta in T)[concatone(beta, (j, k)) subset alpha]} union {k st (exists beta in T)[concatone(beta, k) subset alpha]})
+$
+the largest number which occurs in the path leading to $alpha$. We also define
+$
+s^alpha = min{s st restr(G_s, e^alpha) = restr(G, e^alpha)}.
+$
+(Note that the function $lambda alpha[s^alpha]$ is $G$-recursive.) The point is that none of the cycles
+(of the strategies) leading to $alpha$ will ever see any of the $G$-changes they are looking for
+after stage $s^alpha$.
+
+The following two lemmas are technical, but basically say that if $t > s^alpha$ is a $C$-true stage,
+then either strategy $alpha$ is accessible at stage~$t$, or is cancelled before ever being accessible
+again. This allows us to get a handle on the delayed permitting nature of the argument.
 
 #bibliography("works.yml", style: "ieee")
