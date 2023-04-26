@@ -41,8 +41,8 @@
 #let turinginterval(a, b) = $[#a, #b]_T$
 // Turing less than and leq. Note that we have extra space after this symbol. See https://github.com/typst/typst/issues/877. The
 // workaround is to specify 0 space ourselves.
-#let ltt = $<_T #h(0em)$
-#let leqt = $lt.eq_T #h(0em)$
+#let ltt = $<_T$
+#let leqt = $lt.eq_T$
 #let emptyset = $nothing$
 
 // Calculation converges
@@ -1641,6 +1641,20 @@ Now we can show that the permitting works.
     reset first.
 
     So if $x in.not A_t$, $x in.not A$.
+
+    If $x in A_t$ we must check to see if $x$ ever gets removed from $A$. If $j in.not G$ then cycle $nu$ will never
+    see the necessary permission, and $x in A$. Otherwise, let $j in setdiff(G_w, G_(w-1))$. Let $t'$ be the first
+    $C$-true stage greater than both $t > s^(concatone(alpha, nu))$ and $w$. The same reasoning as before
+    shows that $x$ will have been removed from $A$ by stage $w$ if it ever will be.
+
+    Thus $A(x) = A_w(x)$.
+
+    If $x$ is chosen at $s_0$ to be a witness for cycke $k$ of strategy $alpha$ of _odd_ length then the same
+    basic argument applies, but now we need not worry about $x$ being enumerated out of $B$: we just check if it
+    ever gets enumerated in.
+
+    All of the above can be done by asking questions of a $C$ oracle and a $G$ oracle. As $C ltt G$, a $G$ oracle
+    suffices, and $A join B leqt G$.
 ]
 
 #bibliography("works.yml", style: "ieee")
