@@ -44,6 +44,8 @@
 #let ltt = $<_T$
 #let leqt = $lt.eq_T$
 #let emptyset = $nothing$
+// "Zero jump"
+#let zerojump = $emptyset'$
 
 // Calculation converges
 #let converge = $#h(0em) arrow.b #h(0.05em)$
@@ -1530,7 +1532,7 @@ This establishes the last part of the Proposition for $n = eta$ and the inductiv
 #thmref(<prop2.16>)[Proposition] is proved. #qed
 
 Thus all the requirements are satisfied, and we have constructed $D = C join A$ and $F = C join A join B$,
-d.r.e.~sets forming a proper interval $turinginterval(D, F) subset turinginterval(C, nothing')$ free of r.e.~degrees.
+d.r.e.~sets forming a proper interval $turinginterval(D, F) subset turinginterval(C, zerojump)$ free of r.e.~degrees.
 It remains to show that there is enough permitting in the construction to ensure that $F leqt G$.
 
 We follow the method and notation of~@LaForte. For $alpha in T$ we let
@@ -1611,7 +1613,7 @@ again. This allows us to get a handle on the delayed permitting nature of the ar
     that, at stage $t$, some (leftmost) cycle~$chi$ of strategy~$beta$ is imposing restraint $r$. As $t$
     is $C$-true this restraint is based on computations which will never be injured by a later $C$-change.
     Thus $chi$ will always impose at least $r$-much restraint unless strategy~$beta$ (and hence strategy $beta^+$)
-    is cancelled. Thus, if $beta^+ subset f_(s')$ then strategy~$beta^+$ is canclled by stage~$s'$.
+    is cancelled. Thus, if $beta^+ subset f_(s')$ then strategy~$beta^+$ is cancelled by stage~$s'$.
 ]
 
 Now we can show that the permitting works.
@@ -1656,5 +1658,72 @@ Now we can show that the permitting works.
     All of the above can be done by asking questions of a $C$ oracle and a $G$ oracle. As $C ltt G$, a $G$ oracle
     suffices, and $A join B leqt G$.
 ]
+
+
+////////////////////////////////////////
+// Chapter 3
+
+= Avoiding $n$-r.e. degrees with dREA sets <chapter3>
+
+== Introduction
+
+Soare and Stob prove (see @SoareStob1982)
+
+#theorem[
+    Given a nonrecursive, r.e. set $G$ there is an $reInAbove(G)$ set $F$ not of r.e. degree.
+    <theorem3.1>
+]
+
+A question arises: what other sorts of degrees can we avoid in this way? For example, can
+we always construct $F$ to be not of d.r.e. degree? The answer is no:
+#theorem(name: [Arslanov, LaForte, and Slaman; @ALS1998])[
+    There exists an r.e. set $G ident.not_T emptyset$ such that every $reInAbove(G)$ set $F$ is of d.r.e. degree.
+    <theorem3.2>
+]
+
+The question is then how we might relax the requirements on the construction of $F$. Rather than work with a
+fixed "base" set $G$, Jockusch and Shore consider what happens if the choice of r.e.~$G$ is completely
+free (see @JockuschShore1984[Thm1.6a]). That is, $F$ is required only to be 2-REA, _i.e._ $reInAbove(G)$ for
+_some_ r.e. set~$G$, which we are free to construct:
+#theorem(name: [Jockusch and Shore])[
+    Let $A_0, A_1, dots$ be uniformly recursive in $zerojump$. Then there is a 2-REA set $F leqt zerojump$
+    such that for all $i geq 0$, $F ident.not A_i$.
+    <theorem3.3>
+]
+Here "uniformly recursive in $zerojump$" means that there is a $zerojump$-recursive function $f$ such that
+$A_i(x) = f(i, x)$ for all $i$ and $x$. This is an important result, as many interesting families of
+sets are uniformly recursive in~$zerojump$. Examples are the $n$-r.e. sets, for each $n$, and the union
+over $n$ of these families. So we immediately have
+#theorem(name: [Jockusch and Shore])[
+    For each $n$, there is a 2-REA set $F_n leqt zerojump$ not of $n$-r.e. degree. In face, there is a single 2-REA
+    set $F leqt zerojump$ which fails to be of $n$-r.e. degree for any $n geq 0$.
+    <theorem3.4>
+]
+
+Rather than give up control over $G$ we will give up some rigor in the way $F$ is enumerated from $G$. When
+constructing $F$ to be $dreInAbove(G)$ the following result is obtained.
+#theorem(name: [Cholak and Hinman; @CholakHinman])[
+    Given any nonrecursive, r.e. set $G$ there is $dreInAbove(G)$ set $F$ not of d.r.e. degree.
+    <theorem3.5>
+]
+This result has been strengthened by Hinman, @Hinman:
+#theorem[
+    Given a nonrecursive, r.e. set $G$ there is $dreInAbove(G)$ set $F$ not of 3-r.e. degree.
+    <theorem3.6>
+]
+
+Can we avoid 4-r.e. degrees _via_ $dreInAbove(G)$ sets in this way? $n$-r.e. degrees in general?
+We cannot answer this question at the moment. However, if we drop the requirement that
+the constructed set be Turing-above $G$, we can avoid $n$-r.e. degrees, and at the same time
+place the "base set" $G$ (which we now call $D$) in a prescribed r.e.~interval.
+#theorem[
+    For any $n in omega$ and any r.e.sets $C ltt G$ there is r.e. $D in turinginterval(C, G)$
+    and $dreInAbove(D)$ $F$ such that $F$ is not of $n$-r.e. degree.
+    <theorem3.7>
+]
+Note that $D leqt F$, bue we do not know whether or not we can ensure $G leqt F$.
+
+This result is in some sense a middle point between Theorems~#thmref(<theorem3.1>) and~#thmref(<theorem3.4>).
+We maintain some control over the base set by allowing more flexiibility in the construction of $F$ from it.
 
 #bibliography("works.yml", style: "ieee")

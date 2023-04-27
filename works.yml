@@ -27,3 +27,58 @@ LaForte:
   author: LaForte, Geoffrey L.
   title: Phenomena in the n-R.E. and n-REA degrees
   date: 1996
+
+SoareStob1982:
+  type: Article
+  author:
+    - Soare, Robert I.
+    - Stob, Michael
+  title: Relative recursive enumerability
+  page-rage: 299-324
+  parent:
+    title: Proceedings of the Herbrand Symposium, Logic Colloquium '81
+    editor: Stern, J.
+    publisher: North-Holland
+    date: 1982
+
+ALS1998:
+  type: Article
+  author:
+    - Arslanov, Marat M.
+    - LaForte, Geoffrey, L.
+    - Slaman, Theodore A.
+  title: Relative enumerability in the difference hierarchy
+  page-range: 411-420
+  parent:
+    title: Journal of Symbolic Logic
+    volume: 62
+    number: 2
+  date: 1998
+
+JockuschShore1984:
+  type: Article
+  author:
+    - Jockusch, Carl
+    - Shore, Richard
+  title: "Pseudo-Jump operators. II: transfinite iterations, hierarchies, and minimal covers"
+  page-range: 1205-1236
+  parent:
+    title: Journal of Symbolic Logic
+    volume: 49
+
+CholakHinman:
+  type: Article
+  author:
+    - Cholak, Peter A.
+    - Hinman, Peter G.
+  title: Iterated relative recursive enumerability
+  page-range: 321-348
+  parent:
+    title: Archives of Mathematical Logic
+    volume: 33
+  date: 1994
+
+Hinman:
+  type: Unpublished Notes
+  author: Hinman, Peter G.
+  title: More iterated relative recursive enumerability
