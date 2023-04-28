@@ -35,6 +35,8 @@
 
 #let lemmaRef(name) = thmref(name)[Lemma]
 
+#let chapRef(num) = ref(label("chapter" + str(num)), supplement: "Chapter")
+
 // Set difference
 #let setdiff(a, b) = $#a tilde.op #b$
 // Turing interval
@@ -1740,7 +1742,7 @@ R_e: quad setdiff(U^D, V^D) neq Phi_e(E_e) thick or thick E_e neq Psi_e(C join A
 $
 in which ${angletup(E_e, Phi_e, Psi_e)}_(e geq 0)$ enumerates all triples in which $E_e$ is a 4-r.e. set and
 $Phi_e$ and $Psi_e$ are recursive functionals. We will ensure that $D leqt G$ by direct permitting. As in
-@chapter2[Chapter] this permitting is delayed, as there will be "gaps" in the stages at which any particular strategy
+#chapRef(2) this permitting is delayed, as there will be "gaps" in the stages at which any particular strategy
 is accessible. It will be convenient to enumerate elements into $U^(C join A)$ and $V^(C join A)$ with
 separate $C$- and $A$-uses. Thus we will actually be enumerating into r.e. sets $U$ and $V$ axioms
 of the form $angletup(x, Z_1, Z_2)$, where are $Z_1$ and $Z_2$ are finite sets thought of as
@@ -1753,10 +1755,43 @@ In other places we will just use $D$.
 === The basic module <section3.2.1>
 
 The construction used to satisfy the requirements is (loosely) based on the basic module given in @CLW1989.
-It is similar to the module in @chapter2[Chapter]. The strategy for a single requirement consists of a
+It is similar to the module in #chapRef(2). The strategy for a single requirement consists of a
 (potentially unbounded) number of cycles, each of which makes a very simplistic attempt
 to satisfy the requirement. We argue that if no cycle succeeds then we have $G leqt C$, a contradiction.
 
+So, fix $e in omega$. We desribe the strategy for satisfying requirement $R_e$. To simplify notation
+we write $angletup(R, Phi, Psi)$ for $angletup(E_e, Phi_e, Psi_e)$.
+
+In #chapRef(2) we avoided an r.e.~opponent by changing our constructed set twice. When avoiding
+a 4-r.e. set we must change our set 5 times. This is not as bad as it seems as we have sweeping
+powers over the set, $F$, we construct. Firstly, $F$ is (the join of an r.e.~set with) the difference
+of two r.e.[$D$] sets, and membership of individual numbers in such sets may change
+many times during a construction due to changes in $D$. Furthermore, $D = C join A$ and we have complete control
+over $A$. This will allow us to eject elements from $setdiff(U^D, V^D)$ with great flexibility.
+
+Now, as we wish to ensure $A leqt G$ we must ask for $G$-permission each time we put an element into~$A$.
+It turns out that in the $n = 4$ case we must do this twice, which leads to a two dimensional cycle layout, as in #chapRef(2).
+
+Thus, the strategy consts of an $(omega^2)$-sequence of cycles ordered lexicographically. Cycle $(0,0)$ starts first.
+Cycle $chi = (j, k)$ may start $(j, k+1)$ and $(j+1, 0)$ as well as stopping all cycles $> chi$.
+Cycle $chi$ may define the values $Gamma_j(C; k)$ and $Delta(C\; j)$.
+Again we refer to rows of cycles, $R_j = {(j,k) st k in omega}$.
+
+Cycles may declare various numbers to be _levers_. These are used when we want to remove some some element, $x$, from $V^D$.
+When $x$ is enumerated into $V^D$ we choose some new large element, $lambda$, not already a member of $D$
+(actually, not a member of $A$, over which we have control) and put $x$ into $V^D$ with an $A$-use that is larger than $lambda$.
+When it comes to remove $x$ from $V^D$ we "pull the lever": we enumerate $lambda$ into $A$, thus ejecting $x$ from $V^D$.
+
+Each cycle begins in #state(0). A cycle is _started_ by letting it pass from #state(0) to another state,
+as determined by its history in much the same way as in #chapRef(2); we have the same cascading effect.
+A cycle is reset by putting it back into #state(0), returning its restraints to 0 and undefining its
+parameters $x, u, tilde(u), v, tilde(v), lambda^1(x)$, and $lambda^2(x)$.
+A cycle is _abandoned_ by returing its restraints to 0 and stopping all activity for that cycle. This is done in much
+the same situations as in #chapRef(2): a cycle has failed to satisfy $R_e$.
+A cycle is said to _act_ whenever it moves from one state to another, _except_ in the case of the bookkeeping
+transition from #state(4) to #state(5).
+
+Cycle $chi = (j, k)$ proceeds as follows.
 
 == Verification for $n = 4$ <section3.3>
 
