@@ -59,9 +59,9 @@
 // r.e.[Z]
 #let reIn(z) = $"r.e."[#z]$
 // REA[Z]
-#let reInAbove(z) = $"REA"[#z]$
+#let reInAbove(z) = $upright("REA")[#z]$
 // dREA[Z]
-#let dreInAbove(z) = $"d"reInAbove(#z)$
+#let dreInAbove(z) = $upright("d")reInAbove(#z)$
 
 // Tuple with angle brackets
 #let angletup(..z) = $lr(angle.l #z.pos().join(", ") angle.r)$
@@ -275,7 +275,8 @@ $reIn(Y)$ set $U^Y$. $U$ then becomes a _pseudojump operator_, $U : Y arrow.r.ba
 A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(x)$ and $X leqt Y$.
 If, instead, $Y$ is the difference of two $reIn(x)$ sets, and $X leqt Y$ then Y is said to be $dreInAbove(X)$.
 
-= A patched proof of the weak density of the properly d.r.e. degrees
+= A patched proof of the weak density of the properly d.r.e. degrees <chapter2>
+
 == Introduction
 
 In @CLW1989 a proof is given of the weak density of the properly d.r.e. degrees:
@@ -1721,9 +1722,43 @@ place the "base set" $G$ (which we now call $D$) in a prescribed r.e.~interval.
     and $dreInAbove(D)$ $F$ such that $F$ is not of $n$-r.e. degree.
     <theorem3.7>
 ]
-Note that $D leqt F$, bue we do not know whether or not we can ensure $G leqt F$.
+Note that $D leqt F$, but we do not know whether or not we can ensure $G leqt F$.
 
 This result is in some sense a middle point between Theorems~#thmref(<theorem3.1>) and~#thmref(<theorem3.4>).
 We maintain some control over the base set by allowing more flexiibility in the construction of $F$ from it.
 
+
+== The construction for the case $n = 4$ <section3.2>
+
+We start by giving a proof for the case $n = 4$. In @section3.4 we comment on the changes needed for larger
+values of $n$.
+
+We will construct $D = C join A leqt G$ and $F = C join A join (setdiff(U^D, V^D))$ with the required
+properties. We must meet all of the requirements
+$
+R_e: quad setdiff(U^D, V^D) neq Phi_e(E_e) thick or thick E_e neq Psi_e(C join A join (setdiff(U^D, V^D)))
+$
+in which ${angletup(E_e, Phi_e, Psi_e)}_(e geq 0)$ enumerates all triples in which $E_e$ is a 4-r.e. set and
+$Phi_e$ and $Psi_e$ are recursive functionals. We will ensure that $D leqt G$ by direct permitting. As in
+@chapter2[Chapter] this permitting is delayed, as there will be "gaps" in the stages at which any particular strategy
+is accessible. It will be convenient to enumerate elements into $U^(C join A)$ and $V^(C join A)$ with
+separate $C$- and $A$-uses. Thus we will actually be enumerating into r.e. sets $U$ and $V$ axioms
+of the form $angletup(x, Z_1, Z_2)$, where are $Z_1$ and $Z_2$ are finite sets thought of as
+initial segments (correct at some stage $s$) of $C$ and $A$ respectively.
+
+Where the structure $D = C join A$ of $D$ is important, we will write it out in full.
+In other places we will just use $D$.
+
+
+=== The basic module <section3.2.1>
+
+The construction used to satisfy the requirements is (loosely) based on the basic module given in @CLW1989.
+It is similar to the module in @chapter2[Chapter]. The strategy for a single requirement consists of a
+(potentially unbounded) number of cycles, each of which makes a very simplistic attempt
+to satisfy the requirement. We argue that if no cycle succeeds then we have $G leqt C$, a contradiction.
+
+
+== Verification for $n = 4$ <section3.3>
+
+== The cases $n > 4$ <section3.4>
 #bibliography("works.yml", style: "ieee")
