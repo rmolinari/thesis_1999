@@ -1732,13 +1732,14 @@ We maintain some control over the base set by allowing more flexiibility in the 
 
 == The construction for the case $n = 4$ <section3.2>
 
+#let udvd = $setdiff(U^D, V^D)$
 We start by giving a proof for the case $n = 4$. In @section3.4 we comment on the changes needed for larger
 values of $n$.
 
-We will construct $D = C join A leqt G$ and $F = C join A join (setdiff(U^D, V^D))$ with the required
+We will construct $D = C join A leqt G$ and $F = C join A join (udvd)$ with the required
 properties. We must meet all of the requirements
 $
-R_e: quad setdiff(U^D, V^D) neq Phi_e(E_e) thick or thick E_e neq Psi_e(C join A join (setdiff(U^D, V^D)))
+R_e: quad udvd neq Phi_e(E_e) thick or thick E_e neq Psi_e(C join A join (udvd))
 $
 in which ${angletup(E_e, Phi_e, Psi_e)}_(e geq 0)$ enumerates all triples in which $E_e$ is a 4-r.e. set and
 $Phi_e$ and $Psi_e$ are recursive functionals. We will ensure that $D leqt G$ by direct permitting. As in
@@ -1767,7 +1768,7 @@ a 4-r.e. set we must change our set 5 times. This is not as bad as it seems as w
 powers over the set, $F$, we construct. Firstly, $F$ is (the join of an r.e.~set with) the difference
 of two r.e.[$D$] sets, and membership of individual numbers in such sets may change
 many times during a construction due to changes in $D$. Furthermore, $D = C join A$ and we have complete control
-over $A$. This will allow us to eject elements from $setdiff(U^D, V^D)$ with great flexibility.
+over $A$. This will allow us to eject elements from $udvd$ with great flexibility.
 
 Now, as we wish to ensure $A leqt G$ we must ask for $G$-permission each time we put an element into~$A$.
 It turns out that in the $n = 4$ case we must do this twice, which leads to a two dimensional cycle layout, as in #chapRef(2).
@@ -1793,6 +1794,56 @@ transition from #state(4) to #state(5).
 
 Cycle $chi = (j, k)$ proceeds as follows.
 
+#show: doc => setupenum(doc, formats: ("1.", "(i)",))
+0. Until given the go-ahead, do nothing. When told to start, if $k=0$ or row $R_j$ has previously been abandoned _in toto_,
+   advance directly to #state(11) and follow the instructions there. Otherwise, check if cycle $chi$ has been abanonded
+   in the past. In this case jump straight to #state(10) and follow the instruction there. Otherwise, choose a witness~$x$,
+   larger than any number mentioned in the construction so far, including all currently defined $(udvd)$-restraints,
+   and larger than both $j$ and~$k$. Advance to #state(1).
+
++ Let $Eq(x, s)$ denote the condition
+  $
+    ((udvd)(x))[s] = (Phi(E\, x))[s] #h(1fr) \ #h(1fr)
+      and (restr(E, phi(x)))[s] = (restr(hat(Psi)(C join A join (udvd)), phi(x)))[s].
+  $
+
+  Wait for a stage $s_1$ at which $Eq(x, s_1)$ holds. There are two kinds of computation use we must consider.
+  The first is $u = (hat(psi) phi(x))[s_1]$, the total (direct) use of the
+  $hat(Psi)(C join A join udvd)$ computations. Also implied here are the $C$- and $A$-uses
+  needed to enumerate that part of $setdiff(U^(C join A), V^(C join A))$ used in the computation. So, we defined
+  $
+  tilde(u) = max({eta_C^U(x), eta_A^U(x) st x in restr(U^(C join A), u)} union
+                 {eta_C^V(x), eta_A^V(x) st x in restr(V^(C join A), u)})
+  $
+
+  where $eta_C^U(x)$ is the $C$-use of the axiom which witnesses the membership of $x$ in $U^(C join A)$,
+  and the other terms are defined analogously. The point is that a $C$- or $A$-change below $tilde(u)$
+  and hence destroy the important computations. Conversely, the definition ensures that a
+  change in $restr((udvd), u)$ is accompanied (nay, caused!) by a change in $restr(C, tilde(u))$
+  or $restr(A, tilde(u))$. We restrain $restr((udvd), u)$ and $restr(A, tilde(u))$,
+  enumerate $x$ into $U^(C join A)$ with $C$-use $tilde(u)$ and $A$-use~0, and advance to #state(2).
+
+  [Note that if $s_1$ does not exist then $x$ is already a witness to the success of our strategy.
+   The same comment applies to $s_2, dots, s_5$ below.]
+
++ Wait for a stage $s_2$ at which either
+  + $restr(C_(s_2), tilde(u)) neq restr(C_(s_1), tilde(u))$; or
+  + $restr(C_(s_2), tilde(u)) = restr(C_(s_1), tilde(u))$, $Eq(x, s_2)$ holds.
+
+  If (i) occurs then return to #state(1), setting the (udvd)- and $A$-restraints back to~0.
+  Note that the change in $C$ automatically ejhects the witness $x$ from $U^D$.
+
+  If we have (ii) let $v = (hat(psi)phi(x))[s_2] > u$, the total use of the
+  $hat(Psi(C join A join udvd))$ computations at stage~$s_2$, and define $tilde(v) > tilde(u)$ analogously
+  to~$tilde(u)$. Note that because of the enumeration at #state(1) info $(udvd)$ we have
+  $(Phi(E\; x))[s_2] = 1 neq 0 = (Phi(E\; x))[s_1]$, so that $restr(E_(s_2), phi_(s_1)(x)) neq restr(E_(s_1), phi_(s_1)(x))$.
+  Also note that by reaching this point we still have $restr(C_(s_2), tilde(u)) = restr(C_(s_1), tilde(u))$.
+
+  We set
+  $
+    lambda^1(x) = (min lambda)[lambda > tilde(v) and lambda > l and lambda > s_2 and lambda in.not A_(s_2) \
+                               and lambda "is larger than any number mentioned in the construction so far"].
+  $
 == Verification for $n = 4$ <section3.3>
 
 == The cases $n > 4$ <section3.4>
