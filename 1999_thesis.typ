@@ -1844,6 +1844,100 @@ Cycle $chi = (j, k)$ proceeds as follows.
     lambda^1(x) = (min lambda)[lambda > tilde(v) and lambda > l and lambda > s_2 and lambda in.not A_(s_2) \
                                and lambda "is larger than any number mentioned in the construction so far"].
   $
+  Declare $lambda^1(x)$ to be a lever, restrain $restr((udvd), v)$ and $restr(A, lambda^1(x) + 1)$, and enumerate
+  $x$ into $V^(C join A)$ with $C$-use $tilde(v)$ and $A$-use $lambda^1(x) + 1$.
+
+  Note that now, since we have just removed $x$ from $udvd$, we have
+  $
+    (restr((C join A join (udvd)), u))[s_2 + 1] = (restr((C join A join (udvd)), u))[s_1].
+  $
+
+  Advance to #state(3).
+
++ Wait for a stage $s_3$ at which either
+  + $restr(C_(s_3), tilde(u)) neq restr(C_(s_1), tilde(u))$;
+  + $restr(C_(s_3), tilde(u)) = restr(C_(s_1), tilde(u))$ but $restr(C_(s_3), tilde(v)) neq restr(C_(s_2), tilde(v))$; or
+  + we see no appropriate $C$-change, $Eq(x, s_3)$ holds.
+
+  In case (i), return to #state(1), setting the cycle's restraints back to 0.
+  In case (ii), return to #state(2), setting the $udvd$ restraint to $u$, and the $A$-restraint to $tilde(u)$.
+  In either of these cases we also discard our choice of the lever, $lambda^1(x)$.
+  Note that in case~(i) (resp.~(ii)), $x$ has been ejected from both $U^D$ and $V^D$ (resp. from $V^D$)
+  by the change in $C$.
+
+  In case (iii) we have $restr(E_(s_3), phi_(s_1)(x)) = restr(E_(s_1), phi_(s_1)(x))$, so there is a
+  $y < phi_(s_1)(x)$ such that $E_(s_3)(y) = E_(s_1)(y) neq E_(s_2)(y)$. Thus $E$ has changed (at least)
+  twice on $y$ so far. Fix this $y$ in subsequenct discussion.
+
+  We wish to continue our tactic of reacting to changes in $E$ by changing $(udvd)(x)$.
+  The witness $x$ is already in both of $U^D$ and $V^D$, so to get it back into the difference
+  we must remove it from $V^D$. We have a mechanism for doing this: pulling the lever $lambda^1(x)$.
+  However, enumerating $lambda^1(x)$ into $A$ means asking for $G$-permission. We do this now.
+
+  If $G_(s_3)(k) = 1$ we have no hope of getting the $G$-change we rely on; jump straight
+  to #state(10) and follow the instructions there.
+
+  Otherwise we prepare to wait for $G(k)$ to change to get the permission we need.
+  Define $Gamma_j(C; k) = G_(s_3)(k) thin (=0)$ with use $tilde(v)$ and start cycle $(j, k+1)$ to run
+  simultaneously. Advance to #state(4).
+
++ Wait for a stage $t_1$ at which either
+  + $restr(C_(t_1), tilde(u)) neq restr(C_(s_1), tilde(u))$;
+  + $restr(C_(t_1), tilde(u)) = restr(C_(s_1), tilde(u))$ but $restr(C_(t_1), tilde(v)) neq restr(C_(s_2), tilde(v))$; or
+  + $G_(t_1)(k) neq G_(s_3)(k)$.
+
+  In cases (i) and (ii) we reset all the cycles $> (j, k)$ behave as we did in #state(3), returning to #state(1)
+  or #state(2) as appropriate. We also declare $lambda^1(x)$ not to be a lever any more.
+
+  In case (iii) we have two subcases, just as in #state(2) of the strategy in #chapRef(2):
+  #[
+    #show: doc => setupenum(doc, formats: ("1.", "(a)",))
+    + If some cycle $chi'$ of row $row(j)$ is currently in #state(8) or #state(9)
+      (as in #chapRef(2) there will be at most one such cycle) we set the marker $mu(x) = tilde(v)_(t_1)(chi')$
+      and advance to #state(5). This transition does not count as an action.
+    + Otherwise no such $chi'$ exists and we reset all cycles $> chi$, enumerate $lambda^1(x)$ into $A$
+      (so that $x$ re-enters $udvd$) and advance to #state(6).
+  ]
+
++ Wait for a stage $t_2$ such that either
+
+  + $restr(C_(t_2), tilde(u)) neq restr(C_(s_1), tilde(u))$;
+  + $restr(C_(t_2), tilde(u)) = restr(C_(s_1), tilde(u))$ but $restr(C_(t_2), tilde(v)) neq restr(C_(s_2), tilde(v))$; or
+  + $restr(C_(t_2), tilde(v)) = restr(C_(s_2), tilde(v))$ but $restr(C_(t_2), mu(x)) neq restr(C_(t_1), mu(x))$.
+
+  In cases (i) and (ii) we behave as we did in #state(3).
+
+  In case (iii) reset all cycles $> chi$, enumerate $lambda^1(x)$ into $A$ and advance to #state(6).
+
++ [Once we reach this point, any subsequent change in $restr(C, tilde(v))$ from its shape at stage~$s_2$
+   is disastrous to our underlying computations. By taking advantage of the change in $G(k)$ to enumerate
+   our lever we have passed the point of no return and cannot cope with a $C$-change by going back to
+   #state(1) or #state(2). However, as in #chapRef(2) such a $C$-change gives us the small victory
+   of a correct definition of the value $Gamma_j(C; k)$. So, if we ever subsequently see such
+   a change in $restr(C, tilde(v))$, reset all cycles $> chi$ and jump straight to #state(10).
+   This instruction is implicit in all the states that follow, up to #state(10) itself.]
+
+  Wait for a stage $s_4$ such that $Eq(x, s_4)$ holds. Now, since
+  $
+    (restr((C join A join (udvd)), v))[s_4] = (restr((C join A join (udvd)), v))[s_2]
+  $
+  we must have that $restr(E_(s_4), phi_(s_1)(x)) = restr(E_(s_2), phi_(s_1)(x))$.
+  Thus $E_(s_4)(y) = E_(s_2)(y) neq E_(s_3)(y)$ = $E_(s_1)(y)$ and $E$ has now changed 3~times on $y$.
+
+  We prepare to enumerate $x$ back into $V^D$ by defining another lever:
+  $
+    lambda^2(x) = (min lambda)[lambda > tilde(v) and lambda > j and lambda > s_4 and lambda in.not A_(s_4) \
+                               and lambda "is larger than any number mentioned in the construction so far"].
+  $
+  Declare $lambda^2(x)$ to be a lever and restrain $restr(A, lambda^2(x) + 1)$.
+  (The restraint $restr((udvd), v)$ is still in place from before.)
+  Enumerate $x$ into $V^(C join A)$ with $C$-use $tilde(v)$ and $A$-use $lambda^2(x) + 1$.
+  This enumeration ensures that
+  $
+  (restr((C join A join (udvd)), u))[s_4 + 1] = (restr((C join A join (udvd)), u))[s_1].
+  $
+  Advance to #state(7).
+
 == Verification for $n = 4$ <section3.3>
 
 == The cases $n > 4$ <section3.4>
