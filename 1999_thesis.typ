@@ -2008,9 +2008,9 @@ there are six fundamentally different situations at stage~$s$.
  This is why we have a "doesn't matter" in this row.)
 
 We will have a separate outcome for each of these possibilities but the first. This first
-possibility is dealt with, as in #chapRef(2), by using the rightmost cycle to left which imposes restraint.
+possibility is dealt with, as in #chapRef(2), by using the rightmost cycle to the left which imposes restraint.
 
-So let $Lambda = {-1} union (omega^2 time {1, 2, 3, 4, 5})$, ordered lexicographically with -1 coming first.  Now let $T =
+So let $Lambda = {-1} union (omega^2 times {1, 2, 3, 4, 5})$, ordered lexicographically with $-1$ coming first.  Now let $T =
 finseq(Lambda)$ with the standard partial order $<_L$. As before, we make no distinction between a node of the tree and (instance of
 the) strategy it is implementing. The node $alpha in T$ attempts to satisfy requirement $R_(|alpha|)$. A strategy is _cancelled_ by
 resetting all of its cycles and discarding any functionals it may have partially defined. Any parameter of a strategy keeps its
