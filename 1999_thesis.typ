@@ -1938,6 +1938,51 @@ Cycle $chi = (j, k)$ proceeds as follows.
   $
   Advance to #state(7).
 
++ Wait for a stage $s_5$ such that $Eq(x, s_5)$ holds. Now we have
+  $restr(E_(s_5), phi_(s_1)(x)) = restr(E_(s_1), phi_(s_1)(x))$ so that
+  $E_(s_5)(y) = E_(s_3)(y) = E_(s_1)(y) neq E_(s_4) = E_(s_2)$.
+  $E$ has changed 4~times on $y$, and being 4-r.e. can't change again. We want
+  to put $x$ back into $udvd$ to take advantage of the fact that $restr(E, phi_(s_1)(x))$
+  can't return to its $s_2$ shape. This entails pulling the lever $lambda^2(x)$, which
+  means asking for $G$-permission again.
+
+  If $G_(s_5)(j) = 1$ already, jump straight to $state(11)$ and follow the instructions there.
+  Otherwise set $Delta(C \; j) = G_(s_5)(j)$ with use $tilde(v)$, and start cycle $(j+1, 0)$
+  to run simultaneously. Advance to #state(8).
+
++ Wait for a stage $t_3$ such that $G_(t_3)(j) neq G_(s_5)(j)$. Then reset all cycles to the right
+  of $chi$, enumerate $lambda^2(x)$ into $A$, and advance to #state(9).
+
++ Wait for a stage $t_4$ such that $restr(C_(t_4), tilde(v)) neq restr(C_(s_2), tilde(v))$.
+   (We make explicit the implicit instruction mentioned in #state(6).)
+   If this happens, advance to #state(11).
+
+  Otherwise $restr(C, tilde(v)) = restr(C_(s_2), tilde(v))$ and we satisfy the requirement because
+  $E(y)$ cannot change any more:
+  $
+  restr(E, phi_(s_1)(x)) & neq (restr(E, phi_(s_1)(x)))[s_2] \
+                         & = (restr(hat(Psi)(C join A join (udvd)), phi_(s_1)(x)))[s_2] \
+                         & = restr(Psi(C join A join (udvd)), phi_(s_1)(x)).
+  $
+
++ This state is analogous to #state(7) in #chapRef(2). If we arrive here it is safe and accurate
+  to set $Gamma_j(C; k) = 1$ with use~0. Do so, unless it has already been done, (permanently)
+  abandon cycle $(j, k)$ and start cycle $(j, k+1)$.
+
++ Arriving here means we can with confidence set $Delta(C\; j)$ with use~0.
+  Do so, unless it has already been done, (permanently) abandon row $row(j)$ and start cycle $(j+1, 0)$.
+  For technical reasons also reset every cycle in row $row(j)$ and put cycle $(j, 0)$ into #state(11).
+
+=== Combining the modules
+
+The basic modules are combined in much the same way as we used in #chapRef(2) with a tree.
+However, there is a very important difference.
+
+In #chapRef(2) a cycle could act infinitely often without being reset by bouncing back and forth
+between states 1 and~2, or between states 4 and~5. It was important in that construction
+that such infinite action was not accompanied by any enumerations into or out of the sets
+under construction.
+
 == Verification for $n = 4$ <section3.3>
 
 == The cases $n > 4$ <section3.4>
