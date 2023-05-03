@@ -1981,7 +1981,42 @@ However, there is a very important difference.
 In #chapRef(2) a cycle could act infinitely often without being reset by bouncing back and forth
 between states 1 and~2, or between states 4 and~5. It was important in that construction
 that such infinite action was not accompanied by any enumerations into or out of the sets
-under construction.
+under construction. The proof of #lemmaRef(<lemma2.21>) depended on this fact: after
+a cycle is reset for the last time it can only cause finitely much enuemration.
+In the preset construction, however, this is not true. A cycle returning infinitely often
+to #state(1) (or to #state(2)) must infinitely often change the value of $(udvd)(x)$,
+only to have it changed back again when a $C$-change causes the return to #state(1).
+We need a way to deal with this.
+
+In #chapRef(2) we used multiple outcomes for each cycle. We make use of them again, both
+to remove the need for a path restraint, and to deal with the potentially infinite
+changes in $(udvd)(x)$ mentioned above. For each cycle~$nu$ of the basic strategy
+there are six fundamentally different situations at stage~$s$.
+#table(
+    columns: (1fr, 1fr, 1fr, 1fr),
+    align: horizon + center,
+    [$nu$'s state], [$x in (udvd)$?], [Restraint on \ $(udvd)$], [Restraint on $A$],
+    $0, 1, 10, 11$, [doesn't matter], $0$,                     $0$,
+    $2$,            [yes],            $u$,                     $tilde(u)$,
+    $3, 4, 5$,      [no],             $v$,                     $(lambda^1(x) + 1)[s]$,
+    $6$,            [yes],            $v$,                     $(lambda^1(x) + 1)[s]$,
+    $7, 8$,         [no],             $v$,                     $(lambda^2(x) + 1)[s]$,
+    $9$,            [yes],            $v$,                     $(lambda^2(x) + 1)[s]$
+)
+(The only state in the first row to which $nu$ can return infinitely often without
+ being reset infinitely often is #state(1), and whenever $nu$ is in this state $x(nu) in.not (udvd)[s]$.
+ This is why we have a "doesn't matter" in this row.)
+
+We will have a separate outcome for each of these possibilities but the first. This first
+possibility is dealt with, as in #chapRef(2), by using the rightmost cycle to left which imposes restraint.
+
+So let $Lambda = {-1} union (omega^2 time {1, 2, 3, 4, 5})$, ordered lexicographically with -1 coming first.  Now let $T =
+finseq(Lambda)$ with the standard partial order $<_L$. As before, we make no distinction between a node of the tree and (instance of
+the) strategy it is implementing. The node $alpha in T$ attempts to satisfy requirement $R_(|alpha|)$. A strategy is _cancelled_ by
+resetting all of its cycles and discarding any functionals it may have partially defined. Any parameter of a strategy keeps its
+assigned value until that value is redefined or undefined.
+
+The construction proceeds as follows.
 
 == Verification for $n = 4$ <section3.3>
 
