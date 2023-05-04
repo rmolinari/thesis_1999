@@ -38,7 +38,7 @@
 #let chapRef(num) = ref(label("chapter" + str(num)), supplement: "Chapter")
 
 // Set difference
-#let setdiff(a, b) = $#a #h(0.1em) tilde.op #h(0.1em) #b$
+#let setdiff(a, b) = $#a tilde.op #b$
 // Turing interval
 #let turinginterval(a, b) = $[#a, #b]_T$
 // Turing less than and leq. Note that we have extra space after this symbol. See https://github.com/typst/typst/issues/877. The
@@ -63,7 +63,7 @@
 #let dreInAbove(z) = $upright("d")reInAbove(#z)$
 
 // Tuple with angle brackets
-#let angletup(..z) = $lr(angle.l #z.pos().join(", ") angle.r)$
+#let angletup(..z) = $lr(angle.l #z.pos().join([, ]) angle.r)$
 
 // Restriction of a to b
 #let restr(a, b) = $#a harpoon.tr #b$
@@ -2384,5 +2384,3 @@ We can now prove that the delayed permitting worked.
 
 == The cases $n > 4$ <section3.4>
 #bibliography("works.yml", style: "ieee")
-
-
