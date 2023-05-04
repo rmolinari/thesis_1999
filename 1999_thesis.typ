@@ -2231,6 +2231,29 @@ The consistency of $Delta(C)$ and $Gamma_j(C)$ are proved just as they were in #
     As #lemmaRef(<lemma2.11>).
 ]
 
+=== Satisfaction of the requirements
+
+As in #chapRef(2) we now prove that all the requirements are satisfied.
+All that will then remain is to check that $A leqt G$. Again we define the true path, $f$,
+through the priority tree: $f(n) = xi$ where $concatone(restr(f, n), xi)$ is the leftmost successor of
+$restr(f, n)$ accessible infinitely often.
+
+We have the same proposition as before.
+
+#proposition[
+    #show: doc => setupenum(doc, formats: ("1.", "a."))
+    For all $n in omega$
+    + $f(n)$ is defined;
+
+    + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
+
+    + strategy $restr(f, n)$ satisfies requirement $R_n$;
+
+    + for all sufficiently large $C$-true stages $t$, $restr(f, (n+1)) subset f_t$.
+    <prop3.17>
+]
+
+
 == The cases $n > 4$ <section3.4>
 #bibliography("works.yml", style: "ieee")
 
