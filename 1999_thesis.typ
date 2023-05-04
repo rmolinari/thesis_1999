@@ -12,7 +12,7 @@
     titlefmt: strong,
     bodyfmt: emph,
     inset: 0em,
-    padding: (top: 0.5em),
+    padding: (top: 0.0em),
     separator: [#h(0.5em)] // using my change to theorems.typ - pull requested
 )
 
@@ -1682,7 +1682,6 @@ Now we can show that the permitting works.
 == Introduction
 
 Soare and Stob prove (see @SoareStob1982)
-
 #theorem[
     Given a nonrecursive, r.e. set $G$ there is an $reInAbove(G)$ set $F$ not of r.e. degree.
     <theorem3.1>
@@ -1709,7 +1708,7 @@ $A_i(x) = f(i, x)$ for all $i$ and $x$. This is an important result, as many int
 sets are uniformly recursive in~$zerojump$. Examples are the $n$-r.e. sets, for each $n$, and the union
 over $n$ of these families. So we immediately have
 #theorem(name: [Jockusch and Shore])[
-    For each $n$, there is a 2-REA set $F_n leqt zerojump$ not of $n$-r.e. degree. In face, there is a single 2-REA
+    For each $n$, there is a 2-REA set $F_n leqt zerojump$ not of $n$-r.e. degree. In fact, there is a single 2-REA
     set $F leqt zerojump$ which fails to be of $n$-r.e. degree for any $n geq 0$.
     <theorem3.4>
 ]
