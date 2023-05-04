@@ -86,6 +86,7 @@
 #let strat(s) = [strategy~#s]
 #let stg(num) = [stage~#num]
 #let theRow(j) = [row~$row(#j)$]
+#let cycle(name) = [cycle~#name]
 
 // The "equality" property
 #let Eq(x, y) = $sans("Eq")(#x, #y)$
@@ -2235,7 +2236,7 @@ The consistency of $Delta(C)$ and $Gamma_j(C)$ are proved just as they were in #
 
 As in #chapRef(2) we now prove that all the requirements are satisfied.
 All that will then remain is to check that $A leqt G$. Again we define the true path, $f$,
-through the priority tree: $f(n) = xi$ where $concatone(restr(f, n), xi)$ is the leftmost successor of
+through the priority tree: $f(n) = xi$ where $concatone((restr(f, n)), xi)$ is the leftmost successor of
 $restr(f, n)$ accessible infinitely often.
 
 We have the same proposition as before.
@@ -2253,7 +2254,72 @@ We have the same proposition as before.
     <prop3.17>
 ]
 
+So, inductively assume 1, 2, 3 and 4 for $n = eta - 1$ and let $alpha = restr(f, eta)$.
+Fix a #stg($s_0$) so larger that $alpha$ is not cancelled after~$s_0$; and for for every
+$C$-true stage $t > s_0$, $alpha subset f_t$, $rho(alpha, t) = liminf_s rho(alpha, s)$,
+and $tilde(rho)(alpha, t) = liminf_s tilde(rho)(alpha, s)$.
 
+Recall that we say _$alpha$ acts finitely_ if there is a stage after which no cycle of #strat($alpha$) acts,
+and otherwise we say that _$alpha$ acts infinitely_.
+#lemma[
+    If $alpha$ acts infinitely then some specific cycle of $alpha$ acts infinitely often.
+    <lemma3.18>
+]
+#proof[
+    As #lemmaRef(<lemma2.17>).
+]
+
+The next result follows as it did in #chapRef(2).
+#lemma[
+    Given a #strat($alpha$), if $chi$ is the leftmost cycle of #strat($alpha$) to act infinitely often
+    then only finitely often can _any_ cycle to the left of $chi$ act.
+    <lemma3.19>
+]
+
+#lemma[
+    Some (leftmost) successor of $alpha$ is accessible infinitely often.
+    <lemma3.20>
+]
+#proof[
+    As #lemmaRef(<lemma2.19>).
+]
+
+This establishes part~1 of the Proposition for $n = eta$ and we may assume that there is a value
+$f(eta) = epsilon in Lambda$. Write $epsilon = (nu_eta, i_eta)$ or $epsilon = -1$ as appropriate,
+where $i_eta = 1, 2, 3, 4, "or" 5$.
+
+It will again be convenient to define what it means for a cycle to be _lacking_ at #stg($s$).
+We say that #cycle($nu$) of #strat($alpha$) is lacking for~$i$ at #stg($s$) if $nu$ is in #state(10)
+or #state(11), or
+(a)~$i=1$ and $nu$ is in a state numbered less than 2,
+(b)~$i=2$ and $nu$ is in a state numbered less than 3,
+(c)~$i=3$ and $nu$ is in a state numbered less than 6,
+(d)~$i=4$ and $nu$ is in a state numbered less than 7, or
+(e)~$i=5$ and $nu$ is in a state numbered less than 9.
+Then we have the following results, proved as were Lemmas #thmref(<lemma2.20>)-#thmref(<lemma2.23>)
+from the definition of $nu_eta$.
+#lemma[
+    If $nu_eta$ is defined, then it is lacking for $i_eta$ only finitely often. <lemma3.21>
+]
+#lemma[
+    $restr(f, (eta+1)) = concatone(alpha, epsilon)$ is cancelled only finitely often. <lemma3.22>
+]
+#lemma[
+    Strategy~$alpha$ satisfies requirement $R_(|alpha|)$. <lemma3.23>
+]
+#lemma[
+    For all sufficiently large $C$-true stages $t$, $restr(f, (eta+1)) = concatone(alpha, epsilon) subset f_t$. <lemma3.24>
+]
+
+These results establish parts 1-4 of the Proposition and complete the inductive step.
+#thmref(<prop3.17>)[Proposition] is proved. #qed
+
+
+Thus all of the requirements are satisfied, and we have constructed r.e. $D gt.eq_T G$ and
+two r.e.[$D$] sets $U^D$ and~$V^D$ such that $D join (udvd)$ is not of 4-r.e. degree.
+It remains only to show that in fact $D leq_T G$. We use the same method as we did in #chapRef(2).
+
+#lemma
 == The cases $n > 4$ <section3.4>
 #bibliography("works.yml", style: "ieee")
 
