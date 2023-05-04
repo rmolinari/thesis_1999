@@ -38,7 +38,7 @@
 #let chapRef(num) = ref(label("chapter" + str(num)), supplement: "Chapter")
 
 // Set difference
-#let setdiff(a, b) = $#a tilde.op #b$
+#let setdiff(a, b) = $#a #h(0.1em) tilde.op #h(0.1em) #b$
 // Turing interval
 #let turinginterval(a, b) = $[#a, #b]_T$
 // Turing less than and leq. Note that we have extra space after this symbol. See https://github.com/typst/typst/issues/877. The
@@ -97,6 +97,12 @@
 #let st = sym.bar.v   // vertical bar: "such that"
 #let dubpr = sym.prime.double // double primes
 #let trippr = sym.prime.triple // triple!
+
+////////////////////////////////////////
+// Small-scale layout things
+
+#let stage-hdr(name) = [Stage #name: #h(1em)]
+#let case(name) = [#smallcaps([Case #name]) #h(1em)]
 
 ////////////////////////////////////////
 // Placeholder for things that aren't supported yet or that I don't know how to do
@@ -1733,6 +1739,7 @@ We maintain some control over the base set by allowing more flexiibility in the 
 == The construction for the case $n = 4$ <section3.2>
 
 #let udvd = $setdiff(U^D, V^D)$
+
 We start by giving a proof for the case $n = 4$. In @section3.4 we comment on the changes needed for larger
 values of $n$.
 
@@ -2017,6 +2024,45 @@ resetting all of its cycles and discarding any functionals it may have partially
 assigned value until that value is redefined or undefined.
 
 The construction proceeds as follows.
+
+#stage-hdr(0) All strategies are cancelled.
+
+#stage-hdr($s+1$) We defined, in substages $t < s$ a finite path $f_(s+1)$ through the tree, of length $s$.
+Suppose $alpha = (restr(f_(s+1), t)) in T$ has been defined by substage $t-1$. If no cycle of strategy $alpha$ has been
+started since $alpha$ was last cancelled then start $alpha$'s cycle $(0,0)$ and set $nextval = -1$.
+
+Otherwise,let any cycles of stategy $alpha$ able to make the transition from #state(4) to #state(5) do so.
+Let any cycle forced solely by a $C$-change to change state do so. There are now two cases
+- #case(1) Some leftmost cycle $nu$ of strategy $alpha$ is able to act.
+
+#let bigS = $sans(upright("S"))$
+We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of strategy $alpha$ now imposing restraint of some sort
+(if there is such a cycle.) Let $lambda$ be in state~#bigS (note that $bigS neq 0, 1, 10, 11$) and let $i$ be defined by
+$
+i = cases(
+    1 quad & "if" bigS = 2\,,
+    2      & "if" bigS = 3\, 4 "or" 5\,,
+    3      & "if" bigS = 6\,,
+    4      & "if" bigS = 7 "or" 8\,,
+    5      & "if" bigS = 9.
+)
+$
+Now set $nextval = (nu, i)$. If there is no such cycle $lambda$ put $nextval = -1$.
+
+In any case, cancel all strategies $beta$ with $concatone(alpha, nextval) <_L beta$.
+
+- #case(2) No cycle of strategy $alpha$ is able to act.
+
+We do nothing at this substage. Define $nextval$ just as above. There is nothing to cancel.
+
+If $t + 1 < s$ we advance to substage $t+1$.
+
+A node $alpha$ is _accessible_ at stage $s+1$ if $alpha subset f_(s+1)$.
+
+One of the points of multiple outcomes for each cycle is to cope with the coming and going
+of elements of $udvd$ as $C$ changes. It is important to observe that every time $concatone(alpha, (nu, i))$
+($i = 1, 2, 3, 4, 5$) is accessible, $(udvd)(x(alpha, nu))$ is the same, where $x(alpha, nu)$ is the witness chosen by
+cycle~$nu$ of strategy~$alpha$.
 
 == Verification for $n = 4$ <section3.3>
 
