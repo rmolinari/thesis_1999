@@ -2079,5 +2079,62 @@ As in #chapRef(2), we will refer to parameters associated with cycle~$nu$ of str
 at stage~$s$ like so: $u_s(alpha, nu)$, $lambda^1_s(alpha, x(nu))$.
 Whenever it is made possible by context we will drop the strategy name.
 
+=== Layout of the cycle states
+
+We begin again with a description of the possible state-arrangements, and state a Pattern Lemma.
+We assume we have a certain, fixed strategy~$alpha$ in mind, and all cycles mentioned are assumed to belong
+to it. As before, we regard the stages mentioned as being the successive ones at which strategy~$alpha$
+is accessible. Just as in #chapRef(2), we refer to a special "double state": a cycle in either #state(8)
+or #state(9) is said to be "in state~8/9".
+
+#lemma[
+    For any row $row(j)$, at most one cycle $(j, k)$ of the row is in state~8/9.
+    <lemma3.8>
+]
+#proof[As #lemmaRef(<lemma2.3>).]
+
+#lemma[
+    Suppose cycle $chi = (j, k)$ enters #state(5) at stage $s$ due to cycle $chi'$ being in state~8/9.
+    If at stage $t > s$ cycle~$chi'$ leaves stage~8/9 for the first time after~$s$, for any reason, $chi$
+    is no longer in #state(5) at the end of stage~$t$.
+    <lemma3.9>
+]
+#proof[
+We start by noting that $mu(x(chi)) = tilde(v)_s(chi') = tilde(v)_t(chi')$.
+Now, cycle $chi'$ only leaves state~8/9 through acting or being reset. If $chi' < chi$ then
+the action/resetting of $chi'$ also resets $chi$, by construction.
+We consider the case $chi < chi'$. If cycle $chi'$ leaves state~8/9 without being reset
+it must reach either #state(10) (if it sees a change in $restr(C, tilde(v)_t(chi'))$ while in #state(8));
+or #state(11) (if that $C$-change is seen while in #state(9).)
+In either case there is a change in $restr(C, mu(x(chi)))$, and cycle~$chi$ will change state,
+or be reset by the action of a cycle to its left.
+
+The case left to consider is that there is a third cycle, $chi dubpr$ with $chi < chi dubpr < chi'$,
+which acts at stage~$t$.
+To reach a contradiction we assume that this action is not accompanied by a change in $restr(C, tilde(v)_t(chi'))$.
+Without loss of generality we may assume that $t$ is minimal in witnessing the failure of the lemma in this way.
+Now, as cycle~$chi'$ is not in #state(0) at stage~$s$, cycle~$chi dubpr$ must be in one of the following
+states at that time: 4, 5, or~10.
+Cycle~$chi dubpr$ cannot change state between stages~$s$ and~$t$ (except for the transition~#trans(4,5))
+as to do so would reset cycle~$chi'$, contradicting the definition of~$t$. We may discard the possibility
+that $chi dubpr$ is in #state(10) at stage~$s$, as such a cycle can never act again without first
+being reset. Cycle $chi dubpr$ can't make the transition~#trans(4,5) at stage~$t$, as such a transition
+doesn't count as an action. The transitions~#trans(4,1), and~#trans(4,2), entail a change in $restr(C, tilde(v)_t(chi dubpr))$.
+But $tilde(v)_t(chi dubpr) < tilde(v)_t(chi')$ since cycle~$chi'$ starts after $chi dubpr$ reaches #state(2)
+and $tilde(v)_t(chi dubpr)$ is defined. Thus such a $C$-change is impossible.
+
+Thus, the only possible transition left is~#trans(5,6). That this is impossible follows from the same
+argument as was used for the #trans(3,4) transition in #chapRef(2).
+]
+
+#lemma[
+    Given $j$, if cycles $chi, chi' in cal(S)_j$ are both in #state(5) at stage~$s$ then
+    $(mu(x(chi)))[s] = (mu(x(chi')))[s]$.
+    <lemma3.10>
+]
+#proof[
+    As #lemmaRef(<lemma2.5>).
+]
+
 == The cases $n > 4$ <section3.4>
 #bibliography("works.yml", style: "ieee")
