@@ -2319,7 +2319,69 @@ Thus all of the requirements are satisfied, and we have constructed r.e. $D gt.e
 two r.e.[$D$] sets $U^D$ and~$V^D$ such that $D join (udvd)$ is not of 4-r.e. degree.
 It remains only to show that in fact $D leq_T G$. We use the same method as we did in #chapRef(2).
 
-#lemma
+For $alpha in T$ we set
+$
+e^alpha = max ( {j, l | (exists beta in T, i = 1, dots 5)[concatone(beta, ((j, k), i)) subset alpha]} //) sic
+$
+the largest number which occurs in the path leading to $alpha$ and which may be called upon
+by a cycle of some strategy on that path to be a witness to a $G$-change. We set
+$
+s^alpha = min { s | restr(G_s, e^alpha) = restr(G, e^alpha)}.
+$
+and recall that $lambda alpha [s^alpha]$ is $G$-recursive.
+
+#lemma[
+    Suppose that $t > s^(concatone(alpha, nu))$ is a $C$-true stage, and that $alpha$'s cycle $nu$
+    is in state 4, 5, 8, 10 or 11. Then if #cycle($nu$) does not act at #stg($t$) it will never act
+    subsequently without first being reset.
+    <lemma3.25>
+]
+#proof[
+    As #lemmaRef(<lemma2.24>).
+]
+
+#lemma[
+    Suppose that $alpha subset f_s$, $t > max{s, s^alpha}$ is $C$-true, and $s' > t$.
+    Then for $beta subset alpha$, if $beta subset.not f_t$ but $beta subset f_(s')$
+    then there is a $tau in (s, s']$ such that $beta$ is cancelled at #stg($tau$).
+    <lemma3.26>
+]
+#proof[
+    As #lemmaRef(<lemma2.25>).
+]
+
+We can now prove that the delayed permitting worked.
+
+#lemma[
+    $A leqt G$.
+    <lemma3.27>
+]
+#proof[
+    \
+    Let $y in omega$. As the construction always picks levers to be larger than the current stage,
+    if $y$ has not been chosen as a lever by #stg($y$) it never will be and $y in.not A$. Otherwise,
+    suppose that $y$ is chosen at #stg($s_0$) to be a lever for cycle~$chi = (j,k)$ of #strat($alpha$).
+    Note that $alpha subset f_(s_0)$.
+
+    Assume that $y$ is actually chosen as $lambda^1_(s_0)(x(chi))$. If $k in.not G$ or $k in G_(s_0)$
+    then #cycle($chi$) will never get the $G$-permission it needs to enumerate $y$ into $A$ and $y in.not A$.
+    Otherwise let $k in setdiff(G_s, G_(s-1))$ and let $t$ be the first $C$-true stage larger than each
+    of $s_0$, $s$, and $s^(concatone(alpha, chi))$. We claim that $y$ is enumerated into $A$ by #stg($t$)
+    or not at all, so that $G(y) = G_t(y)$.
+
+    If $a subset.not f_t$ then by #lemmaRef(<lemma3.26>) #strat($alpha$) will be cancelled before
+    being accessible again, and $y$ will be lost. If some cycle $chi' < chi$ of #strat($alpha$) acts
+    at #stg($t$) then $chi$ will be reset and again $y$ will be lost.
+    Otherwise, if $chi$ is in #state(1) or~2 at #stg($t$) then the lever~$y$ has already been discarded since being chosen,
+    and will never get a chance after $t$ to be enumerated.
+    If $chi$ is in #state(3) then, since $G_t(k) = 1$, $y$ will never be enumerated into~$A$.
+    If $chi$ is in #state(6), 7, or~8 then by construction, $y in A_t$.
+    Otherwise we apply #lemmaRef(<lemma3.25>) to see that #cycle($nu$) must act at #stg($t$)
+    if it ever will without first being reset, and lever~$y$ is lost..
+
+    If $y$ is chosen as $lambda^2_(s_0)(x(chi))$ the argument is similar, with $j$ replacing $k$.
+]
+
 == The cases $n > 4$ <section3.4>
 #bibliography("works.yml", style: "ieee")
 
