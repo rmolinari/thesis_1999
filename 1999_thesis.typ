@@ -2066,5 +2066,18 @@ cycle~$nu$ of strategy~$alpha$.
 
 == Verification for $n = 4$ <section3.3>
 
+At heart this construction is very like the one in #chapRef(2). We use the same mechanism
+to avoid $Delta$-inconsistency, and the underlying aim is the same: change the constructed set
+frequently enough that our opponent (previously an r.e.~set; here a 4-r.e.~set) cannot keep up with us.
+As such, we would expect the verification to take alrgely the same tack. This is the case.
+
+The verification argument given in #chapRef(2) is detailed#footnote[The less charitable reader may prefer another word).]
+and it would please no-one to go through the same sort of thing again in its entirety. So, when an argument follows the
+same lines as the corresponding discussion in #chapRef(2) we will just indicate the essential modifications, if any.
+
+As in #chapRef(2), we will refer to parameters associated with cycle~$nu$ of strategy~$alpha$ as they are defined
+at stage~$s$ like so: $u_s(alpha, nu)$, $lambda^1_s(alpha, x(nu))$.
+Whenever it is made possible by context we will drop the strategy name.
+
 == The cases $n > 4$ <section3.4>
 #bibliography("works.yml", style: "ieee")
