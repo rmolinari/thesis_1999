@@ -55,9 +55,6 @@
 // "State transition"
 #let trans(a, b) = $#a arrow.r.bar #b$
 
-// State number, with nonbreaking space
-#let state(num) = [state~#num]
-
 // r.e.[Z]
 #let reIn(z) = $"r.e."[#z]$
 // REA[Z]
@@ -84,6 +81,12 @@
 // A cycle pattern. Note awkward negative space to get good placement of the subscript
 #let pattern(s) = $cal(P)#h(-0.2em)_#s$
 
+// State/stage/strategy/row numbers/names, with nonbreaking space
+#let state(num) = [state~#num]
+#let strat(s) = [strategy~#s]
+#let stg(num) = [stage~#num]
+#let theRow(j) = [row~$row(#j)$]
+
 // The "equality" property
 #let Eq(x, y) = $sans("Eq")(#x, #y)$
 
@@ -105,7 +108,7 @@
 #let finalCrampedRow = patternName("finalCrampedRow")
 #let crampedRow = patternName("crampedRow")
 #let uncrampedRow = patternName("uncrampedRow")
-#let abandonedrow = patternName("abandonedRow")
+#let abandonedRow = patternName("abandonedRow")
 #let prelimRow = patternName("prelimRow")
 #let finalRow = patternName("finalRow")
 #let validPattern = patternName("validPattern")
@@ -811,8 +814,8 @@ $
   finalCrampedRow   &= setconcat(finseq({2, 3, 7}), angletup({6})), \
   crampedRow        &= prelimCrampedRow union finalCrampedRow, \
   uncrampedRow      &= setconcat(finseq({2, 7}), angletup({1, 4})), \
-  abandonedrow      &= angletup({8}), \
-  prelimRow         &= prelimCrampedRow union abandonedrow, \
+  abandonedRow      &= angletup({8}), \
+  prelimRow         &= prelimCrampedRow union abandonedRow, \
   finalRow          &= finalCrampedRow union uncrampedRow,
 $
 and a subset of $finseq((finseq(X)))$
@@ -2140,5 +2143,95 @@ argument as was used for the #trans(3,4) transition in #chapRef(2).
     As #lemmaRef(<lemma2.5>).
 ]
 
+We are now ready to state the Pattern Lemma for this construction.
+
+Let $X = {0, 1, dots, 11}$ and reacall that for sets $M, N$ of finite sequences
+(of unspecified type) we set
+$setconcat(M, N) = {concat(theta, sigma) | theta in M and sigma in N}$, and $angletup(M) = {angletup(theta) | theta in M}$.
+
+The constructions being very similar, the set of valid patterns to be defined is all-but-isomorphic to that in #chapRef(2).
+
+We define the following subsets of $finseq(X)$:
+#let commabr = [\,\ ]
+$
+prelimCrampedRow &= setconcat(finseq({4, 5, 10}), angletup({8})) commabr
+finalCrampedRow  &= setconcat(finseq({4, 5, 10}), angletup({9})) commabr
+crampedRow       &= prelimCrampedRow union finalCrampedRow commabr
+uncrampedRow     &= setconcat(finseq({4, 10}), angletup({1, 2, 3, 6, 7})) commabr
+abandonedRow     &= angletup({11}) commabr
+prelimRow        &= prelimCrampedRow union abandonedRow commabr
+finalRow         &= finalCrampedRow union uncrampedRow\,
+$
+and a subset of $finseq((finseq(X)))$,
+$
+validPattern = setconcat(finseq(prelimRow), angletup(finalRow)).
+$
+
+As in #chapRef(2) we define by $pattern(s)(alpha)$ the cycle-state arrangement of the strategy~$alpha$ at stage~$s$.
+We also refer to the cycle arrangements of individual slices as "patterns".
+
+#lemma[
+    If #strat($alpha$) has at least one cycle not in #state(0) at #stg($s$), $pattern(s) in validPattern$.
+    <lemma3.11>
+]
+#proof[
+    The arguments are very similar to those in the corresonding proof in #chapRef(2), and consist of an exhaustion of cases.
+    The same follow-your-nose approach works just fine; nothing is to be gained by repeating it.
+]
+
+=== Consistency of the functions $Gamma_j(C)$ and $Delta(C)$
+
+Now for the consistency of the constructed functions $Gamma_j(C)$ and $Delta(C)$.
+The proofs need little beyond the corresponding ones in #chapRef(2). The only change necessary is typically
+a slightly more involved exhaustion of possibilities brought about by the fact that each
+cycle has five outcomes corresponding to it, rather than the two of the earlier chapter.
+
+Again we assume that we have a specific strategy, $alpha$, in mind.
+
+#lemma[
+    If cycle~$(j,k)$ is in #state(8) at #stg($s$), then $(Delta(C\; j))[s] converge$.
+    The same conclusion may be reached if #theRow($j$) was abandoned at some stage before~$s$.
+    <lemma3.12>
+]
+#proof[
+    As #lemmaRef(<lemma2.7>).
+]
+
+#lemma[
+    If some cycle $chi = (j, k)$ acts at #stg($s$) to define $Delta(C\; j)$ then for each
+    $i < j$, $(Delta(C\; i))[s] converge$.
+    <lemma3.13>
+]
+#proof[
+    As #lemmaRef(<lemma2.8>).
+]
+
+Similarly we have.
+#lemma[
+    If some cycle $chi = (j, k)$ acts at #stg($s$) to define $Gamma_j(C; k)$ then for each
+    $i < k$, $(Gamma_j(C; i))[s] converge$.
+    <lemma3.14>
+]
+
+The consistency of $Delta(C)$ and $Gamma_j(C)$ are proved just as they were in #chapRef(2).
+#lemma[
+    For all $j in omega$, Row~$row(j)$ defines a computation for $Delta(C\; j)$ only when no
+    other such computation is currently defined.
+    <lemma3.15>
+]
+#proof[
+    As #lemmaRef(<lemma2.10>).
+]
+
+#lemma[
+    Cycle $(j, k)$ defines a computation for $Gamma_j(C; k)$ only when no other such computation is currently defined.
+    <lemma3.16>
+]
+#proof[
+    As #lemmaRef(<lemma2.11>).
+]
+
 == The cases $n > 4$ <section3.4>
 #bibliography("works.yml", style: "ieee")
+
+
