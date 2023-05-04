@@ -73,6 +73,9 @@
 // Concatenation of sequences a and b
 #let concat(a, b) = $#a paren.t #b$
 #let concatone(a, b) = $concat(#a, #angletup(b))$
+
+#let setconcat(M, N) = $#M\; #N$
+
 // "Finite sequences of"
 #let finseq(a) = $#a^(< infinity)$
 
@@ -798,22 +801,22 @@ each for those rows $row(j)$ of the strategy with at least one cycle in a state 
 be a finite sequence, one term each for the cycles of row $row(j)$ (say) in a state other than 0.
 
 Let $X = {0, 1, 2, dots, 8}$. For sets $M, N$ of finite sequences (of unspecified type) we let
-$M; N = {concat(theta, sigma) st theta in M and sigma in N}$,
+$setconcat(M, N) = {concat(theta, sigma) st theta in M and sigma in N}$,
 the finite sequences got by appending a sequence from $N$ to a sequence from $M$. For convenience we also allow the notation
 $angletup(M) = { angletup(theta) | theta in M }$, the length 1 sequences consisting of single terms from $M$. We define the
 following subsets of $finseq(X)$:
 $
-  prelimCrampedRow  &= finseq({2, 3, 7}); angletup({5}), \
-  finalCrampedRow   &= finseq({2, 3, 7}); angletup({6}), \
+  prelimCrampedRow  &= setconcat(finseq({2, 3, 7}), angletup({5})), \
+  finalCrampedRow   &= setconcat(finseq({2, 3, 7}), angletup({6})), \
   crampedRow        &= prelimCrampedRow union finalCrampedRow, \
-  uncrampedRow      &= finseq({2, 7}); angletup({1, 4}), \
+  uncrampedRow      &= setconcat(finseq({2, 7}), angletup({1, 4})), \
   abandonedrow      &= angletup({8}), \
   prelimRow         &= prelimCrampedRow union abandonedrow, \
   finalRow          &= finalCrampedRow union uncrampedRow,
 $
 and a subset of $finseq((finseq(X)))$
 $
-  validPattern = finseq(prelimRow); angletup(finalRow).
+  validPattern = setconcat(finseq(prelimRow), angletup(finalRow)).
 $
 The names are intended to be somewhat mnemonic. "Cramped" refers to a row in which cycles are prevented from reaching state~4 by the
 presence of a cycle in that row in state~5/6. These cycles have their style cramped: they must bide their time in state~3 waiting
@@ -1138,7 +1141,7 @@ used in the $R_e$ strategy argument.
 Let $Y = {plabel(0), plabel(1), ..., plabel(4)}$. Using the same notation as in the definition of #validPattern we may
 define a single subset of $finseq(Y)$:
 $
-  validPatternForP = finseq({plabel(2), plabel(4)}) ; angletup({plabel(1), plabel(3)})
+  validPatternForP = setconcat(finseq({plabel(2), plabel(4)}), angletup({plabel(1), plabel(3)}))
 $
 We then have the following analogue to the Pattern Lemma.#footnote[We don't refer to this result as a "Pattern Lemma",
                                                                    as it is too simple to deserve a name.]
