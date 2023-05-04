@@ -121,10 +121,11 @@
 // Placeholder for things that aren't supported yet or that I don't know how to do
 
 #let footnote(body) = {
-    box(
-        fill: rgb(220, 220, 220),
-        [(#emph(body))]
+    set text(
+        fill: blue,
+        size: 0.8em
     )
+    [ ^(#emph(body)) ]
 }
 
 ////////////////////////////////////////
@@ -2075,7 +2076,7 @@ to avoid $Delta$-inconsistency, and the underlying aim is the same: change the c
 frequently enough that our opponent (previously an r.e.~set; here a 4-r.e.~set) cannot keep up with us.
 As such, we would expect the verification to take alrgely the same tack. This is the case.
 
-The verification argument given in #chapRef(2) is detailed#footnote[The less charitable reader may prefer another word).]
+The verification argument given in #chapRef(2) is detailed#footnote[The less charitable reader may prefer another word.]
 and it would please no-one to go through the same sort of thing again in its entirety. So, when an argument follows the
 same lines as the corresponding discussion in #chapRef(2) we will just indicate the essential modifications, if any.
 
