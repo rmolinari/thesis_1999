@@ -81,9 +81,6 @@
 // A cycle pattern. Note awkward negative space to get good placement of the subscript
 #let pattern(s) = $cal(P)#h(-0.2em)_#s$
 
-// A "term" from the pattern definitions
-#let patternName(n) = $sans(#n)$
-
 // The "equality" property
 #let Eq(x, y) = $sans("Eq")(#x, #y)$
 
@@ -97,6 +94,19 @@
 #let st = sym.bar.v   // vertical bar: "such that"
 #let dubpr = sym.prime.double // double primes
 #let trippr = sym.prime.triple // triple!
+
+////////////////////////////////////////
+// The names of things in the Pattern Lemmas
+#let patternName(n) = $sans(#n)$
+#let prelimCrampedRow = patternName("prelimCrampedRow")
+#let finalCrampedRow = patternName("finalCrampedRow")
+#let crampedRow = patternName("crampedRow")
+#let uncrampedRow = patternName("uncrampedRow")
+#let abandonedrow = patternName("abandonedRow")
+#let prelimRow = patternName("prelimRow")
+#let finalRow = patternName("finalRow")
+#let validPattern = patternName("validPattern")
+#let validPatternForP = patternName("validPatternForP")
 
 ////////////////////////////////////////
 // Small-scale layout things
@@ -120,7 +130,7 @@
 
 
 // Based on an answer in the Discord from PgSuper (2023-04-13 1:43 PM)
-// See issue #9 on GitHub
+// See issue #9 on my GitHub
 #let setupenum(doc, prefix: "", formats: ("1.", "(a)", "i.")) = {
   set enum(
     full: true,
@@ -792,14 +802,6 @@ $M; N = {concat(theta, sigma) st theta in M and sigma in N}$,
 the finite sequences got by appending a sequence from $N$ to a sequence from $M$. For convenience we also allow the notation
 $angletup(M) = { angletup(theta) | theta in M }$, the length 1 sequences consisting of single terms from $M$. We define the
 following subsets of $finseq(X)$:
-#let prelimCrampedRow = patternName("prelimCrampedRow")
-#let finalCrampedRow = patternName("finalCrampedRow")
-#let crampedRow = patternName("crampedRow")
-#let uncrampedRow = patternName("uncrampedRow")
-#let abandonedrow = patternName("abandonedRow")
-#let prelimRow = patternName("prelimRow")
-#let finalRow = patternName("finalRow")
-#let validPattern = patternName("validPattern")
 $
   prelimCrampedRow  &= finseq({2, 3, 7}); angletup({5}), \
   finalCrampedRow   &= finseq({2, 3, 7}); angletup({6}), \
@@ -1133,7 +1135,6 @@ in this case is simply a finite sequence of state-names. There is no need for th
 used in the $R_e$ strategy argument.
 
 #let plabel(n) = $upright(P)#n$
-#let validPatternForP = patternName("validPatternForP")
 Let $Y = {plabel(0), plabel(1), ..., plabel(4)}$. Using the same notation as in the definition of #validPattern we may
 define a single subset of $finseq(Y)$:
 $
