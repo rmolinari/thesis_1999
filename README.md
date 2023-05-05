@@ -28,6 +28,10 @@ My submitted thesis has more typos that I care to admit, even after all the proo
 point I became blind to them. For now I'm aiming to reproduce the thesis, errors and all, so that I can fix them as later
 commits. Of course, the very process of typsetting it again means I'll introduce new errors.
 
+The thesis also has expositional problems that are evident to me even 25 years later, when much of my knowledge is gone
+and my mathematical maturity is back at a primitive level. For example, section 3.4 is a bit of a mess and could
+use better exposition and perhaps some diagrams.
+
 Typst is still in beta and in flux. Things will surely change, and I'm sure that things I want to be able to do aren't (yet)
 possible.
 
