@@ -3,9 +3,15 @@
 #let author = "Rory Molinari"
 
 ////////////////////////////////////////
-// Theorem envinroment
+// Theorem environment
 // https://github.com/sahasatvik/typst-theorems
 #import "theorems.typ": *
+
+////////////////////////////////////////
+// Tablex
+// Extended table support
+// https://github.com/PgBiel/typst-tablex
+#import "tablex.typ": tablex, gridx, hlinex, colspanx
 
 #let myresult = thmbox.with(
     base_level: 1,
@@ -296,7 +302,7 @@ $reIn(C)$ sets are realizable in this way (up to degree).
 
 Note that, once it is defined, $U$ does not depend essentially in any way on $C$. Thus we may consider, for _any_ set $Y$, the
 $reIn(Y)$ set $U^Y$. $U$ then becomes a _pseudojump operator_, $U : Y arrow.r.bar Y join U^Y$. These operators will appear in
-(Chapter IV TODO).
+(Chapter VI TODO).
 
 A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(x)$ and $X leqt Y$.
 If, instead, $Y$ is the difference of two $reIn(x)$ sets, and $X leqt Y$ then Y is said to be $dreInAbove(X)$.
@@ -490,7 +496,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
      )
    $
    where we take $C_(-1)^beta = emptyset$. Here we do _not_ use this construct. The part of the verification argument, below,
-   which deals with the permission delays inherent with our set up (Lemma 2.25 TODO) would only be complicated by the use of
+   which deals with the permission delays inherent with our set up (#lemmaRef(<lemma2.25>)) would only be complicated by the use of
    such variant enumerations.]
 
   Now, if
@@ -552,7 +558,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   2, waiting forlornly for an impossible $G$-change, but in the meantime computing a correct value for $Gamma_j(C; k)$. We may as
   well cut our losses and simplify by abandoning this cycle: we content ourselves with the modest gain of a single correct value for
   $Gamma_j(C; k)$ and the knowledge that if we end up permanently abandoning _all_ cycles like this, we'll be able to compute $G$
-  from $C$ (see Lemma 2.17 TODO below), a contradiction.
+  from $C$ (see #lemmaRef(<lemma2.17>) below), a contradiction.
 
 + We only reach _this_ state if it is similarly safe to set $Delta(C\; j) = 1$ with use 0. Do so, unless it has already been done.
   We permanently abandon the whole of row $row(j)$, and since there is no need to keep any of this row in business, it is convenient
@@ -2007,17 +2013,21 @@ In #chapRef(2) we used multiple outcomes for each cycle. We make use of them aga
 to remove the need for a path restraint, and to deal with the potentially infinite
 changes in $(udvd)(x)$ mentioned above. For each cycle~$nu$ of the basic strategy
 there are six fundamentally different situations at stage~$s$.
-#table(
-    columns: (1fr, 1fr, 1fr, 1fr),
+#[
+#set align(center)
+#tablex(
+    columns: (1.3in,) * 4,
+    rows: 3em,
     align: horizon + center,
     [$nu$'s state], [$x in (udvd)$?], [Restraint on \ $(udvd)$], [Restraint on $A$],
-    $0, 1, 10, 11$, [doesn't matter], $0$,                     $0$,
+    $0, 1, 10, 11$, [doesn't\ matter], $0$,                     $0$,
     $2$,            [yes],            $u$,                     $tilde(u)$,
     $3, 4, 5$,      [no],             $v$,                     $(lambda^1(x) + 1)[s]$,
     $6$,            [yes],            $v$,                     $(lambda^1(x) + 1)[s]$,
     $7, 8$,         [no],             $v$,                     $(lambda^2(x) + 1)[s]$,
     $9$,            [yes],            $v$,                     $(lambda^2(x) + 1)[s]$
 )
+]
 (The only state in the first row to which $nu$ can return infinitely often without
  being reset infinitely often is #state(1), and whenever $nu$ is in this state $x(nu) in.not (udvd)[s]$.
  This is why we have a "doesn't matter" in this row.)
@@ -2383,4 +2393,48 @@ We can now prove that the delayed permitting worked.
 ]
 
 == The cases $n > 4$ <section3.4>
+
+The complications which arise as $n$ gets larger are of notation, rather than of approach.
+When avoiding $n$-r.e. sets we must change our constructed set $n+1$ times, leading to
+an $(n+1)$-dimensional cycle structure.
+This leads to an increase in the number of times that we must ask for $G$-permission for the levers
+corresonding to a given witness~$x$, and in the number of different functionals we construct.
+
+We will not attempt to give anything more than the briefest indications of how to
+adapt the $n=4$ construction to larger values of~$n$.  We will start by calculating how many times
+our basic module must ask for $G$-permission for a given witness.
+
+Our basic approach remains the same. Given an $n$-r.e. set~$E$ and a witness~$x$, we aim to defeat
+any agreement of the type $Eq(x, s)$ by changing $n+1$ times the membership of $x$ in $udvd$, thus
+exhausting $E$'s ability to reach. The question is thus: while pushing $x$ in and out of $udvd$,
+how many times must we actually enumerate a lever into~$A$, thus requiring $G$-permission?
+Well, suppose first than $n = 2m + 1$ is odd, so we must make $n+1 = 2m+2$ changes to $(udvd)(x)$.
+Our method is the same as before: we make the first change by putting $x$ into $U^D$, and subsequent ones by
+pushing $x$ in and out of $V^D$. Only the "out of $V^D$" action requires $G$-permission:
+#[
+#set align(center)
+#gridx(
+    columns: (1in, 1in, 1in),
+    align: bottom + center,
+    // The following appears to be the only way to control per-column alignment settings
+    map-cols: (col, cells) => cells.map(c =>
+      if c == none {
+          c
+      } else {
+          (..c, align: if col == 1 { bottom + left } else { bottom + center })
+      }
+    ),
+    [Action on\ $udvd$], [Method], [Permission?],
+    hlinex(),
+    [1. #h(1fr) in:],       [$x$ into $U^D$],   [],
+    [2. #h(1fr) out:],      [$x$ into $V^D$],   [],
+    [3. #h(1fr) in:],       [$x$ out of $V^D$], [(yes)],
+    [4. #h(1fr) out:],      [$x$ into $V^D$],   [],
+    [5. #h(1fr) in:],       [$x$ out of $V^D$], [(yes)],
+    [6. #h(1fr) out:],      [$x$ into $V^D$],   [],
+    colspanx(2)[$dots.v$],  (),                 [],
+    [$2m+1$. #h(1fr) in:],  [$x$ out of $V^D$], [(yes)],
+    [$2m+2$. #h(1fr) out:], [$x$ into $V^D$],   []
+)
+]
 #bibliography("works.yml", style: "ieee")
