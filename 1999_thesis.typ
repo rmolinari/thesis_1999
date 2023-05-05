@@ -82,8 +82,9 @@
 // "Finite sequences of"
 #let finseq(a) = $#a^(< infinity)$
 
-// Row j of an omega^2 set of cycles
+// Row j of an omega^2 set of cycles, and a more general "slice" of a higher-dimensional set
 #let row(j) = $cal(R)_#j$
+#let slice(..j) = $cal(S)_(#j.pos().join([,]))$
 // A cycle pattern. Note awkward negative space to get good placement of the subscript
 #let pattern(s) = $cal(P)#h(-0.2em)_#s$
 
@@ -1203,7 +1204,7 @@ We then have the following analogue to the Pattern Lemma.#footnote[We don't refe
       Either way, $pattern(s) in validPatternForP$, and we are done.
 ]
 
-Now there are some results corresopnding to Lemmas #thmref(<lemma2.7>)--#thmref(<lemma2.11>).
+Now there are some results corresponding to Lemmas #thmref(<lemma2.7>)--#thmref(<lemma2.11>).
 
 #lemma[
     If cycle $k$ is in state #plabel(2) or state #plabel(4) at stage $s$ then $Xi(C\; j)[s] converge$.
@@ -2437,4 +2438,64 @@ pushing $x$ in and out of $V^D$. Only the "out of $V^D$" action requires $G$-per
     [$2m+2$. #h(1fr) out:], [$x$ into $V^D$],   []
 )
 ]
+There are thus $m+1$ pairs of actions, each (except the first) needing exactly one "layer" of $G$-permission.
+Thus the number of times that we must ask for $G$-permission is just $m = (n-1)\/2$.
+In the case that $n = 2m$ is even, the only change to the table above is the removal of the
+$(2m+2)$nd line, and we sill need permission $m$ times.
+Thus, given any $n$, we need permission $m = floor(n\/2)$ times for a given witness.
+(Notice that in the $n=4$ case we seek permission $2 = floor(4\/2)$ times for each witness.)
+
+Suppose that $n=7$. What needs to be done to adapt the basic $n=4$ module?
+Well, most obviously, the cycle structure will now be an $(omega^3)$-sequence of cycles $chi = (j, k, l)$,
+to accommodate the 3 layers of permission that we will (potentially) need for each witness.
+Secondly, in addition to constructing functions $Gamma_j(C)$ and $Delta(C)$ we will need a third tier,
+$Upsilon_(j,k)$ to handle the extra layer of $G$-permission.
+With the extra dimension, we need a more general concept than "row".
+In general, for the $n$-dimensional structure $omega^n$, we define an $(n-i)$-dimensional _slice_
+by specifying the first $i < n$ components:
+$
+slice(c_1, dots, c_i) = {(c_1, dots, c_i, c_(i+1), dots, c_n) | c_(i+1), dots, c_n in omega}
+$
+
+Just as before we had a $Delta$-protecting, "waiting" state, 5, which was used to prevent the over-eager
+employment of $G$-changes leading to the inconsistent definition of $Delta(C)$, we must now have states
+which protect both $Gamma_j$ and $Delta$.
+Before, the trigger for entering #state(5) was the existence of some cycle of slice~#slice($j$) in state~8/9.
+To allow us some abstraction, call this double state the _endgame for $Delta$_.
+In the new construction, there will be endgames for $Gamma_j$ and $Delta$.
+In each case, the endgame consists of the two states immediately following the definition
+of $Gamma_j(C;k)$ and $Delta(C\; j)$, respectively, in which the value of the functional value
+just defined is still valid, and remains and important part of our overall approach.
+While some cycle is in an endgame like this we cannot have cycles to the left acting impetuously,
+compromising the consistency of $Gamma_j(C)$ and $Delta(C)$.
+
+Now action on $G$-permission corresponding to definitions of values for $Upsilon_(j,k)(C)$ must
+wait until there are no cycles to the right in endgames. The subcases for behavior upon seeing
+a $G$-change in #state(4) will now look something like this:
+
+#show: doc => setupenum(doc, formats: ("(a)",))
++ If some (leftmost) cycle $chi'$ of slice #slice($j$) is currently in an endgame for $Gamma_j$ or for $Delta$
+  then set the marker $mu^1(x) = tilde(v)_(t_3)(chi')$ and advance to #state(5). This transition does not
+  count as an action.
+
++ [As it was before.]
+
+Note that we need only one $Upsilon_(j,k)$-related waiting state to protect both $Gamma_j$ and $Delta$ computations.
+We set $mu^1(x)$ to keep our eye on the leftmost cycle, $chi'$, to our right in a $Gamma_j$- or $Delta$-endgame.
+If $chi'$ should leave its endgame, the monotonicity of the computation function will ensure that all cycles to _its_
+right will leave their respective endgames as well.
+
+Now, $G$-changes corresponding to $Gamma_j$ definitions must also be treated with caution:
+action upon these changes must still respect $Delta$-endgames. Thus the state immediately after
+the definition of the value $Gamma_j(C; k)$ will have similar subcases to determine the response
+to a $G$-change. In this case we need only keep an eye out for $Delta$-endgames.
+(Note that the extra waiting state that will follow means that a $Gamma_j$-endgame actually consists of the
+ _three_ states immediately following the functional definition. We lied before.)
+
+Apart from that, the same construction will work for $n=7$, and may be adapted for any $n > 4$.
+Every time an increase in $n$ requires the addition an extra dimension to the cycle-structure
+(that is, every time $n$ is incresed from $2m-1$ to $2m$), we just "bolt" one to the front:
+add an extra tier of functionals, with a corresponding waiting stage to protect all of the existing tiers.
+
+
 #bibliography("works.yml", style: "ieee")
