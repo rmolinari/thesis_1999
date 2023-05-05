@@ -2416,15 +2416,8 @@ pushing $x$ in and out of $V^D$. Only the "out of $V^D$" action requires $G$-per
 #set align(center)
 #gridx(
     columns: (1in, 1in, 1in),
-    align: bottom + center,
-    // The following appears to be the only way to control per-column alignment settings
-    map-cols: (col, cells) => cells.map(c =>
-      if c == none {
-          c
-      } else {
-          (..c, align: if col == 1 { bottom + left } else { bottom + center })
-      }
-    ),
+    align: (col, row) => { bottom + if col == 1 { left } else { center } },
+    //
     [Action on\ $udvd$], [Method], [Permission?],
     hlinex(),
     [1. #h(1fr) in:],       [$x$ into $U^D$],   [],
