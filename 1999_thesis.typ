@@ -2497,5 +2497,47 @@ Every time an increase in $n$ requires the addition an extra dimension to the cy
 (that is, every time $n$ is incresed from $2m-1$ to $2m$), we just "bolt" one to the front:
 add an extra tier of functionals, with a corresponding waiting stage to protect all of the existing tiers.
 
+== Further comments
+
+As all of the strategies are self-contained, it does not hurt to combine strategies corresponding to
+different valus of $n$, so long as we associate their enumerations with different $dreInAbove(D)$ sets.
+So, those strategies concerning themselves with avoiding 5-r.e. degrees (say) work with the set
+$C join A join (setdiff(U^(D,5), V^(D,5)))$, while those avoiding 13-r.e. degrees work with the separate
+$C join A join (setdiff(U^(D,13), V^(D,13)))$. A description of the priority tree then
+becomes more complicated (as different nodes will have different successor-sequences),
+but in principle the construction is no different. Indeed, as all of the strategies for all $n$
+can be combined, we can actually construct a single $D leqt G$ for which, given $n$, there is
+a $dreInAbove(D)$ set not of $n$-r.e. degree:
+#theorem[
+    Given r.e. sets $C ltt G$ there is r.e. $D in turinginterval(C, G)$ such that for all $n in omega$
+    there is a $dreInAbove(D)$ set $F_n$ not of $n$-r.e. degree.
+    <theorem3.28>
+]
+In fact, there is no need to keep enumerations for different values of $n$ separate: we can
+construct a single $dreInAbove(D)$ set $F$ with is not $n$-r.e. for any $n$:
+#theorem[
+    Given r.e. sets $C ltt G$ there is r.e. $D in turinginterval(C, G)$ and a $dreInAbove(D)$ set $F$
+    not of $n$-r.e. degree for any $n in omega$.
+    <theorem3.29>
+]
+
+It is also interesting to note that the sets $F_n$ we construct are just barely $dreInAbove(D)$.
+In the construction, elements are only ever enumerated into $U^D$ once, at least modulo "unwanted"
+ejections due to $C$-changes. In the absense of these $C$-changes the set $U^D$ would be
+recursively enumerable. Hence the set(s) $udvd$ are really the difference of an (almost) r.e.~set
+and a $C$-r.e. one. Then the question is, how much do we really use the full strength
+of "$dreInAbove(D)$"? Can we get the same final result using just $reInAbove(D)$ in place of $dreInAbove(D)$?
+Using the present technique, the answer is "no".
+
+The key point in the construction is that we know, ahead of time, how many times we will have to
+change the membership of a particular witness in the set $udvd$, and hence the number of times we
+will have to ask for corresponding $G$-permissions. This means that, for a specific basic module,
+we can specify ahead of time what the cycle-structure is going to look like, $omega^(floor(n\/2))$,
+and hence what the possible outcomes will be. All of this is possible because for each witness we have
+two _anchor-points_, $restr(E_(s_1), phi_(s_1)(x))$ and $restr(E_(s_2), phi_(s_2)(x))$, to which
+we return over and over. Since we force $restr(E, phi_(s_1)(x))$ to repeatedly flip-flop between
+these two states, we see that there is a _fixed_ number (called $y$ in the construction) on which
+$E$ must change each and every time. As we know how many times $E(y)$ can change we can therefore
+put a bound, _before any cycle of the strategy starts_, on how many times we will have to flip-flop.
 
 #bibliography("works.yml", style: "ieee")
