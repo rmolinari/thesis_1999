@@ -2615,4 +2615,34 @@ which corresponds to #thmref(<theorem3.29>) just as #thmref(<theorem3.30>) corre
     <theorem3.31>
 ]
 
+=== A related result
+
+In @ALS1998 the following is proved
+
+#theorem(name: [Arslanov, LaForte and Slaman])[
+    Any $omega$-r.e. set with is 2-REA is actually of 2-r.e. degree.
+    <theorem3.32>
+]
+The question then occurs: does the behaviour occur for numbers greater than 2?
+The same paper answers the question negatively:
+#theorem(name: [Arslanov, LaForte and Slaman])[
+    There is a set F which is both 3-REA and $(n+1)$-r.e. but fails to be of $n$-r.e. degree.
+    <theorem3.33>
+]
+In that paper, $F$ is constructed to be 3-REA by making it recursively enumerable in, and above, a d.r.e. set $D$.
+(The names for these sets are different in~@ALS1998.)
+
+In the present paper we also construct such a set, $F$. Our $F$ is certainly 3-REA, as it is above and d.r.e. in (and hence 2-REA in)
+an r.e. set $D$. By using the construction corresponding to #thmref(<theorem3.30>)[Theorem] we can
+take $F$ to be $(n+1)$-r.e. and the whole point of $F$ is that it is not of $n$-r.e. degree.
+
+The proof in @ALS1998 of #thmref(<theorem3.33>)[Theorem] is of finite injury, and involves a construction using two anchor-points.
+Thus an adaption is possible, involving cycles, which will find the d.r.e. set $D$ below any previously given, non-recursive,
+r.e. set~$G$. Therefore Theorem~11 in @ALS1998 may be slightly strengthened to read
+#theorem[
+    Given any non-recursive, r.e. set $G$ there is a d.r.e set $D leqt G$ such that, for every $n geq 3$, there exists
+    a set $F_n$ which is simultaneously $reInAbove(D)$ and $(n+1)$-r.e. but is not of $n$-r.e. degree.
+    <theorem3.34>
+]
+
 #bibliography("works.yml", style: "ieee")
