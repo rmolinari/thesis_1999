@@ -2576,4 +2576,43 @@ such computation.
 The same problems occur, even when we allow $F$ to be $dreInAbove(D)$, if we try to avoid $omega$-r.e. degrees,
 as again the number of flip-flops depends on the particular witness chosen.
 
+=== The special case $C = emptyset$
+
+The case in which $C = emptyset$ was the first to be proved by the author.
+It was obtained before the method was developed to ensure the consistency of the $Delta$ functional,
+as that method is not needed in the special case. The overall construction is in any case vastly simplifed.
+
+To see why, consider what would happen in the construction if $C = emptyset$. In particular, we never experience a $C$-change.
+At no time would a #cycle($chi$) need to return to an earlier numbered state due to a computation being destroyed.
+So long as it is not reset, $chi$ will only ever make progress, or (at worst) stay put.
+This means that no strategy will act infinitely often.
+(Otherwise, by Lemmas~#thmref(<lemma3.18>) and~#thmref(<lemma3.19>),
+ some cycle would act infinitely without being reset infinitly often).
+In other words, _each strategy causes only finitely much injury._
+Once we have a finite injury argument, we can do away with the entire apparatus of the priority tree.
+
+The finite injury nature of the construction also means that the functionals $Gamma_j$ and $Delta$
+do not need to be constructed "on the fly", but can be extracted without too much trouble after the face, in the verification,
+under the assumption that the construction has failed. This allowed us to completely avoid the problems of
+$Delta$-inconsistency in the original Cooper, Lempp, and Watson method.
+Hence there was no need for the special method we used above
+
+An interest artifact of the finite injury construction is that witnesses are enumerated out of our set~$F$ only
+when we want them to be, in forcing the opponent set, $E$, to change. That is, when avoiding an $n$-r.e. set,
+the value of $(udvd)(x)$, for a given witness, will change at most $n+1$ times: the constructed set will be $(n+1)$-r.e.
+Hence we have the following.
+#theorem[
+    Given an r.e. set $G ident.not_T emptyset$, there is r.e. $D leqt G$ such that for all $n in omega$
+    there is a set $F$ which is simultaneously $dreInAbove(D)$ and $(n+1)$-r.e. but not of $n$-r.e. degree.
+    <theorem3.30>
+]
+When combining requirements corresponding to different values of $n$ we can tell for the sake of which $n$-value a specific
+witness $x$ was chosen, and hence the maximum number of times that $(udvd)(x)$ will change. We thereforew have the following result,
+which corresponds to #thmref(<theorem3.29>) just as #thmref(<theorem3.30>) corresponds to #thmref(<theorem3.28>)[Theorem].
+#theorem[
+    Given an r.e. set $G ident.not_T emptyset$, there is r.e. $D leqt G$ and a set $F$ which is
+    simultaneously $dreInAbove(D)$ and $omega$-r.e., but not of $n$-r.e. degree for any $n in omega$.
+    <theorem3.31>
+]
+
 #bibliography("works.yml", style: "ieee")
