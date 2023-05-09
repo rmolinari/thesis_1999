@@ -40,6 +40,7 @@
     separator: [:#h(1em)]
 ).with(numbering: none)
 
+#let theoremRef(name) = thmref(name)[Theorem]
 #let lemmaRef(name) = thmref(name)[Lemma]
 
 #let chapRef(num) = ref(label("chapter" + str(num)), supplement: "Chapter")
@@ -245,7 +246,7 @@ University possible, and whose unfailing hospitality made me feel welcome.
       CHAPTER #counter(heading).display()\
       #v(0.5em)
       #it.body
-      #v(0.2em)
+      #v(0.8in)
     ]
 }
 
@@ -316,7 +317,7 @@ If, instead, $Y$ is the difference of two $reIn(x)$ sets, and $X leqt Y$ then Y 
 In @CLW1989 a proof is given of the weak density of the properly d.r.e. degrees:
 #theorem[
 Given recursively enumerable sets $C ltt G$ there is a d.r.e. set $D$ not of r.e. degree such that $C ltt D ltt G$.
-<thm2.1>
+<theorem2.1>
 ]
 
 The proof given in @CLW1989 has two technical but important flaws. The first, involving the timing of injuries caused by different
@@ -401,11 +402,11 @@ $Delta(C)$.
 The author tried, and failed, for some time to reconcile these conflicting demands. I think my adviser, Peter Hinman, for suggesting
 the correct compromise: we back both horses, hedging our bets until we have a better idea which is likely to be the right one.
 
-This chapter, then, gives a correct proof of #thmref(<thm2.1>)[Theorem], slightly strengthening it to obtain the following result:
+This chapter, then, gives a correct proof of #theoremRef(<theorem2.1>), slightly strengthening it to obtain the following result:
 #theorem[
 Given r.e. sets $C ltt G$ there are d.r.e. sets $D ltt E$ such that $turinginterval(D, F) subset turinginterval(C, G)$
 and there is no r.e. set $E in turinginterval(D, F)$.
-<thm2.2>
+<theorem2.2>
 ]
 
 == The construction
@@ -2692,6 +2693,49 @@ The proof we give is derived from one given in @ALS1996 of the similar statement
     $E$ which is $reInAbove(C)$ but not of r.e. degree such that $C ltt E ltt H$.
     <theorem4.4>
 ]
+That proof suffers from several flaws. It is based on the original proof of #theoremRef(<theorem2.1>) given in @CLW1989,
+and hence has the same problems: injury caused by "weaker" strategies (noted and fixed by LaForte) and $Delta$-inconsistency.
+It also has a flaw all its own (see @section4.4[Section] below)
+
+As well as strengthening #theoremRef(<theorem4.4>) we simplify the argument, fixing at a stroke
+both the $Delta$-consistency and local problems. The method of previous chapters is used for the remaining obstacle.
+
+The simplification which allows us to do away with $Delta$-inconsistency without the need for the "waiting states"
+of earlier chapters is the reduction of the cycle structure from two dimensions to one. For each witness we still need
+two layers of $H$-permission, but we get the second one (almost) for free, from the "high permitting" argument
+inherent in the construction. The use in~@ALS1996 of a two dimensional cycle structure is overkill.
+
+To see how we will use the hypothesis that $C$ is high consider the following.
+By a result of Robinson~@Robinson we may assume (perhaps by replacing $C$ with a Turing equivalent r.e. set)
+that we can find a recursive enumeration ${C_s st s in omega}$ such that the _computation function_
+$
+  c_C(x) = (mu s)[restr(C_s, x) = restr(C, x)]
+$
+dominates all (total) recursive functions.
+That is, if $f$ is a total, recursive function, there is $n in omega$ such that $(forall m > n)[c_C(m) > f(m)]$.
+(Roughly speaking, our construction will require $C$-permission "late" in the strategy, and the fact that $c_C$
+ dominates every recursive function means that we get this permission when we need it. Whenever you
+ (recursively) guess how long it takes initial segments of $C$ to converge, you are wrong confinitely often.)
+Fix such an enumeration, and enumerations ${G_s}_(s geq 0)$ and ${H_s}_(s geq 0)$.
+
+We will construct an auxiliary r.e. set $B$ and arrange things so that $D = G join A$ and $F = G join A join B$
+have the required properties. That $D$ and $F$ are d.r.e will follow from the fact that the approximations to
+the set~$A$ will change at most twice on any element (at worst, $x$ will be enumerated into $A$, and later removed forever.)
+
+We must satisfy all the requirements of the form
+$
+R_e: quad A neq Phi_e(E_e) thick or thick E_e neq Psi_e(G join A join B)
+$
+and
+$
+N_e: quad B neq Theta_e(G join A)
+$
+where ${angletup(E_e, Phi_e, Psi_e)}_(e geq 0)$ enumerates all triples in which $E_e$ is an r.e. set and $Phi_e$ and $Psi_e$
+are recursive functionals, and ${Theta_e}_(e geq 0)$ simply enumerates all recursive functionals.
+We will ensure that $A leqt H$ by a combination of direct permitting, and the high permitting used to make $A$ r.e. in~$C$.
+We ensure $B leqt H$ by direct permitting.  As in earlier chapters all of the permission is potentially delayed.
+
+== The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
 = Chap 5 <chapter5>
 

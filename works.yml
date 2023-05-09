@@ -89,9 +89,19 @@ ALS1996:
     - Arslanov, Marat
     - Lempp, Steffen
     - Shore, Richard A.
-  title: Interpolating _d_-r.e. and REA degrees between r.e. degrees
+  title: Interpolating d-r.e. and REA degrees between r.e. degrees
   page-range: 29-56
   parent:
     title: Annals of Pure and Applied Logic
     volume: 78
   date: 1996
+
+Robinson:
+  type: Article
+  author: Robinson, Robert W.
+  title: A dichotomy of the recursively enumerable sets
+  page-range: 339-356
+  date: 1968
+  parent:
+    title: "Zeitschrift Für Mathematische Logik Und Grundlagen Der Mathematik"
+    volume: 14
