@@ -25,6 +25,7 @@
 #let theorem = myresult("theorem", "Theorem")
 #let lemma = myresult("theorem", "Lemma", bodyfmt: text)
 #let proposition = myresult("theorem", "Proposition")
+#let conjecture = myresult("theorem", "Natural Conjeccture")
 
 #let qed = [#h(1fr) $square$]
 #let proof = thmplain(
@@ -2644,5 +2645,54 @@ r.e. set~$G$. Therefore Theorem~11 in @ALS1998 may be slightly strengthened to r
     a set $F_n$ which is simultaneously $reInAbove(D)$ and $(n+1)$-r.e. but is not of $n$-r.e. degree.
     <theorem3.34>
 ]
+
+
+////////////////////////////////////////
+// Chapter IV
+= For high $C$ the properly $reInAbove(C)$ intervals are weakly dense <chapter4>
+
+== Introduction
+
+In #chapRef(3) we gave a generalization of (a weaker form) of the origianl Soare and Stob result.
+In #chapRef(5) we will prove a generalization in another direction:
+// TODO: label this 5.2
+#theorem[
+    For any non-recursive r.e. set $C$, there are $reInAbove(C)$ sets $A$ and $B$ such that $A ltt B$
+    and there is no r.e. set $D in turinginterval(A, B)$.
+]
+
+In this chapter we consider the latter result from the point of density: can such r.e.-free intervals be
+found densely in the r.e. degrees?
+#conjecture[
+    For all r.e. sets $C$, $G$ and $H$ such that $emptyset ltt C leqt G ltt H$ there
+    are $reInAbove(C)$ sets $D ltt F$ such that $turinginterval(D, F) subset turinginterval(G, H)$
+    and there is no r.e. set $E in turinginterval(D, F)$.
+    <conjecture4.1>
+]
+This (and even the weaker version in which we allow $D = F$) is false because of
+#theorem(name: [Arslanov, Lempp and Shore, @ALS1996])[
+    There is a recursively enuemrable set $C$ with $emptyset ltt C ltt emptyset'$ such that
+    every $reInAbove(C)$ set $A$ with $C leqt A leqt emptyset'$ is of r.e. degree.
+    <theorem4.2>
+]
+However, we can succeed if $C$ is high:
+#theorem[
+    If $C$ is r.e. and high and $G ltt H$ are r.e. with $C leqt H$ there are $reInAbove(C)$ sets
+    $D ltt F$ such that $turinginterval(D, F) subset turinginterval(G, H)$ and there is no r.e. set $E$ with
+    $E in turinginterval(D, F)$. Furthermore, $D$ and $F$ may be chosen to be d.r.e.
+    <theorem4.3>
+]
+
+== The construction
+
+The proof we give is derived from one given in @ALS1996 of the similar statement
+// This appears to be Thm 2.1 in the other paper
+#theorem[
+    If $C leqt H$ are r.e. and high (that is, $C' ident_T H' ident_T emptyset'$), there is a d.r.e. set
+    $E$ which is $reInAbove(C)$ but not of r.e. degree such that $C ltt E ltt H$.
+    <theorem4.4>
+]
+
+= Chap 5 <chapter5>
 
 #bibliography("works.yml", style: "ieee")

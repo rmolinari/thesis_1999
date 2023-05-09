@@ -82,3 +82,16 @@ Hinman:
   type: Unpublished Notes
   author: Hinman, Peter G.
   title: More iterated relative recursive enumerability
+
+ALS1996:
+  type: Article
+  author:
+    - Arslanov, Marat
+    - Lempp, Steffen
+    - Shore, Richard A.
+  title: Interpolating _d_-r.e. and REA degrees between r.e. degrees
+  page-range: 29-56
+  parent:
+    title: Annals of Pure and Applied Logic
+    volume: 78
+  date: 1996
