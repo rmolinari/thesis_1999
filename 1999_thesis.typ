@@ -130,6 +130,8 @@
 #let stage-hdr(name) = [Stage #name: #h(1em)]
 #let case(name) = [#smallcaps([Case #name]) #h(1em)]
 
+#let squad = h(1em)
+
 ////////////////////////////////////////
 // Placeholder for things that aren't supported yet or that I don't know how to do
 
@@ -2734,6 +2736,53 @@ where ${angletup(E_e, Phi_e, Psi_e)}_(e geq 0)$ enumerates all triples in which 
 are recursive functionals, and ${Theta_e}_(e geq 0)$ simply enumerates all recursive functionals.
 We will ensure that $A leqt H$ by a combination of direct permitting, and the high permitting used to make $A$ r.e. in~$C$.
 We ensure $B leqt H$ by direct permitting.  As in earlier chapters all of the permission is potentially delayed.
+
+=== The Basic Modules
+
+==== The $R_e$ requirements
+
+For the requirements of the first type (the "r.e.-avoiding" requirements) the basic module is
+a simplified version of the one used in @ALS1996[Theorem 2.1]. This in turn is basically the approach used in
+@CLW1989[Theorem 1], but incorporating high permitting. The strategy used to satisfy $R_e$ consists of a
+(potentially unbounded) number of _cycles_, each of which tries to satisfy the requirement in a very simplistic way.
+If each cycle fails, we argue that $H leqt G$, contradicting the typothesis of the theorem.
+
+Suppose $e$ is fixed, and write $angletup(E, Phi, Psi)$ for $angletup(E_e, Phi_e, Psi_e)$. We will describe the strategy
+for satisfying~$R_e$.  It consists of an $omega$-sequence of cycles. Cycle~0 starts first, and each #cycle($k$) can start
+cycle $k+1$, as well as stopping all cycles $k' > k$. The strategy as a whole threatens to demonstrate that
+$H leqt G$ by constructing a functional $Gamma(G) = H$. The #cycle($k$) may define the value $Gamma(G\; k)$. The strategy
+also defines values for an auxiliary (partial) recursive function~$m$, used in the high permitting part of the argument.
+
+All cycles begin in #state(0).
+A cycle is _started_ by letting it pass from #state(0) to another state,
+depending on its history, as in earlier chapters. Again, a cascade of cycle-startings might occur.
+A cycle is _reset_ by putting it back into #state(0), returing its restraints to 0 and undefining the values of its
+parameters, $u$, $x$, and $p$.
+A cycle is _abandoned_ by returing its restraints to 0 and (permanently) stopping all activity for that cycle.
+This is done when a cycle has categorically failed to satisfy $R_e$, as in the earlier chapters.
+A cycle is said to _act_ when it moves from one state to another.
+
+Cycle~$k$ proceeds as follows.
+
+// reset to default
+#show: doc => setupenum(doc)
+0. Until given the go-ahead, just hang out with the other cycles.
+   When told to start first check if #cycle($k$) has been abandoned at any time. If so jump straight to #state(6)
+   and follow the instructions there. Otherwise choose a witness, $x$, larger than any number mentioned in the construction
+   so far (including all currently defined $A$-restraints and the current stage) and larger than $k$.
+
++ Let $Eq(x, s)$ denote the condition
+  $
+  (A(x) = Phi(E\; x))[s] squad and squad (restr(E, phi(x)) = restr(hat(Psi)(G join A join B), phi(x)))[s]
+  $
+  Wait for a stage $s_1$ at which $Eq(x, s_1)$ holds and let $u = (hat(phi) phi(x))[s_1]$, the total use of the
+  $hat(Psi)(G join A join B)$ computations.
+  [Note that if no such $s_1$ exists, then $x$ witnesses the success of our strategy.]
+
+  If $H_(s_1)(k) = 1$ then we have no hope ever of seeing the $H$-change we need for permission, so go to #state(6).
+
+  Otherwise restrain $restr(A, u)$ and $restr(B, u)$ from now on, set $Gamma(G\; k) = H_(s_1)(k) (= 0)$ with
+  use~$u$, and start cycle $k+1$ to run simultaneously. Advance to #state(2).
 
 == The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
