@@ -2857,6 +2857,19 @@ Cycle~$k$ proceeds as follows.
 
 + Redefine $Gamma(G\; k) = H(k) = 1$ with use 0, abandon #cycle($k$) and start #cycle($k+1$).
 
+==== The $N_e$ requirements
+
+The requirements $N_e$ are simpler that those of the first kind, are we implement a standard
+diagonalizatin approach to satisfy them.  This is slightly complicated by the fact that we must
+ensure that $B leqt H$, but we can just us a stripped-down version of the Cooper, Lempp and Watson method.
+
+Again, suppose $e$ is fixed, and write $Theta$ for $Theta_e$. The strategy for $N_e$ has the same cycle
+structure as that for $R_e$. Cycle~0 starts first. We again threaten to show $H leqt G$, this time by
+constructing a functional $Delta(G) = H$. We don't need any auxiliary function like~$m$.
+_Starting_, _resetting_, _abandoning_ and _acting_ all have the same definitions as before.
+
+Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds as follows.
+
 #lemma[
     TODO
     <lemma4.6>
