@@ -2784,6 +2784,52 @@ Cycle~$k$ proceeds as follows.
   Otherwise restrain $restr(A, u)$ and $restr(B, u)$ from now on, set $Gamma(G\; k) = H_(s_1)(k) (= 0)$ with
   use~$u$, and start cycle $k+1$ to run simultaneously. Advance to #state(2).
 
++ Wait for a stage $s'$ at which either
+
+  + $restr(G_(s'), u) neq restr(G_(s_1), u)$, or
+  + $H_(s')(k) neq H_(s_1)(k)$
+
+  On reaching $s'$, reset all cycles $k' > k$ of strategy $alpha$. Then
+
+  + if $restr(G, u)$ changes first, drop the $A$- and $B$-restraints of #cycle($k$) back to 0
+    and return to #state(1).
+    (Note that the change in $G$ will automatically undefine the values $Gamma(G\; k')$ for $k' geq k$,
+     allowing these values to be redefined later, keeping $Gamma$ consistent.) While
+  + if $H(k)$ changes first, let $p in omega$ be least such that
+    $m(p)$ is not defined yet. Enumerate $x$ into $A$ with $C$-use $p$. This enumeration has just been permitted by the change
+    in $restr(H, x)$ (since, by choice, $x > k$.) Proceed to #state(3).
+
+    Note that we now know that $H(k) = 1$: it will never change again, as $H$ is r.e.
+    Thus, if we ever subsequently get a change in $G$ below $u$, we may redefine $Gamma(G\; k) = 1$ with use~0,
+    and be sure that $Gamma(G\; k) = H(k)$. From now on, if we see such a change in $G$, jump straight to #state(6).
+
++ Set the marker $xi(x) = p$ and wait for a stage $s_2$ at with either
+
+  + $restr(G_(s_2), u) neq restr(G_(s_1), u)$; or
+  + $restr(G_(s_2), u) = restr(G_(s_1), u)$ and $Eq(x, s_2)$.
+
+  Note that if such a $s_2$ does not exist, $x$ again witnesses our success.
+
+  It in entirely possible that while we are wating for $s_2$, $C$ changes below $xi(x)$, ejecting $x$ from $A$.
+  We waint $x$ to remain in $A$ for now, so we "artificially" keep it there by enumerating new axioms
+  $angletup(x, restr(C_t, p))$ into $U$ (where we are constructing $A = U^C$) whenever $restr(C_t, p) neq restr(C_(t-1), p)$.
+  (Note that this is enough to keep $A$ d.r.e. We consider $x$'s ejection from $A$ a transitory phenomenon, not affecting
+   the enumeration of $A$ that our algorithm defines. To decide whether $x in A$ at #stg($s$), check if $x in A$ at
+   the _end_ of the stage.)
+
+  When we reach such a stage, set $m(p) = s_2$. If we have just seen a $G$-change, jump straight to #state(6).
+  Otherwise, proceed to #state(4). Note that in the latter case we have $A_(s_1)(x) = 0$ and $A_(s_2)(x) = 1$
+  and so we must have $restr(E_(s_1), phi_(s_1)(x)) neq restr(E_(s_2), phi_(s_1)(x))$.
+  This change is irreversible, as $E$ is r.e., and we attempt to exploit this, by waiting for
+  $x$ to be enumerated out of $A$ by a $C$-change. Start #cycle($k+1$) to run simultaneously.
+
+  (Note that, although in #state(2) we reset all cycles $k' > k$, this resetting cannot destroy the
+   computations $Gamma(G \; k+1), Gamma(G \; k+2), dots$ that these cycles may have defined:
+   there has not been a convenient $G$-change. Thus the restarted $k+1$ (and its cronies $k+2, k+3, dots$)
+   may produce values for $Gamma(G)$ at points where it is already defined.
+   We will argue that such multiple definitions only persist when #cycle($k$) gets permanently stuck
+   in #state(4) and this will only happen to finitely many cycles.)
+
 == The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
 = Chap 5 <chapter5>
