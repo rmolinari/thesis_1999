@@ -2830,6 +2830,38 @@ Cycle~$k$ proceeds as follows.
    We will argue that such multiple definitions only persist when #cycle($k$) gets permanently stuck
    in #state(4) and this will only happen to finitely many cycles.)
 
++ Wait for a #stg($s dubpr$) at which $restr(C, xi(x))$ changes. Let this change in $C$ remove $x$ from A,
+  reset all cycles $k' > k$ and go to #state(5).
+
+  Now if $restr(G, u) = restr(G_(s_1), u)$, $x$ finally witnesses the success of our strategy, since
+  $
+  restr(hat(Psi)(G join A join B), phi_(s_1)(x))
+     &= (restr(hat(Psi)(G join A join B), phi(x)))[s_1] \
+     &= restr(E_(s_1), phi_(s_1)(x)) \
+     &neq restr(E, phi_(s_1)(x))
+  $
+
+  Note that we are potentially stuck with the disagreement $Gamma(G\; k) neq H(k)$
+  (if we don't see the desired change in $restr(C, xi(x))$, or a change in $G$ below $u$ which would allow
+   us to redefine our (incorrect) value $Gamma(G\; k)$.)
+  The fact that the computation function $c_C$ is dominant means that we will only have to put up with this
+  finintely often (see #lemmaRef(<lemma4.6>)), and we will still be able to threaten to compute $H$ recursively from $G$.
+
++ Wait for $restr(G, u) neq restr(G_(s_1), u)$. If this never happens, the strategy succeds by the argument in #state(4),
+  above. If it does happen, reset all cycles $k' > k$ and advance to #state(6) to redefine $Gamma(G\; k)$ as a value
+  we now know to be correct, and abandon the cycle.
+  (Note that the change in $G$ automatically undefines any values $Gamma(G\; k+1), Gamma(G\; k+2), dots$ which where
+   defined while #cycle($k$) was waiting in #state(4). Thus, so long as we don't get permanently stuck in~4, the
+   extraneous $Gamma$ values that are defined while we wait for the $G$-change don't persist. Of course, leaving~4
+   but failing to reach 6 means we get stuck in 5, which leads to success.)
+
++ Redefine $Gamma(G\; k) = H(k) = 1$ with use 0, abandon #cycle($k$) and start #cycle($k+1$).
+
+#lemma[
+    TODO
+    <lemma4.6>
+]
+
 == The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
 = Chap 5 <chapter5>
