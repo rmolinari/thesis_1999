@@ -3109,6 +3109,36 @@ This establishes part 3 of the Proposition for $n = eta$.
 
 This establishes part 4 of #thmref(<proposition4.5>) for $n = eta$, and the Proposition is proved. #qed
 
+Thus all of the requirements are satisfied, and $turinginterval(D, F)$ forms a proper interval with $reInAbove(C)$
+endpoints, free of r.e.~degrees. It remains to show that the permitting used in the construction
+sufficed to ensure that $D ltt H$ and $F ltt H$.
+
+We use the same emthod as in chapters @chapter2 and @chapter3. For $alpha in T$ let
+$
+e^alpha = max { n | (exists beta in T)[concatone(beta, n) subset alpha] },
+$
+the largest number which occurs as an outcome in the path leading to $alpha$. We also define
+$
+s^alpha = (mu s)[restr(H_s, e^alpha) = restr(H, e^alpha)].
+$
+Our techinical lemma is the same as before.
+
+#lemma[
+    Suppose that $alpha subset f_s$, $t > max{s, s^alpha}$ is a $C$-true stage, $t' geq t$ is a $G$-true
+    stage, and $s' > t'$.
+    Then for $beta subset alpha$, if $beta subset.not f_t$ and $beta subset f_(s')$ then there is
+    a stage $tau$ such that $s < tau leq s'$ and $beta$ is cancelled at #stg($tau$).
+    <lemma4.11>
+]
+#proof[
+    As #lemmaRef(<lemma2.25>). We use the assumption that $s'$ is greater than the first $G$-true stage
+    after the first $C$-true stage after both $s$ and $s^alpha$ when we argue that it is "now or never"
+    for some action out of #state(4).
+    (In this state the cycle is waiting for a $C$-change, rather than a $G$-change.)
+]
+
+Now permitting follows much as it did before.
+
 == The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
 = Chap 5 <chapter5>
