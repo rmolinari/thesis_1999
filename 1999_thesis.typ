@@ -2984,6 +2984,7 @@ To show that all the requirements are satisfied we prove the following, now fami
     + #strat($restr(f, n)$) satisfies the requirement towards which it was working;
 
     + for all sufficiently large $G$-true stages $t$, $restr(f, (n+1)) subset f_t$.
+    <proposition4.5>
 ]
 
 So, inductively assume the proposition for $n = eta - 1$, let $alpha = restr(f, eta)$
@@ -3078,6 +3079,35 @@ as we have only a one-dimensional cycle-structure to worry about.
 ]
 
 This establishes part 1 of the Proposition, and we assume we have a value $k_eta$ for $f(eta)$.
+#lemma[
+    $restr(f, (eta+1)) = concatone(f, k_eta)$ is cancelled only finintely often.
+    <lemma4.8>
+]
+#proof[
+    As #lemmaRef(<lemma2.21>).
+]
+
+This establishes part 2 of the Proposition for $n = eta$.
+
+#lemma[
+    Strategy $alpha$ satisfies requirement the corresponding requirement.
+    <lemma4.9>
+]
+#proof[
+    As #lemmaRef(<lemma2.22>).
+]
+
+This establishes part 3 of the Proposition for $n = eta$.
+
+#lemma[
+    For sufficiently large $G$-true stages $t$, $restr(f, (eta+1)) = concatone(alpha, k_eta) subset f_t$.
+    <lemma4.10>
+]
+#proof[
+    As #lemmaRef(<lemma2.23>).
+]
+
+This establishes part 4 of #thmref(<proposition4.5>) for $n = eta$, and the Proposition is proved. #qed
 
 == The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
