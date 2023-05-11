@@ -92,6 +92,7 @@
 
 // State/stage/strategy/row numbers/names, with nonbreaking space
 #let state(num) = [state~#num]
+#let nstate(num) = [state~N#num]
 #let strat(s) = [strategy~#s]
 #let stg(num) = [stage~#num]
 #let theRow(j) = [row~$row(#j)$]
@@ -2869,6 +2870,50 @@ constructing a functional $Delta(G) = H$. We don't need any auxiliary function l
 _Starting_, _resetting_, _abandoning_ and _acting_ all have the same definitions as before.
 
 Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds as follows.
+
+#show: doc => setupenum(doc, prefix: "N")
+0. Until given the go-ahead, do nothing. When given the signal to proceed, check if
+  #cycle($k$) has been abandoned in the past. If so jump straight to #nstate(4).
+  Otherwise choose a witness, $y$, larger than any number mentioned so far in the constuction
+  (including all currently defined $B$-restraints and the current stage), and larger than~$k$.
+
++ Wait for a stage $s_1$ at which
+  $
+  (B(y) = hat(Theta)(G join A; y))[s_1]
+  $
+  and let $v = hat(theta)_(s_1)(y)$, the use of the $hat(Theta)(G join A)$ computation. Restrain $restr(A, v)$
+  from now on. Set $Delta(G\; k) = H_(s_1)(k)$ with use $delta(k) = v$ and start cycle $k+1$ to run simultaneously.
+
++ Wait for a stage $s'$ at which
+
+  + $restr(G_(s'), v) neq restr(G_(s_1), v)$, or
+  + $H_(s')(k) neq H_(s_1)(k)$.
+
+  On reaching $s'$, reset all cycles $k' > k$. Then
+  + if $restr(G, v)$ changes first, return the $A$-restraint of this cycle to 0 and return to #nstate(1).
+    (As before, the $G$-change undefined $Delta(G\; k')$ for $k' > k$.) While
+  + if $H(k)$ changes first and enumerate $y$ into $B$. This has just been permitted by the change in $restr(H, y)$.
+    Proceed to #nstate(3).
+
++ Wait for a stage $s_2$ at which
+  $
+  (B(y) = hat(Theta)(G join A; y))[s_2]
+  $
+  If there is no such state, $y$ witnesses the success of our strategy.
+
+  If such an $s_2$ exists, note that we have
+  $
+  (Theta(G join A; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1)(y) = (Theta(G join A; y))[s_1]
+  $
+
+  By the restraint on $A$, $restr(A_(s_1), v) = restr(A_(s_2), v)$, so we must have $restr(G_(s_1), v) neq restr(G_(s_2), v)$.
+  We reset all cycled $k' > k$ and advance to #nstate(4).
+  Note that the $G$-change has undefined all computations for $Delta(k')$, $k' > k$, except those computations with 0 use
+  (which are correct anyway).
+
++ We set $Delta(G\; k) = 1$ (with use 0) a value we now know to be correct, start cycle $k+1$, and abandon #cycle($k$).
+
+Note that at all times, $Delta(G)$ is defined consistently.
 
 #lemma[
     TODO
