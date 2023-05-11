@@ -3030,7 +3030,54 @@ acts. Otherwise, we way that $alpha$ _acts infinitely_.
     many cycles get stuck in #state(4). We show that this leads to a contradiction.
 
     In this case, each of these cycles will have defined a value for the function~$m$ (this is done in #state(3).)
+    As each cycle chooses its~$p$ to be the least without an $m$-value the construction ensures that function~$m$
+    will be _total_ recursive, and hence dominated by $c_C$.
+    For each #cycle($k$) that gets stuck in~4, let $x_k$ be the last witness it ever
+    chooses#footnote[There must be a last, as $k$ only gets to choose a new one after it is reset.],
+    let $p_k$ be the final value for which #cycle($k$) defines $m(p_k)$ and let $s_(2,k)$ be the final stage
+    at which #cycle($k$) passes from #state(3) to #state(4) before getting stuck there. Note that $xi(x_k) = p_k$
+    and that $m(p_k) = s_(2,k)$.
+
+    Now, since $m$ is dominated by $c_C$, there is a $macron(p)$ such that
+    $(forall p geq macron(p))[m(p) < c_C(p)]$ and so, by the definition of $c_C$
+    $
+    (forall p geq macron(p))[restr(C_(m(p)), p) neq restr(C, p)]
+    $
+    and
+    $
+    (forall p geq macron(p))[restr(C_(m(p)), xi(x)) neq restr(C, xi(x))]
+    $
+    whenever $xi(x) geq p$. Now let $k_0$ be minimal such that $p_(k_0) geq macron(p)$ and #cycle($k_0$) gets stuck in~4.
+    Then $m(p_(k_0)) = s_(2,k_0)$ and
+    $
+    restr(C_(s_(2,k_0)), xi(x_(k_0))) neq restr(C, xi(x_(k_0))),
+    $
+    so #cycle($k_0$) does in fact see a $C$-change after #stg($s_(2,k_0)$).
+    Let $q$ be the first $G$-true stage after after $q'$, the first $C$-true stage after $s_(2,k_0)$.
+    As $q'$ involves a $C$-change on the smallest element for which a change is still to take place,
+    it must involve a change in $C$ below $xi(x_(k_0))$.
+    By assumption, $alpha$ will be accessible after $q'$ no later than #stg($q$), and so #cycle($k_0$)
+    will be released from #state(4), contradicting our assumption about #cycle($k_0$).
+
+    If $|alpha| = 2e + 1$, so that $alpha$ works towards $N_e$, the proof is much simpler. Now
+    every cycle must end up getting stuck in #nstate(2) or being permanently abandoned.
+    In either case, the #cycle($k$) computes a value $Delta(G\; k)$ which agrees with $H(k)$, and
+    we demonstrate $H leqt G$, a contradiction.
+
+    The lemma is proved.
 ]
+
+The rest of the verification follows just as in #chapRef(2). The arguments are somewhat simpler,
+as we have only a one-dimensional cycle-structure to worry about.
+#lemma[
+    Some (leftmost) successor of $alpha$ is accessible infinitely often.
+    <lemma4.7>
+]
+#proof[
+    As #lemmaRef(<lemma2.19>).
+]
+
+This establishes part 1 of the Proposition, and we assume we have a value $k_eta$ for $f(eta)$.
 
 == The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
