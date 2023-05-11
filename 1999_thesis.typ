@@ -2915,11 +2915,6 @@ Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds 
 
 Note that at all times, $Delta(G)$ is defined consistently.
 
-#lemma[
-    TODO
-    <lemma4.6>
-]
-
 === Combining the modules
 
 We use much the same tree argument as previous chapters to combine our strategies.
@@ -2972,6 +2967,70 @@ This is immediate from the construction.
 As usual in an infininte injury construction, the key object in the verification is the _true path_
 though the tree~$T$, defined by $f(n) = k$, where $concatone((restr(f, n)), k)$ is the leftmost
 successor of $restr(f, n)$ accessible infinitely often.
+
+When needed, we will refer to parameters associated with a particular cycle, $k$,
+of a particular strategy, $alpha$, like so: $x(alpha, k)$, $u(alpha, k)$, etc.
+We will drop the strategy name whenever possible.
+
+To show that all the requirements are satisfied we prove the following, now familiar, result.
+#proposition[
+    #show: doc => setupenum(doc, formats: ("1.", "a."))
+    For all $n in omega$
+
+    + $f(n)$ is defined;
+
+    + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
+
+    + #strat($restr(f, n)$) satisfies the requirement towards which it was working;
+
+    + for all sufficiently large $G$-true stages $t$, $restr(f, (n+1)) subset f_t$.
+]
+
+So, inductively assume the proposition for $n = eta - 1$, let $alpha = restr(f, eta)$
+and let $s_0$ be a stage so large that $alpha$ is not cancelled after~$s_0$, and for every $G$-true stage
+$t > s_0$, $alpha subset f_t$.
+
+We say that #strat($alpha$) _acts finitely_ if there is a #stg($s$) after which no cycle of $alpha$
+acts. Otherwise, we way that $alpha$ _acts infinitely_.
+
+#lemma[
+    If $alpha$ acts infinitely then some single cycle of $alpha$ acts infinitely often.
+    <lemma4.6>
+]
+#proof[
+    Suppose otherwise, and suppose that $|alpha| = 2e$, so that #strat($alpha$) works towards
+    satisfying requirement~$R_e$. Each #cycle($k$) must end up getting stuck in a state such that
+    #cycle($k+1$) is no prevented from acting. Thus each $k$ either
+    (a) gets stuck in #state(2),
+    (b) gets stuck in #state(4), or
+    (c) is abandoned.
+
+    Suppose first that (b) happens to only finintely many cycles.
+    Let $s > s_0$ be a stage so large that all the cycles which eventually get stuck in #state(4) have
+    already entered that state for the last time by #stg($s$), never to leave. Consider the finite set
+    $
+    cal(G) = {x st Gamma(G\; x) "is defined at " stg(s)}.
+    $
+    If $x in cal(G)$ it is possible that $Gamma(G\; x)$ is (or will end up being) defined more than once:
+    if #cycle($k$) gets permanently stuck in~4, cycles $k+1, k+2, dots$ may "write-over"
+    values for $Gamma(G\; k+1), dots$ defined earlier.
+    However, if $g = max(cal(G))$ and $macron(k) > g$, cycle $macron(k)$ does not get stuck in~4.
+    Indeed, if it did it would have done so by #stg($s$), and then $x(alpha, macron(k)) in cal(G)$.
+    But by construction $macron(k) < x(alpha, macron(k))$, which contradicts the definition of $macron(k)$.
+    Thus either $macron(k)$ gets stuck in #state(2), or successfully passes through~4 and reaches~6.
+    Either way, #cycle($macron(k)$) successfully computes a value $Gamma(G\; macron(k))$ which agrees with $H(macron(k))$.
+    Thus
+    $
+    H(k) = cases(
+        H(k)              & "if" k leq g\,,
+        Gamma(G\; k) quad & "otherwise"\,,
+    )
+    $
+    contradicting the assumption that $G ltt H$. Hence we need only consider the case in which infinitely
+    many cycles get stuck in #state(4). We show that this leads to a contradiction.
+
+    In this case, each of these cycles will have defined a value for the function~$m$ (this is done in #state(3).)
+]
 
 == The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
