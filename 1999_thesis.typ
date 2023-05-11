@@ -2903,11 +2903,11 @@ Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds 
 
   If such an $s_2$ exists, note that we have
   $
-  (Theta(G join A; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1)(y) = (Theta(G join A; y))[s_1]
+  (Theta(G join A\; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1)(y) = (Theta(G join A\; y))[s_1]
   $
 
   By the restraint on $A$, $restr(A_(s_1), v) = restr(A_(s_2), v)$, so we must have $restr(G_(s_1), v) neq restr(G_(s_2), v)$.
-  We reset all cycled $k' > k$ and advance to #nstate(4).
+  We reset all cycles $k' > k$ and advance to #nstate(4).
   Note that the $G$-change has undefined all computations for $Delta(k')$, $k' > k$, except those computations with 0 use
   (which are correct anyway).
 
@@ -2919,6 +2919,48 @@ Note that at all times, $Delta(G)$ is defined consistently.
     TODO
     <lemma4.6>
 ]
+
+=== Combining the modules
+
+We use much the same tree argument as previous chapters to combine our strategies.
+As each cycle (in either basic strategy) imposes only one "wave" of restraint, we need only
+one outcome corresponding to each cycle.
+
+Let $Lambda = {-1} union omega$, with the natural ordering and let $T = finseq(Lambda)$ be the
+tree of strategies, with the standard partial ordering $<_L$.
+If $alpha in T$ is of length $|alpha| = 2e$ then $alpha$ will work towards satisfying requirement $R_e$,
+while if $|alpha| = 2e+1$, $alpha$ will work towards satisfying $N_e$.
+We make no distinction between a node and the strategy it is employing.
+A strategy/node is _cancelled_ by resetting all of its cycles and discarding any functional
+it may have (partially) defined. Any parameter, once defined, keeps that value until it is redefined or undefined.
+
+The construction proceeds as follows.
+
+Stage 0: #h(1em) All parameters are undefined or $emptyset$, as appropriate,
+all functionals are completely undefined and all cycles are in #state(0) or #nstate(0), as appropriate.
+
+Stage $s+1$: #h(1em) We define, in substages $t < s$, a finite path, $f_(s+1)$, through $T$, of length $s$.
+We think of $f_(s+1)$ as our approximation to the "true" path defined at stage $s+1$.
+So, suppose we have reached substage~$t$, and $alpha = restr(f_(s+1), t)$ is already defined.
+If no cycle of #strat($alpha$) is started, we start $alpha$'s #cycle(0), and set $f_(s+1)(t) = 0$.
+Otherwise, we have two cases.
+
+- #case(1) Some (least) #cycle($k$) of $alpha$ is able (or forced, by a $G$-injury) to act
+
+We allow #cycle($k$) to act.
+Let $l$ be the rightmost cycle of #strat($alpha$) now imposing restraint (if there is any such cycle)
+and put $f_(s+1)(t) = l$. If there is no such #cycle($l$) then put $f_(s+1)(t) = -1$.
+Cancel all strategies $beta$ with $concatone(alpha, f_(s+1)(t)) <_L beta$.
+If $l = k$ and the action of #cycle($k$) involved enumerating a number into or out of $A$
+or into $B$ then also cancel all strategies $beta supset concatone(alpha, f_(s+1)(t))$.
+
+- #case(2) No cycle of #strat($alpha$) is able, or forced, to act.
+
+We do nothing, and there are no strategies to cancel. Define $f_(s+1)(t)$ just as above.
+
+If $t + 1 < s$, we advance to substage $t+1$.
+
+The strategies $alpha subset f_(s+1)$ are said to be _accessible_ at stage $s+1$.
 
 == The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
