@@ -2962,6 +2962,17 @@ If $t + 1 < s$, we advance to substage $t+1$.
 
 The strategies $alpha subset f_(s+1)$ are said to be _accessible_ at stage $s+1$.
 
+== Verification
+
+We do not state a Pattern Lemma or proofs of the consistency of the functions $Delta(G)$.
+This is immediate from the construction.
+(Note that we do not claim that the functionals $Gamma(G)$ are consistent, as we may indeed have
+ multiple definitions. We prove below that this happens only finitely often.)
+
+As usual in an infininte injury construction, the key object in the verification is the _true path_
+though the tree~$T$, defined by $f(n) = k$, where $concatone((restr(f, n)), k)$ is the leftmost
+successor of $restr(f, n)$ accessible infinitely often.
+
 == The flaw in the proof of #thmref(<theorem4.4>) <section4.4>
 
 = Chap 5 <chapter5>
