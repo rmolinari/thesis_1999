@@ -3213,6 +3213,33 @@ The $R$-requirements ensure that at least one of the intervals
 $turinginterval(D_i, F_i) = turinginterval(C join A_i, C join A_i join B_i)$
 is free of r.e. sets, while the $P$ requirements make sure that both of these intervals are proper.
 
+=== The basic module for $R_e$
 
+Fix $e geq 0$ and write $angletup(Phi_0, Phi_1, Psi_0, Psi_1, E_0, E_1)$
+for $angletup(Phi_(e,0), Phi_(e,1), Psi_(e,0), Psi_(e,1), E_(e,0), E_(e,1))$.
+
+The basic module again consists of cycles, this time in an $omega$-sequence, each
+trying simplistically to satisfy requirement~$R_e$. As noted below (@section5.2.3[section])
+we do not need to observe path restraint as we did in earlier constructions.
+Cycle~0 starts first. Cycle~$k$ may start cycle $k+1$ and stop all cycles $k' > k$
+In addition, if $k > 0$, cycle $k$ may instruct cycle $k-1$ to perform an enumeration. This is detailed below.
+Even numbered cycles will enumerate witnesses into $A_0$, while the odd numbered will enumerate into $A_1$.
+To this end it will be useful to use the notation $pi(l)$ for the parity of $l$.
+
+All cycles begin in #state(0). A cycle is _started_ by letting it pass from #state(0) to #state(1),
+choosing a witness on the way. A cycle is _reset_ by putting it back into #state(0), returning
+its restraint to 0 and undefining the values of its parameters $x$, $u$, and $v$.
+Unlike earlier constructions, a cycle is never permanently abandoned.
+
+Where necessary we will indicate the value of a parameter corresponding to #cycle($l$) like so: $x(l)$, $u(l)$, $v(l)$.
+
+Cycle $k$ proceeds as follows.
+
+#show: doc => setupenum(doc)
+0. Until told to start, do nothing. When started, choose a new witness~$x$ larger than any number mentioned in the
+  construction so far (including all currently imposed $A$-restraints). Advance to #state(1).
+
+
+=== Combining the modules <section5.2.3>
 
 #bibliography("works.yml", style: "ieee")
