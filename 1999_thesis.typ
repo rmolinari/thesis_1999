@@ -3176,6 +3176,43 @@ We can't use larger and larger values for $p$ each time, as the argument require
 We can't even redefine $xi(x)$ each time we get a $C$-change, as we would then not be able to $H$-recursively
 compute the final value for $xi(x)$, needed for the proof of #lemmaRef(<lemma4.12>).
 
-= Chap 5 <chapter5>
+= A Theorem of Soare and Stob in an Interval <chapter5>
+== Introduction
+
+In @CholakHinman Cholak and Hinman give a proof of a result of Soare and Stob.
+#theorem(name: [Soare and Stob, @SoareStob1982])[
+    For any non-recursive r.e. set $C$, there exists an $reInAbove(C)$ set which is not of r.e. degree.
+    <theorem5.1>
+]
+
+In this chapter we will prove the following generalization:
+#theorem[
+    For any non-recursive r.e. set $C$, there are $reInAbove(C)$ sets $D ltt F$ such that there is no r.e.~set
+    $E in turinginterval(D, F)$.
+    <theorem5.2>
+]
+
+The proof is based closely on that of Cholak and Hinman, but we recast it in the cycle method of earlier chapters.
+
+== The construction
+
+As shown in Corollary 4.3 of @SoareStob1982 we cannot find the sets $D$ and $F$ "effectively" from the set~$C$.
+That is, given (an index for) $C$ we cannot recursively compute indices for the $C$-recursive enumerations of $D$ and~$F$.
+We actually construct two pairs of $reInAbove(C)$, $(D_0, F_0)$ and $(D_1, F_1)$, and prove that one pair
+satisfies the requirements of the theorem, without knowing which one.
+
+We will satisfy all requirements
+$
+R_e:      quad & or.big_(i=0,1) [A_k neq Phi_(e,i)(E_(e,i)) or E_(e,i) neq Psi_(e,i)(C join A_i join B_i)],\
+P_(2e):   quad & B_0 neq Theta_e(C join A_0),\
+P_(2e+1): quad & B_1 neq Theta_e(C join A_1).
+$
+Here ${angletup(Phi_(e,0), Phi_(e,1), Psi_(e,0), Psi_(e,1), E_(e,0), E_(e,1))}_(e geq 0)$ enumerates all sextuples of four
+recursive functionals and two r.e. sets, and ${Theta_e}_(e geq 0)$ simply enumerates the recursive functionals.
+The $R$-requirements ensure that at least one of the intervals
+$turinginterval(D_i, F_i) = turinginterval(C join A_i, C join A_i join B_i)$
+is free of r.e. sets, while the $P$ requirements make sure that both of these intervals are proper.
+
+
 
 #bibliography("works.yml", style: "ieee")
