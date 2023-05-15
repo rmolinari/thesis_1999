@@ -3255,6 +3255,28 @@ Restrain $restr((A_i join B_i), v(k))$ for $i = 0, 1$, start cycle $(k+1)$ to ru
 
 [If there is no such stage then the requirement is satisfied.]
 
++ Wait for a #stg($s_2$) at which
+
+  + $restr(C_(s_2), v) neq restr(C_(s_1), v)$; or
+
+  + #cycle($k$) is instructed by #cycle($k+1$) to enumerate $x$.
+
+  If we have case (i) reset all cycles $l > k$, forget the current values of $u$ and~$v$,
+  drop this cycle's restraint back to~0, return to #state(1), and (if $k > 0$) return cycle $k-1$ to #state(2).
+
+  If we have case (ii) enumerate $x$ into $A_(pi(k), s_2+1)$ with use $v(k+1)$, and advance to
+  #state(3). (Note that we do _not_ reset any cycles to the right.)
+
++ Wait for a #stg($s_3$) at which $restr(C_(s_3), v) neq restr(C_(s_1), v)$.
+
+  If this happens reset all cycles to the right, forget the values of $u$ and~$v$, drop this cycle's restraint back to~0,
+  return to #state(1),and (if $k > 0$) return cycle $k-1$ to #state(2). The $C$-change ejects $x(k-1)$ from $A_(pi(k-1))$
+  (Note further than since $v < x(k+1) leq v(k+1)$, $x$ is ejected from $A_(pi(k))$ by this change in $C$.)
+
+We note (without proof) that the valie patterns corresponding to this module are
+exactly $setconcat(finseq({3}), {angletup(2, 1)})$.
+
+
 === Combining the modules <section5.2.3>
 
 #bibliography("works.yml", style: "ieee")
