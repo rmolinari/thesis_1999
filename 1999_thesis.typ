@@ -93,6 +93,7 @@
 // State/stage/strategy/row numbers/names, with nonbreaking space
 #let state(num) = [state~#num]
 #let nstate(num) = [state~N#num]
+#let pstate(num) = [state~P#num]
 #let strat(s) = [strategy~#s]
 #let stg(num) = [stage~#num]
 #let theRow(j) = [row~$row(#j)$]
@@ -3276,6 +3277,27 @@ Restrain $restr((A_i join B_i), v(k))$ for $i = 0, 1$, start cycle $(k+1)$ to ru
 We note (without proof) that the valie patterns corresponding to this module are
 exactly $setconcat(finseq({3}), {angletup(2, 1)})$.
 
+=== The basic moudle for the $P$-requirements
+
+Consider the requirement $P_(2e)$. (The $P_(2e+1)$ is the same, with $A_0$ and $B_0$ replaced with $A_1$ and $B_1$.)
+Write $Theta$ for~$Theta_e$.
+The strategy for satisfying $P_(2e)$ has no cycle-structure, but has 3 internal states.
+
+#show: doc => setupenum(doc, prefix: "P")
+0. Wait for the strategy to be started.
+  When it is, choose a new witness, $y$, larger than any number mentioned in the construction so far
+  (in particular, larger than any currently imposed $B$-restraint.) Advance to #pstate(1).
+
++ Wait for a #stg($t_1$) such that
+  $
+  (hat(Theta)(C join A_0; y))[t_1] = 0.
+  $
+  Put $w = hat(theta)_(t_1)(y)$, restrain $restr(A_0, w)$, and enumerate $y$ into $B_(0, t_1 +1)$ with $C$-use~$w$.
+  Advance to #pstate(2).
+
++ Wait for a #stg($t_2$) at which $restr(C_(t_2), w) neq restr(C_(t_1), w)$.
+  If this happens forget the value of~$w$, drop this cycle's restraint back to~0, and return to #pstate(1).
+  (Note that $y$ has been ejected from $B_0$ by the $C$-change.)
 
 === Combining the modules <section5.2.3>
 
