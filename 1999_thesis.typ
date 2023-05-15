@@ -95,6 +95,7 @@
 #let nstate(num) = [state~N#num]
 #let pstate(num) = [state~P#num]
 #let strat(s) = [strategy~#s]
+#let stalpha = [#strat($alpha$)]
 #let stg(num) = [stage~#num]
 #let theRow(j) = [row~$row(#j)$]
 #let cycle(name) = [cycle~#name]
@@ -490,7 +491,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
 
   [Note that we do not wait for a stage $t_1$ at which $C_(t_1) neq C_(t_1 - 1)$, (or where there is similar change in $G$) but
    rather for a change from the situation at stage $s_1$. In either case, once we combine the various strategies using a priority
-   tree (see @section2.3.3 below) strategy $alpha$ is not "accessible" at every stage. There may be times at which a relevant $G$- or
+   tree (see @section2.3.3 below) #stalpha is not "accessible" at every stage. There may be times at which a relevant $G$- or
    $C$-change occurs but $alpha$ is not accessible, only to become accessible later. The reaction to the change, and hence
    permission, is "delayed" until the strategy is accessible.
 
@@ -643,7 +644,7 @@ standard reference fo this technique is Chapter XIV of Soare @Soare1987.
 #let outcome = $concatone(alpha, (j, k))$
 
 In @LaForte LaForte introduced a path restraint to deal with a problem in the original construction in @CLW1989. Basically, that
-construction worked the tree angle in an "obvious" way. As soon a strategy $alpha$'s cycle $(j, k)$ became "active" we use #outcome
+construction worked the tree angle in an "obvious" way. As soon a #stalpha's cycle $(j, k)$ became "active" we use #outcome
 as the outcome; this happens as soon as cycle $(j, k)$ chooses a witness. (For the moment the consider the case of
 $R_e$-strategies.) However, if cycle $(j, k)$ later sees a relevant computation converge and imposes a restraint $r$, those
 strategies in the subtree below #outcome started in the meantime will not have chosen witnesses to respect this new restraint. This
@@ -660,7 +661,7 @@ cycle $(j, k)$ has actually imposed a restraint. Until that happen we follow a c
 left of $(j, k)$ which imposes restraint. This is perfectly safe, as, so long as $(j, k)$ imposes no restraint, we cannot injure any
 computions by letting the strategies below the leftward cycle operate. Once such a restraint is imposed, we automatically respect it
 by starting to follow a child corresponding to $(j, k)$. The only trick we actually need is to add a new child,
-$concatone(alpha, -1)$, to be followed when no cycles at all of strategy $alpha$ impose a restraint.
+$concatone(alpha, -1)$, to be followed when no cycles at all of #stalpha impose a restraint.
 
 Each cycle can impose restraint in two "waves". By seeing $Eq(x, s_1)$ cycle $(j, k)$ restrains $restr(A, u)$ and $restr(B, u)$.
 Later, on seeing $Eq(x, s_2)$, it further restrains $A$ and $B$ as far as $v$. Thus, corresponding to each cycle $(j, k)$ we will
@@ -686,14 +687,14 @@ Stage 0: #h(1em) All parameters are undefined or $emptyset$ as appropriate, and 
 
 #let nextval = $f_(s+1)(t)$
 Stage $s+1$: #h(1em) We define, in substages $t < s$, a finite path $nextval$ through the tree, of length $s$. So, suppose $alpha =
-(restr(nextval, t)) in T$ is defined. If no cycle of strategy $alpha$ has been started since $alpha$ was last cancelled, start
+(restr(nextval, t)) in T$ is defined. If no cycle of #stalpha has been started since $alpha$ was last cancelled, start
 $alpha$'s cycle $(0, 0)$ or $0$, as appropriate, and put $nextval(t) = -1$.
 
-Otherwise, first suppose that $|alpha|$ is even, so that $alpha$ is using an $R_e$ strategy. Allow any cycles of strategy $alpha$
+Otherwise, first suppose that $|alpha|$ is even, so that $alpha$ is using an $R_e$ strategy. Allow any cycles of #stalpha
 able to make the transition from state~2 to state~3 do so. Now there are 2 cases.
-- #smallcaps("Case 1") #h(1em) Some least cycle $nu$ of strategy $alpha$ is able (or forced by a $C$-change) to act.
+- #smallcaps("Case 1") #h(1em) Some least cycle $nu$ of #stalpha is able (or forced by a $C$-change) to act.
 
-We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of strategy $alpha$ now imposing restraint
+We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of #stalpha now imposing restraint
 (if there is any such cycle.) It is not necessarily the case that $lambda = nu$. If cycle $lambda$ is now in state~2, 3, or 4 then put
 $nextval = (lambda, 1)$. If instead, $lambda$ is in stage 5 or 6 then put $nextval = (lambda, 2)$. Cancel all strategies
 $beta$ with $concatone(alpha, nextval) <_L beta$. If $lambda = nu$ and the action of cycle $nu$ involved enumerating a number into
@@ -701,7 +702,7 @@ or out of $A$ or into $B$ we also cancel all strategies $beta supset concatone(a
 
 If there is no such cycle $lambda$ then put $nextval = -1$ and cancel all strategies $beta$ with $concatone(alpha, -1) <_L beta$.
 
-- #smallcaps("Case 2") #h(1em) No cycle of strategy $alpha$ is able, or forced, to act.
+- #smallcaps("Case 2") #h(1em) No cycle of #stalpha is able, or forced, to act.
 
 We do nothing, and nothing needs to be cancelled. Define $nextval$ just as above. No strategies need to be cancelled.
 
@@ -717,7 +718,7 @@ We say tha the strategies $alpha subset f_(s+1)$ are _accessible_ at stage $s+1$
 The verification of the construction is a long and tedious one, and is broken up into a sequence of lemmas. As the arguments for the
 two types of module are of necessity quite different, for the first part of the verification we discuss the modules separately.
 
-We will refer to the parameters associated with cycle $nu$ of strategy $alpha$ as they are defined at stage $s$ like so:
+We will refer to the parameters associated with cycle $nu$ of #stalpha as they are defined at stage $s$ like so:
 $u_s(alpha, nu)$, $v_s(alpha, nu)$, _etc_. When the strategy is clear from context (as it usually will be), we will drop it.
 
 === Lemmas for the $R_e$ strategy <section2.3.1>
@@ -728,8 +729,8 @@ We begin with a sequence of lemmas which describes the different arrangements po
 The aim is to formalize the intuitive ideas that develop from an understanding of the way the construction works.
 
 We assume that we have a certain, fixed strategy, $alpha$, of even length in mind, and that all cycles mentioned belong to this
-strategy. Also, we ignore the fact that strategy $alpha$ may not be accessible at all (or even all sufficiently large) stages: we
-just treat the stages mentioned as being the successive ones at which strategy $alpha$ _is_ accessible.
+strategy. Also, we ignore the fact that #stalpha may not be accessible at all (or even all sufficiently large) stages: we
+just treat the stages mentioned as being the successive ones at which #stalpha _is_ accessible.
 
 It will be convenient to refer to a cycle with is in either stage 5 or state~6 as being "in state~5/6".
 
@@ -812,8 +813,8 @@ We are now ready to describe the various patterns made by the successive
 cycle-states.#footnote[Such as Athens, Sparta, Hamburg, #sym.dots . Oh, no, that's something else.]
 To do this we first need to introduce some definitions and notation.
 
-Consider a stage $s$, and the states that all the various cycles of strategy $alpha$ are in at the end of stage $s$.  We will call
-this arrangement the _pattern of strategy $alpha$ at stage $s$_, and denote it by $pattern(s) = pattern(s)(alpha)$.  The notation
+Consider a stage $s$, and the states that all the various cycles of #stalpha are in at the end of stage $s$.  We will call
+this arrangement the _pattern of #stalpha at stage $s$_, and denote it by $pattern(s) = pattern(s)(alpha)$.  The notation
 used to represent patterns is based on the row structure of the cycles. $pattern(s)$ will be given as a finite sequence, one term
 each for those rows $row(j)$ of the strategy with at least one cycle in a state other than 0. Each term in this sequence will itself
 be a finite sequence, one term each for the cycles of row $row(j)$ (say) in a state other than 0.
@@ -844,15 +845,15 @@ has at least one cycle not in state 0.
 When we want to make it clear how long a finite sequence is, we subscript the sequence with its length, like so:
 $angletup(0, 1, dots, 7)_8$.
 
-The claim is now that if strategy $alpha$ has been started since last being cancelled, its pattern in "valid":
+The claim is now that if #stalpha has been started since last being cancelled, its pattern in "valid":
 #lemma(name: "Pattern Lemma")[
-    If strategy $alpha$ has at least one cycle not in state 0 at stage $s$, $pattern(s) in validPattern$.
+    If #stalpha has at least one cycle not in state 0 at stage $s$, $pattern(s) in validPattern$.
     <patternLemma>
 ]
 
 #proof[
     #let angle8 = angletup(8)
-    We proceed by induction on the number of stages since the last time strategy $alpha$ had a cycle started after previously being
+    We proceed by induction on the number of stages since the last time #stalpha had a cycle started after previously being
     cancelled.
 
     When a strategy is started up (perhaps not for the first time), as stage $s$, cycle $(0, 0)$ is started. If this cycle, or row
@@ -864,7 +865,7 @@ The claim is now that if strategy $alpha$ has been started since last being canc
     $
     This is a valid pattern, as $angle8 in prelimRow$ and $angletup(7, dots, 7, 1) in uncrampedRow subset finalRow$.
 
-    Now suppose that $alpha$'s pattern is valid coming into stage $s$, that strategy $alpha$ is not cancelled at $s$, and that something
+    Now suppose that $alpha$'s pattern is valid coming into stage $s$, that #stalpha is not cancelled at $s$, and that something
     actually appens: some cycle of the strategy changes state.  We let $pattern(s-1) = angletup(p_0, p_1, dots, p_n, f)$, where
     $p_i in prelimRow$ and $f in finalRow$. First consider any $2 arrow.r.bar 3$ transitions. These can occur only in a crampedRow,
     as only such rows have anything in state~5/6. But a 3 in place of a 2 leaves the type of crampedRow
@@ -1146,8 +1147,8 @@ We have the analogous result for the $Gamma$ functionals.
 === Lemmas for the $P_e$ strategy <section2.3.2>
 
 @section2.3.1 was a long and complicated one. As the $P_e$ strategy is so much simpler than the $R_e$ one,
-the corresponding set of lemmas is also. We assume we have fixed a strategy $alpha$ of odd length. Again
-we streat all stages mentioned as being the succissive ones at which strategy $alpha$ is actually accessible.
+the corresponding set of lemmas is also. We assume we have fixed a #stalpha of odd length. Again
+we streat all stages mentioned as being the succissive ones at which #stalpha is actually accessible.
 We start by discussing the patterns that the cycle states can make. We again refer to the pattern at stage $s$
 as $pattern(s)$.
 
@@ -1165,16 +1166,16 @@ We then have the following analogue to the Pattern Lemma.#footnote[We don't refe
                                                                    as it is too simple to deserve a name.]
 
 #lemma[
-    If strategy $alpha$ has at least one cycle not in state #plabel(0) at stage $s$, $pattern(s) in validPatternForP$.
+    If #stalpha has at least one cycle not in state #plabel(0) at stage $s$, $pattern(s) in validPatternForP$.
     <lemma2.12>
 ]
 #show: doc => setupenum(doc, formats: ("I.", "1.", "a."))
 #proof[
-    If strategy $alpha$ is started at stage $s$, cycle 0 is started, perhaps having been abandoned in the past.
+    If #stalpha is started at stage $s$, cycle 0 is started, perhaps having been abandoned in the past.
     Let $j = min_iota{ "cycle" iota "never abandoned" }$. Then the pattern at the end of stage $s$
     is $pattern(s) = angletup(plabel(4), dots, plabel(4), plabel(1))_(j+1) in validPatternForP$.
 
-    Now suppose that $pattern(s-1)$, $alpha$'s pattern coming into stage $s$, was valid and that strategy $alpha$
+    Now suppose that $pattern(s-1)$, $alpha$'s pattern coming into stage $s$, was valid and that #stalpha
     is not cancelled at $s$. If no cycle of $alpha$ acts at stage $s$ then $pattern(s) = pattern(s-1)$ and there
     is nothing to prove. So, suppose some cycle does act, let $k$ be the leftmost one, and write
     $pattern(s-1) = angletup(h_0, dots, h_m, b)$, where $h_i in {plabel(2), plabel(4)}$ and $b in {plabel(1), plabel(3)}$.
@@ -1241,7 +1242,7 @@ Now there are some results corresponding to Lemmas #thmref(<lemma2.7>)--#thmref(
     <lemma2.15>
 ]
 #proof[
-    As in Lemmas~#thmref(<lemma2.10>) and~#thmref(<lemma2.11>) we may assume that strategy $alpha$ is not cancelled during
+    As in Lemmas~#thmref(<lemma2.10>) and~#thmref(<lemma2.11>) we may assume that #stalpha is not cancelled during
     the stages that concern us.
 
     We proceed by induction. Fix $k$ and assume (I) and (II) for $0, 1, dots, k-1$. Statement (I) holds for $k$
@@ -1291,7 +1292,7 @@ The following result is the key one.
 
     + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
 
-    + strategy $restr(f, n)$ satisfies the requirement towards which it works;
+    + #strat($restr(f, n)$) satisfies the requirement towards which it works;
 
     + for all sufficiently large $C$-true stages $t$, $restr(f, (n+1)) subset f_t$.
     <prop2.16>
@@ -1300,7 +1301,7 @@ The following result is the key one.
 So, inductively assume 1, 2, 3 and 4 for $n = eta - 1$, and let $alpha = restr(f, eta)$. Fix a stage $s_0$
 so large that $alpha$ is not cancelled after $s_0$, and for every $C$-true stage $t > s_0$, $alpha subset f_t$.
 
-We say that strategy $alpha$ _acts finitely_ if there is a stage $s$ after which no cycle of $alpha$ every
+We say that #stalpha _acts finitely_ if there is a stage $s$ after which no cycle of $alpha$ every
 acts. Otherwise we say that $alpha$ _acts infinitely_.
 
 #lemma[
@@ -1363,7 +1364,7 @@ acts. Otherwise we say that $alpha$ _acts infinitely_.
 
 We extract part of the proof of the preceeding lemma as a separate result.
 #lemma[
-    Given s strategy $alpha$, if $chi$ is the leftmost cycle of strategy $alpha$ to act infinitely
+    Given s #stalpha, if $chi$ is the leftmost cycle of #stalpha to act infinitely
     often then only finitely often can _any_ cycle to the left of $chi$ act.
     <lemma2.18>
 ]
@@ -1390,7 +1391,7 @@ We extract part of the proof of the preceeding lemma as a separate result.
     at every $C$-true stage $t > s_0$.
 
     Otherwise $alpha$ acts infinitely. Suppose first that $|alpha|$ is even and (by #lemmaRef(<lemma2.17>))
-    let $nu$ be the leftmost cycle of strategy $alpha$ which acts infinitely often. By #lemmaRef(<lemma2.18>)
+    let $nu$ be the leftmost cycle of #stalpha which acts infinitely often. By #lemmaRef(<lemma2.18>)
     choose $s > s_0$ large enough that cycle $nu$ is not reset after stage $s$ by the action of any $alpha$-cycles
     to its left. Suppose for the moment that $nu^-$ is the rightmost cycle of $alpha$ to the left of $nu$
     imposing restraint at stage $s$. (That is, suppose such $nu^-$ exists.) Note that cycle~$nu^-$ will never
@@ -1408,10 +1409,10 @@ We extract part of the proof of the preceeding lemma as a separate result.
 This establishes part 1 of the Proposition for $n = eta$ and we may assume that there is a value, $epsilon$, for $f(eta)$.  We write
 this value variously as $epsilon = (nu_eta, i_eta)$ (for some $nu_eta in omega^2$ and $i_eta in {1, 2}$, if $|alpha|$ is even),
 $epsilon = nu_eta$ (if $|alpha|$ is odd), or $epsilon = -1$ (if appropriate.) If there is a cycle of
-strategy $alpha$ which acts infinitely often then we denote the leftmost one by $nu^+$.
+#stalpha which acts infinitely often then we denote the leftmost one by $nu^+$.
 
 It will be convenient to make the following definition. If $|alpha|$ is even and $i = 1$, or 2, then
-we say that cycle $nu$ of strategy $alpha$ is _lacking for $i$ at stage~$s$_ if, at that stage,
+we say that cycle $nu$ of #stalpha is _lacking for $i$ at stage~$s$_ if, at that stage,
 cycle $nu$ imposes less restraint than is indicated by an outcome of $(nu, i)$. That is, if $i = 1$
 and $nu$ imposes no restraint at stage $s$, or if $i = 2$ and $nu$ imposes only the restraints
 $restr(A, u)$ and $restr(B, u)$. If $|alpha|$ is odd then we say that cycle $nu$ is _lacking_ at stage~$s$
@@ -1462,7 +1463,7 @@ if it imposed no restraint at that stage.
     #show: doc => setupenum(doc, formats: ("1.",))
     + cycle $nu_eta$ is lacking for $i_eta$ (or just lacking, if $|alpha|$ is odd); or
 
-    + cycle $nu_eta$ of strategy $|alpha|$ enumerates something into or out of $A$,
+    + cycle $nu_eta$ of #stalpha enumerates something into or out of $A$,
       or something into $B$.
 
     By #lemmaRef(<lemma2.20>) cancellations of the first kind happen only finitely often.
@@ -1479,14 +1480,14 @@ if it imposed no restraint at that stage.
 This establishes part 2 of the Proposition for $n = eta$.
 
 #lemma[
-    Strategy $alpha$ satisfies the requirement towards which it was working.
+    #stalpha satisfies the requirement towards which it was working.
     <lemma2.22>
 ]
 #proof[
     By Lemmas #thmref(<lemma2.17>), #thmref(<lemma2.18>), and #thmref(<lemma2.21>) we have just two possibilities.
 
     #show: doc => setupenum(doc, formats: ("1.",))
-    + Only finitely often does any cycle of strategy $alpha$ act.
+    + Only finitely often does any cycle of #stalpha act.
 
     + Either $epsilon neq -1$ and cycle $nu^+$ acts infinitely often, but is only reset finitely often,
       or $epsilon = -1$ and cycle $(0, 0)$ (resp. 0) returnes infinitely often to #state(1) (resp. #state(plabel(0))).
@@ -1517,7 +1518,7 @@ This establishes part 2 of the Proposition for $n = eta$.
 
 This establishes part 3 of the Proposition for $n = eta$.
 
-Naturally, #lemmaRef(<lemma2.22>) describes what "really" happens to strategy $alpha$: the construction
+Naturally, #lemmaRef(<lemma2.22>) describes what "really" happens to #stalpha: the construction
 of $Gamma_j$ and $Delta$ is only a threat to ensure that we get $G$ changes when we need them, and not too
 many $C$-changes. If $Phi(E)$ and $Psi(C join A join B)$ are both total, then we actually win by diagonalization.
 If not, we track down a witness to the partialness.
@@ -1579,7 +1580,7 @@ $
 after stage $s^alpha$.
 
 The following two lemmas are technical, but basically say that if $t > s^alpha$ is a $C$-true stage,
-then either strategy $alpha$ is accessible at stage~$t$, or is cancelled before ever being accessible
+then either #stalpha is accessible at stage~$t$, or is cancelled before ever being accessible
 again. This allows us to get a handle on the delayed permitting nature of the argument.
 
 #lemma[
@@ -1621,8 +1622,8 @@ again. This allows us to get a handle on the delayed permitting nature of the ar
     hypothesis $beta$ is cancelled at some stage in $(s, s']$ which leads to $beta^+$ being cancelled as well. So
     it suffices to assume that $beta subset f_t$ and that $beta$ is never cancelled in $(s, s']$.
 
-    Suppose cycle~$nu$ of strategy $beta$ is reset at some $tau in (s, s']$. As $beta$ isn't cancelled at $tau$,
-    $nu$ is reset by some the action at $tau$ of some cycle $nu' < nu$ of strategy $beta$. By construction,
+    Suppose cycle~$nu$ of #strat($beta$) is reset at some $tau in (s, s']$. As $beta$ isn't cancelled at $tau$,
+    $nu$ is reset by some the action at $tau$ of some cycle $nu' < nu$ of #strat($beta$). By construction,
     this leads to the cancellation of node $beta^+$.
 
     (In what follows it will be convenient to refer to a cycle which is not in #state(0) or #state(plabel(0))
@@ -1641,10 +1642,10 @@ again. This allows us to get a handle on the delayed permitting nature of the ar
     and $concatone(beta, (j, k)) subset.not f_(s')$, a contradiction.
 
     If, instead, $beta^+ = concatone(beta, -1) subset alpha$, assume that $beta^+ subset.not f_t$. This means
-    that, at stage $t$, some (leftmost) cycle~$chi$ of strategy~$beta$ is imposing restraint $r$. As $t$
+    that, at stage $t$, some (leftmost) cycle~$chi$ of #strat($beta$) is imposing restraint $r$. As $t$
     is $C$-true this restraint is based on computations which will never be injured by a later $C$-change.
-    Thus $chi$ will always impose at least $r$-much restraint unless strategy~$beta$ (and hence strategy $beta^+$)
-    is cancelled. Thus, if $beta^+ subset f_(s')$ then strategy~$beta^+$ is cancelled by stage~$s'$.
+    Thus $chi$ will always impose at least $r$-much restraint unless #strat($beta$) (and hence #strat($beta^+$))
+    is cancelled. Thus, if $beta^+ subset f_(s')$ then #strat($beta^+$) is cancelled by stage~$s'$.
 ]
 
 Now we can show that the permitting works.
@@ -1655,7 +1656,7 @@ Now we can show that the permitting works.
 ]
 #proof[
     Let $x in omega$. If $x$ is not chosen as a witness by stage~$x$ then it never will be, and $x in.not A union B$.
-    Otherwise, suppose $x$ is chosen at stage $s_0$ to be the witness for a cycle $nu = (j,k)$ of strategy~$alpha$
+    Otherwise, suppose $x$ is chosen at stage $s_0$ to be the witness for a cycle $nu = (j,k)$ of #stalpha
     of even length. Note that $alpha subset f_(s_0)$, and that $x in.not B$.
 
     If $k in.not G$ or $G_(s_0)(k) = 1$ then $alpha$'s cycle~$nu$ will never get the first permission that it needs,
@@ -1663,10 +1664,10 @@ Now we can show that the permitting works.
 
     Suppose now that $k in setdiff(G_s, G_(s-1))$. Let $t$ be the first $C$-true stage larger than each of
     $s$, $s_0$, and $s^(concatone(alpha, nu))$. We claim that if $x$ is not enumerated into $A$ by stage $t$
-    it never will be. Well, if $alpha subset.not f_t$ then by #lemmaRef(<lemma2.25>) strategy~$alpha$ will be
+    it never will be. Well, if $alpha subset.not f_t$ then by #lemmaRef(<lemma2.25>) #stalpha will be
     cancelled (and witness $x$ forgotten) before $alpha$ gets a chance to act again. So if $x$ hasn't entered $A$
     before~$t$, we must have $alpha subset f_t$ if $x$ is ever to have a chance. If some cycle $(j', k') < nu$
-    of strategy~$alpha$ acts at $t$ then cycle~$nu$ will be reset, and its witness forgotten. Otherwise, if cycle $nu$
+    of #stalpha acts at $t$ then cycle~$nu$ will be reset, and its witness forgotten. Otherwise, if cycle $nu$
     acts at or after stage~$t$ due only to $Eq(x, s_1)$ holding, then certainly $x in.not A$, as by construction
     cycle~$(j,k)$ will jump straight to #state(7) rather than attempt to enumerate $x$ into $A$. If $nu$ is in #state(4)
     at stage~$t$ then $x$ would have already entered $A$.  So we may assume that cycle~$nu$ is in a state
@@ -1682,7 +1683,7 @@ Now we can show that the permitting works.
 
     Thus $A(x) = A_w(x)$.
 
-    If $x$ is chosen at $s_0$ to be a witness for cycke $k$ of strategy $alpha$ of _odd_ length then the same
+    If $x$ is chosen at $s_0$ to be a witness for cycke $k$ of #stalpha of _odd_ length then the same
     basic argument applies, but now we need not worry about $x$ being enumerated out of $B$: we just check if it
     ever gets enumerated in.
 
@@ -2053,15 +2054,15 @@ The construction proceeds as follows.
 #stage-hdr(0) All strategies are cancelled.
 
 #stage-hdr($s+1$) We defined, in substages $t < s$ a finite path $f_(s+1)$ through the tree, of length $s$.
-Suppose $alpha = (restr(f_(s+1), t)) in T$ has been defined by substage $t-1$. If no cycle of strategy $alpha$ has been
+Suppose $alpha = (restr(f_(s+1), t)) in T$ has been defined by substage $t-1$. If no cycle of #stalpha has been
 started since $alpha$ was last cancelled then start $alpha$'s cycle $(0,0)$ and set $nextval = -1$.
 
 Otherwise,let any cycles of stategy $alpha$ able to make the transition from #state(4) to #state(5) do so.
 Let any cycle forced solely by a $C$-change to change state do so. There are now two cases
-- #case(1) Some leftmost cycle $nu$ of strategy $alpha$ is able to act.
+- #case(1) Some leftmost cycle $nu$ of #stalpha is able to act.
 
 #let bigS = $sans(upright("S"))$
-We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of strategy $alpha$ now imposing restraint of some sort
+We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of #stalpha now imposing restraint of some sort
 (if there is such a cycle.) Let $lambda$ be in state~#bigS (note that $bigS neq 0, 1, 10, 11$) and let $i$ be defined by
 $
 i = cases(
@@ -2076,7 +2077,7 @@ Now set $nextval = (nu, i)$. If there is no such cycle $lambda$ put $nextval = -
 
 In any case, cancel all strategies $beta$ with $concatone(alpha, nextval) <_L beta$.
 
-- #case(2) No cycle of strategy $alpha$ is able to act.
+- #case(2) No cycle of #stalpha is able to act.
 
 We do nothing at this substage. Define $nextval$ just as above. There is nothing to cancel.
 
@@ -2087,7 +2088,7 @@ A node $alpha$ is _accessible_ at stage $s+1$ if $alpha subset f_(s+1)$.
 One of the points of multiple outcomes for each cycle is to cope with the coming and going
 of elements of $udvd$ as $C$ changes. It is important to observe that every time $concatone(alpha, (nu, i))$
 ($i = 1, 2, 3, 4, 5$) is accessible, $(udvd)(x(alpha, nu))$ is the same, where $x(alpha, nu)$ is the witness chosen by
-cycle~$nu$ of strategy~$alpha$.
+cycle~$nu$ of #stalpha.
 
 == Verification for $n = 4$ <section3.3>
 
@@ -2100,15 +2101,15 @@ The verification argument given in #chapRef(2) is detailed#footnote[The less cha
 and it would please no-one to go through the same sort of thing again in its entirety. So, when an argument follows the
 same lines as the corresponding discussion in #chapRef(2) we will just indicate the essential modifications, if any.
 
-As in #chapRef(2), we will refer to parameters associated with cycle~$nu$ of strategy~$alpha$ as they are defined
+As in #chapRef(2), we will refer to parameters associated with cycle~$nu$ of #stalpha as they are defined
 at stage~$s$ like so: $u_s(alpha, nu)$, $lambda^1_s(alpha, x(nu))$.
 Whenever it is made possible by context we will drop the strategy name.
 
 === Layout of the cycle states
 
 We begin again with a description of the possible state-arrangements, and state a Pattern Lemma.
-We assume we have a certain, fixed strategy~$alpha$ in mind, and all cycles mentioned are assumed to belong
-to it. As before, we regard the stages mentioned as being the successive ones at which strategy~$alpha$
+We assume we have a certain, fixed #stalpha in mind, and all cycles mentioned are assumed to belong
+to it. As before, we regard the stages mentioned as being the successive ones at which #stalpha
 is accessible. Just as in #chapRef(2), we refer to a special "double state": a cycle in either #state(8)
 or #state(9) is said to be "in state~8/9".
 
@@ -2185,11 +2186,11 @@ $
 validPattern = setconcat(finseq(prelimRow), angletup(finalRow)).
 $
 
-As in #chapRef(2) we define by $pattern(s)(alpha)$ the cycle-state arrangement of the strategy~$alpha$ at stage~$s$.
+As in #chapRef(2) we define by $pattern(s)(alpha)$ the cycle-state arrangement of the #stalpha at stage~$s$.
 We also refer to the cycle arrangements of individual slices as "patterns".
 
 #lemma[
-    If #strat($alpha$) has at least one cycle not in #state(0) at #stg($s$), $pattern(s) in validPattern$.
+    If #stalpha has at least one cycle not in #state(0) at #stg($s$), $pattern(s) in validPattern$.
     <lemma3.11>
 ]
 #proof[
@@ -2265,7 +2266,7 @@ We have the same proposition as before.
 
     + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
 
-    + strategy $restr(f, n)$ satisfies requirement $R_n$;
+    + #strat($restr(f, n)$) satisfies requirement $R_n$;
 
     + for all sufficiently large $C$-true stages $t$, $restr(f, (n+1)) subset f_t$.
     <prop3.17>
@@ -2276,7 +2277,7 @@ Fix a #stg($s_0$) so larger that $alpha$ is not cancelled after~$s_0$; and for f
 $C$-true stage $t > s_0$, $alpha subset f_t$, $rho(alpha, t) = liminf_s rho(alpha, s)$,
 and $tilde(rho)(alpha, t) = liminf_s tilde(rho)(alpha, s)$.
 
-Recall that we say _$alpha$ acts finitely_ if there is a stage after which no cycle of #strat($alpha$) acts,
+Recall that we say _$alpha$ acts finitely_ if there is a stage after which no cycle of #stalpha acts,
 and otherwise we say that _$alpha$ acts infinitely_.
 #lemma[
     If $alpha$ acts infinitely then some specific cycle of $alpha$ acts infinitely often.
@@ -2288,7 +2289,7 @@ and otherwise we say that _$alpha$ acts infinitely_.
 
 The next result follows as it did in #chapRef(2).
 #lemma[
-    Given a #strat($alpha$), if $chi$ is the leftmost cycle of #strat($alpha$) to act infinitely often
+    Given a #stalpha, if $chi$ is the leftmost cycle of #stalpha to act infinitely often
     then only finitely often can _any_ cycle to the left of $chi$ act.
     <lemma3.19>
 ]
@@ -2306,7 +2307,7 @@ $f(eta) = epsilon in Lambda$. Write $epsilon = (nu_eta, i_eta)$ or $epsilon = -1
 where $i_eta = 1, 2, 3, 4, "or" 5$.
 
 It will again be convenient to define what it means for a cycle to be _lacking_ at #stg($s$).
-We say that #cycle($nu$) of #strat($alpha$) is lacking for~$i$ at #stg($s$) if $nu$ is in #state(10)
+We say that #cycle($nu$) of #stalpha is lacking for~$i$ at #stg($s$) if $nu$ is in #state(10)
 or #state(11), or
 (a)~$i=1$ and $nu$ is in a state numbered less than 2,
 (b)~$i=2$ and $nu$ is in a state numbered less than 3,
@@ -2322,7 +2323,7 @@ from the definition of $nu_eta$.
     $restr(f, (eta+1)) = concatone(alpha, epsilon)$ is cancelled only finitely often. <lemma3.22>
 ]
 #lemma[
-    Strategy~$alpha$ satisfies requirement $R_(|alpha|)$. <lemma3.23>
+    #stalpha satisfies requirement $R_(|alpha|)$. <lemma3.23>
 ]
 #lemma[
     For all sufficiently large $C$-true stages $t$, $restr(f, (eta+1)) = concatone(alpha, epsilon) subset f_t$. <lemma3.24>
@@ -2377,7 +2378,7 @@ We can now prove that the delayed permitting worked.
     \
     Let $y in omega$. As the construction always picks levers to be larger than the current stage,
     if $y$ has not been chosen as a lever by #stg($y$) it never will be and $y in.not A$. Otherwise,
-    suppose that $y$ is chosen at #stg($s_0$) to be a lever for cycle~$chi = (j,k)$ of #strat($alpha$).
+    suppose that $y$ is chosen at #stg($s_0$) to be a lever for cycle~$chi = (j,k)$ of #stalpha.
     Note that $alpha subset f_(s_0)$.
 
     Assume that $y$ is actually chosen as $lambda^1_(s_0)(x(chi))$. If $k in.not G$ or $k in G_(s_0)$
@@ -2386,8 +2387,8 @@ We can now prove that the delayed permitting worked.
     of $s_0$, $s$, and $s^(concatone(alpha, chi))$. We claim that $y$ is enumerated into $A$ by #stg($t$)
     or not at all, so that $G(y) = G_t(y)$.
 
-    If $a subset.not f_t$ then by #lemmaRef(<lemma3.26>) #strat($alpha$) will be cancelled before
-    being accessible again, and $y$ will be lost. If some cycle $chi' < chi$ of #strat($alpha$) acts
+    If $a subset.not f_t$ then by #lemmaRef(<lemma3.26>) #stalpha will be cancelled before
+    being accessible again, and $y$ will be lost. If some cycle $chi' < chi$ of #stalpha acts
     at #stg($t$) then $chi$ will be reset and again $y$ will be lost.
     Otherwise, if $chi$ is in #state(1) or~2 at #stg($t$) then the lever~$y$ has already been discarded since being chosen,
     and will never get a chance after $t$ to be enumerated.
@@ -2791,7 +2792,7 @@ Cycle~$k$ proceeds as follows.
   + $restr(G_(s'), u) neq restr(G_(s_1), u)$, or
   + $H_(s')(k) neq H_(s_1)(k)$
 
-  On reaching $s'$, reset all cycles $k' > k$ of strategy $alpha$. Then
+  On reaching $s'$, reset all cycles $k' > k$ of #stalpha. Then
 
   + if $restr(G, u)$ changes first, drop the $A$- and $B$-restraints of #cycle($k$) back to 0
     and return to #state(1).
@@ -2938,19 +2939,19 @@ all functionals are completely undefined and all cycles are in #state(0) or #nst
 Stage $s+1$: #h(1em) We define, in substages $t < s$, a finite path, $f_(s+1)$, through $T$, of length $s$.
 We think of $f_(s+1)$ as our approximation to the "true" path defined at stage $s+1$.
 So, suppose we have reached substage~$t$, and $alpha = restr(f_(s+1), t)$ is already defined.
-If no cycle of #strat($alpha$) is started, we start $alpha$'s #cycle(0), and set $f_(s+1)(t) = 0$.
+If no cycle of #stalpha is started, we start $alpha$'s #cycle(0), and set $f_(s+1)(t) = 0$.
 Otherwise, we have two cases.
 
 - #case(1) Some (least) #cycle($k$) of $alpha$ is able (or forced, by a $G$-injury) to act
 
 We allow #cycle($k$) to act.
-Let $l$ be the rightmost cycle of #strat($alpha$) now imposing restraint (if there is any such cycle)
+Let $l$ be the rightmost cycle of #stalpha now imposing restraint (if there is any such cycle)
 and put $f_(s+1)(t) = l$. If there is no such #cycle($l$) then put $f_(s+1)(t) = -1$.
 Cancel all strategies $beta$ with $concatone(alpha, f_(s+1)(t)) <_L beta$.
 If $l = k$ and the action of #cycle($k$) involved enumerating a number into or out of $A$
 or into $B$ then also cancel all strategies $beta supset concatone(alpha, f_(s+1)(t))$.
 
-- #case(2) No cycle of #strat($alpha$) is able, or forced, to act.
+- #case(2) No cycle of #stalpha is able, or forced, to act.
 
 We do nothing, and there are no strategies to cancel. Define $f_(s+1)(t)$ just as above.
 
@@ -2992,7 +2993,7 @@ So, inductively assume the proposition for $n = eta - 1$, let $alpha = restr(f, 
 and let $s_0$ be a stage so large that $alpha$ is not cancelled after~$s_0$, and for every $G$-true stage
 $t > s_0$, $alpha subset f_t$.
 
-We say that #strat($alpha$) _acts finitely_ if there is a #stg($s$) after which no cycle of $alpha$
+We say that #stalpha _acts finitely_ if there is a #stg($s$) after which no cycle of $alpha$
 acts. Otherwise, we way that $alpha$ _acts infinitely_.
 
 #lemma[
@@ -3000,7 +3001,7 @@ acts. Otherwise, we way that $alpha$ _acts infinitely_.
     <lemma4.6>
 ]
 #proof[
-    Suppose otherwise, and suppose that $|alpha| = 2e$, so that #strat($alpha$) works towards
+    Suppose otherwise, and suppose that $|alpha| = 2e$, so that #stalpha works towards
     satisfying requirement~$R_e$. Each #cycle($k$) must end up getting stuck in a state such that
     #cycle($k+1$) is no prevented from acting. Thus each $k$ either
     (a) gets stuck in #state(2),
@@ -3091,7 +3092,7 @@ This establishes part 1 of the Proposition, and we assume we have a value $k_eta
 This establishes part 2 of the Proposition for $n = eta$.
 
 #lemma[
-    Strategy $alpha$ satisfies requirement the corresponding requirement.
+    #stalpha satisfies requirement the corresponding requirement.
     <lemma4.9>
 ]
 #proof[
@@ -3274,7 +3275,7 @@ Restrain $restr((A_i join B_i), v(k))$ for $i = 0, 1$, start cycle $(k+1)$ to ru
   return to #state(1),and (if $k > 0$) return cycle $k-1$ to #state(2). The $C$-change ejects $x(k-1)$ from $A_(pi(k-1))$
   (Note further than since $v < x(k+1) leq v(k+1)$, $x$ is ejected from $A_(pi(k))$ by this change in $C$.)
 
-We note (without proof) that the valie patterns corresponding to this module are
+We note (without proof) that the valid patterns corresponding to this module are
 exactly $setconcat(finseq({3}), {angletup(2, 1)})$.
 
 === The basic moudle for the $P$-requirements
@@ -3300,5 +3301,57 @@ The strategy for satisfying $P_(2e)$ has no cycle-structure, but has 3 internal 
   (Note that $y$ has been ejected from $B_0$ by the $C$-change.)
 
 === Combining the modules <section5.2.3>
+
+As usual, we combine the basic modules by means of a strategy tree, $T$.
+Let $Lambda = {-1} union omega$, and define the strategy tree
+$T = {f in finseq(Lambda) st n "odd" arrow.r.double f(n) in {0, 1} }$,
+with the stardard partial ordering $<_L$.
+If $alpha in T$ has even length $|alpha| = 2e$ then $alpha$ aims to satisfy requirement~$R_e$, while
+if $|alpha| = 2e + 1$ it works towards satisfying~$P_e$.
+(Hence the definition of the priority tree: strategies for satisfying $P_e$ will have just two outcomes: 0 and~1.)
+As before we make no distinction between a node on the tree and (the instance of)
+the strategy.
+An $R$-strategy is cancelled by resetting all of its cycles.
+A $P$-strategy is cancelled merely by putting it into #pstate(0) and discarding its witness.
+
+The construction proceeds as follows.
+
+Stage 0: #h(1em) All strategies are cancelled.
+
+Stage $s+1$: #h(1em) We define, in substages $t < s$, a finite path $f_(s+1)$, through the tree, of length~$s$.
+So, suppose $alpha = restr(f_(s+1), t) in T$ is defined.
+We have two cases to consider, depending on the parity of~$t$.
+
+- #case(1) $t$ is even, so #stalpha is trying to satisfy an $R$-requirement.
+
+  If no cycle of #stalpha has been started since $alpha$ was last cancelled, start $alpha$'s #cycle(0).
+
+  Otherwise see if there is a leftmost #cycle($k$) able to make one of the state transitions
+  #trans(1, 2), #trans(2, 1), or #trans(3, 1).
+  If so, let this cycle make this transition, resetting cycles to the right if indicated.
+  In the case of the #trans(1,2) transition, if $k > 0$ we also let #cycle($k-1$) perform the required
+  enumeration and move from #state(2) to #state(3).
+  If one of the other transtitions takes place cancel all strategies $beta$ with
+  $concatone(alpha, k) subset beta$ or $concatone(alpha, k-1) <_L beta$.
+  If also $k > 0$ we return #cycle($k-1$) to #state(2).
+  If there is no such #cycle($k$) there is nothing to do at this substage.
+
+  In any case, let $l$ be the rightmost cycle of $alpha$ in a state other than~0.
+  (This cycle must be in #state(1), and if $l > 0$ then cycle $l - 1$ is in #state(2) and imposing restraint.)
+  Let $f_(s+1)(t) = l - 1$.
+
+- #case(2) $t$ is odd, so #stalpha is trying to satisfy a $P$-requirement.
+
+If #stalpha is in #pstate(0) then let it advance to #pstate(1), choosing a witness on the way.
+
+Otherwise, if $alpha$ is able to make a state transition #trans("P1", "P2") or #trans("P2", "P1") let it do so.
+If the latter transition was made we cancel all strategies $beta supset concatone(alpha, 1)$.
+
+In any case, let $f_(s+1)(t) = 0$ if $alpha$ is now in #pstate(1), and $f_(s+1)(t) = 1$ otherwise
+(that is, if $alpha$ is in #pstate(2).)
+
+If $t + 1 < s$ advance to substage $t+1$.
+
+If $alpha subset f_(s+1)$ then $alpha$ is _accessible_ at stage $s+1$.
 
 #bibliography("works.yml", style: "ieee")
