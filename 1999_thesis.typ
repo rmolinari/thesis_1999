@@ -3239,6 +3239,21 @@ Cycle $k$ proceeds as follows.
 0. Until told to start, do nothing. When started, choose a new witness~$x$ larger than any number mentioned in the
   construction so far (including all currently imposed $A$-restraints). Advance to #state(1).
 
++ Denote by $Eq(x, s)$ the condition
+$
+and.big_(k=0,1) [(restr(A_k, x + 1))[s] = (restr(Phi_(e,k)(E_(e,k)), x+1))[s] and
+                 (restr(E_(e,k), hat(phi)(x)))[s] = (restr(hat(Psi)_(e,k)(C join A_k join B_k), hat(phi)(x)))[s]],
+$
+where $phi_s(x) = max{phi_(0,s)(x), phi_(1,s)(x)}$. (Note that $Eq(x, s)$ implies $Eq(y, s)$ for all $y < x$.)
+
+Wait for a stage $s_1$ at which $Eq(x, s_1)$ holds. Set $u = phi_(s_1)(x)$ and put
+$
+v = max{(hat(psi)_0(phi(x)))[s_1], (hat(psi)_1(phi(x)))[s_1]}.
+$
+If $k > 0$ then instruct cycle $k-1$ to enumerate its witness $x(k-1)$ into $A_(pi(k-1))$ with use $v(k)$.
+Restrain $restr((A_i join B_i), v(k))$ for $i = 0, 1$, start cycle $(k+1)$ to run simultaneously, and advance to #state(2).
+
+[If there is no such stage then the requirement is satisfied.]
 
 === Combining the modules <section5.2.3>
 
