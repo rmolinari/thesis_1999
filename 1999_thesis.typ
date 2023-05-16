@@ -3472,7 +3472,7 @@ When it exists, $s(l)$ has all sorts of nice properties.
     return to #state(1), resetting cycle $l+1$ and contradicting the definition of~$s(l)$.
 
     For all $s geq s(l)$ and all $k leq l-2$, $alpha$'s #cycle($k$) is in #state(3) at #stg($s$),
-    so by #lemmaRef(<lemma5.3>) (i), $macron(x)(alpha, k) in A_(pi(k), s)$.
+    so by #lemmaRef(<lemma5.3>);(i), $macron(x)(alpha, k) in A_(pi(k), s)$.
     This establishes~(iv).
 
     (v) follows as did (iv) once we note that, by the minimality of $s(l)$, $alpha$'s #cycle($l-1$)
@@ -3486,7 +3486,7 @@ When it exists, $s(l)$ has all sorts of nice properties.
 ]
 #proof[
     Cycle $l+1$ can only be reset (and hence sent to a state other than 1, 2, or 3) by
-    a change in~$C$. The argument in #lemmaRef(<lemma5.3>) (i) shows that this change must be
+    a change in~$C$. The argument in #lemmaRef(<lemma5.3>);(i) shows that this change must be
     below $v_s(alpha, l)$, a contradiction.
 ]
 
@@ -3510,7 +3510,7 @@ The following result is vitally important, if tedious to prove.
     Again, we give the argument to deal with $A$-witnesses.
 
     If $concatone(alpha, l+1) <_L beta$ then strategy $beta$ is cancelled at #stg($s(l)$), and we
-    use #lemmaRef(<lemma5.3>) (ii).
+    use #lemmaRef(<lemma5.3>);(ii).
     Otherwise we actually have to do some work. We have several cases to consider.
 
     - $concatone(alpha, l+1) subset.neq beta$ for some $j leq l+1$.
@@ -3518,7 +3518,7 @@ The following result is vitally important, if tedious to prove.
       Note that we can actually assume that $j < l$, since if $j = l$ or $j = l+1$ then
       by construction #strat($beta$) automatically respects the restraint $macron(v)(alpha, l)$.
 
-      If $t leq s(l)$ and $x_t(beta, k) in A_(pi(l), s(l))$ then by #lemmaRef(<lemma5.3>) (i)
+      If $t leq s(l)$ and $x_t(beta, k) in A_(pi(l), s(l))$ then by #lemmaRef(<lemma5.3>);(i)
       #strat($beta$)'s #cycle($k$) is in #state(3) at #stg($s(l)$).
       For $x_t(beta, k)$ to leave $A_(pi(l))$ between stages $s(l)$ and $s(l+1)$, $beta$'s
       #cycle($k$) must leave #state(3), due to a $C$-change, necessarily below $macron(v)(alpha, l)$.
@@ -3554,7 +3554,7 @@ The following result is vitally important, if tedious to prove.
       But $alpha$ is accessible at #stg($s(l+1)$), so either
       #cycle($k$) of $beta$ is reset by $s(l+1)$ (if $alpha <_L concatone(beta, k)$), or
       $beta$'s #cycle($k$) is in #state(2) at #stg($s(l+1)$)
-      In either case, $x_t(beta, k) in.not A_(pi(l), s(l+1))$, by #lemmaRef(<lemma5.3>) (i).
+      In either case, $x_t(beta, k) in.not A_(pi(l), s(l+1))$, by #lemmaRef(<lemma5.3>);(i).
 
       If $s(l) < t leq s(l+1)$ (so $x_t(beta, k) in.not A_(pi(l), s(l))$) then $alpha <_L concatone(beta, k)$,
       for otherwise (since $concatone(beta, k-1)$ is accessible at~$t$) $alpha$ would have been cancelled
@@ -3571,13 +3571,44 @@ The following result is vitally important, if tedious to prove.
       we need only consider those with $j ident l thin (mod 2)$.
 
       Well, for such $j leq l - 2$, $macron(x)(alpha, j) in A_(pi(l), s)$ for all $s geq s(l)$ by #lemmaRef(<lemma5.5>) (iv).
-      Now $alpha$'s #cycle($l$) is in #state(1) at #stg($s(l)$), so by #lemmaRef(<lemma5.3>) (i),
+      Now $alpha$'s #cycle($l$) is in #state(1) at #stg($s(l)$), so by #lemmaRef(<lemma5.3>);(i),
       $macron(x)(alpha, l) in.not A_(pi(l), s(l))$.
       By #lemmaRef(<lemma5.5>) (v), $macron(x)(alpha, l) in.not A_(pi(l),s(l+1))$.
 
 ]
 This result is used to prove the crucial
+#lemma[
+    #show: doc => setupenum(doc, formats: ("(i)",))
+    + If $s(l+1)$ exists then $restr(E_(pi(l), s(l+1)), macron(u)(alpha, l)) = restr(E_(pi(l), s(l)), macron(u)(alpha, l))$.
 
+    + If $s(l+2)$ exists then there is an $s > s(l)$ such that
+      $restr(E_(pi(l), s), macron(u)(alpha, l)) neq restr(E_(pi(l), s(l)), macron(u)(alpha, l))$, and if $t(l)$ is the least such~$s$,
+      then $s(l+1) < t(l)$.
+    <lemma5.8>
+]
+#proof[
+    For (i), if $s(l+1)$ exists then both $Eq(macron(x)(alpha, l), s(l+1))$ and $Eq(macron(x)(alpha, l), s(l))$ hold,
+    // note: Eq(*,*) hold in previous line by Lemma 5.5(ii)
+    so
+    $
+    restr(E_(pi(l),s(l+1)), macron(u)(alpha, l))
+             &= (restr(hat(Psi)_(pi(l))(C join A_(pi(l)) join B_(pi(l))), macron(u)(alpha, l)))[s(l+1)] \
+             &= (restr(hat(Psi)_(pi(l))(C join A_(pi(l)) join B_(pi(l))), macron(u)(alpha, l)))[s(l)] \
+             &= restr(E_(pi(l),s(l)), macron(u)(alpha, l)).
+    $
+
+    For (ii), if $s(l+2)$ exists, then since both
+    $Eq(macron(x)(alpha, l), s(l+2))$ and $Eq(macron(x)(alpha, l), s(l))$ hold,
+    if equality held for $s = s(l+2)$ we would have
+    $
+    0 &= A_(pi(l),s(l))(macron(x)(alpha,l)) \
+      &= (hat(Phi)_(pi(l))(E_(pi(l)); macron(x)(alpha,l)))[s(l)] \
+      &= (hat(Phi)_(pi(l))(E_(pi(l)); macron(x)(alpha,l)))[s(l+2)] \
+      &= A_(pi(l),s(l+2))(macron(x)(alpha,l)) \
+      &= 1.
+    $
+    By part (i) we must have $s(l+1) < t(l)$.
+]
 #bibliography("works.yml", style: "ieee")
 
 // LocalWords:  basicModuleRe
