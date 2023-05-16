@@ -244,7 +244,7 @@ University possible, and whose unfailing hospitality made me feel welcome.
 #set heading(numbering: "1.")
 #show heading.where(level: 1): it => {
     set heading(numbering: "I")
-    pagebreak()
+    pagebreak(weak: true)
     v(2in)
     set text(weight: "bold")
     align(center)[
@@ -258,7 +258,7 @@ University possible, and whose unfailing hospitality made me feel welcome.
 = Introduction
 == Definitions and notation
 
-The notation used in this paper is largely standand, and the reader is directed to @Soare1987 for an exposition. We note the
+The notation used in this paper is largely standard, and the reader is directed to @Soare1987 for an exposition. We note the
 following.
 
 Uppercase Greek letters, $Phi, Psi, dots$ will denote recursive functionals, with associated uses $phi, psi, dots$ where the
@@ -290,12 +290,12 @@ hat(phi)(x,s) = cases(
     0              & "otherwise."
 )
 $
-The point of all this is the following. If $Phi\(C; x) converge$, then confinitely often $hat(Phi)_s(C; x) converge$, and for every
+The point of all this is the following. If $Phi\(C; x) converge$, then cofinitely often $hat(Phi)_s(C; x) converge$, and for every
 $C$-true stage $s$, $hat(Phi)_s(C_s; x) arrow.r.double hat(Phi)(C; x) converge$. The hattrick serves to weed out at $C$-true stages
 all but the correct computations.
 
-Finte sequences are denoted variously with parentheses, $(x_0, dots, x_(n-1))$ and angle brackets $angle.l x_0, dots, x_(n-1)
-angle.r$. The length of the sequence $alpha$ is denonted $|alpha|$. The empty sequence, $angle.l angle.r$, is written as $emptyset$.
+Finite sequences are denoted variously with parentheses, $(x_0, dots, x_(n-1))$ and angle brackets $angle.l x_0, dots, x_(n-1)
+angle.r$. The length of the sequence $alpha$ is denoted $|alpha|$. The empty sequence, $angle.l angle.r$, is written as $emptyset$.
 The concatenation of the finite sequences $sigma$ and $gamma$ is written as $concat(sigma, gamma)$. For $e lt.eq |alpha|$,
 $restr(alpha, e)$ is the initial segment of $alpha$ of length $e$.
 
@@ -326,7 +326,7 @@ Given recursively enumerable sets $C ltt G$ there is a d.r.e. set $D$ not of r.e
 ]
 
 The proof given in @CLW1989 has two technical but important flaws. The first, involving the timing of injuries caused by different
-strategies competing on the priorty tree, was noted and fixed by LaForte in @LaForte. The second, involving the claim that the
+strategies competing on the priority tree, was noted and fixed by LaForte in @LaForte. The second, involving the claim that the
 various functionals defined in the construction (specifically, the $Delta(C)$ functionals) are always defined consistently, was
 noted by the present author and is discussed here. We assume the reader has access to a copy of @CLW1989.
 
@@ -343,7 +343,7 @@ $
 where $E_e$ is an r.e. set, and $Theta_e$ and $Phi_e$ are partial recursive functionals.
 
 The basic module presented to satisfy $E_e$ consists of an infinite collection of _cycles_, indexed by $omega^2$. Together, these
-cycles attempt to define fuctionals $Delta(C)$ and $Gamma_j(C)$ (for $j in omega$) such that, if the strategy fails to satisfy
+cycles attempt to define functionals $Delta(C)$ and $Gamma_j(C)$ (for $j in omega$) such that, if the strategy fails to satisfy
 $R_e$, one of these functionals demonstrates $G leqt C$, contrary to assumption. Cycle $(j, k)$ is allowed to define the values
 $Delta(C\; j)$ and $Gamma_j(C; k)$.
 
@@ -395,7 +395,7 @@ $s dubpr$). Then the values of $Delta(j)$ that cycles $(j,k)$ and $(j, k+1)$ def
 $s dubpr$.
 
 When boiled down, the problem is the tension between the definitions of the functions $Delta(C)$ and $Gamma_j(C)$.  The apparent
-need to keep the definition of $Gamma_j(C)$ synchronozed with enumerations into the set $G$ conflicts with the more subdued approach
+need to keep the definition of $Gamma_j(C)$ synchronized with enumerations into the set $G$ conflicts with the more subdued approach
 needed to keep $Delta(C)$ consistent. The inconsistency sneaks in when we "back the wrong horse," in committing to the wrong
 $G$-change, rather than waiting for the one associated with a $Delta(C \; j)$-definition to pan out.
 
@@ -436,7 +436,7 @@ never need to remove elements from $B$ once they are enumerated in.
 
 === The basic module for $R_e$ <basicModuleRe>
 
-The basic module is very nearly the same as the one given in @CLW1989. (It appears to be somewhat differend here,
+The basic module is very nearly the same as the one given in @CLW1989. (It appears to be somewhat different here,
 as we use slightly different notation, and a reduction in the number of states.) There is an extra state
 necessary to avoid $Delta$-inconsistency.
 
@@ -450,19 +450,19 @@ collection $row(j) = { (j, k) st k in omega }$ as the _$j$-th row of cycles_.
 All cycles begin in state 0. A cycle is _started_ by letting it pass from state 0 to another state, as determined by its history. In
 starting, a given cycle $(j, k)$ may in fact start subsequent cycles at the same stage, depending on whether cycle $(j, k)$ has been
 abandoned in the past. This may start a "cascade" of cycle-startings. See state 0, below. A cycle is _reset_ by putting it back into
-state 0, returing its restraints to 0 and undefining the values of its parameters $u$ and $v$.
+state 0, returning its restraints to 0 and undefining the values of its parameters $u$ and $v$.
 //
 (Note that the paper @CLW1989 uses
 "_cancelled_" for this operation. We reserve this word for another purpose: see the description of the priority tree construction in
-@section2.3.3 below.)
+@section2.2.3 below.)
 //
-A cycle is _abandoned_ by returing its restraints to 0 and stopping all activity for that cycle. This is done when a cycle has
+A cycle is _abandoned_ by returning its restraints to 0 and stopping all activity for that cycle. This is done when a cycle has
 categorically failed to satisfy $R_e$, due to the squandering of the various $G$-changes to which it has access. We gain through
 this failure the correct definition of a value for one of the functionals $Gamma_j(C)$ or $Delta(C)$. A cycle is said to _act_
 whenever it moves from one state to another. An exception to this is the transition from state~2 to state~3: this transition is made
 purely for bookkeeping purposes.
 
-Also, when (say) cycle $(j, k)$ acts and in doing so resets cycles to its right, we enirely discard any functionals $Gamma_l(C)$
+Also, when (say) cycle $(j, k)$ acts and in doing so resets cycles to its right, we entirely discard any functionals $Gamma_l(C)$
 for $l > j$, starting them completely afresh if ever needed.
 
 Cycle $(j,k)$ of the strategy proceeds as follows.
@@ -478,7 +478,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   $
     ( A(x) = Phi(E \; x) )[s_1] and (restr(E, phi(x)) = ( restr(hat(Psi)(C join A join B), phi(x)) )[s_1]
   $
-  [Note that if $s_1$ doesn't exist, we automatically satisify the requirement.]
+  [Note that if $s_1$ doesn't exist, we automatically satisfy the requirement.]
 
   If $G_(s_1)(k) = 1$ we jump straight to state~7 and follow the instructions there.
 
@@ -491,7 +491,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
 
   [Note that we do not wait for a stage $t_1$ at which $C_(t_1) neq C_(t_1 - 1)$, (or where there is similar change in $G$) but
    rather for a change from the situation at stage $s_1$. In either case, once we combine the various strategies using a priority
-   tree (see @section2.3.3 below) #stalpha is not "accessible" at every stage. There may be times at which a relevant $G$- or
+   tree (see @section2.2.3 below) #stalpha is not "accessible" at every stage. There may be times at which a relevant $G$- or
    $C$-change occurs but $alpha$ is not accessible, only to become accessible later. The reaction to the change, and hence
    permission, is "delayed" until the strategy is accessible.
 
@@ -561,7 +561,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   Once we reach this state, we define a value for $Gamma_j(C; k)$ which we _know_ to be correct, since $G(k)$ has already changed,
   and won't change again, $G$ being r.e.  Also, the "once-off" nature of the $G$-change means that the only way cycle $(j,k)$ is
   going to be able to satisfy requirement $R_e$ in the future, even with a new witness, is by being infinitely often in state~1; it
-  cannot enumerate its witness into $A$, as the $G$-change it needs has already come and gone.  Although it is posisble that $(j,
+  cannot enumerate its witness into $A$, as the $G$-change it needs has already come and gone.  Although it is possible that $(j,
   k)$ will be able to succeed in this manner, it is improbable. More likely is that cycle $(j, k)$ will be eventually stuck in state
   2, waiting forlornly for an impossible $G$-change, but in the meantime computing a correct value for $Gamma_j(C; k)$. We may as
   well cut our losses and simplify by abandoning this cycle: we content ourselves with the modest gain of a single correct value for
@@ -580,7 +580,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
 
 === The basic module for $P_e$
 
-The $P_e$ requriements are simpler than those of the first kind, and we implement a standard diagonalisation approach to satisfy
+The $P_e$ requirements are simpler than those of the first kind, and we implement a standard diagonalization approach to satisfy
 them. To ensure that $B leqt G$ we again use a system of cycles, but now we only have a one-dimensional arrangement.
 
 Again, suppose $e$ is fixed, and write $Theta$ for $Theta_e$. We have a $omega$-sequence of cycles, and again threaten
@@ -635,11 +635,11 @@ the letter P. Cycle $k$ proceeds as follows.
 // TODO: hacky (see above)
 #show: doc => setupenum(doc)
 
-=== Combining the modules <section2.3.3>
+=== Combining the modules <section2.2.3>
 
-Now that we have desribed the strategy for satisfying a single requirement in isolation we must consider how to satisfy all
+Now that we have described the strategy for satisfying a single requirement in isolation we must consider how to satisfy all
 requirements simultaneously. Since each strategy may well act infinitely often we must use a _priority tree_ to manage this. The
-standard reference fo this technique is Chapter XIV of Soare @Soare1987.
+standard reference for this technique is Chapter XIV of Soare @Soare1987.
 
 #let outcome = $concatone(alpha, (j, k))$
 
@@ -654,12 +654,12 @@ constantly check the extent of the path restraint being imposed on them.
 
 #let outcome = none
 
-This method works fine, as seen in @LaForte. However, it not particulary pretty. In particular, the point of tree-based arguments is
+This method works fine, as seen in @LaForte. However, it not particularly pretty. In particular, the point of tree-based arguments is
 to remove the need for strategies to themselves keep an eye on the restraints set by other strategies. If possible, we would like to
 avoid the path restraint, and there is a simple trick that lets us do so. We only follow a child corresponding to cycle $(j,k)$ when
 cycle $(j, k)$ has actually imposed a restraint. Until that happen we follow a child corresponding to the rightmost cycle to the
 left of $(j, k)$ which imposes restraint. This is perfectly safe, as, so long as $(j, k)$ imposes no restraint, we cannot injure any
-computions by letting the strategies below the leftward cycle operate. Once such a restraint is imposed, we automatically respect it
+computations by letting the strategies below the leftward cycle operate. Once such a restraint is imposed, we automatically respect it
 by starting to follow a child corresponding to $(j, k)$. The only trick we actually need is to add a new child,
 $concatone(alpha, -1)$, to be followed when no cycles at all of #stalpha impose a restraint.
 
@@ -679,7 +679,7 @@ be the priority tree, with the started partial ordering $<_L$ inherited from the
 has even length $|alpha| = 2e$ then $alpha$ aims to satisfy requirement $R_e$, while if $|alpha| = 2e + 1$ then $alpha$ works
 towards satisfying $P_e$. Recall that we make no distinction between a node on the tree and the (instance of the) strategy it is
 using. A strategy is _cancelled_ by resetting all of its cycles and discarding any functionals it may have (partially) defined. Any
-paramater, once defined, keeps that value until it is redefined or undefined.
+parameter, once defined, keeps that value until it is redefined or undefined.
 
 The construction proceeds as follows.
 
@@ -711,7 +711,7 @@ $nextval = lambda$, rather than worrying about two kinds of restraint.
 
 If $t + 1 < s$ we advance to substage $t + 1$.
 
-We say tha the strategies $alpha subset f_(s+1)$ are _accessible_ at stage $s+1$.
+We say that the strategies $alpha subset f_(s+1)$ are _accessible_ at stage $s+1$.
 
 == Verification
 
@@ -743,7 +743,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state~6 a
     (namely, a cycle $(j, k') > (j, k)$) is in either of these states at stage $s$.
 
     If cycle $(j, k)$ entered state~5 from state~4 (and there is no other way), no cycles to the right of $(j, k)$ are in any state
-    other than 0 at the start of stage $s$, because by entereing state~4, cycle $(j, k)$ reset every cycle to its right, and no new
+    other than 0 at the start of stage $s$, because by entering state~4, cycle $(j, k)$ reset every cycle to its right, and no new
     cycles were started so long as $(j, k)$ remained in state~4. Upon entering state~5, cycle $(j, k)$ starts cycle $(j+1, 0)$,
     and no cycle to the right of $(j, k)$ in row $row(j)$ is started so long as $(j, k)$ stays in state~5.
 
@@ -787,7 +787,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state~6 a
 
     Cycle $(j, k dubpr)$ can't go from state~2 to state~3 at stage $t$, as this does not count as an action, so the only remaining
     possibility is the $3 arrow.r.bar 4$ transition, so that there is a change in $restr(C, mu_t(x(j, k dubpr)))$.
-    We claim that $mu_t(x(j, k dubpr)) = v_t(j, k')$, and obtain the contradiciton of a change in $restr(C, v_t(j, k'))$.
+    We claim that $mu_t(x(j, k dubpr)) = v_t(j, k')$, and obtain the contradiction of a change in $restr(C, v_t(j, k'))$.
 
     Suppose otherwise, so that $(j, k dubpr)$ enters state~3 for the sake of yet another cycle $(j, k trippr)$ being
     in state~5/6, or for another "incarnation" of cycle $(j, k')$; that is, for the sake of cycle $(j, k')$ being in state~5/6
@@ -866,11 +866,11 @@ The claim is now that if #stalpha has been started since last being cancelled, i
     This is a valid pattern, as $angle8 in prelimRow$ and $angletup(7, dots, 7, 1) in uncrampedRow subset finalRow$.
 
     Now suppose that $alpha$'s pattern is valid coming into stage $s$, that #stalpha is not cancelled at $s$, and that something
-    actually appens: some cycle of the strategy changes state.  We let $pattern(s-1) = angletup(p_0, p_1, dots, p_n, f)$, where
+    actually happens: some cycle of the strategy changes state.  We let $pattern(s-1) = angletup(p_0, p_1, dots, p_n, f)$, where
     $p_i in prelimRow$ and $f in finalRow$. First consider any $2 arrow.r.bar 3$ transitions. These can occur only in a crampedRow,
     as only such rows have anything in state~5/6. But a 3 in place of a 2 leaves the type of crampedRow
     (either #patternName("prelim") or #patternName("final")) unchanged, so the pattern is still valid after such changes.  From now on let
-    $pattern(s-1)$ represent the pattern after all $2 arrow.r.bar 3$ state transitions are taken into accout, bet before any action is
+    $pattern(s-1)$ represent the pattern after all $2 arrow.r.bar 3$ state transitions are taken into account, bet before any action is
     recorded.
 
     If no cycle of the strategy actually acts at stage $s$ we are done. Otherwise, let $(j, k)$ be the leftmost cycle which acts. We
@@ -1000,16 +1000,16 @@ and restrict our attention to the functionals associated with this strategy.
 
 #lemma[
     If some cycle $(j, k)$ acts at stage $s$ to define a computation for $Delta(C\; j)$,
-    then for eaach $i < j$, ($Delta(C\; i))[s] converge$.
+    then for each $i < j$, ($Delta(C\; i))[s] converge$.
     <lemma2.8>
 ]
 #proof[
     Such a cycle can act in this way only by moving from state~4 to either state~5 or state~8. In either case,
     the pattern corresponding to row $row(j)$ coming into stage $s$ must have been an uncrampedRow.
     So, by the Pattern Lemma, for each $i < j$, the pattern for row $row(i)$ must either be angle8
-    (indiciating that row $row(i)$ was abandoned at some time) or an element of prelimCrampedRow. In the latter
+    (indicating that row $row(i)$ was abandoned at some time) or an element of prelimCrampedRow. In the latter
     case, each row $row(i)$ has some cycle in state~5 as we enter stage $s$. But no cycle in any row $row(i)$, $i < j$
-    acts at stage $s$, as othwerwise cycle $(j, k)$ would be reset and unable to act. Thus the pattern of each of these rows
+    acts at stage $s$, as otherwise cycle $(j, k)$ would be reset and unable to act. Thus the pattern of each of these rows
     is unchanged (except perhaps for 2 changing to 3) during stage $s$, and each has a cycle in state~5 at the end of the stage.
 
     So, by #lemmaRef(<lemma2.7>), $(Delta(C\; i))[s] converge$.
@@ -1034,7 +1034,7 @@ Now we can prove that the functionals are defined consistently.
     <lemma2.10>
 ]
 #proof[
-    Notice that we may assume that the strategy in questino is not cancelled during
+    Notice that we may assume that the strategy in question is not cancelled during
     any of the stages of interest to us in this lemma. If such a cancellation were to occur, all functionals
     associated with our strategy would be discarded and the lemma follows trivially.
 
@@ -1042,10 +1042,10 @@ Now we can prove that the functionals are defined consistently.
 
     First note that when any cycle $(j, k)$ of $row(j)$ starts it chooses a witness $x(j, k)$ larger than
     any number mentioned so far. In particular, $x(j, k)$ is larger than the use of any $Delta(C\; i)$
-    computation (for $i < j$) still defined when the witness is chosen. As the defintition of such
+    computation (for $i < j$) still defined when the witness is chosen. As the definition of such
     a new computation would involve the resetting of cycle $(j, k)$ (by the Pattern Lemma), $x(j, k)$
     will remain larger than the use of any currently defined $Delta(C\; i)$ computation. But
-    if cycle $(j, k)$ ever defines a compuation for $Delta(C\; j)$, then $delta(j) = v(j, k) > x(j, k)$
+    if cycle $(j, k)$ ever defines a computation for $Delta(C\; j)$, then $delta(j) = v(j, k) > x(j, k)$
     will also be larger than the uses of prior $Delta(C\; i)$ computations. So (I) will never be violated
     by a row defining a $Delta$-computation with a use smaller than the uses of computations defined by earlier rows.
 
@@ -1125,7 +1125,7 @@ We have the analogous result for the $Gamma$ functionals.
     Now suppose that (II) fails for k: at stage $s$ cycle $(j, k)$ defines $Gamma_j(C; k)$ but another
     computation, $(Gamma_j(C; k))[t]$, exists from an earlier stage $t < s$. Note that
     $restr(C_s, u_t(j, k)) = restr(C_t, u_t(j, k))$. Note also that $gamma_(j,t)(k) > 0$, since the definition
-    of a computation of use 0 would lead to the permenent abandonment of cycle $(j, k)$ at stage $t$. This cycle
+    of a computation of use 0 would lead to the permanent abandonment of cycle $(j, k)$ at stage $t$. This cycle
     would therefore be unable to act at stage $s$.
 
     Now, only cycle $(j, k)$ can define a computation for $Gamma_j(C; k)$. It cannot merely have returned to state~1 and again to
@@ -1137,7 +1137,7 @@ We have the analogous result for the $Gamma$ functionals.
     (if it hadn't been reset since stage $t$ already.) By #lemmaRef(<lemma2.9>), $(Gamma_j(C; k'))[t] converge$ and by part (I)
     $gamma_(j,t)(k') < gamma_(j,t)(k)$. Before stage $s$ cycle $(j, k')$ must restart cycle $(j, k' + 1)$, and at the same
     time define a new computation for $Gamma_j(C; k')$. But by the inductive hypothesis the previous such computation
-    (_i.e._ that valid at stage $t$) must have become undefined. This meanst hat there has been a change
+    (_i.e._ that valid at stage $t$) must have become undefined. This means that there has been a change
     since stage $t$ in $restr(C, gamma_(j,t)(k')) subset restr(C, gamma_(j,t)(k))$. But $gamma_(j,t)(k) = u_t(j, k)$,
     so this is a contradiction.
 
@@ -1148,7 +1148,7 @@ We have the analogous result for the $Gamma$ functionals.
 
 @section2.3.1 was a long and complicated one. As the $P_e$ strategy is so much simpler than the $R_e$ one,
 the corresponding set of lemmas is also. We assume we have fixed a #stalpha of odd length. Again
-we streat all stages mentioned as being the succissive ones at which #stalpha is actually accessible.
+we treat all stages mentioned as being the successive ones at which #stalpha is actually accessible.
 We start by discussing the patterns that the cycle states can make. We again refer to the pattern at stage $s$
 as $pattern(s)$.
 
@@ -1326,13 +1326,13 @@ acts. Otherwise we say that $alpha$ _acts infinitely_.
     of the form $(i, k)$ for $i < j$ acts after stage~$t_0$. Since row~$row(j)$ acts infinitely, but each
     cycle in it acts only finitely often, _every_ cycle $(j, k)$ must eventually act, and get stuck in a way
     which does not prevent cycle~$(j, k+1)$ from acting. This means that each cycle in the row
-    must eventually get parmanently stuck in state~2 or state~3, or is abandoned.
+    must eventually get permanently stuck in state~2 or state~3, or is abandoned.
 
     By #lemmaRef(<lemma2.4>) a cycle gets permanently stuck in #state(3) only if another cycle in its
     row gets permanently stuck in #state(5) or #state(6), which we have seen does not happen to row~$row(j)$.
     Thus in fact every cycle of row~$row(j)$ eventually gets permanently stuck in #state(2) or is
     abandoned in #state(7). In the latter case, $Gamma_j(C; k)$ is correctly defined to be
-    $1 = G(k)$ with use~0. We claim that the cycles which get permantently stuck in #state(2) also
+    $1 = G(k)$ with use~0. We claim that the cycles which get permanently stuck in #state(2) also
     compute a correct value. Well, suppose that $(j, k)$ gets so stuck. It must be that
     $restr(C, u(j,k)) = restr(C_(s_1(j,k)), u(j, k))$ _and_ $G(k) = G_(s_1(j,k))(k)$. But then
     $
@@ -1442,7 +1442,7 @@ if it imposed no restraint at that stage.
     + $i_eta = 2$ and $nu_eta$ is infinitely often in a state numbered less than 4.
 
      Once cycle $nu_eta$ reaches #state(4) it can only return to a lower numbered state by being reset.
-     But by defintion this cycle is not reset after state~$s$, so the only way it can infinitely often
+     But by definition this cycle is not reset after state~$s$, so the only way it can infinitely often
      be in a state numbered less than 4 is if it never reaches #state(4). This contradicts the definition of $i_eta$.
 
     In the case $|alpha| = 2e + 1$ the argument is again similar and simpler.
@@ -1454,10 +1454,10 @@ if it imposed no restraint at that stage.
 ]
 #proof[
     If $alpha$ acts only finitely, then $concatone(alpha, epsilon)$ is certainly not
-    cancelled after the last time any cycle of stretegy $alpha$ acts.
+    cancelled after the last time any cycle of #stalpha acts.
 
     Otherwise, we note that by assumption $alpha$ is cancelled only finitely often, so
-    ofter stage $s_0$, $concatone(alpha, -1)$ is never cancelled. For other possible
+    after stage $s_0$, $concatone(alpha, -1)$ is never cancelled. For other possible
     values of $epsilon$, $concatone(alpha, epsilon)$ is cancelled only when
 
     #show: doc => setupenum(doc, formats: ("1.",))
@@ -1472,7 +1472,7 @@ if it imposed no restraint at that stage.
     By #lemmaRef(<lemma2.20>) choose $s > s_0$ so large that $nu_eta$ is not lacking for $i_eta$
     (or just lacking) after stage~$s$. In particular, cycle $nu_eta$ is not reset after stage~$s$,
     as in being reset it would (temporarily) be lacking. Thus $eta_nu$ works only with its final witness, $x$ (resp.~$y$),
-    after $s$. But the worst $nu_eta$ can now do is ennumerate $x$ into $A$ and out again (or into $B$) once.
+    after $s$. But the worst $nu_eta$ can now do is enumerate $x$ into $A$ and out again (or into $B$) once.
 
     Thus $concatone(alpha, epsilon)$ is cancelled only finitely often.
 ]
@@ -1490,7 +1490,7 @@ This establishes part 2 of the Proposition for $n = eta$.
     + Only finitely often does any cycle of #stalpha act.
 
     + Either $epsilon neq -1$ and cycle $nu^+$ acts infinitely often, but is only reset finitely often,
-      or $epsilon = -1$ and cycle $(0, 0)$ (resp. 0) returnes infinitely often to #state(1) (resp. #state(plabel(0))).
+      or $epsilon = -1$ and cycle $(0, 0)$ (resp. 0) returns infinitely often to #state(1) (resp. #state(plabel(0))).
 
     We start with the argument for $|alpha| = 2e$.
 
@@ -1601,8 +1601,8 @@ again. This allows us to get a handle on the delayed permitting nature of the ar
     means that such action is also impossible in the future.
     Also, $t > s^(concatone(alpha, nu))$, so (writing $nu = (j,k)$), ${j, k} sect G = {j, k} sect G_t$,
     and so by stage~$t$ cycle~$nu$ will have seen all of the explicit $G$-permission it will ever see.
-    Finally, if $nu$ makes the trasition #trans(2, 3) at stage~$t$, then the value of $mu$ just calculated
-    is based on some computations in some cycle to the right, and these computations will never be subsequently injuired by
+    Finally, if $nu$ makes the transition #trans(2, 3) at stage~$t$, then the value of $mu$ just calculated
+    is based on some computations in some cycle to the right, and these computations will never be subsequently injured by
     a $C$-change, as $t$ is $C$-true. Thus cycle $nu$ will be stuck in #state(3) until it is reset.
 
     The upshot of all of this is that by not acting at $t$, cycle $nu$ has demonstrated that it is unable
@@ -1683,7 +1683,7 @@ Now we can show that the permitting works.
 
     Thus $A(x) = A_w(x)$.
 
-    If $x$ is chosen at $s_0$ to be a witness for cycke $k$ of #stalpha of _odd_ length then the same
+    If $x$ is chosen at $s_0$ to be a witness for cycle $k$ of #stalpha of _odd_ length then the same
     basic argument applies, but now we need not worry about $x$ being enumerated out of $B$: we just check if it
     ever gets enumerated in.
 
@@ -1755,7 +1755,7 @@ place the "base set" $G$ (which we now call $D$) in a prescribed r.e.~interval.
 Note that $D leqt F$, but we do not know whether or not we can ensure $G leqt F$.
 
 This result is in some sense a middle point between Theorems~#thmref(<theorem3.1>) and~#thmref(<theorem3.4>).
-We maintain some control over the base set by allowing more flexiibility in the construction of $F$ from it.
+We maintain some control over the base set by allowing more flexibility in the construction of $F$ from it.
 
 
 == The construction for the case $n = 4$ <section3.2>
@@ -1789,7 +1789,7 @@ It is similar to the module in #chapRef(2). The strategy for a single requiremen
 (potentially unbounded) number of cycles, each of which makes a very simplistic attempt
 to satisfy the requirement. We argue that if no cycle succeeds then we have $G leqt C$, a contradiction.
 
-So, fix $e in omega$. We desribe the strategy for satisfying requirement $R_e$. To simplify notation
+So, fix $e in omega$. We describe the strategy for satisfying requirement $R_e$. To simplify notation
 we write $angletup(R, Phi, Psi)$ for $angletup(E_e, Phi_e, Psi_e)$.
 
 In #chapRef(2) we avoided an r.e.~opponent by changing our constructed set twice. When avoiding
@@ -1802,7 +1802,7 @@ over $A$. This will allow us to eject elements from $udvd$ with great flexibilit
 Now, as we wish to ensure $A leqt G$ we must ask for $G$-permission each time we put an element into~$A$.
 It turns out that in the $n = 4$ case we must do this twice, which leads to a two dimensional cycle layout, as in #chapRef(2).
 
-Thus, the strategy consts of an $(omega^2)$-sequence of cycles ordered lexicographically. Cycle $(0,0)$ starts first.
+Thus, the strategy consists of an $(omega^2)$-sequence of cycles ordered lexicographically. Cycle $(0,0)$ starts first.
 Cycle $chi = (j, k)$ may start $(j, k+1)$ and $(j+1, 0)$ as well as stopping all cycles $> chi$.
 Cycle $chi$ may define the values $Gamma_j(C; k)$ and $Delta(C\; j)$.
 Again we refer to rows of cycles, $R_j = {(j,k) st k in omega}$.
@@ -1816,7 +1816,7 @@ Each cycle begins in #state(0). A cycle is _started_ by letting it pass from #st
 as determined by its history in much the same way as in #chapRef(2); we have the same cascading effect.
 A cycle is reset by putting it back into #state(0), returning its restraints to 0 and undefining its
 parameters $x, u, tilde(u), v, tilde(v), lambda^1(x)$, and $lambda^2(x)$.
-A cycle is _abandoned_ by returing its restraints to 0 and stopping all activity for that cycle. This is done in much
+A cycle is _abandoned_ by returning its restraints to 0 and stopping all activity for that cycle. This is done in much
 the same situations as in #chapRef(2): a cycle has failed to satisfy $R_e$.
 A cycle is said to _act_ whenever it moves from one state to another, _except_ in the case of the bookkeeping
 transition from #state(4) to #state(5).
@@ -1825,7 +1825,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
 
 #show: doc => setupenum(doc, formats: ("1.", "(i)",))
 0. Until given the go-ahead, do nothing. When told to start, if $k=0$ or row $R_j$ has previously been abandoned _in toto_,
-   advance directly to #state(11) and follow the instructions there. Otherwise, check if cycle $chi$ has been abanonded
+   advance directly to #state(11) and follow the instructions there. Otherwise, check if cycle $chi$ has been abandoned
    in the past. In this case jump straight to #state(10) and follow the instruction there. Otherwise, choose a witness~$x$,
    larger than any number mentioned in the construction so far, including all currently defined $(udvd)$-restraints,
    and larger than both $j$ and~$k$. Advance to #state(1).
@@ -1860,7 +1860,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
   + $restr(C_(s_2), tilde(u)) = restr(C_(s_1), tilde(u))$, $Eq(x, s_2)$ holds.
 
   If (i) occurs then return to #state(1), setting the (udvd)- and $A$-restraints back to~0.
-  Note that the change in $C$ automatically ejhects the witness $x$ from $U^D$.
+  Note that the change in $C$ automatically ejects the witness $x$ from $U^D$.
 
   If we have (ii) let $v = (hat(psi)phi(x))[s_2] > u$, the total use of the
   $hat(Psi(C join A join udvd))$ computations at stage~$s_2$, and define $tilde(v) > tilde(u)$ analogously
@@ -1896,7 +1896,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
 
   In case (iii) we have $restr(E_(s_3), phi_(s_1)(x)) = restr(E_(s_1), phi_(s_1)(x))$, so there is a
   $y < phi_(s_1)(x)$ such that $E_(s_3)(y) = E_(s_1)(y) neq E_(s_2)(y)$. Thus $E$ has changed (at least)
-  twice on $y$ so far. Fix this $y$ in subsequenct discussion.
+  twice on $y$ so far. Fix this $y$ in subsequent discussion.
 
   We wish to continue our tactic of reacting to changes in $E$ by changing $(udvd)(x)$.
   The witness $x$ is already in both of $U^D$ and $V^D$, so to get it back into the difference
@@ -2011,7 +2011,7 @@ In #chapRef(2) a cycle could act infinitely often without being reset by bouncin
 between states 1 and~2, or between states 4 and~5. It was important in that construction
 that such infinite action was not accompanied by any enumerations into or out of the sets
 under construction. The proof of #lemmaRef(<lemma2.21>) depended on this fact: after
-a cycle is reset for the last time it can only cause finitely much enuemration.
+a cycle is reset for the last time it can only cause finitely much enumeration.
 In the preset construction, however, this is not true. A cycle returning infinitely often
 to #state(1) (or to #state(2)) must infinitely often change the value of $(udvd)(x)$,
 only to have it changed back again when a $C$-change causes the return to #state(1).
@@ -2057,7 +2057,7 @@ The construction proceeds as follows.
 Suppose $alpha = (restr(f_(s+1), t)) in T$ has been defined by substage $t-1$. If no cycle of #stalpha has been
 started since $alpha$ was last cancelled then start $alpha$'s cycle $(0,0)$ and set $nextval = -1$.
 
-Otherwise,let any cycles of stategy $alpha$ able to make the transition from #state(4) to #state(5) do so.
+Otherwise let any cycles of #stalpha able to make the transition from #state(4) to #state(5) do so.
 Let any cycle forced solely by a $C$-change to change state do so. There are now two cases
 - #case(1) Some leftmost cycle $nu$ of #stalpha is able to act.
 
@@ -2095,7 +2095,7 @@ cycle~$nu$ of #stalpha.
 At heart this construction is very like the one in #chapRef(2). We use the same mechanism
 to avoid $Delta$-inconsistency, and the underlying aim is the same: change the constructed set
 frequently enough that our opponent (previously an r.e.~set; here a 4-r.e.~set) cannot keep up with us.
-As such, we would expect the verification to take alrgely the same tack. This is the case.
+As such, we would expect the verification to take largely the same tack. This is the case.
 
 The verification argument given in #chapRef(2) is detailed#footnote[The less charitable reader may prefer another word.]
 and it would please no-one to go through the same sort of thing again in its entirety. So, when an argument follows the
@@ -2164,7 +2164,7 @@ argument as was used for the #trans(3,4) transition in #chapRef(2).
 
 We are now ready to state the Pattern Lemma for this construction.
 
-Let $X = {0, 1, dots, 11}$ and reacall that for sets $M, N$ of finite sequences
+Let $X = {0, 1, dots, 11}$ and recall that for sets $M, N$ of finite sequences
 (of unspecified type) we set
 $setconcat(M, N) = {concat(theta, sigma) | theta in M and sigma in N}$, and $angletup(M) = {angletup(theta) | theta in M}$.
 
@@ -2194,7 +2194,7 @@ We also refer to the cycle arrangements of individual slices as "patterns".
     <lemma3.11>
 ]
 #proof[
-    The arguments are very similar to those in the corresonding proof in #chapRef(2), and consist of an exhaustion of cases.
+    The arguments are very similar to those in the corresponding proof in #chapRef(2), and consist of an exhaustion of cases.
     The same follow-your-nose approach works just fine; nothing is to be gained by repeating it.
 ]
 
@@ -2406,7 +2406,7 @@ The complications which arise as $n$ gets larger are of notation, rather than of
 When avoiding $n$-r.e. sets we must change our constructed set $n+1$ times, leading to
 an $(n+1)$-dimensional cycle structure.
 This leads to an increase in the number of times that we must ask for $G$-permission for the levers
-corresonding to a given witness~$x$, and in the number of different functionals we construct.
+corresponding to a given witness~$x$, and in the number of different functionals we construct.
 
 We will not attempt to give anything more than the briefest indications of how to
 adapt the $n=4$ construction to larger values of~$n$.  We will start by calculating how many times
@@ -2500,7 +2500,7 @@ add an extra tier of functionals, with a corresponding waiting stage to protect 
 == Further comments
 
 As all of the strategies are self-contained, it does not hurt to combine strategies corresponding to
-different valus of $n$, so long as we associate their enumerations with different $dreInAbove(D)$ sets.
+different values of $n$, so long as we associate their enumerations with different $dreInAbove(D)$ sets.
 So, those strategies concerning themselves with avoiding 5-r.e. degrees (say) work with the set
 $C join A join (setdiff(U^(D,5), V^(D,5)))$, while those avoiding 13-r.e. degrees work with the separate
 $C join A join (setdiff(U^(D,13), V^(D,13)))$. A description of the priority tree then
@@ -2523,7 +2523,7 @@ construct a single $dreInAbove(D)$ set $F$ with is not $n$-r.e. for any $n$:
 
 It is also interesting to note that the sets $F_n$ we construct are just barely $dreInAbove(D)$.
 In the construction, elements are only ever enumerated into $U^D$ once, at least modulo "unwanted"
-ejections due to $C$-changes. In the absense of these $C$-changes the set $U^D$ would be
+ejections due to $C$-changes. In the absence of these $C$-changes the set $U^D$ would be
 recursively enumerable. Hence the set(s) $udvd$ are really the difference of an (almost) r.e.~set
 and a $C$-r.e. one. Then the question is, how much do we really use the full strength
 of "$dreInAbove(D)$"? Can we get the same final result using just $reInAbove(D)$ in place of $dreInAbove(D)$?
@@ -2547,7 +2547,7 @@ with total use $tilde(v)$, we would (after waiting for permission) kick $x$ out 
 lever~$lambda_1(x)$. However, it is impossible for us to restrain $restr(A, tilde(v))$ from #stg($s_2$)
 onwards, as we cannot be sure that $lambda_1(x) > v$. The very act of returning $V^D$ to its $s_1$ shape
 may change $restr(A, tilde(v))$. Thus, instead of two anchor-points, we will only have one,
-$restr(E_(s_1), phi_(s_1)(x))$, to which we can be sure of returing each time. Thus, while we can say each time that
+$restr(E_(s_1), phi_(s_1)(x))$, to which we can be sure of returning each time. Thus, while we can say each time that
 $
 restr(E_(s_("odd")), phi_(s_1)(x)) = restr(E_1, phi_(s_1)(x)) neq restr(E_(s_("even")), phi_(s_1)(x)),
 $
@@ -2560,13 +2560,13 @@ needing to change our constructed set $n+1$ times, we may need to change it
 $m(x) = m(x, s_1) = (1 + n dot phi_(s_1)(x))$ times for the witness~$x$.
 This bound is clearly not known before the cycle starts: we have to wait until stage~$s_1$ to find it.
 
-This, of course, is where thep problems start. Before we knew that all the witnesses chosen by a given strategy
-would be content with just $n+1$ changes and could thereforew do with an $omega^(floor(n\/2))$ cycle structure.
+This, of course, is where the problems start. Before we knew that all the witnesses chosen by a given strategy
+would be content with just $n+1$ changes and could therefore do with an $omega^(floor(n\/2))$ cycle structure.
 Now, as we chose larger and larger witnesses for the various cycles, the potential number of times that we must seek
 permission may grow without bound. This fact by itself does not make the construction impossible: we can
-use $omega^(< omega)$ (ordered lexicographically) to organize our cycles, and we can speak of slices of all finine
+use $omega^(< omega)$ (ordered lexicographically) to organize our cycles, and we can speak of slices of all finite
 dimensions. Define the _slice dimension_ of a #cycle($chi$) as the dimension of the smallest
-slice containing $chi$ and all of itse predecessors. Thus the slice dimension of cycle $(1, 1, 1)$ is 3, while
+slice containing $chi$ and all of its predecessors. Thus the slice dimension of cycle $(1, 1, 1)$ is 3, while
 that of $(1, 0, 0, 0)$ is 4. Various cycles will now have varying (finite) numbers of internal states
 (determined by each cycle dynamically as soon as $phi_(s_1)(x)$ is calculated), and the strategy
 as a whole may have infinitely many different ones. There is now a fundamentally different kind of possibility
@@ -2574,7 +2574,7 @@ that must be considered in the proof of #lemmaRef(<lemma3.18>) (which is really 
 
 ($infinity$) #h(0.5em) For all $i in omega$ a non-zero number of cycles of slice dimension greater than $i$ act.
 
-The author has been unable to turn a failure of this type into a deomnstration that $G leqt C$.
+The author has been unable to turn a failure of this type into a demonstration that $G leqt C$.
 In the $dreInAbove(D)$ construction, possibility~(A), say, of #lemmaRef(<lemma3.18>) (actually of #lemmaRef(<lemma2.17>))
 led to computation of $G$ from $C$ "along the first component". In general, for any $n$, a failure of
 the $dreInAbove(D)$ computation leads a computation of $D$ along one of the components. Outcome ($infinity$) allows no
@@ -2587,14 +2587,14 @@ as again the number of flip-flops depends on the particular witness chosen.
 
 The case in which $C = emptyset$ was the first to be proved by the author.
 It was obtained before the method was developed to ensure the consistency of the $Delta$ functional,
-as that method is not needed in the special case. The overall construction is in any case vastly simplifed.
+as that method is not needed in the special case. The overall construction is in any case vastly simplified.
 
 To see why, consider what would happen in the construction if $C = emptyset$. In particular, we never experience a $C$-change.
 At no time would a #cycle($chi$) need to return to an earlier numbered state due to a computation being destroyed.
 So long as it is not reset, $chi$ will only ever make progress, or (at worst) stay put.
 This means that no strategy will act infinitely often.
 (Otherwise, by Lemmas~#thmref(<lemma3.18>) and~#thmref(<lemma3.19>),
- some cycle would act infinitely without being reset infinitly often).
+ some cycle would act infinitely without being reset infinitely often).
 In other words, _each strategy causes only finitely much injury._
 Once we have a finite injury argument, we can do away with the entire apparatus of the priority tree.
 
@@ -2614,7 +2614,7 @@ Hence we have the following.
     <theorem3.30>
 ]
 When combining requirements corresponding to different values of $n$ we can tell for the sake of which $n$-value a specific
-witness $x$ was chosen, and hence the maximum number of times that $(udvd)(x)$ will change. We thereforew have the following result,
+witness $x$ was chosen, and hence the maximum number of times that $(udvd)(x)$ will change. We therefore have the following result,
 which corresponds to #thmref(<theorem3.29>) just as #thmref(<theorem3.30>) corresponds to #thmref(<theorem3.28>)[Theorem].
 #theorem[
     Given an r.e. set $G ident.not_T emptyset$, there is r.e. $D leqt G$ and a set $F$ which is
@@ -2659,7 +2659,7 @@ r.e. set~$G$. Therefore Theorem~11 in @ALS1998 may be slightly strengthened to r
 
 == Introduction
 
-In #chapRef(3) we gave a generalization of (a weaker form) of the origianl Soare and Stob result.
+In #chapRef(3) we gave a generalization of (a weaker form) of the original Soare and Stob result.
 In #chapRef(5) we will prove a generalization in another direction:
 // TODO: label this 5.2
 #theorem[
@@ -2677,7 +2677,7 @@ found densely in the r.e. degrees?
 ]
 This (and even the weaker version in which we allow $D = F$) is false because of
 #theorem(name: [Arslanov, Lempp and Shore, @ALS1996])[
-    There is a recursively enuemrable set $C$ with $emptyset ltt C ltt emptyset'$ such that
+    There is a recursively enumerable set $C$ with $emptyset ltt C ltt emptyset'$ such that
     every $reInAbove(C)$ set $A$ with $C leqt A leqt emptyset'$ is of r.e. degree.
     <theorem4.2>
 ]
@@ -2720,7 +2720,7 @@ dominates all (total) recursive functions.
 That is, if $f$ is a total, recursive function, there is $n in omega$ such that $(forall m > n)[c_C(m) > f(m)]$.
 (Roughly speaking, our construction will require $C$-permission "late" in the strategy, and the fact that $c_C$
  dominates every recursive function means that we get this permission when we need it. Whenever you
- (recursively) guess how long it takes initial segments of $C$ to converge, you are wrong confinitely often.)
+ (recursively) guess how long it takes initial segments of $C$ to converge, you are wrong cofinitely often.)
 Fix such an enumeration, and enumerations ${G_s}_(s geq 0)$ and ${H_s}_(s geq 0)$.
 
 We will construct an auxiliary r.e. set $B$ and arrange things so that $D = G join A$ and $F = G join A join B$
@@ -2748,7 +2748,7 @@ For the requirements of the first type (the "r.e.-avoiding" requirements) the ba
 a simplified version of the one used in @ALS1996[Theorem 2.1]. This in turn is basically the approach used in
 @CLW1989[Theorem 1], but incorporating high permitting. The strategy used to satisfy $R_e$ consists of a
 (potentially unbounded) number of _cycles_, each of which tries to satisfy the requirement in a very simplistic way.
-If each cycle fails, we argue that $H leqt G$, contradicting the typothesis of the theorem.
+If each cycle fails, we argue that $H leqt G$, contradicting the hypothesis of the theorem.
 
 Suppose $e$ is fixed, and write $angletup(E, Phi, Psi)$ for $angletup(E_e, Phi_e, Psi_e)$. We will describe the strategy
 for satisfying~$R_e$.  It consists of an $omega$-sequence of cycles. Cycle~0 starts first, and each #cycle($k$) can start
@@ -2759,9 +2759,9 @@ also defines values for an auxiliary (partial) recursive function~$m$, used in t
 All cycles begin in #state(0).
 A cycle is _started_ by letting it pass from #state(0) to another state,
 depending on its history, as in earlier chapters. Again, a cascade of cycle-startings might occur.
-A cycle is _reset_ by putting it back into #state(0), returing its restraints to 0 and undefining the values of its
+A cycle is _reset_ by putting it back into #state(0), returning its restraints to 0 and undefining the values of its
 parameters, $u$, $x$, and $p$.
-A cycle is _abandoned_ by returing its restraints to 0 and (permanently) stopping all activity for that cycle.
+A cycle is _abandoned_ by returning its restraints to 0 and (permanently) stopping all activity for that cycle.
 This is done when a cycle has categorically failed to satisfy $R_e$, as in the earlier chapters.
 A cycle is said to _act_ when it moves from one state to another.
 
@@ -2813,8 +2813,8 @@ Cycle~$k$ proceeds as follows.
 
   Note that if such a $s_2$ does not exist, $x$ again witnesses our success.
 
-  It in entirely possible that while we are wating for $s_2$, $C$ changes below $xi(x)$, ejecting $x$ from $A$.
-  We waint $x$ to remain in $A$ for now, so we "artificially" keep it there by enumerating new axioms
+  It in entirely possible that while we are waiting for $s_2$, $C$ changes below $xi(x)$, ejecting $x$ from $A$.
+  We want $x$ to remain in $A$ for now, so we "artificially" keep it there by enumerating new axioms
   $angletup(x, restr(C_t, p))$ into $U$ (where we are constructing $A = U^C$) whenever $restr(C_t, p) neq restr(C_(t-1), p)$.
   (Note that this is enough to keep $A$ d.r.e. We consider $x$'s ejection from $A$ a transitory phenomenon, not affecting
    the enumeration of $A$ that our algorithm defines. To decide whether $x in A$ at #stg($s$), check if $x in A$ at
@@ -2848,9 +2848,9 @@ Cycle~$k$ proceeds as follows.
   (if we don't see the desired change in $restr(C, xi(x))$, or a change in $G$ below $u$ which would allow
    us to redefine our (incorrect) value $Gamma(G\; k)$.)
   The fact that the computation function $c_C$ is dominant means that we will only have to put up with this
-  finintely often (see #lemmaRef(<lemma4.6>)), and we will still be able to threaten to compute $H$ recursively from $G$.
+  finitely often (see #lemmaRef(<lemma4.6>)), and we will still be able to threaten to compute $H$ recursively from $G$.
 
-+ Wait for $restr(G, u) neq restr(G_(s_1), u)$. If this never happens, the strategy succeds by the argument in #state(4),
++ Wait for $restr(G, u) neq restr(G_(s_1), u)$. If this never happens, the strategy succeeds by the argument in #state(4),
   above. If it does happen, reset all cycles $k' > k$ and advance to #state(6) to redefine $Gamma(G\; k)$ as a value
   we now know to be correct, and abandon the cycle.
   (Note that the change in $G$ automatically undefines any values $Gamma(G\; k+1), Gamma(G\; k+2), dots$ which where
@@ -2863,7 +2863,7 @@ Cycle~$k$ proceeds as follows.
 ==== The $N_e$ requirements
 
 The requirements $N_e$ are simpler that those of the first kind, are we implement a standard
-diagonalizatin approach to satisfy them.  This is slightly complicated by the fact that we must
+diagonalization approach to satisfy them.  This is slightly complicated by the fact that we must
 ensure that $B leqt H$, but we can just us a stripped-down version of the Cooper, Lempp and Watson method.
 
 Again, suppose $e$ is fixed, and write $Theta$ for $Theta_e$. The strategy for $N_e$ has the same cycle
@@ -2876,7 +2876,7 @@ Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds 
 #show: doc => setupenum(doc, prefix: "N")
 0. Until given the go-ahead, do nothing. When given the signal to proceed, check if
   #cycle($k$) has been abandoned in the past. If so jump straight to #nstate(4).
-  Otherwise choose a witness, $y$, larger than any number mentioned so far in the constuction
+  Otherwise choose a witness, $y$, larger than any number mentioned so far in the construction
   (including all currently defined $B$-restraints and the current stage), and larger than~$k$.
 
 + Wait for a stage $s_1$ at which
@@ -2966,7 +2966,7 @@ This is immediate from the construction.
 (Note that we do not claim that the functionals $Gamma(G)$ are consistent, as we may indeed have
  multiple definitions. We prove below that this happens only finitely often.)
 
-As usual in an infininte injury construction, the key object in the verification is the _true path_
+As usual in an infinite injury construction, the key object in the verification is the _true path_
 though the tree~$T$, defined by $f(n) = k$, where $concatone((restr(f, n)), k)$ is the leftmost
 successor of $restr(f, n)$ accessible infinitely often.
 
@@ -3008,7 +3008,7 @@ acts. Otherwise, we way that $alpha$ _acts infinitely_.
     (b) gets stuck in #state(4), or
     (c) is abandoned.
 
-    Suppose first that (b) happens to only finintely many cycles.
+    Suppose first that (b) happens to only finitely many cycles.
     Let $s > s_0$ be a stage so large that all the cycles which eventually get stuck in #state(4) have
     already entered that state for the last time by #stg($s$), never to leave. Consider the finite set
     $
@@ -3082,7 +3082,7 @@ as we have only a one-dimensional cycle-structure to worry about.
 
 This establishes part 1 of the Proposition, and we assume we have a value $k_eta$ for $f(eta)$.
 #lemma[
-    $restr(f, (eta+1)) = concatone(f, k_eta)$ is cancelled only finintely often.
+    $restr(f, (eta+1)) = concatone(f, k_eta)$ is cancelled only finitely often.
     <lemma4.8>
 ]
 #proof[
@@ -3115,7 +3115,7 @@ Thus all of the requirements are satisfied, and $turinginterval(D, F)$ forms a p
 endpoints, free of r.e.~degrees. It remains to show that the permitting used in the construction
 sufficed to ensure that $D ltt H$ and $F ltt H$.
 
-We use the same emthod as in chapters @chapter2 and @chapter3. For $alpha in T$ let
+We use the same method as in chapters @chapter2 and @chapter3. For $alpha in T$ let
 $
 e^alpha = max { n | (exists beta in T)[concatone(beta, n) subset alpha] },
 $
@@ -3123,7 +3123,7 @@ the largest number which occurs as an outcome in the path leading to $alpha$. We
 $
 s^alpha = (mu s)[restr(H_s, e^alpha) = restr(H, e^alpha)].
 $
-Our techinical lemma is the same as before.
+Our technical lemma is the same as before.
 
 #lemma[
     Suppose that $alpha subset f_s$, $t > max{s, s^alpha}$ is a $C$-true stage, $t' geq t$ is a $G$-true
@@ -3165,10 +3165,10 @@ In @ALS1996 #state(3) defines a second tier functional, which we will here call 
 extra state (which we will call #state(3.5)) between our states 3 and~4, corresponding to #chapRef(2)'s #state(5).
 As in the earlier chapter, @ALS1996's construction returns from #state(3.5) to #state(3) upon certain $C$-changes.
 
-As well as being redundant, this seems to break the $C$-permiission argument, or rather the argument that shows
+As well as being redundant, this seems to break the $C$-permission argument, or rather the argument that shows
 that $C$-permission does not interfere with our attempts to threaten $H leqt C$.
 We must be able to show that we don't get stuck infinitely often in #state(4).
-To do this, in the original proof of~@ALS1996, we must show that (apart from finintely many cases)
+To do this, in the original proof of~@ALS1996, we must show that (apart from finitely many cases)
 we get a $C$-change after the _last_ time that we pass out of #state(3)
 (since we can have several $restr(C, u_2)$ changes, we may jump from 3.5 back to 3 several times).
 But this is now a problem: we know that $c_C$ dominates the function $m$, but $m$ no longer records
@@ -3278,7 +3278,7 @@ Restrain $restr((A_i join B_i), v(k))$ for $i = 0, 1$, start cycle $(k+1)$ to ru
 We note (without proof) that the valid patterns corresponding to this module are
 exactly $setconcat(finseq({3}), {angletup(2, 1)})$.
 
-=== The basic moudle for the $P$-requirements
+=== The basic module for the $P$-requirements
 
 Consider the requirement $P_(2e)$. (The $P_(2e+1)$ is the same, with $A_0$ and $B_0$ replaced with $A_1$ and $B_1$.)
 Write $Theta$ for~$Theta_e$.
@@ -3305,7 +3305,7 @@ The strategy for satisfying $P_(2e)$ has no cycle-structure, but has 3 internal 
 As usual, we combine the basic modules by means of a strategy tree, $T$.
 Let $Lambda = {-1} union omega$, and define the strategy tree
 $T = {f in finseq(Lambda) st n "odd" arrow.r.double f(n) in {0, 1} }$,
-with the stardard partial ordering $<_L$.
+with the standard partial ordering $<_L$.
 If $alpha in T$ has even length $|alpha| = 2e$ then $alpha$ aims to satisfy requirement~$R_e$, while
 if $|alpha| = 2e + 1$ it works towards satisfying~$P_e$.
 (Hence the definition of the priority tree: strategies for satisfying $P_e$ will have just two outcomes: 0 and~1.)
@@ -3331,7 +3331,7 @@ We have two cases to consider, depending on the parity of~$t$.
   If so, let this cycle make this transition, resetting cycles to the right if indicated.
   In the case of the #trans(1,2) transition, if $k > 0$ we also let #cycle($k-1$) perform the required
   enumeration and move from #state(2) to #state(3).
-  If one of the other transtitions takes place cancel all strategies $beta$ with
+  If one of the other transitions takes place cancel all strategies $beta$ with
   $concatone(alpha, k) subset beta$ or $concatone(alpha, k-1) <_L beta$.
   If also $k > 0$ we return #cycle($k-1$) to #state(2).
   If there is no such #cycle($k$) there is nothing to do at this substage.
@@ -3416,7 +3416,7 @@ The rest of the verification revolves around the true path, $f$, through the pri
 defined as usual by $f(n) = nu$, where $concatone((restr(f, n)), nu)$ is the left most successor $restr(f, n)$
 accessible infinitely often.
 
-We have the following (now familar) result.
+We have the following (now familiar) result.
 
 #proposition[
     #show: doc => setupenum(doc, formats: ("1.",))
@@ -3462,7 +3462,7 @@ When it exists, $s(l)$ has all sorts of nice properties.
     <lemma5.5>
 ]
 #proof[
-    For (i), note that since cycle $l+1$ is in a state numbered 1 or highter for $s > s(l)$,
+    For (i), note that since cycle $l+1$ is in a state numbered 1 or higher for $s > s(l)$,
     all cycles $k leq l$ are in #state(2) or~3 for these stages. Thus the values of the parameters
     $x$, $u$, and $v$ associated with these cycles will have no chance to change value.
 
@@ -3480,3 +3480,5 @@ When it exists, $s(l)$ has all sorts of nice properties.
 ]
 
 #bibliography("works.yml", style: "ieee")
+
+// LocalWords:  basicModuleRe
