@@ -3523,7 +3523,60 @@ The following result is vitally important, if tedious to prove.
       For $x_t(beta, k)$ to leave $A_(pi(l))$ between stages $s(l)$ and $s(l+1)$, $beta$'s
       #cycle($k$) must leave #state(3), due to a $C$-change, necessarily below $macron(v)(alpha, l)$.
       But this imples that $alpha$'s #cycle($l+1$) is reset, contradicting the definition of~$s(l)$.
+
+      If $x_t(beta, k) in.not A_(pi(l), s(l))$ then $x_t(beta, k)$ can enter $A_(pi(l))$ only by $beta$'s
+      #cycle($k$) entering #state(3).
+      But this requires $beta$ being accessible, and hence the accessibility of $concatone(alpha, j)$.
+      This can happen only if $alpha$'s #cycle($l+1$) is in #state(0), which does not happen after #stg($s(l)$).
+
+      Note that no new witness $x_t(beta, k)$ is chosen for $s(l) < t leq s(l+1)$, as this would again imply
+      $alpha$'s #cycle($l+1$) being in #state(0).
+
+    - $beta <_L alpha$
+
+      Any change in the value of $A_(pi(l))(x_t(beta, k))$ between stages $s(l)$ and $s(l+1)$ implies the
+      accessibility or cancellation of #strat($beta$), and hence the cancellation of #stalpha,
+      which by assumption does not happen.
+
+    - $beta subset.neq alpha$
+
+      If $t leq s(l)$ and $x_t(beta, k) in A_(pi(l), s(l))$,
+      then $concatone(beta, k) <_L alpha$ or $concatone(beta, k) subset alpha$.
+      (Otherwise #cycle($k$) of $beta$ is reset at #stg($s(l)$), as $alpha$ is inaccessible at $s(l)$.)
+      Note that $beta$'s #cycle($k$) is in #state(3) at #stg($s(l)$).
+      If this changes at any time before #stg($s(l+1)$) then $alpha$ is cancelled, by construction,
+      which would contradict the definition of~$s(l)$.
+
+      Suppose $t leq s(l)$ and $x_t(beta, k) in.not A_(pi(l), s(l))$, but that $x_t(beta, k)$ enters $A_(pi(l))$
+      at some stage $t'$ with $s(l) < t' leq s(l+1)$.
+      Then either $concatone(beta, k) subset alpha$ or $alpha <_L concatone(beta, k)$, as otherwise the entry
+      of $x_t(beta, k)$ entails the cancellation of~$alpha$.
+      But $alpha$ is accessible at #stg($s(l+1)$), so either
+      #cycle($k$) of $beta$ is reset by $s(l+1)$ (if $alpha <_L concatone(beta, k)$), or
+      $beta$'s #cycle($k$) is in #state(2) at #stg($s(l+1)$)
+      In either case, $x_t(beta, k) in.not A_(pi(l), s(l+1))$, by #lemmaRef(<lemma5.3>) (i).
+
+      If $s(l) < t leq s(l+1)$ (so $x_t(beta, k) in.not A_(pi(l), s(l))$) then $alpha <_L concatone(beta, k)$,
+      for otherwise (since $concatone(beta, k-1)$ is accessible at~$t$) $alpha$ would have been cancelled
+      between stages $s(l)$ and~$t$.
+      Thus, since $alpha$ is accessible at $s(l+1)$, $beta$'s #cycle($k$) is in #state(0) at #stg($s(l+1)$),
+      and $x_t(beta, k) in.not A_(pi(l), s(l+1))$.
+
+    - $beta = alpha$
+
+      If $k > l+1$ we just use #lemmaRef(<lemma5.3>) (ii). No $x_t(alpha, l+1)$ is ever in $A_(pi(l))$,
+      as $pi(l+1) neq pi(l)$.
+      If $j leq l$, $t < s(l)$ and $x_t(alpha, j) neq macron(x)(alpha, j)$ then again we use #lemmaRef(<lemma5.3>) (ii).
+      So we are just left to consider the witnesses $macron(x)(alpha, j)$ for $j leq l$, and by parity,
+      we need only consider those with $j ident l thin (mod 2)$.
+
+      Well, for such $j leq l - 2$, $macron(x)(alpha, j) in A_(pi(l), s)$ for all $s geq s(l)$ by #lemmaRef(<lemma5.5>) (iv).
+      Now $alpha$'s #cycle($l$) is in #state(1) at #stg($s(l)$), so by #lemmaRef(<lemma5.3>) (i),
+      $macron(x)(alpha, l) in.not A_(pi(l), s(l))$.
+      By #lemmaRef(<lemma5.5>) (v), $macron(x)(alpha, l) in.not A_(pi(l),s(l+1))$.
+
 ]
+This result is used to prove the crucial
 
 #bibliography("works.yml", style: "ieee")
 
