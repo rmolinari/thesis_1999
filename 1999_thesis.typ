@@ -3403,6 +3403,80 @@ Our verification follows Cholak and Hinman, @CholakHinman.
       or no cycle of $alpha$ had been started since #stalpha was last cancelled.
       Thus $x_s(alpha, k)$ is chosen after $v(beta, l)$ is defined, so $x_s(alpha, k) > v(beta, l)$, and
       as before we have the result we want.
+
+    A similar argument establishes the result for the $y$-witness.
+
+    For (ii), notice that the witness $x(alpha, k)$ changes or becomes undefined only when
+    #stalpha's #cycle($k$) is reset. When this occurs, #cycle($k$) leaves #state(3) (if it was there,)
+    so by part~(i), $x(alpha, k)$ certainly leaves $A_(pi(k))$.
+    As it will never again be chosen as a witness, it never reenters $A_(pi(k))$.
+]
+
+The rest of the verification revolves around the true path, $f$, through the priority tree,
+defined as usual by $f(n) = nu$, where $concatone((restr(f, n)), nu)$ is the left most successor $restr(f, n)$
+accessible infinitely often.
+
+We have the following (now familar) result.
+
+#proposition[
+    #show: doc => setupenum(doc, formats: ("1.",))
+    For all $n in omega$
+
+    + $f(n)$ is defined;
+
+    + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
+
+    + #strat($restr(f, n)$) satisfies the requirement towards which it works;
+
+    + for all sufficiently large $C$-true stages $t$, $restr(f, (n+1)) subset f_t$.
+    <proposition5.4>
+]
+
+We proceed by induction. Assume 1, 2, 3, and 4 for $n = eta - 1$ and let $alpha = restr(f, eta)$.
+Fix a stage $s_0$ so large that $alpha$ is not cancelled after $s_0$, and for every $C$-true
+$t > s_0$, $alpha subset f_t$.
+
+For the moment, assume $eta$ is even. For $l geq -1$ define
+$
+s(l) = (mu s geq s_0)(forall t > s)[alpha's "cycle" l+1 "is in state 1, 2, or 3 at stage" t],
+$
+if such exists. Clearly , if $s(l)$ is defined then so is $s(l') < s(l)$ for all $l' < l$.
+
+When it exists, $s(l)$ has all sorts of nice properties.
+
+#lemma[
+    #show: doc => setupenum(doc, formats: ("(i)",))
+    If $s(l)$ exists then
+
+    + for each $k leq l$, $x_t(alpha, k)$, $u_t(alpha, k)$, and $v_t(alpha, k)$ have the same values for all $t > s(l)$,
+      (these fixed values will be referred to as $macron(x)(alpha, k)$, $macron(u)(alpha, k)$, and $macron(v)(alpha, k)$);
+
+    + $Eq(macron(x)(alpha, l), s(l))$ holds;
+
+    + $restr(C_(s(l)), macron(v)(alpha, l)) = restr(C, macron(v)(alpha, l))$;
+
+    + for all $s geq s(l)$ and $k leq l - 2$, $macron(x)(alpha, k) in A_(pi(l),s)$;
+
+    + If $l > 0$ then $macron(x)(alpha, l - 1) in.not A_(pi(l-1), s(l))$ but for all $s > s(l)$,
+      $macron(x)(alpha, l - 1) in A_(pi(l-1), s)$.
+    <lemma5.5>
+]
+#proof[
+    For (i), note that since cycle $l+1$ is in a state numbered 1 or highter for $s > s(l)$,
+    all cycles $k leq l$ are in #state(2) or~3 for these stages. Thus the values of the parameters
+    $x$, $u$, and $v$ associated with these cycles will have no chance to change value.
+
+    (ii) follows from the minimality of $s(l)$.
+
+    For (iii), if $restr(C, macron(v)(alpha, l))$ after #stg($s(l)$) then $alpha$'s #cycle($l$) would
+    return to #state(1), resetting cycle $l+1$ and contradicting the definition of~$s(l)$.
+
+    For all $s geq s(l)$ and all $k leq l-2$, $alpha$'s #cycle($k$) is in #state(3) at #stg($s$),
+    so by #lemmaRef(<lemma5.3>) (i), $macron(x)(alpha, k) in A_(pi(k), s)$.
+    This establishes~(iv).
+
+    (v) follows as did (iv) once we note that, by the minimality of $s(l)$, $alpha$'s #cycle($l-1$)
+    is still in #state($s$) at #stg($s(l)$), only reaching 3 at #stg($s(l) + 1$).
 ]
 
 #bibliography("works.yml", style: "ieee")
