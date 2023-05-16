@@ -3479,6 +3479,52 @@ When it exists, $s(l)$ has all sorts of nice properties.
     is still in #state($s$) at #stg($s(l)$), only reaching 3 at #stg($s(l) + 1$).
 ]
 
+#lemma[
+    For all $l$ and $s > s_0$, if #cycle($l+1$) of #stalpha is in a state numbered 1 or higher
+    at #stg($s$) and $restr(C_s, v_s(alpha, l)) = restr(C, v_s(alpha, l))$ then $s(l)$ exists and is less than~$s$.
+    <lemma5.6>
+]
+#proof[
+    Cycle $l+1$ can only be reset (and hence sent to a state other than 1, 2, or 3) by
+    a change in~$C$. The argument in #lemmaRef(<lemma5.3>) (i) shows that this change must be
+    below $v_s(alpha, l)$, a contradiction.
+]
+
+The following result is vitally important, if tedious to prove.
+#lemma[
+    If $s(l+1)$ exists then
+    $
+    restr(A_(pi(l), s(l+1)), macron(v)(alpha, l)) = restr(A_(pi(l), s(l)), macron(v)(alpha, l)),\
+    restr(B_(pi(l), s(l+1)), macron(v)(alpha, l)) = restr(B_(pi(l), s(l)), macron(v)(alpha, l)).
+    $
+    <lemma5.7>
+]
+#proof[
+    We give the argument for $A_(pi(l))$. The $B_(pi(l))$ case is essentially the same.
+
+    It suffices to show that for all $beta in T$ with $|beta|$ even, and all
+    $t leq s(l+1)$ and $k in omega$ with $x_t(beta, k) < macron(v)(alpha, l)$, that
+    $
+    A_(pi(l),s(l+1))(x_t(beta, k)) = A_(pi(l),s(l))(x_t(beta, k)).
+    $
+    Again, we give the argument to deal with $A$-witnesses.
+
+    If $concatone(alpha, l+1) <_L beta$ then strategy $beta$ is cancelled at #stg($s(l)$), and we
+    use #lemmaRef(<lemma5.3>) (ii).
+    Otherwise we actually have to do some work. We have several cases to consider.
+
+    - $concatone(alpha, l+1) subset.neq beta$ for some $j leq l+1$.
+
+      Note that we can actually assume that $j < l$, since if $j = l$ or $j = l+1$ then
+      by construction #strat($beta$) automatically respects the restraint $macron(v)(alpha, l)$.
+
+      If $t leq s(l)$ and $x_t(beta, k) in A_(pi(l), s(l))$ then by #lemmaRef(<lemma5.3>) (i)
+      #strat($beta$)'s #cycle($k$) is in #state(3) at #stg($s(l)$).
+      For $x_t(beta, k)$ to leave $A_(pi(l))$ between stages $s(l)$ and $s(l+1)$, $beta$'s
+      #cycle($k$) must leave #state(3), due to a $C$-change, necessarily below $macron(v)(alpha, l)$.
+      But this imples that $alpha$'s #cycle($l+1$) is reset, contradicting the definition of~$s(l)$.
+]
+
 #bibliography("works.yml", style: "ieee")
 
 // LocalWords:  basicModuleRe
