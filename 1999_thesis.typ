@@ -3354,4 +3354,55 @@ If $t + 1 < s$ advance to substage $t+1$.
 
 If $alpha subset f_(s+1)$ then $alpha$ is _accessible_ at stage $s+1$.
 
+== Verification
+
+In what follows we will denote the values at #stg($s$) of parameters associated with #cycle($k$)
+of #stalpha like so: $u_s(alpha, k)$, $x_s(alpha, k)$.
+For parameters associated with $P$-requirement strategies we naturally omit any reference to the cycle.
+Wherever context makes it possible, we omit as many of the stage, the strategy, and the cycle as we can.
+
+Our verification follows Cholak and Hinman, @CholakHinman.
+
+#lemma[
+    #show: doc => setupenum(doc, formats: ("(i)",))
+    For $alpha, beta in T$, where $|alpha| = 2e$ and $|beta| = 2e' + 1$ we have:
+    + $x_s(alpha, k) in A_(pi(k),s)$ iff #cycle($k$) of #stalpha is in #state(3) at #stg($s$).
+      Similarly, $y_s(beta) in B_(pi(e'),s)$ iff #strat($beta$) is in #pstate(2) at #stg($s$).
+    + For stages $t < s$, if $x_t(alpha, k)$ is defined, and either $x_t(alpha, k) neq x_s(alpha, k)$,
+      or $x_s(alpha, k)$ is undefined, then for all $s' geq s$, $x_t(alpha, k) in.not A_(pi(k),s')$.
+      Similarly for any witness $y_t(beta)$ and the set $B_(pi(e'))$.
+    <lemma5.3>
+]
+#proof[
+    We start with (i). Certainly $x_s(alpha, k)$ is enumerated into $A_(pi(k))$ exactly when $alpha$'s #cycle($k$)
+    enters #state(3). We claim that whenever this cycle leaves #state(3), for whatever reason, $x_s(alpha, k)$
+    is ejected from $A_(pi(k))$.
+
+    There are three ways that this cycle could leave #state(3).
+    #show: doc => setupenum(doc, formats: ("(a)",))
+    + Cycle $k$ sees a #stg($s_3$) such that $restr(C_(s_3), v) neq restr(C_(s_1), v)$.
+
+      Well, the $C$-use of the enumeration that put $x_s(alpha, k)$ into $A_(pi(k))$ is
+      $v(k+1) geq x(k+1) > v$ so this $C$-change indeed ejects $x_s(alpha, k)$ from $A_(pi(k))$.
+
+    + Some cycle $l < k$ of #stalpha resets $k$ due to a change in $restr(C, v(l))$.
+
+      But $v(l) < x_s(alpha, k) leq v(k) < v(k+1)$ as before, so again $x_s(alpha, k)$ is ejected from $A_(pi(k))$.
+
+    + Strategy $alpha$ is cancelled by some cycle $beta subset.neq alpha$ or $beta <_L alpha$ seeing a $C$-change
+      below $v(beta, l)$ for some~$l$ (or below $w(beta)$, as appropriate.)
+
+      We consider the case where $|beta|$ is even, so that the $C$-change is below $v(beta, l)$.
+      The $|beta|$ odd case is the same.
+      If $beta subset.neq alpha$ then, by construction, $x_s(alpha, k)$ is chosen to be larger than $v(beta, l)$,
+      as $alpha$ becomes accessible only after #cycle($l$) of #strat($beta$) imposes restraint and defines $v(beta, l)$.
+      But now, as above, $v(alpha, k+1) > v(beta, l)$ and $x_s(alpha, k)$ is again ejected.
+
+      If $beta <_L alpha$ then let $gamma$ be the longest common initial segment of $alpha$ and~$beta$.
+      At the stage $t < s$ when $v(beta, l)$ is defined, either the action of #strat($gamma$) cancelled #stalpha,
+      or no cycle of $alpha$ had been started since #stalpha was last cancelled.
+      Thus $x_s(alpha, k)$ is chosen after $v(beta, l)$ is defined, so $x_s(alpha, k) > v(beta, l)$, and
+      as before we have the result we want.
+]
+
 #bibliography("works.yml", style: "ieee")
