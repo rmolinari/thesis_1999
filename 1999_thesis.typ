@@ -3686,6 +3686,25 @@ value $epsilon$ for $f(n)$.
 
 This establishes part 2 of the Proposition.
 
+#lemma[
+    Strategy $alpha$ satisfies the requirement to which it works.
+    <lemma5.12>
+]
+#proof[
+    First consider $|eta| = 2e$.
+
+    If $alpha$ acts only finitely, then $alpha$'s #cycle($epsilon + 1$) must get permanently stuck in #state(1).
+    In particular, it never reaches its instance of $Eq(convolve, convolve)$.
+    Thus either $A_i neq Phi_(e,i)(E_(e,i))$ or
+    $E_(e,i) neq Psi_(e,i)(C join A_i join B_i)$ (for some $i = 0,1,$) and the requirement is satisfied.
+
+    If $alpha$ acts infinitely, let $s > s_0$ be so larger than that #cycle($epsilon + 1$) of #stalpha
+    is not reset after #stg($s$).
+    Thus #cycle($epsilon + 1$) works with the same witness, $x$, from now on.
+    As this cycle returns infinitely often to #state(1) we must have that one the functions
+    $Phi_(e,i)(E_(e,i))$, $Psi_(e,i)(C join A_i join B_i)$ (for some $i = 0, 1$) is partial.
+    (The argument is the same as in the proof of #lemmaRef(<lemma2.22>).)
+]
 
 #bibliography("works.yml", style: "ieee")
 
