@@ -91,9 +91,14 @@
 #let pattern(s) = $cal(P)#h(-0.2em)_#s$
 
 // State/stage/strategy/row numbers/names, with nonbreaking space
+//#let set-normal(z) = text(style: "normal")[#z]
 #let state(num) = [state~#num]
-#let nstate(num) = [state~N#num]
-#let pstate(num) = [state~P#num]
+
+// it's oddly difficult to make the prefix upright in all contexts. I couldn't work out how to use text styling: it kept coming out
+// italic inside math mode. (See #set-normal, just above.)
+#let named-state(prefix, num) = [state~$upright(prefix)$#num]
+#let nstate(num) = named-state("N", num)
+#let pstate(num) = named-state("P", num)
 #let strat(s) = [strategy~#s]
 #let stalpha = [#strat($alpha$)]
 #let stg(num) = [stage~#num]
@@ -109,7 +114,7 @@
 #let join = sym.plus.circle
 #let neq = sym.eq.not // not equal
 #let leq = sym.lt.eq  // greater than or equal
-#let geq = sym.gt.eq  // greater than or equal
+#let geq = sym.gt.eq  // less than or equal
 #let st = sym.bar.v   // vertical bar: "such that"
 #let dubpr = sym.prime.double // double primes
 #let trippr = sym.prime.triple // triple!
@@ -3609,6 +3614,79 @@ This result is used to prove the crucial
     $
     By part (i) we must have $s(l+1) < t(l)$.
 ]
+
+#lemma[
+    If $alpha$ acts infinitely (that is, if infinitely often some cycle of #stalpha changes state,)
+    then some (leftmost) cycle of $alpha$ must change state infinitely often.
+    <lemma5.9>
+]
+#proof[
+    Suppose not. Then each cycle must eventually get stuck in #state(3), never to leave.
+    Thus $s(l)$ exists for all~$l$, and also each~$t(l)$.
+
+    But $s(-1) = 0$ and
+    $s(l+1) = (mu s < t(l))[Eq(macron(x)(alpha, l+1), s) thin and thin restr(C_s, v_s(alpha, l+1)) = restr(C_(t(l)), v_s(alpha, l+1))]$.
+    Moreover by Lemmas~#thmref(<lemma5.8>);(ii) and~#thmref(<lemma5.5>);(i) both $t(l)$ and $macron(x)(alpha, l)$ are
+    recursively computable from $s(l)$, so the function $lambda l[s(l)]$ is recursive.
+
+    But $restr(C_(s(l)), macron(v)(alpha, l)) = restr(C, macron(v)(alpha, l))$ by #lemmaRef(<lemma5.5>);(iii),
+    and $macron(v)(alpha, l) geq macron(x)(alpha, l) > l$ so $C(l) = C_(s(l))(l)$, and $C$ is a recursive set,
+    which contradicts the assumption of the theorem.
+]
+
+From now on we consider both $eta$ even and $eta$ odd.
+
+#lemma[
+    Some (leftmost) successor of $alpha$ is accessible infinitely often.
+    <lemma5.10>
+]
+#proof[
+    If $eta$ is even and $alpha$ acts only finitely, then after some stage $s geq s_0$ no cycle of $alpha$
+    ever changes state again. If $k$ is the rightmost cycle of $alpha$ in a state other than 0 at #stg($s+1$)
+    then $concatone(alpha, k-1)$ will be accessible whenever $alpha$ is after #stg($s$).
+    But by the inductive hypothesis $alpha$ is accessible at every $C$-true stage after $s_0$,
+    of which there are infinitely many.
+
+    If $eta$ is even and $alpha$ acts infinitely, then by #lemmaRef(<lemma5.9>) some leftmost #cycle($k$) changes
+    state infinitely often. Strategy~$alpha$ is not cancelled after #stg($s$), so it must be that either
+    (a)~#cycle($k$) eventually switches infinitely often between states 2 and~3, and is never in another state; or
+    (b)~$k = 0$ and #cycle($k$) returns infinitely often to #state(1).
+    In case~(a), $concatone(alpha, k)$ is accessible infinitely often, while
+    in case~(b), $concatone(alpha, -1)$ is.
+    Note that in case~(a) #cycle($k+1$) is reset only finitely often.
+
+    If $eta$ is odd, then let
+    $
+    h = cases(
+        0\, quad & "if" stalpha "is in" pstate(1) "infinitely often,",
+        1\, quad & "otherwise, (that is, if" alpha "is in" pstate(2) "cofinitely often)".
+    )
+    $
+    Then $concatone(alpha, h)$ is accessible infinitely often.
+]
+
+Thus we have established part 1 of the Proposition for $n = eta$, and that we have a
+value $epsilon$ for $f(n)$.
+
+#lemma[
+    $restr(f, (eta+1)) = concatone(alpha, epsilon)$ is cancelled only finitely often.
+    <lemma5.11>
+]
+#proof[
+    By assumption, after #stg($s_0$) #stalpha is not cancelled.
+
+    If $eta$ is even, the by construction $concatone(alpha, epsilon)$ is cancelled after #stg($s_0$)
+    only if $epsilon geq 0$, and even then only when #cycle($epsilon$) of #stalpha is reset or returns to #state(1).
+    The argument in the proof of #lemmaRef(<lemma5.10>) shows that this happens only finitely often.
+
+    If $epsilon$ is even, then if $epsilon = 0$, #strat($concatone(alpha, epsilon)$) is never cancelled after #stg($s_0$).
+    If $epsilon = 1$ then there is a stage $s > s_0$ after which #stalpha is never in a state other than #pstate(2),
+    and $concatone(alpha, 1)$ is not cancelled after #stg($s$).
+]
+
+This establishes part 2 of the Proposition.
+
+
 #bibliography("works.yml", style: "ieee")
 
 // LocalWords:  basicModuleRe
