@@ -45,6 +45,17 @@
 
 #let chapRef(num) = ref(label("chapter" + str(num)), supplement: "Chapter")
 
+// Convenience symbols
+#let phi = sym.phi.alt
+#let epsilon = sym.epsilon.alt
+#let join = sym.plus.circle
+#let neq = sym.eq.not // not equal
+#let leq = sym.lt.eq  // greater than or equal
+#let geq = sym.gt.eq  // less than or equal
+#let st = sym.bar.v   // vertical bar: "such that"
+#let dubpr = sym.prime.double // double primes
+#let trippr = sym.prime.triple // triple!
+
 // Set difference
 #let setdiff(a, b) = $#a tilde.op #b$
 // Turing interval
@@ -53,12 +64,17 @@
 // workaround is to specify 0 space ourselves.
 #let ltt = $<_T$
 #let leqt = $lt.eq_T$
+#let notleqt = $lt.eq.not_T$
+#let equivt = $ident_T$
 #let emptyset = $nothing$
 // "Zero jump"
 #let zerojump = $emptyset'$
+// Pseudojump V applied to X
+#let pseudojump(X, V) = $#X join #V^(#X)$
 
 // Calculation converges
 #let converge = $#h(0em) arrow.b #h(0.05em)$
+#let diverge = $#h(0em) arrow.t #h(0.05em)$
 
 // "State transition"
 #let trans(a, b) = $#a arrow.r.bar #b$
@@ -107,17 +123,7 @@
 
 // The "equality" property
 #let Eq(x, y) = $sans("Eq")(#x, #y)$
-
-// Convenience symbols
-#let phi = sym.phi.alt
-#let epsilon = sym.epsilon.alt
-#let join = sym.plus.circle
-#let neq = sym.eq.not // not equal
-#let leq = sym.lt.eq  // greater than or equal
-#let geq = sym.gt.eq  // less than or equal
-#let st = sym.bar.v   // vertical bar: "such that"
-#let dubpr = sym.prime.double // double primes
-#let trippr = sym.prime.triple // triple!
+#let blankEq = $Eq(ast.op, ast.op)$ // with stars as arguments
 
 ////////////////////////////////////////
 // The names of things in the Pattern Lemmas
@@ -314,7 +320,7 @@ is $reIn(C)$. The axiom $(restr(C, e), x, e)$ _witnesses_ the fact that $x in U^
 $reIn(C)$ sets are realizable in this way (up to degree).
 
 Note that, once it is defined, $U$ does not depend essentially in any way on $C$. Thus we may consider, for _any_ set $Y$, the
-$reIn(Y)$ set $U^Y$. $U$ then becomes a _pseudojump operator_, $U : Y arrow.r.bar Y join U^Y$. These operators will appear in
+$reIn(Y)$ set $U^Y$. $U$ then becomes a _pseudojump operator_, $U : Y arrow.r.bar pseudojump(Y, U)$. These operators will appear in
 (Chapter VI TODO).
 
 A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(x)$ and $X leqt Y$.
@@ -2660,6 +2666,7 @@ r.e. set~$G$. Therefore Theorem~11 in @ALS1998 may be slightly strengthened to r
 
 ////////////////////////////////////////
 // Chapter IV
+// p.53
 = For high $C$ the properly $reInAbove(C)$ intervals are weakly dense <chapter4>
 
 == Introduction
@@ -2699,10 +2706,11 @@ However, we can succeed if $C$ is high:
 The proof we give is derived from one given in @ALS1996 of the similar statement
 // This appears to be Thm 2.1 in the other paper
 #theorem[
-    If $C leqt H$ are r.e. and high (that is, $C' ident_T H' ident_T emptyset'$), there is a d.r.e. set
+    If $C leqt H$ are r.e. and high (that is, $C' equivt H' equivt emptyset'$), there is a d.r.e. set
     $E$ which is $reInAbove(C)$ but not of r.e. degree such that $C ltt E ltt H$.
     <theorem4.4>
 ]
+// p.54
 That proof suffers from several flaws. It is based on the original proof of #theoremRef(<theorem2.1>) given in @CLW1989,
 and hence has the same problems: injury caused by "weaker" strategies (noted and fixed by LaForte) and $Delta$-inconsistency.
 It also has a flaw all its own (see @section4.4[Section] below)
@@ -2745,6 +2753,7 @@ are recursive functionals, and ${Theta_e}_(e geq 0)$ simply enumerates all recur
 We will ensure that $A leqt H$ by a combination of direct permitting, and the high permitting used to make $A$ r.e. in~$C$.
 We ensure $B leqt H$ by direct permitting.  As in earlier chapters all of the permission is potentially delayed.
 
+// p.55
 === The Basic Modules
 
 ==== The $R_e$ requirements
@@ -2790,6 +2799,7 @@ Cycle~$k$ proceeds as follows.
   If $H_(s_1)(k) = 1$ then we have no hope ever of seeing the $H$-change we need for permission, so go to #state(6).
 
   Otherwise restrain $restr(A, u)$ and $restr(B, u)$ from now on, set $Gamma(G\; k) = H_(s_1)(k) (= 0)$ with
+  // p.56
   use~$u$, and start cycle $k+1$ to run simultaneously. Advance to #state(2).
 
 + Wait for a stage $s'$ at which either
@@ -2833,6 +2843,7 @@ Cycle~$k$ proceeds as follows.
 
   (Note that, although in #state(2) we reset all cycles $k' > k$, this resetting cannot destroy the
    computations $Gamma(G \; k+1), Gamma(G \; k+2), dots$ that these cycles may have defined:
+   // p.57
    there has not been a convenient $G$-change. Thus the restarted $k+1$ (and its cronies $k+2, k+3, dots$)
    may produce values for $Gamma(G)$ at points where it is already defined.
    We will argue that such multiple definitions only persist when #cycle($k$) gets permanently stuck
@@ -2878,6 +2889,7 @@ _Starting_, _resetting_, _abandoning_ and _acting_ all have the same definitions
 
 Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds as follows.
 
+// p.58
 #show: doc => setupenum(doc, prefix: "N")
 0. Until given the go-ahead, do nothing. When given the signal to proceed, check if
   #cycle($k$) has been abandoned in the past. If so jump straight to #nstate(4).
@@ -2922,6 +2934,7 @@ Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds 
 
 Note that at all times, $Delta(G)$ is defined consistently.
 
+// p.59
 === Combining the modules
 
 We use much the same tree argument as previous chapters to combine our strategies.
@@ -2975,6 +2988,7 @@ As usual in an infinite injury construction, the key object in the verification 
 though the tree~$T$, defined by $f(n) = k$, where $concatone((restr(f, n)), k)$ is the leftmost
 successor of $restr(f, n)$ accessible infinitely often.
 
+// p.60
 When needed, we will refer to parameters associated with a particular cycle, $k$,
 of a particular strategy, $alpha$, like so: $x(alpha, k)$, $u(alpha, k)$, etc.
 We will drop the strategy name whenever possible.
@@ -3034,6 +3048,7 @@ acts. Otherwise, we way that $alpha$ _acts infinitely_.
         Gamma(G\; k) quad & "otherwise"\,,
     )
     $
+    // p.61
     contradicting the assumption that $G ltt H$. Hence we need only consider the case in which infinitely
     many cycles get stuck in #state(4). We show that this leads to a contradiction.
 
@@ -3085,6 +3100,7 @@ as we have only a one-dimensional cycle-structure to worry about.
     As #lemmaRef(<lemma2.19>).
 ]
 
+// p.62
 This establishes part 1 of the Proposition, and we assume we have a value $k_eta$ for $f(eta)$.
 #lemma[
     $restr(f, (eta+1)) = concatone(f, k_eta)$ is cancelled only finitely often.
@@ -3145,6 +3161,7 @@ Our technical lemma is the same as before.
 ]
 
 Now permitting follows much as it did before.
+// p.63
 #lemma[
     $A join B leqt H$.
     <lemma4.12>
@@ -3183,6 +3200,9 @@ We can't use larger and larger values for $p$ each time, as the argument require
 We can't even redefine $xi(x)$ each time we get a $C$-change, as we would then not be able to $H$-recursively
 compute the final value for $xi(x)$, needed for the proof of #lemmaRef(<lemma4.12>).
 
+////////////////////////////////////////
+// Chapter V
+// p.64
 = A Theorem of Soare and Stob in an Interval <chapter5>
 == Introduction
 
@@ -3216,7 +3236,9 @@ P_(2e+1): quad & B_1 neq Theta_e(C join A_1).
 $
 Here ${angletup(Phi_(e,0), Phi_(e,1), Psi_(e,0), Psi_(e,1), E_(e,0), E_(e,1))}_(e geq 0)$ enumerates all sextuples of four
 recursive functionals and two r.e. sets, and ${Theta_e}_(e geq 0)$ simply enumerates the recursive functionals.
-The $R$-requirements ensure that at least one of the intervals
+The
+// p.65
+$R$-requirements ensure that at least one of the intervals
 $turinginterval(D_i, F_i) = turinginterval(C join A_i, C join A_i join B_i)$
 is free of r.e. sets, while the $P$ requirements make sure that both of these intervals are proper.
 
@@ -3262,6 +3284,7 @@ Restrain $restr((A_i join B_i), v(k))$ for $i = 0, 1$, start cycle $(k+1)$ to ru
 
 [If there is no such stage then the requirement is satisfied.]
 
+// p.66
 + Wait for a #stg($s_2$) at which
 
   + $restr(C_(s_2), v) neq restr(C_(s_1), v)$; or
@@ -3305,6 +3328,7 @@ The strategy for satisfying $P_(2e)$ has no cycle-structure, but has 3 internal 
   If this happens forget the value of~$w$, drop this cycle's restraint back to~0, and return to #pstate(1).
   (Note that $y$ has been ejected from $B_0$ by the $C$-change.)
 
+// p.67
 === Combining the modules <section5.2.3>
 
 As usual, we combine the basic modules by means of a strategy tree, $T$.
@@ -3359,6 +3383,7 @@ If $t + 1 < s$ advance to substage $t+1$.
 
 If $alpha subset f_(s+1)$ then $alpha$ is _accessible_ at stage $s+1$.
 
+// p.68
 == Verification
 
 In what follows we will denote the values at #stg($s$) of parameters associated with #cycle($k$)
@@ -3409,6 +3434,7 @@ Our verification follows Cholak and Hinman, @CholakHinman.
       Thus $x_s(alpha, k)$ is chosen after $v(beta, l)$ is defined, so $x_s(alpha, k) > v(beta, l)$, and
       as before we have the result we want.
 
+    // p.69
     A similar argument establishes the result for the $y$-witness.
 
     For (ii), notice that the witness $x(alpha, k)$ changes or becomes undefined only when
@@ -3471,6 +3497,7 @@ When it exists, $s(l)$ has all sorts of nice properties.
     all cycles $k leq l$ are in #state(2) or~3 for these stages. Thus the values of the parameters
     $x$, $u$, and $v$ associated with these cycles will have no chance to change value.
 
+    // p.70
     (ii) follows from the minimality of $s(l)$.
 
     For (iii), if $restr(C, macron(v)(alpha, l))$ after #stg($s(l)$) then $alpha$'s #cycle($l$) would
@@ -3529,6 +3556,7 @@ The following result is vitally important, if tedious to prove.
       #cycle($k$) must leave #state(3), due to a $C$-change, necessarily below $macron(v)(alpha, l)$.
       But this imples that $alpha$'s #cycle($l+1$) is reset, contradicting the definition of~$s(l)$.
 
+      // p.71
       If $x_t(beta, k) in.not A_(pi(l), s(l))$ then $x_t(beta, k)$ can enter $A_(pi(l))$ only by $beta$'s
       #cycle($k$) entering #state(3).
       But this requires $beta$ being accessible, and hence the accessibility of $concatone(alpha, j)$.
@@ -3582,6 +3610,7 @@ The following result is vitally important, if tedious to prove.
 
 ]
 This result is used to prove the crucial
+// p.72
 #lemma[
     #show: doc => setupenum(doc, formats: ("(i)",))
     + If $s(l+1)$ exists then $restr(E_(pi(l), s(l+1)), macron(u)(alpha, l)) = restr(E_(pi(l), s(l)), macron(u)(alpha, l))$.
@@ -3643,6 +3672,7 @@ From now on we consider both $eta$ even and $eta$ odd.
 #proof[
     If $eta$ is even and $alpha$ acts only finitely, then after some stage $s geq s_0$ no cycle of $alpha$
     ever changes state again. If $k$ is the rightmost cycle of $alpha$ in a state other than 0 at #stg($s+1$)
+    // p.73
     then $concatone(alpha, k-1)$ will be accessible whenever $alpha$ is after #stg($s$).
     But by the inductive hypothesis $alpha$ is accessible at every $C$-true stage after $s_0$,
     of which there are infinitely many.
@@ -3694,7 +3724,7 @@ This establishes part 2 of the Proposition.
     First consider $|eta| = 2e$.
 
     If $alpha$ acts only finitely, then $alpha$'s #cycle($epsilon + 1$) must get permanently stuck in #state(1).
-    In particular, it never reaches its instance of $Eq(convolve, convolve)$.
+    In particular, it never reaches its instance of $blankEq$.
     Thus either $A_i neq Phi_(e,i)(E_(e,i))$ or
     $E_(e,i) neq Psi_(e,i)(C join A_i join B_i)$ (for some $i = 0,1,$) and the requirement is satisfied.
 
@@ -3704,8 +3734,129 @@ This establishes part 2 of the Proposition.
     As this cycle returns infinitely often to #state(1) we must have that one the functions
     $Phi_(e,i)(E_(e,i))$, $Psi_(e,i)(C join A_i join B_i)$ (for some $i = 0, 1$) is partial.
     (The argument is the same as in the proof of #lemmaRef(<lemma2.22>).)
+
+    // p.74
+    Now consider $eta = 2e+1$.
+    Without loss of generality we assume that $e = 2e'$ is even,
+    so that #stalpha works with $A_0$ and~$B_0$.
+    Since $alpha$ is not cancelled after #stg($s_0$), the strategy works with the same witnesses, $y$,
+    forever after~$s_0$.
+    If $epsilon = 0$ then $alpha$ is infinitely often in #pstate(1).
+    Thus either $Theta_(e')(C join A_0; y) converge$, but converges to something other than~0,
+    (if only finitely often does #stalpha advance to #pstate(2)); or $Theta_(e')(C join A_0; j) diverge$.
+    But if $alpha$ is in #pstate(1) infinitely often, then $y in.not B_0$, so either way
+    $Theta_(e')(C join A_0) neq B_0(y)$.
 ]
+
+This establishes part 3 of the Proposition. Only one part now remains.
+
+#lemma[
+    For all sufficiently large $C$-true stages~$t$, $concatone(alpha, epsilon) subset f_t$.
+    <lemma5.13>
+]
+#proof[
+    First suppose that $eta$ is even.
+
+    Let $s > s_0$ be a stage so large that #cycle($epsilon + 1$) is not reset after #stg($s$),
+    and is in a state other than~0 at #stg($s$).
+    Suppose $t > s$ is a $C$-true stage such that #cycle($epsilon + 1$) finished #stg($t$) in a
+    state numbered greater than~1.
+    Then #cycle($epsilon + 1$) will never again return to #state(1), as the only way it can do so it through
+    a change in $restr(C, v)$.
+    But the combination of the use of the hat-trick functional $hat(Psi)$ in the definition of $blankEq$,
+    and the fact that $t$ is a $C$-true stage, means that this cannot happen after #stg($t$).
+    But this is a contradiction, as by construction #cycle($epsilon + 1$) is infinitely often in #state(1).
+
+    If $eta$ is odd then a similar argument shows that (with #stg($s$) defined as above) #stalpha
+    every $C$-true #stg($t$) after $s$ in #state($epsilon$).
+]
+
+This concludes the proof of the Proposition, and of #theoremRef(<theorem5.2>).
+
+// Chapter 6
+// p.75
+= A generalization of a result of Coles et al <chapter6>
+
+== Introduction
+
+In previous chapters we have typically been given a starting r.e. set $X$ and have constructed
+an $reInAbove(C)$ set~$Y$ by specifying an algorithm to do so.
+In each case we have (essentially explicitly) specified a pseudojump operator~$V$ such that
+$Y = pseudojump(X, V)$.
+In #chapRef(3) we also constructed our base set~$X$; we only had to ensure
+$X in turinginterval(C, G)$. There are four different ways we may be asked to go about building $V^X$:
+#[
+#set align(center)
+#tablex(
+    columns: (1.3in,) * 3,
+    rows: (auto, 3em),
+    align: horizon + center,
+    $X$, $V$, [Example],
+    [we construct], [we construct], [#theoremRef(<theorem3.7>)],
+    [given],        [we construct], [Theorems #thmref(<theorem2.2>), #thmref(<theorem4.3>)],
+    [we construct], [given],        [Hmmmm #sym.dots],
+    [given],        [given],        [Boring:\ $V^X$ is fixed]
+)
+]
+
+In this chapter we consider the situation in which we are given a pseudojump operator~$V$.
+Jockusch and Shore, in @JockuschShore1983[Thm 3.1], show the following.
+#theorem[
+    Given a pseudojump operator $V$ there is a non-recursive r.e. set $A$ such that
+    $pseudojump(A, V) equivt K$.
+    <theorem6.1>
+]
+
+This is generalized in @CDJF to obtain.
+#theorem[
+    Given a pseudojump operator $V$ such that $V^X notleqt X$ for all r.e. sets $X$,
+    there exist incomparable r.e. sets $A$ and $B$ such that
+    $pseudojump(A, V) equivt pseudojump(B, V) equivt K$.
+    <theorem6.2>
+]
+
+A stronger conclusion is possible from a weaker assumption, with a simpler proof.
+
+// p.76
+#theorem[
+    Given a pseudojump operator $V$ such that $V^X notleqt X$ for all recursively enumerable sets $X equivt K$,
+    there exist pairwise incomparable r.e. sets $D_0, D_1, D_2, dots$ such that
+    for each $i$, $pseudojump(D_i, V) ident_T K$.
+    <theorem6.3>
+]
+
+== The construction
+
+As pointed out in @CDJF, theorem~#thmref(<theorem6.2>) may be proved as follows.
+By Corollary~4.2 in @JockuschShore1983 we have
+#theorem[
+    For any low r.e. set $L$ and any pseudojump operator~$V$, there is an r.e. set
+    $A geq_T L$ such that $pseudojump(A, V) equivt K$.
+    <theorem6.4>
+]
+
+Now, using the Sacks splitting theorem we can split $K$ into two low r.e. sets $L_1$ and~$L_2$.
+Taking a pseudojump~$V$ which acts non-trivially on the all r.e. sets and applying theorem~#thmref(<theorem6.4>)
+to $L_1$ and $L_2$ in turn we obtain r.e. sets $A_1$ and $A_2$ such that $A_1 join A_2 equivt K$
+and $pseudojump(A_i, V) equivt K$.
+We have that $A_1$ and $A_2$ are incomparable, because if, say, $A_1 leqt A_2$ then $A_2 equivt K$ and
+$V$ would not act non-trivially upon it.
+
+The direct proof in @CDJF in a complex one and is at times difficult to follow.
+The proof given here uses a more naïve approach.
+We simply combine proofs of #theoremRef(<theorem6.4>) and of (an extremely weak version of) the
+Sacks splitting theorem. These proofs mesh quite well and the combination
+generalizes easily to produce infinitely many incomparable sets.
+Therefore, the present author didn't so much discover the proof as assemble it from bits that were lying around.
+
+We will construct for each $i in omega$ an r.e. set $D_i = A_i join B_i join C_i$.
+The sets~$A_i$ will receive the elements of $K$ along the lines of the splitting theorem in such a way that
+if $0 leq i < j$ we have $A_i union A_j = K$ so $K equivt A_i join A_j$ and $K equivt D_i join D_j$.
+The sets $C_i$ will receieve trace-markers which will attempt to encode $K$ into each $D_i$ separately,
+using the method of @JockuschShore1984.
+The sets $B_i$ receive enumerations of a technical nature, needed for the recovery of these encodings.
 
 #bibliography("works.yml", style: "ieee")
 
 // LocalWords:  basicModuleRe
+

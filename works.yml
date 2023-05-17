@@ -55,6 +55,18 @@ ALS1998:
     number: 2
   date: 1998
 
+JockuschShore1983:
+  type: Article
+  author:
+    - Jockusch, Carl
+    - Shore, Richard
+  title: "Pseudo-Jump operators. I: the r.e. case"
+  page-range: 599-609
+  parent:
+    title: Transactions of the American Mathematical Society
+    volume: 275
+    number: 2
+
 JockuschShore1984:
   type: Article
   author:
@@ -105,3 +117,12 @@ Robinson:
   parent:
     title: "Zeitschrift Für Mathematische Logik Und Grundlagen Der Mathematik"
     volume: 14
+
+CDJF:
+  type: Preprint
+  author:
+    - Coles, Richard
+    - Downey, Rod
+    - Jockusch, Carl
+    - LaForte, Geoff
+  title: Completing pseudojump operators
