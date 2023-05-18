@@ -1124,6 +1124,7 @@ Now we can prove that the functionals are defined consistently.
 
     Now, cycle $(j, k')$ does not exit cycle 5/6 before stage $s$ "under its own steam", as this would involve
     a change in $restr(C, v_t(j, k'))$, which we have seen does not occur. Thus the only way that _any_
+    // p.21
     cycle in row $row(j)$ can act at stage $s$ is if all the cycles of the row are first reset by the action
     of a cycle in row $row(i)$, for $i < j$, at stage $t'$, where $t < t' < s$. When row $row(i)$ later
     starts row $row(i+1)$ (which is must do before stage $s$) it in the process defines a new computation
@@ -1155,7 +1156,7 @@ We have the analogous result for the $Gamma$ functionals.
     computation for $Gamma_j(C; i)$, where $i < k$.
 
     Suppose that at stage $s$, $(Gamma_j(C; k))[s] converge$ and for the first time we are about to violate (I): we define
-    $Gamma_j(C; i)$ with $i < j$ such that $gamma_(j,s)(i) geq gamma_(j,s)(k) > 0$. Let $t < s$ be the stage at which the current
+    $Gamma_j(C; i)$ with $i < k$ such that $gamma_(j,s)(i) geq gamma_(j,s)(k) > 0$. Let $t < s$ be the stage at which the current
     computation for $Gamma_j(C; k)$ was defined. By #lemmaRef(<lemma2.9>), $(Gamma_j(C; i))[t] converge$ and by the minimality of
     $s$, $gamma_(j,t)(i) < gamma_(j,t)(k) = gamma_(j,s)(k)$.  But the computation for $Gamma_j(C; i)$ valid at stage $t$ must get
     undefined before stage $s$, by the inductive hypothesis, so $restr(C_s, gamma_(j,t)(i)) neq restr(C_t, gamma_(j,t)(i))$ which
