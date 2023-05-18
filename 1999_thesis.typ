@@ -56,6 +56,10 @@
 #let dubpr = sym.prime.double // double primes
 #let trippr = sym.prime.triple // triple!
 
+
+////////////////////////////////////////
+// Some standard notation
+
 // Set difference
 #let setdiff(a, b) = $#a tilde.op #b$
 // Turing interval
@@ -71,6 +75,10 @@
 #let zerojump = $emptyset'$
 // Pseudojump V applied to X
 #let pseudojump(X, V) = $#X join #V^(#X)$
+
+// Logical implication, informally
+#let implies = $arrow.r.double$
+#let iff = $arrow.l.r.double$
 
 // Calculation converges
 #let converge = $#h(0em) arrow.b #h(0.05em)$
@@ -88,6 +96,12 @@
 
 // Tuple with angle brackets
 #let angletup(..z) = $lr(angle.l #z.pos().join([, ]) angle.r)$
+
+// Standard pairing function
+#let pair(a, b) = $angletup(#a, #b)$
+
+//  Inline 1/2. Typst does a bad job with fractions inline, insisting on using a vertical layout. It is surprising.
+#let half = $1\/2$
 
 // Restriction of a to b
 #let restr(a, b) = $#a harpoon.tr #b$
@@ -143,7 +157,10 @@
 
 #let stage-hdr(name) = [Stage #name: #h(1em)]
 #let case(name) = [#smallcaps([Case #name]) #h(1em)]
-
+#let phase(name) = {
+    set text(font: "Sans Serif")
+    [Phase #name #h(1em)]
+}
 #let squad = h(1em)
 
 ////////////////////////////////////////
@@ -154,7 +171,7 @@
         fill: blue,
         size: 0.8em
     )
-    [ ^(#emph(body)) ]
+    [ ^(#body) ]
 }
 
 ////////////////////////////////////////
@@ -3855,6 +3872,83 @@ if $0 leq i < j$ we have $A_i union A_j = K$ so $K equivt A_i join A_j$ and $K e
 The sets $C_i$ will receieve trace-markers which will attempt to encode $K$ into each $D_i$ separately,
 using the method of @JockuschShore1984.
 The sets $B_i$ receive enumerations of a technical nature, needed for the recovery of these encodings.
+
+We represent elements $(x, y)$ of $omega times omega$ using the standard pairing function $pair(x, y)$.
+Note that for all $i in omega$ we have $x < y implies pair(i, x) < pair(i,y)$.
+
+We aim to satisfy the following requirements, for all $i, x in omega$
+$
+N_(i,x): quad & (exists^infinity s)[x in V^(D_i)[s]] implies x in V^(D_i),\
+P_x:     quad & x in K iff x "is missing from at most one of" A_0, A_1, A_2, dots,\
+R_(i,x): quad & x in K iff (exists y leq h(i,x))[y in omega^([x]) and y in C_i],
+$
+where $lambda x[h(i,x)] leqt pseudojump(D_i, V)$.
+
+We assume that we have an enumeration ${K_s}_(s geq 0)$ such that
+$(forall s)[thin |setdiff(K_(s+1), K_s)| leq 1]$.
+Following~@CDJF we also assume that the pseudojump $V$ has the property that for all r.e.
+// p.77
+sets $X$ given $x$, $s$, and $t > s$:
+$
+[x in V^X[s] and restr(X_t, r_X(x, s)) neq restr(X_s, r_X(x, s))]
+implies
+(exists u)[s < u leq t and x in.not V^X[u]]
+$
+where $r_X(x, s)$ is the $X$-use of the axiom witnessing $x in V^X[s]$.
+Essentially , we identify $V$ with its hat-trick counterpart,~$hat(V)$.
+
+The construction progresses as follows.
+
+#let stage-hdr-local(name) = [#smallcaps[Stage] #name: #h(1em)]
+#stage-hdr-local($s = 0$) For $i in omega$, $A_i = B_i = C_i = emptyset$.
+Also, for all $i, s, x in omega$ put (as boundary conditions)
+$h(i, x, -1) = l(i, x, -1) = 0$ and $h(i, -1, s) = -1$.
+
+#stage-hdr-local($s+1$) Each stage has two "phases". The first aims to satisfy
+the requirements $P_x$ and the second to satisfy the $R_(i,x)$. We will call the point between the two phases
+stage $s + 1\/2$.
+
+If $setdiff(K_(s+1), K_s) = emptyset$ then there is nothing to do.
+Otherwise let $setdiff(K_(s+1), K_s) = {k}$ and proceed as described.
+
+#phase("I") For all $i, x in omega$ define
+$
+r(i, x, s) = cases(
+    "the" D_i"-use of" x in V^(D_i)[s] quad & "if" x in V^(D_i)[s]\,,
+    0                                       & "otherwise"
+)
+$
+Now put
+$rho(i, x, s) = max{r(i, y, s) st y leq x}$ and
+$rho^-(i, x, s) = max{r(i, y, s) st y < x}$.
+Define
+$
+l(i,x,s) = (mu y) [ y in omega^([x]) and y in.not B_(i,s) and y geq l(i, x, s-1) and y > rho^-(i, x, s)].
+$
+Let $pair(i_0, x_0)$ be the least pair $pair(i, x)$ such that $k leq r(i, x, s)$.
+We now mimic the proof of Sacks' Splitting Theorem and"protect" the pair $pair(i_0, x_0)$ by
+enumerating $k$ "everywhere else". For each $j neq i_0$ do the following:
+
+#show: doc => setupenum(doc)
++ Enumerate $k$ into $A_(j, s + half)$,
++ Let $z$ be least such that $k leq r(j, z, s)$ and enumerate $l(j, z, s)$ into $B_(j, s+ 1\/2)$.
+  If there is no such $z$, do nothing here.#footnote[
+      Strictly speaking, we are being a little loose. After all, it is not $k$ that gets enumerated into $D_j$, but its
+      encoding, $2k$, and we are only concerned with things if _this_ enumeration injures some restraint $r(j, z, s)$.
+      However, if $2k < r(j, z, s)$ then certainly $k < r(j, z, s)$, and it des not seem worth the trouble to keep track
+      of the difference between $k in A_i$ and what that means to $D_i$.
+]
+
+(This is the purpose of the enumerations into $B_j^([z])$: they witness the fact that $N_(j,z)$ was injured by
+ an enumeration forced on us to protect a higher-priority pair. We do this only for the least pair $pair(j, z)$
+ so affected, because if $pair(j, z') > pair(j, z)$ is also affected, this can be detected
+ ($pseudojump(D_i, V)$)-recursively _via_ the implied change in $h(j, z, s)$. See lemma~#thmref(<lemma6.7>) below.)
+
+
+If there is no such $pair(i_0, x_0)$, then just enumerate $k$ into $A_(i,s + half)$ for every $i in omega$.
+In this case there is no enumeration into any $B_i$.
+#lemma[ Foo <lemma6.7> ]
+
 
 #bibliography("works.yml", style: "ieee")
 
