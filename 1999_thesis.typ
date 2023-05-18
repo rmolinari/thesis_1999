@@ -1640,7 +1640,7 @@ again. This allows us to get a handle on the delayed permitting nature of the ar
 ]
 #proof[
     We consider the case $|alpha| = 2e$. The case $|alpha| = 2e + 1$ is much the same, and simpler, as we don't have to worry
-    about the parameter,~$mu$.
+    about the parameter~$mu$.
 
     We immediately dispense with the case in which $nu$ is in #state(7) or #state(8) at stage~$t$, as by construction such
     a cycle needs to be reset to act again. Thus $nu$ is in #state(2), 3, 5, or~6.
