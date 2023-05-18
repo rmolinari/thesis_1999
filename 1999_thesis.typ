@@ -1337,9 +1337,9 @@ The following result is the key one.
     For all $n in omega$
     + $f(n)$ is defined;
 
-    + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
+    + $restr(f, (n+1))$ is cancelled only finitely often (note that $restr(f, 0) = emptyset$ is never cancelled);
 
-    + #strat($restr(f, n)$) satisfies the requirement towards which it works;
+    + #strat($restr(f, n)$) satisfies the requirement towards which it works; and
 
     + for all sufficiently large $C$-true stages $t$, $restr(f, (n+1)) subset f_t$.
     <prop2.16>
