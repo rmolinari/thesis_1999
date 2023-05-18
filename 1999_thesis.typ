@@ -3577,7 +3577,7 @@ The following result is vitally important, if tedious to prove.
       #strat($beta$)'s #cycle($k$) is in #state(3) at #stg($s(l)$).
       For $x_t(beta, k)$ to leave $A_(pi(l))$ between stages $s(l)$ and $s(l+1)$, $beta$'s
       #cycle($k$) must leave #state(3), due to a $C$-change, necessarily below $macron(v)(alpha, l)$.
-      But this imples that $alpha$'s #cycle($l+1$) is reset, contradicting the definition of~$s(l)$.
+      But this implies that $alpha$'s #cycle($l+1$) is reset, contradicting the definition of~$s(l)$.
 
       // p.71
       If $x_t(beta, k) in.not A_(pi(l), s(l))$ then $x_t(beta, k)$ can enter $A_(pi(l))$ only by $beta$'s
@@ -3875,7 +3875,7 @@ Therefore, the present author didn't so much discover the proof as assemble it f
 We will construct for each $i in omega$ an r.e. set $D_i = A_i join B_i join C_i$.
 The sets~$A_i$ will receive the elements of $K$ along the lines of the splitting theorem in such a way that
 if $0 leq i < j$ we have $A_i union A_j = K$ so $K equivt A_i join A_j$ and $K equivt D_i join D_j$.
-The sets $C_i$ will receieve trace-markers which will attempt to encode $K$ into each $D_i$ separately,
+The sets $C_i$ will receive trace-markers which will attempt to encode $K$ into each $D_i$ separately,
 using the method of @JockuschShore1984.
 The sets $B_i$ receive enumerations of a technical nature, needed for the recovery of these encodings.
 
@@ -3941,7 +3941,7 @@ enumerating $k$ "everywhere else". For each $j neq i_0$ do the following:
   If there is no such $z$, do nothing here.#footnote[
       Strictly speaking, we are being a little loose. After all, it is not $k$ that gets enumerated into $D_j$, but its
       encoding, $2k$, and we are only concerned with things if _this_ enumeration injures some restraint $r(j, z, s)$.
-      However, if $2k < r(j, z, s)$ then certainly $k < r(j, z, s)$, and it des not seem worth the trouble to keep track
+      However, if $2k < r(j, z, s)$ then certainly $k < r(j, z, s)$, and it does not seem worth the trouble to keep track
       of the difference between $k in A_i$ and what that means to $D_i$.
 ]
 
@@ -3972,7 +3972,7 @@ This ends the description of the construction.
 We have a sequence of lemmas which together demonstrate that all of the requirements are met.
 
 #lemma[
-    If $i neq j$ then $K = A_i union A_j$. Thus eqch requirement $P_x$ is satisfied.
+    If $i neq j$ then $K = A_i union A_j$. Thus each requirement $P_x$ is satisfied.
     <lemma6.5>
 ]
 #proof[
@@ -4109,5 +4109,5 @@ assumption we have made on the pseudojump~$V$.
 
 #bibliography("works.yml", style: "ieee")
 
-// LocalWords:  basicModuleRe
+// LocalWords:  basicModuleRe blankEq equivt CDJF notleqt lim ast yml
 
