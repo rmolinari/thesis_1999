@@ -1202,7 +1202,7 @@ used in the $R_e$ strategy argument.
 Let $Y = {plabel(0), plabel(1), ..., plabel(4)}$. Using the same notation as in the definition of #validPattern we may
 define a single subset of $finseq(Y)$:
 $
-  validPatternForP = setconcat(finseq({plabel(2), plabel(4)}), angletup({plabel(1), plabel(3)}))
+  validPatternForP = setconcat(finseq({plabel(2), plabel(4)}), angletup({plabel(1), plabel(3)})).
 $
 We then have the following analogue to the Pattern Lemma.#footnote[We don't refer to this result as a "Pattern Lemma",
                                                                    as it is too simple to deserve a name.]
