@@ -1311,7 +1311,7 @@ Now there are some results corresponding to Lemmas #thmref(<lemma2.7>)--#thmref(
     state~#plabel(4) cannot act again before being reset. Cycle $k'$ cannot act at $t'$ by returning
     to state~#plabel(1) as this would mean a change in $restr(C, xi_t(k')) subset restr(C, xi_t(k))$
     which contradicts our assumption. Thus cycle $k'$ acts by reaching state~#plabel(3). As cycle $k'$
-    is not reset before stage $s$ it can not reenter state~#plabel(1) before $s$. It must
+    is not reset before stage $s$ it cannot reenter state~#plabel(1) before $s$. It must
     therefore enter #plabel(4) before stage~$s$, by #lemmaRef(<lemma2.12>), as cycle $k$
     is not in state~#plabel(0) at stage~$s$. But cycle $k'$ passes from state~#plabel(3) to state~#plabel(4)
     only when it sees a change in $restr(C, xi_t(k'))$, which again leads to the contradiction of
