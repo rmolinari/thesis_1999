@@ -3886,7 +3886,7 @@ We aim to satisfy the following requirements, for all $i, x in omega$
 $
 N_(i,x): quad & (exists^infinity s)[x in V^(D_i)[s]] implies x in V^(D_i),\
 P_x:     quad & x in K iff x "is missing from at most one of" A_0, A_1, A_2, dots,\
-R_(i,x): quad & x in K iff (exists y leq h(i,x))[y in omega^([x]) and y in C_i],
+R_(i,x): quad & x in K iff (exists y leq h(i,x))[y in column(omega, x) and y in C_i],
 $
 where $lambda x[h(i,x)] leqt pseudojump(D_i, V)$.
 
@@ -3929,7 +3929,7 @@ $rho(i, x, s) = max{r(i, y, s) st y leq x}$ and
 $rho^-(i, x, s) = max{r(i, y, s) st y < x}$.
 Define
 $
-l(i,x,s) = (mu y) [ y in omega^([x]) and y in.not B_(i,s) and y geq l(i, x, s-1) and y > rho^-(i, x, s)].
+l(i,x,s) = (mu y) [ y in column(omega, x) and y in.not B_(i,s) and y geq l(i, x, s-1) and y > rho^-(i, x, s)].
 $
 Let $pair(i_0, x_0)$ be the least pair $pair(i, x)$ such that $k leq r(i, x, s)$.
 We now mimic the proof of Sacks' Splitting Theorem and"protect" the pair $pair(i_0, x_0)$ by
@@ -4084,7 +4084,28 @@ Now define $h(i, x) = lim_s h(i, x, s)$.
     take on finitely many of these values.
 
     // p.80
+    So, let $J_x = { pair(x, k) | k geq lambda_0 sand pair(x, k) in B_i }$.
+    Note that this set is finite, may perhaps be empty, and may be computed from $B_i$.
+    Let $t$ be the least stage greater than~$s$ such that $J_x subset B_(i,t)$.
+    Thus there are no injuries to $N_(i,x)$ after $t$ due to higher priority pairs being protected.
+    By the definition of~$s$, there are also no subsequent injuries due to enumerations of
+    $h(i,y)$ for $y < x$.
+    As these are the only two ways in which injuries can occur, there are no injuries at all after #stg($t$),
+    and we may conclude that $m_r(x) = m_h(x) = t$, $r(i, x) = 0$ and $h(i, x) = h(i, x, t)$.
+
+    We are done.
 ]
+
+Now, by #lemmaRef(<lemma6.6>), all of the requirements of the form $N_(i,x)$ are satisfied,
+so for each $i$, $pseudojump(D_i, V) leqt K$.
+By construction each $R$-requirement is satisfied, and since by #lemmaRef(<lemma6.7>) we can compute $h(i, x)$
+from $pseudojump(D_i, V)$ we may conclude that also $K leq pseudojump(D_i, V)$.
+
+It remains only to show that $D_0, D_1, D_2, dots$ are pairwise incomparable.
+Well, suppose $i neq j$ and $D_i leqt D_j$.
+By lemma~#thmref(<lemma6.5>) $K equivt A_i join A_j$ so also $K equivt D_i join D_j equivt D_j$.
+But we already know that $pseudojump(D_i, V) equivt K$, so this would contradict the non-triviality
+assumption we have made on the pseudojump~$V$.
 
 #bibliography("works.yml", style: "ieee")
 
