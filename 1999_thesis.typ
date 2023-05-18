@@ -1023,6 +1023,7 @@ was one of the technical flaws in the original paper @CLW1989.
 
 For the following lemmas we again assume that we have fixed in our minds a specific node/strategy of the construction,
 and restrict our attention to the functionals associated with this strategy.
+// p.19
 #lemma[
     For all $j$ and $k$, if cycle $(j, k)$ is in state~5 at stage $s$, then $(Delta(C\; j))[s] converge$.
     The same conclusion can be made if row $row(j)$ was abandoned at some stage before $s$.
@@ -1030,7 +1031,7 @@ and restrict our attention to the functionals associated with this strategy.
 ]
 #proof[
     If cycle $(j, k)$ is in state~5, we must have in particular $restr(C_s, v(j, k)) = restr(C_(s_2), v(j, k))$.
-    But $v(j, k) = delta_(s_0)(j)$, so the computation for $Delta(C\; j)$ that was defined by cycle $(j, k)$
+    But $v(j, k) = delta_(s_2)(j)$, so the computation for $Delta(C\; j)$ that was defined by cycle $(j, k)$
     when it entered state~5 is still defined.
 
     If, instead, row $row(j)$ was abandoned at some earlier stage, this abandonment was accompanied by
