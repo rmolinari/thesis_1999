@@ -1550,7 +1550,7 @@ This establishes part 2 of the Proposition for $n = eta$.
     large enough that cycle~$sigma$ is not reset after stage~$s$, so that it works with the same witness, $x$, after~$s$.
     The only way that cycle $sigma$ can act infinitely often is if it alternates infinitely
     between states~1 and~2, or (if $epsilon neq -1$) between states~4 and~5. This implies that at least one of
-    $Phi_e(E_e)$ and $hat(Psi)_e(C join A join B)$ is partial.
+    $Phi_e(E_e)$ and $Psi_e(C join A join B)$ is partial.
 
     Indeed, suppose that both functions are total and that we bounce infinitely often between #state(1) and #state(2).
     Let $t > s$ be so large that
