@@ -786,6 +786,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state~6 a
     cycle to its right will be started so long as $(j, k)$ remains in this state.
 ]
 
+// p.14
 #lemma[
     Suppose cycle $(j, k)$ enters state~3 at stage $s$ due to cycle $(j, k')$ being in state~5/6. If at stage $t > s$ cycle $(j, k')$
     leaves state~5/6 for the first time, for any reason, then cycle $(j, k)$ is no longer in state~3 at the end of stage $t$.
@@ -813,7 +814,7 @@ It will be convenient to refer to a cycle with is in either stage 5 or state~6 a
     Without loss of generality we may assume that $t$ is minimal in witnessing the failure of this lemma.
     Since cycle $(j, k')$ is "awake" (that is, in a state other than 0) between stages $s$ and $t$, cycle $(j, k dubpr)$
     must be in one of the states 2, 3 or 7, and cannot change states (other than going from 2 to 3) during this time, for otherwise
-    cycle $(j, k')$ would be reset. We may may immediately discount the possibility that $(j, k dubpr)$ in state~7,
+    cycle $(j, k')$ would be reset. We may may immediately discount the possibility that $(j, k dubpr)$ is in state~7,
     because a cycle in this state cannot act. Thus, as stage $t$ starts, cycle $(j, k dubpr)$ is in state~2 or state~3.
 
     We first claim that $(j, k dubpr)$ can't make the transition from state~2 to state~1. Indeed, such a transition indicates a change
