@@ -1333,7 +1333,7 @@ The following result is the key one.
     <prop2.16>
 ]
 
-So, inductively assume 1, 2, 3 and 4 for $n = eta - 1$, and let $alpha = restr(f, eta)$. Fix a stage $s_0$
+So, inductively assume 1, 2, 3, and 4 for $n = eta - 1$, and let $alpha = restr(f, eta)$. Fix a stage $s_0$
 so large that $alpha$ is not cancelled after $s_0$, and for every $C$-true stage $t > s_0$, $alpha subset f_t$.
 
 We say that #stalpha _acts finitely_ if there is a stage $s$ after which no cycle of $alpha$ every
@@ -2031,10 +2031,10 @@ Cycle $chi = (j, k)$ proceeds as follows.
 
 + This state is analogous to #state(7) in #chapRef(2). If we arrive here it is safe and accurate
   to set $Gamma_j(C; k) = 1$ with use~0. Do so, unless it has already been done, (permanently)
-  abandon cycle $(j, k)$ and start cycle $(j, k+1)$.
+  abandon cycle $(j, k)$, and start cycle $(j, k+1)$.
 
 + Arriving here means we can with confidence set $Delta(C\; j)$ with use~0.
-  Do so, unless it has already been done, (permanently) abandon row $row(j)$ and start cycle $(j+1, 0)$.
+  Do so, unless it has already been done, (permanently) abandon row $row(j)$, and start cycle $(j+1, 0)$.
   For technical reasons also reset every cycle in row $row(j)$ and put cycle $(j, 0)$ into #state(11).
 
 === Combining the modules
@@ -2102,7 +2102,7 @@ We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of #stalpha now 
 $
 i = cases(
     1 quad & "if" bigS = 2\,,
-    2      & "if" bigS = 3\, 4 "or" 5\,,
+    2      & "if" bigS = 3\, 4\, "or" 5\,,
     3      & "if" bigS = 6\,,
     4      & "if" bigS = 7 "or" 8\,,
     5      & "if" bigS = 9.
@@ -2307,7 +2307,7 @@ We have the same proposition as before.
     <prop3.17>
 ]
 
-So, inductively assume 1, 2, 3 and 4 for $n = eta - 1$ and let $alpha = restr(f, eta)$.
+So, inductively assume 1, 2, 3, and 4 for $n = eta - 1$ and let $alpha = restr(f, eta)$.
 Fix a #stg($s_0$) so larger that $alpha$ is not cancelled after~$s_0$; and for for every
 $C$-true stage $t > s_0$, $alpha subset f_t$, $rho(alpha, t) = liminf_s rho(alpha, s)$,
 and $tilde(rho)(alpha, t) = liminf_s tilde(rho)(alpha, s)$.
@@ -2385,7 +2385,7 @@ and recall that $lambda alpha [s^alpha]$ is $G$-recursive.
 
 #lemma[
     Suppose that $t > s^(concatone(alpha, nu))$ is a $C$-true stage, and that $alpha$'s cycle $nu$
-    is in state 4, 5, 8, 10 or 11. Then if #cycle($nu$) does not act at #stg($t$) it will never act
+    is in state 4, 5, 8, 10, or 11. Then if #cycle($nu$) does not act at #stg($t$) it will never act
     subsequently without first being reset.
     <lemma3.25>
 ]
@@ -2661,13 +2661,13 @@ which corresponds to #thmref(<theorem3.29>) just as #thmref(<theorem3.30>) corre
 
 In @ALS1998 the following is proved
 
-#theorem(name: [Arslanov, LaForte and Slaman])[
+#theorem(name: [Arslanov, LaForte, and Slaman])[
     Any $omega$-r.e. set with is 2-REA is actually of 2-r.e. degree.
     <theorem3.32>
 ]
 The question then occurs: does the behaviour occur for numbers greater than 2?
 The same paper answers the question negatively:
-#theorem(name: [Arslanov, LaForte and Slaman])[
+#theorem(name: [Arslanov, LaForte, and Slaman])[
     There is a set F which is both 3-REA and $(n+1)$-r.e. but fails to be of $n$-r.e. degree.
     <theorem3.33>
 ]
@@ -2706,7 +2706,7 @@ In #chapRef(5) we will prove a generalization in another direction:
 In this chapter we consider the latter result from the point of density: can such r.e.-free intervals be
 found densely in the r.e. degrees?
 #conjecture[
-    For all r.e. sets $C$, $G$ and $H$ such that $emptyset ltt C leqt G ltt H$ there
+    For all r.e. sets $C$, $G$, and $H$ such that $emptyset ltt C leqt G ltt H$ there
     are $reInAbove(C)$ sets $D ltt F$ such that $turinginterval(D, F) subset turinginterval(G, H)$
     and there is no r.e. set $E in turinginterval(D, F)$.
     <conjecture4.1>
@@ -2797,7 +2797,7 @@ also defines values for an auxiliary (partial) recursive function~$m$, used in t
 All cycles begin in #state(0).
 A cycle is _started_ by letting it pass from #state(0) to another state,
 depending on its history, as in earlier chapters. Again, a cascade of cycle-startings might occur.
-A cycle is _reset_ by putting it back into #state(0), returning its restraints to 0 and undefining the values of its
+A cycle is _reset_ by putting it back into #state(0), returning its restraints to 0, and undefining the values of its
 parameters, $u$, $x$, and $p$.
 A cycle is _abandoned_ by returning its restraints to 0 and (permanently) stopping all activity for that cycle.
 This is done when a cycle has categorically failed to satisfy $R_e$, as in the earlier chapters.
@@ -2909,7 +2909,7 @@ ensure that $B leqt H$, but we can just us a stripped-down version of the Cooper
 Again, suppose $e$ is fixed, and write $Theta$ for $Theta_e$. The strategy for $N_e$ has the same cycle
 structure as that for $R_e$. Cycle~0 starts first. We again threaten to show $H leqt G$, this time by
 constructing a functional $Delta(G) = H$. We don't need any auxiliary function like~$m$.
-_Starting_, _resetting_, _abandoning_ and _acting_ all have the same definitions as before.
+_Starting_, _resetting_, _abandoning_, and _acting_ all have the same definitions as before.
 
 Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds as follows.
 
@@ -2976,7 +2976,7 @@ it may have (partially) defined. Any parameter, once defined, keeps that value u
 The construction proceeds as follows.
 
 Stage 0: #h(1em) All parameters are undefined or $emptyset$, as appropriate,
-all functionals are completely undefined and all cycles are in #state(0) or #nstate(0), as appropriate.
+all functionals are completely undefined, and all cycles are in #state(0) or #nstate(0), as appropriate.
 
 Stage $s+1$: #h(1em) We define, in substages $t < s$, a finite path, $f_(s+1)$, through $T$, of length $s$.
 We think of $f_(s+1)$ as our approximation to the "true" path defined at stage $s+1$.
@@ -3081,7 +3081,7 @@ acts. Otherwise, we way that $alpha$ _acts infinitely_.
     will be _total_ recursive, and hence dominated by $c_C$.
     For each #cycle($k$) that gets stuck in~4, let $x_k$ be the last witness it ever
     chooses#footnote[There must be a last, as $k$ only gets to choose a new one after it is reset.],
-    let $p_k$ be the final value for which #cycle($k$) defines $m(p_k)$ and let $s_(2,k)$ be the final stage
+    let $p_k$ be the final value for which #cycle($k$) defines $m(p_k)$, and let $s_(2,k)$ be the final stage
     at which #cycle($k$) passes from #state(3) to #state(4) before getting stuck there. Note that $xi(x_k) = p_k$
     and that $m(p_k) = s_(2,k)$.
 
@@ -3281,7 +3281,7 @@ To this end it will be useful to use the notation $pi(l)$ for the parity of $l$.
 
 All cycles begin in #state(0). A cycle is _started_ by letting it pass from #state(0) to #state(1),
 choosing a witness on the way. A cycle is _reset_ by putting it back into #state(0), returning
-its restraint to 0 and undefining the values of its parameters $x$, $u$, and $v$.
+its restraint to 0, and undefining the values of its parameters $x$, $u$, and $v$.
 Unlike earlier constructions, a cycle is never permanently abandoned.
 
 Where necessary we will indicate the value of a parameter corresponding to #cycle($l$) like so: $x(l)$, $u(l)$, $v(l)$.
@@ -3623,7 +3623,7 @@ The following result is vitally important, if tedious to prove.
 
       If $k > l+1$ we just use #lemmaRef(<lemma5.3>) (ii). No $x_t(alpha, l+1)$ is ever in $A_(pi(l))$,
       as $pi(l+1) neq pi(l)$.
-      If $j leq l$, $t < s(l)$ and $x_t(alpha, j) neq macron(x)(alpha, j)$ then again we use #lemmaRef(<lemma5.3>) (ii).
+      If $j leq l$, $t < s(l)$, and $x_t(alpha, j) neq macron(x)(alpha, j)$ then again we use #lemmaRef(<lemma5.3>) (ii).
       So we are just left to consider the witnesses $macron(x)(alpha, j)$ for $j leq l$, and by parity,
       we need only consider those with $j ident l thin (mod 2)$.
 
@@ -4023,7 +4023,7 @@ $
     We have shown that no element enters $I_(i,x)$ after stage $t$ and hence that this set is finite.
 
     If there is a stage $t_0 > t$ at which $x in V^(D_i)[t_0]$ then this will never later be injured,
-    $x in V^(D_i)$ and $r(i, x) = r(i, x, t_0)$.
+    $x in V^(D_i)$, and $r(i, x) = r(i, x, t_0)$.
     By the same token, if $x in.not V^(D_i)$ then
     $(forall t_0 > t)[x in.not V^(D_i)[t_0]]$, and $r(i, x) = 0$.
 ]
@@ -4045,10 +4045,10 @@ Now define $h(i, x) = lim_s h(i, x, s)$.
     // (forall s > m_h(x))[h(i, x, s) = h(i, x)].
     //
     // See Soare p.56
-    We show how to $(pseudojump(D_i, V))$-recursively compute $h(i,x)$, $m_r$ and $m_h$ by induction.
+    We show how to $(pseudojump(D_i, V))$-recursively compute $h(i,x)$, $m_r$, and $m_h$ by induction.
     (In fact, it turns out that we end up with $m_r = m_h$, but it seems more natural to refer to these functions separately.)
 
-    So, suppose we know $m_r(y)$, $r(i, y)$, $m_h(y)$ and $h(i,y)$ for all $y < x$.
+    So, suppose we know $m_r(y)$, $r(i, y)$, $m_h(y)$, and $h(i,y)$ for all $y < x$.
 
     Let $s$ be so large that for all $y < x$
 
@@ -4092,7 +4092,7 @@ Now define $h(i, x) = lim_s h(i, x, s)$.
     By the definition of~$s$, there are also no subsequent injuries due to enumerations of
     $h(i,y)$ for $y < x$.
     As these are the only two ways in which injuries can occur, there are no injuries at all after #stg($t$),
-    and we may conclude that $m_r(x) = m_h(x) = t$, $r(i, x) = 0$ and $h(i, x) = h(i, x, t)$.
+    and we may conclude that $m_r(x) = m_h(x) = t$, $r(i, x) = 0$, and $h(i, x) = h(i, x, t)$.
 
     We are done.
 ]
