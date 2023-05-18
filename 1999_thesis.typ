@@ -106,6 +106,11 @@
 #let concat(a, b) = $#a paren.t #b$
 #let concatone(a, b) = $concat(#a, #angletup(b))$
 
+// Functional F relativized by Y, evaluated at x
+// Define a macro because of the tedium of backslashing the semicolon
+// Note the semicolon after #F to force the parser out of code-mode.
+#let fff(F, Y, x) = $#F;(#Y\; #x)$
+
 #let setconcat(M, N) = $#M\; #N$
 
 //  Inline 1/2. Typst does a bad job with fractions inline, insisting on using a vertical layout. It is surprising.
@@ -1256,7 +1261,7 @@ We then have the following analogue to the Pattern Lemma.#footnote[We don't refe
 Now there are some results corresponding to Lemmas #thmref(<lemma2.7>)--#thmref(<lemma2.11>).
 
 #lemma[
-    If cycle $k$ is in state #plabel(2) or state #plabel(4) at stage $s$ then $Xi(C\; j)[s] converge$.
+    If cycle $k$ is in state #plabel(2) or state #plabel(4) at stage $s$ then $fff(Xi, C, k)[s] converge$.
     <lemma2.13>
 ]
 #proof[
