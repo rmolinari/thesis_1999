@@ -1672,20 +1672,20 @@ again. This allows us to get a handle on the delayed permitting nature of the ar
     it suffices to assume that $beta subset f_t$ and that $beta$ is never cancelled in $(s, s']$.
 
     Suppose cycle~$nu$ of #strat($beta$) is reset at some $tau in (s, s']$. As $beta$ isn't cancelled at $tau$,
-    $nu$ is reset by some the action at $tau$ of some cycle $nu' < nu$ of #strat($beta$). By construction,
+    $nu$ is reset by the action at $tau$ of some cycle $nu' < nu$ of #strat($beta$). By construction,
     this leads to the cancellation of node $beta^+$.
 
     (In what follows it will be convenient to refer to a cycle which is not in #state(0) or #state(plabel(0))
      as _awake_. Cycles in #state(0) or #state(plabel(0)) are _asleep_.)
 
     So it remains to consider the case in which $nu$ is not reset at any $tau in (s, s']$. The following
-    argument applies necessarily to the case $|alpha| = 2e$. The case $|alpha| = 2e + 1$ is much the same;
-    and simpler, as do not have to worry about the parameter~$mu$.
+    argument applies necessarily to the case $|alpha| = 2e$. The case $|alpha| = 2e + 1$ is much the same.
+    It is also simpler because we do not have to worry about the parameter~$mu$.
 
     Write $nu = (j, k)$. $beta^+ = concatone(beta, nu) subset f_s$, so cycle $nu$ is awake at stage $s$.
     As it is not reset in $(s, s']$ it remains awake during this period, and in particular is awake at
     stage~$t$. But $beta^+ subset.not f_t$, so some cycle to the right of $nu$ must also be awake at $t$.
-    This means that $(j, k)$ must be in one of the states 2, 3, 5, 7, and~8 by the Pattern Lemma.
+    This means that $(j, k)$ must be in one of the states 2, 3, 5, 7, or~8 by the Pattern Lemma.
     Now, $t > s^alpha geq s^(beta^+)$, so we may apply #lemmaRef(<lemma2.24>) to see that cycle~$nu$
     does not act before being first reset. As it is not reset in $(s, s']$, it cannot act at or before $s'$,
     and $concatone(beta, (j, k)) subset.not f_(s')$, a contradiction.
