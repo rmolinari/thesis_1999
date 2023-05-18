@@ -1270,7 +1270,7 @@ Now there are some results corresponding to Lemmas #thmref(<lemma2.7>)--#thmref(
     the computation defined at $t$, is still valid at $s$.
 
     If cycle $k$ is in state #plabel(4) then it must have been abandoned at some earlier stage.
-    The abandonment was accompanies by a definition of $Xi(C\; K)$ with use 0, so this computation must persist to stage $s$.
+    The abandonment was accompanies by a definition of $Xi(C\; k)$ with use 0, so this computation must persist to stage $s$.
 ]
 
 #lemma[
