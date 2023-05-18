@@ -657,7 +657,7 @@ the letter P. Cycle $k$ proceeds as follows.
 
   If such an $s_2$ exists, note that we have
   $
-  (hat(Theta)(C join A\; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1) = (hat(Theta)(C join A\; y))[s_1].
+  (hat(Theta)(C join A\; y))[s_2] = B_(s_2)(y) = 1 neq 0 = B_(s_1)(y) = (hat(Theta)(C join A\; y))[s_1].
   $
   By the restraint on $A$, $restr(A_(s_2), u) = restr(A_(s_1), u)$ so we must have $restr(C_(s_2), u) neq restr(C_(s_1), u)$.
   This change in $C$ allows us to redefine $Xi(C\; k)$, which we do after advancing to state P4.
