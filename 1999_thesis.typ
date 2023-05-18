@@ -1172,11 +1172,12 @@ We have the analogous result for the $Gamma$ functionals.
     Now, only cycle $(j, k)$ can define a computation for $Gamma_j(C; k)$. It cannot merely have returned to state~1 and again to
     state~2 between stages $t$ and $s$, as this requires a change in $restr(C, u_t(j, k))$. Neither can it advance from state~2 to
     state~7 between stages $t$ and $s$, as entering state~7 entails the same $C$-change. Thus in order to have another crack at
+    // p.22
     defining $Gamma_j(C; k)$, cycle $(j, k)$ must be reset and later restarted. If ever something in row $row(i)$, for $i < j$,
     acts, the functional $Gamma_j(C)$ is discarded wholesale, preventing any conflicting definition
     at stage $s$. So, at some stage $t' in (t, s)$ some cycle $(j, k') < (j, k)$ acts, resetting $(j, k)$
-    (if it hadn't been reset since stage $t$ already.) By #lemmaRef(<lemma2.9>), $(Gamma_j(C; k'))[t] converge$ and by part (I)
-    $gamma_(j,t)(k') < gamma_(j,t)(k)$. Before stage $s$ cycle $(j, k')$ must restart cycle $(j, k' + 1)$, and at the same
+    (if it hadn't been reset since stage $t$ already.) By #lemmaRef(<lemma2.9>), $(Gamma_j(C; k'))[t'] converge$ and by part (I)
+    $gamma_(j,t')(k') < gamma_(j,t')(k)$. Before #stg($s$) #cycle($(j, k')$) must restart #cycle($(j, k' + 1)$), and at the same
     time define a new computation for $Gamma_j(C; k')$. But by the inductive hypothesis the previous such computation
     (_i.e._ that valid at stage $t$) must have become undefined. This means that there has been a change
     since stage $t$ in $restr(C, gamma_(j,t)(k')) subset restr(C, gamma_(j,t)(k))$. But $gamma_(j,t)(k) = u_t(j, k)$,
