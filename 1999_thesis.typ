@@ -510,7 +510,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
 
 + Wait for a stage $s_1$ at which the following statement, which we call $Eq(x, s_1)$, holds:
   $
-    ( A(x) = Phi(E \; x) )[s_1] and (restr(E, phi(x)) = ( restr(hat(Psi)(C join A join B), phi(x)) )[s_1]
+    ( A(x) = Phi(E \; x) )[s_1] sand (restr(E, phi(x)) = ( restr(hat(Psi)(C join A join B), phi(x)) )[s_1]
   $
   [Note that if $s_1$ doesn't exist, we automatically satisfy the requirement.]
 
@@ -1904,7 +1904,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
 
   We set
   $
-    lambda^1(x) = (min lambda)[lambda > tilde(v) and lambda > l and lambda > s_2 and lambda in.not A_(s_2) \
+    lambda^1(x) = (min lambda)[lambda > tilde(v) sand lambda > l sand lambda > s_2 sand lambda in.not A_(s_2) \
                                and lambda "is larger than any number mentioned in the construction so far"].
   $
   Declare $lambda^1(x)$ to be a lever, restrain $restr((udvd), v)$ and $restr(A, lambda^1(x) + 1)$, and enumerate
@@ -1989,7 +1989,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
 
   We prepare to enumerate $x$ back into $V^D$ by defining another lever:
   $
-    lambda^2(x) = (min lambda)[lambda > tilde(v) and lambda > j and lambda > s_4 and lambda in.not A_(s_4) \
+    lambda^2(x) = (min lambda)[lambda > tilde(v) sand lambda > j sand lambda > s_4 sand lambda in.not A_(s_4) \
                                and lambda "is larger than any number mentioned in the construction so far"].
   $
   Declare $lambda^2(x)$ to be a lever and restrain $restr(A, lambda^2(x) + 1)$.
@@ -3677,7 +3677,7 @@ This result is used to prove the crucial
     Thus $s(l)$ exists for all~$l$, and also each~$t(l)$.
 
     But $s(-1) = 0$ and
-    $s(l+1) = (mu s < t(l))[Eq(macron(x)(alpha, l+1), s) thin and thin restr(C_s, v_s(alpha, l+1)) = restr(C_(t(l)), v_s(alpha, l+1))]$.
+    $s(l+1) = (mu s < t(l))[Eq(macron(x)(alpha, l+1), s) sand restr(C_s, v_s(alpha, l+1)) = restr(C_(t(l)), v_s(alpha, l+1))]$.
     Moreover by Lemmas~#thmref(<lemma5.8>);(ii) and~#thmref(<lemma5.5>);(i) both $t(l)$ and $macron(x)(alpha, l)$ are
     recursively computable from $s(l)$, so the function $lambda l[s(l)]$ is recursive.
 
@@ -3886,7 +3886,7 @@ We aim to satisfy the following requirements, for all $i, x in omega$
 $
 N_(i,x): quad & (exists^infinity s)[x in V^(D_i)[s]] implies x in V^(D_i),\
 P_x:     quad & x in K iff x "is missing from at most one of" A_0, A_1, A_2, dots,\
-R_(i,x): quad & x in K iff (exists y leq h(i,x))[y in column(omega, x) and y in C_i],
+R_(i,x): quad & x in K iff (exists y leq h(i,x))[y in column(omega, x) sand y in C_i],
 $
 where $lambda x[h(i,x)] leqt pseudojump(D_i, V)$.
 
@@ -3896,9 +3896,9 @@ Following~@CDJF we also assume that the pseudojump $V$ has the property that for
 // p.77
 sets $X$ given $x$, $s$, and $t > s$:
 $
-[x in V^X[s] and restr(X_t, r_X(x, s)) neq restr(X_s, r_X(x, s))]
+[x in V^X[s] sand restr(X_t, r_X(x, s)) neq restr(X_s, r_X(x, s))]
 implies
-(exists u)[s < u leq t and x in.not V^X[u]]
+(exists u)[s < u leq t sand x in.not V^X[u]]
 $
 where $r_X(x, s)$ is the $X$-use of the axiom witnessing $x in V^X[s]$.
 Essentially , we identify $V$ with its hat-trick counterpart,~$hat(V)$.
@@ -3929,7 +3929,7 @@ $rho(i, x, s) = max{r(i, y, s) st y leq x}$ and
 $rho^-(i, x, s) = max{r(i, y, s) st y < x}$.
 Define
 $
-l(i,x,s) = (mu y) [ y in column(omega, x) and y in.not B_(i,s) and y geq l(i, x, s-1) and y > rho^-(i, x, s)].
+l(i,x,s) = (mu y) [ y in column(omega, x) sand y in.not B_(i,s) sand y geq l(i, x, s-1) sand y > rho^-(i, x, s)].
 $
 Let $pair(i_0, x_0)$ be the least pair $pair(i, x)$ such that $k leq r(i, x, s)$.
 We now mimic the proof of Sacks' Splitting Theorem and"protect" the pair $pair(i_0, x_0)$ by
