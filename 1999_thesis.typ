@@ -100,9 +100,6 @@
 // Standard pairing function
 #let pair(a, b) = $angletup(#a, #b)$
 
-//  Inline 1/2. Typst does a bad job with fractions inline, insisting on using a vertical layout. It is surprising.
-#let half = $1\/2$
-
 // Restriction of a to b
 #let restr(a, b) = $#a harpoon.tr #b$
 // Concatenation of sequences a and b
@@ -111,8 +108,14 @@
 
 #let setconcat(M, N) = $#M\; #N$
 
+//  Inline 1/2. Typst does a bad job with fractions inline, insisting on using a vertical layout. It is surprising.
+#let half = $1\/2$
+
 // "Finite sequences of"
 #let finseq(a) = $#a^(< infinity)$
+
+// A "pair slice"
+#let pairslice(a, b) = $#a^([#b])$
 
 // Row j of an omega^2 set of cycles, and a more general "slice" of a higher-dimensional set
 #let row(j) = $cal(R)_#j$
@@ -163,6 +166,9 @@
 }
 #let squad = h(1em)
 
+// The and wedge doesn't get enough space around it in display math. Try this
+#let sand = $#h(0.5em) and #h(0.5em)$
+
 ////////////////////////////////////////
 // Placeholder for things that aren't supported yet or that I don't know how to do
 
@@ -182,20 +188,20 @@
 // Based on an answer in the Discord from PgSuper (2023-04-13 1:43 PM)
 // See issue #9 on my GitHub
 #let setupenum(doc, prefix: "", formats: ("1.", "(a)", "i.")) = {
-  set enum(
-    full: true,
-    numbering: (..n) => {
-      let n = n.pos()
-      if n.len() > 2 {
-        numbering(formats.at(2), n.last())
-      } else if n.len() == 2 {
-        numbering(formats.at(1), n.last())
-      } else {
-        numbering(prefix + formats.at(0), ..n)
-      }
-    }
-  )
-  doc
+    set enum(
+        full: true,
+        numbering: (..n) => {
+            let n = n.pos()
+            if n.len() > 2 {
+                numbering(formats.at(2), n.last())
+            } else if n.len() == 2 {
+                numbering(formats.at(1), n.last())
+            } else {
+                numbering(prefix + formats.at(0), ..n)
+}
+}
+)
+doc
 }
 
 #let defEnum(..fmts) = {
@@ -3947,7 +3953,86 @@ enumerating $k$ "everywhere else". For each $j neq i_0$ do the following:
 
 If there is no such $pair(i_0, x_0)$, then just enumerate $k$ into $A_(i,s + half)$ for every $i in omega$.
 In this case there is no enumeration into any $B_i$.
-#lemma[ Foo <lemma6.7> ]
+
+// p.78
+#phase("II") For every $i$ such that $A_i$ just received an enumeration, we recompute $r(i, x, s)$,
+and hence $rho(i, x, s)$ based on $D_(i,s+half)$.
+(Even in the case where $k$ doesn't thereby injure anything we might get a new element in
+ $setdiff(V^(D_i)[s+half], V^(D_i)[s])$, so we may as well recompute.)
+Now, for all $i, x in omega$, (even~$i_0, x_0$) put
+$
+h(i, x, s) = (mu y)[ y in pairslice(omega,x) sand y > h(i, x-1, s) sand y geq h(i, x, s-1) sand y > rho(i, x, s)]
+$
+and enumerate $h(i, k, s)$ into $C_(i, s + 1)$.
+
+This ends the description of the construction.
+
+== Verification
+
+We have a sequence of lemmas which together demonstrate that all of the requirements are met.
+
+#lemma[
+    If $i neq j$ then $K = A_i union A_j$. Thus eqch requirement $P_x$ is satisfied.
+    <lemma6.5>
+]
+#proof[
+    Only elements appearing in $K$ at some time are ever enumerated into any $A_k$, and if (say)
+    $y in K$ and $y in.not A_i$ then by construction, $y$ was enumerated into $A_j$.
+]
+
+Now for each pair $pair(i, x)$ define the injury set of $N_(i,x)$ as
+$
+I_(i,x) = { y st (exists s)[y in setdiff(D_(i,s+1), D_(i,s)) sand y leq r(i, x, s)]}.
+$
+#lemma[
+    Each $I_(i,x)$ is finite, and each $r(i, x) =^"dfn" lim_s r(i, x, s)$ exists.
+    Thus each requirement $N_(i,x)$ is satisfied.
+    <lemma6.6>
+]
+#proof[
+    We proceed by induction. Fix $i$ and $x$, and suppose that the lemma holds for all $pair(j, y) < pair(i, x)$.
+    Let $s$ be so large that for all $pair(j, y) < pair(i, x)$
+
+    - $I_(j,y) subset D_(j,s)$ (so that $N_(j,y)$ will never subsequently be injured), and
+
+    - $(forall s' geq s)[r(j, y, s') = r(j, y)]$.
+
+    Let $r = max {r(j,y) | pair(j,y) < pair(i,x)}$ and let $t geq s$ be so large that $restr(K_t, r) = restr(K, r)$
+    and $restr(K_t, x) = restr(K, x)$.
+    This means that no pair $pair(j, y) < pair(i, x)$ will ever need protection again.
+    Thus, for any $t' > t$, if $y in setdiff(K_(t'+1), K_(t'))$ and $y leq r(i, x, t')$ then $pair(i, x)$
+    is the least such pair threatened with injury and $y$ will be enumerated into all of the $A_j$'s _except_ $A_i$.
+    So nothing enumerated into $A_i$ after #stg($t$) will ever injure $N_(i,x)$ and thereby enter $I_(i,x)$.
+    As numbers of the form $l(i, z, t')$ with $z leq x$ will only be enumerated into $B_i$ when a
+    pair $pair(j, y) < pair(i, x)$ needs protection, no such will ever be enumerated again.
+    Also, since $restr(K_t, x) = restr(K, x)$, no number of the form $h(i, z, macron(t))$ with $z < x$ will enter $C_i$
+    after #stg($t$).
+
+    By construction,
+    $
+    (forall t' > t)(forall z geq x)[h(i, z, t') > r(i,z,t')]
+    $
+    // p.79
+    and
+    $
+    (forall t' > t)(forall z > x)[l(i, z, t') > r(i, z, t')]
+    $
+    so none of these will ever injure $N_(i,x)$.
+
+    We have shown that no element enters $I_(i,x)$ after stage $t$ and hence that this set is finite.
+
+    If there is a stage $t_0 > t$ at which $x in V^(D_i)[t_0]$ then this will never later be injured,
+    $x in V^(D_i)$ and $r(i, x) = r(i, x, t_0)$.
+    By the same token, if $x in.not V^(D_i)$ then
+    $(forall t_0 > t)[x in.not V^(D_i)[t_0]]$, and $r(i, x) = 0$.
+]
+
+Now define $h(i, x) = lim_s h(i, x, s)$.
+
+#lemma[
+    For $i in omega$, $lambda x [h(i,x)] leqt pseudojump(D_i, V)$.
+    <lemma6.7>
+]
 
 
 #bibliography("works.yml", style: "ieee")
