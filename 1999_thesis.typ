@@ -985,7 +985,7 @@ The claim is now that if #stalpha has been started since last being cancelled, i
       If the action consists of returning to state~4, no cycles in row $row(j)$ to the left of
       $(j, k)$ can still be in state~3, by Lemmas #thmref(<lemma2.4>) and #thmref(<lemma2.5>).
       Thus $h_i in {2, 7}$ for $i < m+1$. The action resets all cycles to the right of $(j, k)$ (including
-      those is rows $row(l)$, $l > j$), so the new pattern for row $row(j)$ is
+      those in rows $row(l)$, $l > j$), so the new pattern for row $row(j)$ is
       $p'_j = angletup(h_0, dots, h_m, 4) in uncrampedRow$, and the pattern for the whole strategy is
       $pattern(s) = angletup(p_0, dots, p_(j-1), p'_j) in validPattern$.
 
