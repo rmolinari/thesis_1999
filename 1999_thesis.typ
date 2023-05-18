@@ -1443,9 +1443,10 @@ We extract part of the proof of the preceeding lemma as a separate result.
     to its left. Suppose for the moment that $nu^-$ is the rightmost cycle of $alpha$ to the left of $nu$
     imposing restraint at stage $s$. (That is, suppose such $nu^-$ exists.) Note that cycle~$nu^-$ will never
     change state after stage $s$, and so will impose the same restraint forever more. Cycle $nu$ must return
+    // p.27
     infinitely often either to #state(1)
     (at which time either $concatone(alpha, (nu^-, 1))$ or $concatone(alpha, (nu^-, 2))$ will be accessible
-     as appropriate to the state in which $nu^-$ finds itself,) or to
+     as appropriate to the state in which $nu^-$ finds itself) or to
     state 4 (so that $concatone(alpha, (nu, 1))$ will be accessible.)
     If there is no such $nu^-$ then the respective cases find $concatone(alpha, -1)$ and $concatone(alpha, (nu, 1))$
     accessible.
@@ -1455,18 +1456,19 @@ We extract part of the proof of the preceeding lemma as a separate result.
 
 This establishes part 1 of the Proposition for $n = eta$ and we may assume that there is a value, $epsilon$, for $f(eta)$.  We write
 this value variously as $epsilon = (nu_eta, i_eta)$ (for some $nu_eta in omega^2$ and $i_eta in {1, 2}$, if $|alpha|$ is even),
-$epsilon = nu_eta$ (if $|alpha|$ is odd), or $epsilon = -1$ (if appropriate.) If there is a cycle of
+$epsilon = nu_eta in omega$ (if $|alpha|$ is odd), or $epsilon = -1$ (if appropriate). If there is a cycle of
 #stalpha which acts infinitely often then we denote the leftmost one by $nu^+$.
 
-It will be convenient to make the following definition. If $|alpha|$ is even and $i = 1$, or 2, then
+It will be convenient to make the following definition. If $|alpha|$ is even and $i = 1$ or~2, then
 we say that cycle $nu$ of #stalpha is _lacking for $i$ at stage~$s$_ if, at that stage,
 cycle $nu$ imposes less restraint than is indicated by an outcome of $(nu, i)$. That is, if $i = 1$
 and $nu$ imposes no restraint at stage $s$, or if $i = 2$ and $nu$ imposes only the restraints
-$restr(A, u)$ and $restr(B, u)$. If $|alpha|$ is odd then we say that cycle $nu$ is _lacking_ at stage~$s$
-if it imposed no restraint at that stage.
+$restr(A, u)$ and $restr(B, u)$. If $|alpha|$ is odd then we say that cycle $nu$ is _lacking at stage~$s$_
+if it imposes no restraint at that stage.
 
 #lemma[
-    Suppose that $nu_eta$ is defined. If $|alpha|$ is even then $nu_eta$ is lacking for $i_eta$ at only finitely many stages.
+    Suppose that $nu_eta$ is defined (that is, $epsilon neq -1$).
+    If $|alpha|$ is even then $nu_eta$ is lacking for $i_eta$ at only finitely many stages.
     If $|alpha|$ is odd then $nu_eta$ is lacking at only finitely many stages.
     <lemma2.20>
 ]
@@ -1483,7 +1485,7 @@ if it imposed no restraint at that stage.
     + $i_eta = 1$ and $nu_eta$ returns infinitely often to #state(1).
 
      But in this case, either $concatone(alpha, nu_eta^-)$ is accessible infinitely often
-     (if there is such a $nu_eta^-$ as defined in the proof #lemmaRef(<lemma2.19>),) or $concatone(alpha, -1)$
+     (if there is such a $nu_eta^-$ as defined in the proof of #lemmaRef(<lemma2.19>)) or $concatone(alpha, -1)$
      is accessible infinitely often. Both of these contradict the definition of $nu_eta$.
 
     + $i_eta = 2$ and $nu_eta$ is infinitely often in a state numbered less than 4.
