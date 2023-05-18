@@ -1719,8 +1719,9 @@ Now we can show that the permitting works.
     of #stalpha acts at $t$ then cycle~$nu$ will be reset, and its witness forgotten. Otherwise, if cycle $nu$
     acts at or after stage~$t$ due only to $Eq(x, s_1)$ holding, then certainly $x in.not A$, as by construction
     cycle~$(j,k)$ will jump straight to #state(7) rather than attempt to enumerate $x$ into $A$. If $nu$ is in #state(4)
+    // p.32
     at stage~$t$ then $x$ would have already entered $A$.  So we may assume that cycle~$nu$ is in a state
-    other than 0, 1, and~4 at stage~$t$, and by #lemmaRef(<lemma2.24>) is unable ever to act again without getting
+    other than 0, 1, or~4 at stage~$t$, and by #lemmaRef(<lemma2.24>) is unable ever to act again without getting
     reset first.
 
     So if $x in.not A_t$, $x in.not A$.
@@ -1728,7 +1729,7 @@ Now we can show that the permitting works.
     If $x in A_t$ we must check to see if $x$ ever gets removed from $A$. If $j in.not G$ then cycle $nu$ will never
     see the necessary permission, and $x in A$. Otherwise, let $j in setdiff(G_w, G_(w-1))$. Let $t'$ be the first
     $C$-true stage greater than both $t > s^(concatone(alpha, nu))$ and $w$. The same reasoning as before
-    shows that $x$ will have been removed from $A$ by stage $w$ if it ever will be.
+    shows that $x$ will have been removed from $A$ by stage $t'$ if it ever will be.
 
     Thus $A(x) = A_w(x)$.
 
@@ -1743,6 +1744,7 @@ Now we can show that the permitting works.
 
 ////////////////////////////////////////
 // Chapter 3
+// p.33
 
 = Avoiding $n$-r.e. degrees with dREA sets <chapter3>
 
