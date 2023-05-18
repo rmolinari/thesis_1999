@@ -971,10 +971,13 @@ The claim is now that if #stalpha has been started since last being cancelled, i
 
        This action can take cycle $(j, k)$ to either state~1 or state~4. In either case, all cycles to the
        right of $(j, k)$ are reset and the new pattern for row $row(j)$ is $f' = angletup(h_0, dots, h_(k-1), b')$,
-       where $b' = 1$ or $b' = 4$ according to how the cycle acted. In either case, $f' in uncrampedRow$,
+       where $b' = 1$ or $b' = 4$ according to how the cycle
+       // p.18
+       acted. In either case, $f' in uncrampedRow$,
        and the new pattern for the strategy is $pattern(s) = angletup(p_0, dots, p_n, f')$ is still valid.
 
   + $j < n+1$. Row $row(j)$ can't ever have been abandoned, as otherwise no cycle it in could act, so
+    the part of the pattern corresponding to #theRow($j$) is
     $p_j = angletup(h_0, dots, h_m, 5) in prelimCrampedRow$. Note that for $i leq m$, $h_i in {2, 3, 7}$.
 
     + $k = m+1$, so cycle $(j, k)$ is in state~5.
