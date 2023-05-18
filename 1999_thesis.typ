@@ -184,6 +184,7 @@
 // Global formatting
 #set par(justify: true)
 
+#set text(font:"New Computer Modern")
 
 // Based on an answer in the Discord from PgSuper (2023-04-13 1:43 PM)
 // See issue #9 on my GitHub
