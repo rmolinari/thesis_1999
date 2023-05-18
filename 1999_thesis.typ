@@ -1568,7 +1568,7 @@ This establishes part 2 of the Proposition for $n = eta$.
 This establishes part 3 of the Proposition for $n = eta$.
 
 Naturally, #lemmaRef(<lemma2.22>) describes what "really" happens to #stalpha: the construction
-of $Gamma_j$ and $Delta$ is only a threat to ensure that we get $G$ changes when we need them, and not too
+of $Gamma_j$ and $Delta$ is only a threat to ensure that we get $G$-changes when we need them, and not too
 many $C$-changes. If $Phi(E)$ and $Psi(C join A join B)$ are both total, then we actually win by diagonalization.
 If not, we track down a witness to the partialness.
 
@@ -1590,7 +1590,7 @@ If not, we track down a witness to the partialness.
     reset after stage $q$, it can never advance past #state(2), for otherwise nothing could ever cause
     it to return to #state(1).
 
-    Now, if $nu^+$ remains in #state(2) at a $C$-true stage $t > q$ then it will never never subsequently
+    Now, if $nu^+$ remains in #state(2) at a $C$-true stage $t > q$ then it will never subsequently
     see a change in $restr(C, u)$. (We use $hat(Psi)$ instead of just $Psi$ in the definition of $Eq(x, s_1)$
                                     for just this purpose.)
     But this means that $nu^+$ will never return to #state(1). So, as $nu^+$ doesn't advance past
