@@ -1698,7 +1698,7 @@ Now we can show that the permitting works.
     and $x in.not A$.
 
     Suppose now that $k in setdiff(G_s, G_(s-1))$. Let $t$ be the first $C$-true stage larger than each of
-    $s$, $s_0$ and $s^(concatone(alpha, nu))$. We claim that if $x$ is not enumerated into $A$ by stage $t$
+    $s$, $s_0$, and $s^(concatone(alpha, nu))$. We claim that if $x$ is not enumerated into $A$ by stage $t$
     it never will be. Well, if $alpha subset.not f_t$ then by #lemmaRef(<lemma2.25>) #stalpha will be
     cancelled (and witness $x$ forgotten) before $alpha$ gets a chance to act again. So if $x$ hasn't entered $A$
     before~$t$, we must have $alpha subset f_t$ if $x$ is ever to have a chance. If some cycle $(j', k') < nu$
