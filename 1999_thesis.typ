@@ -1769,7 +1769,7 @@ free (see @JockuschShore1984[Thm1.6a]). That is, $F$ is required only to be 2-RE
 _some_ r.e. set~$G$, which we are free to construct:
 #theorem(name: [Jockusch and Shore])[
     Let $A_0, A_1, dots$ be uniformly recursive in $zerojump$. Then there is a 2-REA set $F leqt zerojump$
-    such that for all $i geq 0$, $F ident.not A_i$.
+    such that for all $i geq 0$, $F ident.not_T A_i$.
     <theorem3.3>
 ]
 Here "uniformly recursive in $zerojump$" means that there is a $zerojump$-recursive function $f$ such that
