@@ -114,8 +114,8 @@
 // "Finite sequences of"
 #let finseq(a) = $#a^(< infinity)$
 
-// A "pair slice"
-#let pairslice(a, b) = $#a^([#b])$
+// A "column" of a set: those pairs selected on the second coordinate by b.
+#let column(a, b) = $#a^([#b])$
 
 // Row j of an omega^2 set of cycles, and a more general "slice" of a higher-dimensional set
 #let row(j) = $cal(R)_#j$
@@ -3961,7 +3961,7 @@ and hence $rho(i, x, s)$ based on $D_(i,s+half)$.
  $setdiff(V^(D_i)[s+half], V^(D_i)[s])$, so we may as well recompute.)
 Now, for all $i, x in omega$, (even~$i_0, x_0$) put
 $
-h(i, x, s) = (mu y)[ y in pairslice(omega,x) sand y > h(i, x-1, s) sand y geq h(i, x, s-1) sand y > rho(i, x, s)]
+h(i, x, s) = (mu y)[ y in column(omega,x) sand y > h(i, x-1, s) sand y geq h(i, x, s-1) sand y > rho(i, x, s)]
 $
 and enumerate $h(i, k, s)$ into $C_(i, s + 1)$.
 
@@ -4033,7 +4033,58 @@ Now define $h(i, x) = lim_s h(i, x, s)$.
     For $i in omega$, $lambda x [h(i,x)] leqt pseudojump(D_i, V)$.
     <lemma6.7>
 ]
+#proof[
+    Fix $i$.
+    Write $m_r$ and $m_h$ for moduli of the functions $r(i,x,s)$ and $h(i, x, s)$ respectively.
+    // That is, (treating $i$ as a constant because we have fixed it.)
+    //
+    //    m_r(x) = m_r(i, x) and m_h(x) = m_h(i, x) are such that
+    //
+    // (forall s > m_r(x))[r(i, x, s) = r(i, x)]
+    // (forall s > m_h(x))[h(i, x, s) = h(i, x)].
+    //
+    // See Soare p.56
+    We show how to $(pseudojump(D_i, V))$-recursively compute $h(i,x)$, $m_r$ and $m_h$ by induction.
+    (In fact, it turns out that we end up with $m_r = m_h$, but it seems more natural to refer to these functions separately.)
 
+    So, suppose we know $m_r(y)$, $r(i, y)$, $m_h(y)$ and $h(i,y)$ for all $y < x$.
+
+    Let $s$ be so large that for all $y < x$
+
+    - $s > m_r(y)$,
+
+    - $s > m_h(y)$, and
+
+    - $h(i, y) in C_(i,s)$ for all $y < x$ such that $h(i, y) in C_i$.
+
+    By definition, for all $s' > s$, $rho^-(i, x, s') = rho^-(i, x, s)$.
+
+    Now, if $x in V^(D_i)$ find a $t > s$ such that $x in V^(D_i)[t]$ and
+    $restr(D_(i,t), r(i, x, t)) = restr(D_i, r(i, x, t))$.
+    Then never again will $r(i, x, dot)$ or $h(i, x, dot)$ change and we can define $m_r(x) = m_h(x) = t$,
+    so that $r(i, x) = r(i, x, t)$ and $h(i, x) = h(i, x, t)$.
+
+    If $x in.not V^(D_i)$ we must work a little harder.
+    Let $s' > s$ be arbitrary.
+    First note that there can be no (least) $y < x$ such that $l(i, y, s' + 1) neq l(i, y, s')$.
+    Well, suppose otherwise. For this least $y$, $l(i, y, ast.op)$ can change only if $l(i, y, s')$
+    enters $B_i$ at #stg($s'+1$) to mark an injury to $N_(i,y)$.
+    As this requirement in injured we must have in particular that $y in (V^(D_i))[s']$ and $r(i, y, s') > 0$.
+    But then $restr(D_(i,s'+1), r(i, y, s')) neq restr(D_(i,s'), r(i, y, s'))$ and so by the assumption
+    we made about the operator~$V$, $y in.not (V^(D_i))[s'+1]$ and $r(i, y, s'+1) = 0 neq r(i,y,s')$,
+    contradicting the definition of~$s$.
+    As $rho^-(i, x, s') = rho^-(i, x, s)$, it follows that the only way that we can have
+    $l(i, x, s'+1) neq l(i, x, s')$ is if $l(i, x, s')$ was enumerated into $B_(i,s'+1)$
+    because some pair $pair(j, y) < pair(i, x)$ received protection, thus injuring $N_(i,x)$.
+    In this case, $l(i, x, s'+1)$ is chosen to be the next element after $l(i, x, s')$ in the
+    column~$column(omega, x)$.
+    So, writing $l(i,x,s) = pair(x, lambda_0)$, the only values that will ever subsequently be taken on
+    by $l(i, x, s')$ will be (in order) $pair(x, lambda_0)$, $pair(x, lambda_0 + 1)$, $pair(x, lambda_0 + 2)$, ...
+    As the value will change only when $N_(i,x)$ is injured, by #lemmaRef(<lemma6.6>) $l(i, x, s')$ will only
+    take on finitely many of these values.
+
+    // p.80
+]
 
 #bibliography("works.yml", style: "ieee")
 
