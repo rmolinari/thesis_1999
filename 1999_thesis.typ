@@ -2027,7 +2027,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
 + Wait for a stage $s_5$ such that $Eq(x, s_5)$ holds. Now we have
   $restr(E_(s_5), phi_(s_1)(x)) = restr(E_(s_1), phi_(s_1)(x))$ so that
   $E_(s_5)(y) = E_(s_3)(y) = E_(s_1)(y) neq E_(s_4)(y) = E_(s_2)(y)$.
-  $E$ has changed 4~times on $y$, and being 4-r.e. can't change again. We want
+  $E$ has changed 4~times on $y$ and, being 4-r.e., can't change again. We want
   to put $x$ back into $udvd$ to take advantage of the fact that $restr(E, phi_(s_1)(x))$
   can't return to its $s_2$ shape. This entails pulling the lever $lambda^2(x)$, which
   means asking for $G$-permission again.
@@ -2596,10 +2596,11 @@ two _anchor-points_, $restr(E_(s_1), phi_(s_1)(x))$ and $restr(E_(s_2), phi_(s_2
 we return over and over. Since we force $restr(E, phi_(s_1)(x))$ to repeatedly flip-flop between
 these two states, we see that there is a _fixed_ number (called $y$ in the construction) on which
 $E$ must change each and every time. As we know how many times $E(y)$ can change we can therefore
+// p.50
 put a bound, _before any cycle of the strategy starts_, on how many times we will have to flip-flop.
 
 Consider what would happen here if we tried to construct $F = C join A join V^D$, an $reInAbove(D)$ set.
-At our equivalent of #state(1) we would choose a lever $lambda_1(x)$ larger than $tilde(u)$,
+At our equivalent of #state(1) we would choose a lever $lambda_1(x)$ larger than $tilde(u)$
 and enumerate $x$ into $V^D$ with use $lambda_1(x) + 1$.  Then, when we see the next stage of agreement, $s_2$,
 with total use $tilde(v)$, we would (after waiting for permission) kick $x$ out of $V^D$ by pulling the
 lever~$lambda_1(x)$. However, it is impossible for us to restrain $restr(A, tilde(v))$ from #stg($s_2$)
