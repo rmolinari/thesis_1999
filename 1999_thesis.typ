@@ -1885,7 +1885,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
 
 + Let $Eq(x, s)$ denote the condition
   $
-    ((udvd)(x))[s] = (Phi(E\, x))[s] #h(1fr) \ #h(1fr)
+    ((udvd)(x))[s] = (Phi(E\; x))[s] #h(1fr) \ #h(1fr)
       and (restr(E, phi(x)))[s] = (restr(hat(Psi)(C join A join (udvd)), phi(x)))[s].
   $
 
@@ -1923,9 +1923,10 @@ Cycle $chi = (j, k)$ proceeds as follows.
 
   We set
   $
-    lambda^1(x) = (min lambda)[lambda > tilde(v) sand lambda > l sand lambda > s_2 sand lambda in.not A_(s_2) \
+    lambda^1(x) = (min lambda)[lambda > tilde(v) sand lambda > k sand lambda > s_2 sand lambda in.not A_(s_2) \
                                and lambda "is larger than any number mentioned in the construction so far"].
   $
+  // p.37
   Declare $lambda^1(x)$ to be a lever, restrain $restr((udvd), v)$ and $restr(A, lambda^1(x) + 1)$, and enumerate
   $x$ into $V^(C join A)$ with $C$-use $tilde(v)$ and $A$-use $lambda^1(x) + 1$.
 
