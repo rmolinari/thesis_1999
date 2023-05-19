@@ -2111,17 +2111,18 @@ The construction proceeds as follows.
 
 #stage-hdr(0) All strategies are cancelled.
 
+// p.41
 #stage-hdr($s+1$) We defined, in substages $t < s$ a finite path $f_(s+1)$ through the tree, of length $s$.
 Suppose $alpha = (restr(f_(s+1), t)) in T$ has been defined by substage $t-1$. If no cycle of #stalpha has been
 started since $alpha$ was last cancelled then start $alpha$'s cycle $(0,0)$ and set $nextval = -1$.
 
 Otherwise let any cycles of #stalpha able to make the transition from #state(4) to #state(5) do so.
-Let any cycle forced solely by a $C$-change to change state do so. There are now two cases
+Let any cycle forced solely by a $C$-change to change state do so. There are now two cases.
 - #case(1) Some leftmost cycle $nu$ of #stalpha is able to act.
 
 #let bigS = $sans(upright("S"))$
 We allow cycle $nu$ to act. Let $lambda$ be the rightmost cycle of #stalpha now imposing restraint of some sort
-(if there is such a cycle.) Let $lambda$ be in state~#bigS (note that $bigS neq 0, 1, 10, 11$) and let $i$ be defined by
+(if there is such a cycle). Let $lambda$ be in state~#bigS (note that $bigS neq 0, 1, 10, 11$) and let $i$ be defined by
 $
 i = cases(
     1 quad & "if" bigS = 2\,,
