@@ -2047,7 +2047,7 @@ between states 1 and~2, or between states 4 and~5. It was important in that cons
 that such infinite action was not accompanied by any enumerations into or out of the sets
 under construction. The proof of #lemmaRef(<lemma2.21>) depended on this fact: after
 a cycle is reset for the last time it can only cause finitely much enumeration.
-In the preset construction, however, this is not true. A cycle returning infinitely often
+In the present construction, however, this is not true. A cycle returning infinitely often
 to #state(1) (or to #state(2)) must infinitely often change the value of $(udvd)(x)$,
 only to have it changed back again when a $C$-change causes the return to #state(1).
 We need a way to deal with this.
