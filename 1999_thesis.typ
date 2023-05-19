@@ -350,10 +350,10 @@ $reIn(C)$ sets are realizable in this way (up to degree).
 
 Note that, once it is defined, $U$ does not depend essentially in any way on $C$. Thus we may consider, for _any_ set $Y$, the
 $reIn(Y)$ set $U^Y$. $U$ then becomes a _pseudojump operator_, $U : Y arrow.r.bar pseudojump(Y, U)$. These operators will appear in
-(Chapter VI TODO).
+#chapRef(6).
 
-A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(x)$ and $X leqt Y$.
-If, instead, $Y$ is the difference of two $reIn(x)$ sets, and $X leqt Y$ then Y is said to be $dreInAbove(X)$.
+A set $Y$ is _recursively enumerable in, and above_ $X$ ("Y is $reInAbove(X)$") if $Y$ is $reIn(X)$ and $X leqt Y$.
+If, instead, $Y$ is the difference of two $reIn(X)$ sets, and $X leqt Y$ then Y is said to be $dreInAbove(X)$.
 
 = A patched proof of the weak density of the properly d.r.e. degrees <chapter2>
 
