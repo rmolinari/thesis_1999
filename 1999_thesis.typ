@@ -2158,6 +2158,7 @@ As such, we would expect the verification to take largely the same tack. This is
 
 The verification argument given in #chapRef(2) is detailed#footnote[The less charitable reader may prefer another word.]
 and it would please no-one to go through the same sort of thing again in its entirety. So, when an argument follows the
+// p.42
 same lines as the corresponding discussion in #chapRef(2) we will just indicate the essential modifications, if any.
 
 As in #chapRef(2), we will refer to parameters associated with cycle~$nu$ of #stalpha as they are defined
@@ -2189,8 +2190,8 @@ We start by noting that $mu(x(chi)) = tilde(v)_s(chi') = tilde(v)_t(chi')$.
 Now, cycle $chi'$ only leaves state~8/9 through acting or being reset. If $chi' < chi$ then
 the action/resetting of $chi'$ also resets $chi$, by construction.
 We consider the case $chi < chi'$. If cycle $chi'$ leaves state~8/9 without being reset
-it must reach either #state(10) (if it sees a change in $restr(C, tilde(v)_t(chi'))$ while in #state(8));
-or #state(11) (if that $C$-change is seen while in #state(9).)
+it must reach either #state(10) (if it sees a change in $restr(C, tilde(v)_t(chi'))$ while in #state(8))
+or #state(11) (if that $C$-change is seen while in #state(9)).
 In either case there is a change in $restr(C, mu(x(chi)))$, and cycle~$chi$ will change state,
 or be reset by the action of a cycle to its left.
 
@@ -2204,10 +2205,11 @@ Cycle~$chi dubpr$ cannot change state between stages~$s$ and~$t$ (except for the
 as to do so would reset cycle~$chi'$, contradicting the definition of~$t$. We may discard the possibility
 that $chi dubpr$ is in #state(10) at stage~$s$, as such a cycle can never act again without first
 being reset. Cycle $chi dubpr$ can't make the transition~#trans(4,5) at stage~$t$, as such a transition
-doesn't count as an action. The transitions~#trans(4,1), and~#trans(4,2), entail a change in $restr(C, tilde(v)_t(chi dubpr))$.
+doesn't count as an action. The transitions~#trans(4,1) and~#trans(4,2) entail a change in $restr(C, tilde(v)_t(chi dubpr))$.
 But $tilde(v)_t(chi dubpr) < tilde(v)_t(chi')$ since cycle~$chi'$ starts after $chi dubpr$ reaches #state(2)
 and $tilde(v)_t(chi dubpr)$ is defined. Thus such a $C$-change is impossible.
 
+// p.42
 Thus, the only possible transition left is~#trans(5,6). That this is impossible follows from the same
 argument as was used for the #trans(3,4) transition in #chapRef(2).
 ]
