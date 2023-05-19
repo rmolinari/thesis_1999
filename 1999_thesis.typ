@@ -2026,7 +2026,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
 
 + Wait for a stage $s_5$ such that $Eq(x, s_5)$ holds. Now we have
   $restr(E_(s_5), phi_(s_1)(x)) = restr(E_(s_1), phi_(s_1)(x))$ so that
-  $E_(s_5)(y) = E_(s_3)(y) = E_(s_1)(y) neq E_(s_4) = E_(s_2)$.
+  $E_(s_5)(y) = E_(s_3)(y) = E_(s_1)(y) neq E_(s_4)(y) = E_(s_2)(y)$.
   $E$ has changed 4~times on $y$, and being 4-r.e. can't change again. We want
   to put $x$ back into $udvd$ to take advantage of the fact that $restr(E, phi_(s_1)(x))$
   can't return to its $s_2$ shape. This entails pulling the lever $lambda^2(x)$, which
@@ -2064,9 +2064,10 @@ Cycle $chi = (j, k)$ proceeds as follows.
 The basic modules are combined in much the same way as we used in #chapRef(2) with a tree.
 However, there is a very important difference.
 
-In #chapRef(2) a cycle could act infinitely often without being reset by bouncing back and forth
+In #chapRef(2) a cycle could act infinitely often without being reset: it could bounce back and forth
 between states 1 and~2, or between states 4 and~5. It was important in that construction
 that such infinite action was not accompanied by any enumerations into or out of the sets
+// p.40
 under construction. The proof of #lemmaRef(<lemma2.21>) depended on this fact: after
 a cycle is reset for the last time it can only cause finitely much enumeration.
 In the preset construction, however, this is not true. A cycle returning infinitely often
