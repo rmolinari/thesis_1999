@@ -1943,10 +1943,11 @@ Cycle $chi = (j, k)$ proceeds as follows.
   + we see no appropriate $C$-change, $Eq(x, s_3)$ holds.
 
   In case (i), return to #state(1), setting the cycle's restraints back to 0.
-  In case (ii), return to #state(2), setting the $udvd$ restraint to $u$, and the $A$-restraint to $tilde(u)$.
+  In case (ii), return to #state(2), setting the $(udvd)$-restraint to $u$, and the $A$-restraint to $tilde(u)$.
   In either of these cases we also discard our choice of the lever, $lambda^1(x)$.
   Note that in case~(i) (resp.~(ii)), $x$ has been ejected from both $U^D$ and $V^D$ (resp. from $V^D$)
   by the change in $C$.
+  In either of these cases we also reset all cycles $> (j, k)$.
 
   In case (iii) we have $restr(E_(s_3), phi_(s_1)(x)) = restr(E_(s_1), phi_(s_1)(x))$, so there is a
   $y < phi_(s_1)(x)$ such that $E_(s_3)(y) = E_(s_1)(y) neq E_(s_2)(y)$. Thus $E$ has changed (at least)
@@ -1969,6 +1970,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
   + $restr(C_(t_1), tilde(u)) = restr(C_(s_1), tilde(u))$ but $restr(C_(t_1), tilde(v)) neq restr(C_(s_2), tilde(v))$; or
   + $G_(t_1)(k) neq G_(s_3)(k)$.
 
+  // p.38
   In cases (i) and (ii) we reset all the cycles $> (j, k)$ behave as we did in #state(3), returning to #state(1)
   or #state(2) as appropriate. We also declare $lambda^1(x)$ not to be a lever any more.
 
@@ -2015,6 +2017,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
   Declare $lambda^2(x)$ to be a lever and restrain $restr(A, lambda^2(x) + 1)$.
   (The restraint $restr((udvd), v)$ is still in place from before.)
   Enumerate $x$ into $V^(C join A)$ with $C$-use $tilde(v)$ and $A$-use $lambda^2(x) + 1$.
+  // p.39
   This enumeration ensures that
   $
   (restr((C join A join (udvd)), u))[s_4 + 1] = (restr((C join A join (udvd)), u))[s_1].
