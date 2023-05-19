@@ -1837,6 +1837,7 @@ In other places we will just use $D$.
 
 The construction used to satisfy the requirements is (loosely) based on the basic module given in @CLW1989.
 It is similar to the module in #chapRef(2). The strategy for a single requirement consists of a
+// p.35
 (potentially unbounded) number of cycles, each of which makes a very simplistic attempt
 to satisfy the requirement. We argue that if no cycle succeeds then we have $G leqt C$, a contradiction.
 
@@ -1856,7 +1857,7 @@ It turns out that in the $n = 4$ case we must do this twice, which leads to a tw
 Thus, the strategy consists of an $(omega^2)$-sequence of cycles ordered lexicographically. Cycle $(0,0)$ starts first.
 Cycle $chi = (j, k)$ may start $(j, k+1)$ and $(j+1, 0)$ as well as stopping all cycles $> chi$.
 Cycle $chi$ may define the values $Gamma_j(C; k)$ and $Delta(C\; j)$.
-Again we refer to rows of cycles, $R_j = {(j,k) st k in omega}$.
+Again we refer to rows of cycles, $row(j) = {(j,k) st k in omega}$.
 
 Cycles may declare various numbers to be _levers_. These are used when we want to remove some some element, $x$, from $V^D$.
 When $x$ is enumerated into $V^D$ we choose some new large element, $lambda$, not already a member of $D$
@@ -1865,11 +1866,11 @@ When it comes to remove $x$ from $V^D$ we "pull the lever": we enumerate $lambda
 
 Each cycle begins in #state(0). A cycle is _started_ by letting it pass from #state(0) to another state,
 as determined by its history in much the same way as in #chapRef(2); we have the same cascading effect.
-A cycle is reset by putting it back into #state(0), returning its restraints to 0 and undefining its
+A cycle is _reset_ by putting it back into #state(0), returning its restraints to 0 and undefining its
 parameters $x, u, tilde(u), v, tilde(v), lambda^1(x)$, and $lambda^2(x)$.
 A cycle is _abandoned_ by returning its restraints to 0 and stopping all activity for that cycle. This is done in much
 the same situations as in #chapRef(2): a cycle has failed to satisfy $R_e$.
-A cycle is said to _act_ whenever it moves from one state to another, _except_ in the case of the bookkeeping
+A cycle is said to _act_ whenever it moves from one state to another, except in the case of the bookkeeping
 transition from #state(4) to #state(5).
 
 Cycle $chi = (j, k)$ proceeds as follows.
@@ -1878,6 +1879,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
 0. Until given the go-ahead, do nothing. When told to start, if $k=0$ or row $R_j$ has previously been abandoned _in toto_,
    advance directly to #state(11) and follow the instructions there. Otherwise, check if cycle $chi$ has been abandoned
    in the past. In this case jump straight to #state(10) and follow the instruction there. Otherwise, choose a witness~$x$,
+   // p.36
    larger than any number mentioned in the construction so far, including all currently defined $(udvd)$-restraints,
    and larger than both $j$ and~$k$. Advance to #state(1).
 
