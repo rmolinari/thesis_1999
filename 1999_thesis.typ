@@ -1947,7 +1947,7 @@ Cycle $chi = (j, k)$ proceeds as follows.
   In either of these cases we also discard our choice of the lever, $lambda^1(x)$.
   Note that in case~(i) (resp.~(ii)), $x$ has been ejected from both $U^D$ and $V^D$ (resp. from $V^D$)
   by the change in $C$.
-  In either of these cases we also reset all cycles $> (j, k)$.
+  In either of these cases we also reset all cycles $> chi$.
 
   In case (iii) we have $restr(E_(s_3), phi_(s_1)(x)) = restr(E_(s_1), phi_(s_1)(x))$, so there is a
   $y < phi_(s_1)(x)$ such that $E_(s_3)(y) = E_(s_1)(y) neq E_(s_2)(y)$. Thus $E$ has changed (at least)
@@ -1971,10 +1971,10 @@ Cycle $chi = (j, k)$ proceeds as follows.
   + $G_(t_1)(k) neq G_(s_3)(k)$.
 
   // p.38
-  In cases (i) and (ii) we reset all the cycles $> (j, k)$ behave as we did in #state(3), returning to #state(1)
+  In cases (i) and (ii) we reset all the cycles $> chi$ and behave as we did in #state(3), returning to #state(1)
   or #state(2) as appropriate. We also declare $lambda^1(x)$ not to be a lever any more.
 
-  In case (iii) we have two subcases, just as in #state(2) of the strategy in #chapRef(2):
+  In case (iii) we have two subcases, just as in #state(2) of the strategy for $R_e$-requirements in #chapRef(2):
   #[
     #show: doc => setupenum(doc, formats: ("1.", "(a)",))
     + If some cycle $chi'$ of row $row(j)$ is currently in #state(8) or #state(9)
