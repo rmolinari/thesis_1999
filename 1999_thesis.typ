@@ -1785,17 +1785,17 @@ over $n$ of these families. So we immediately have
 Rather than give up control over $G$ we will give up some rigor in the way $F$ is enumerated from $G$. When
 constructing $F$ to be $dreInAbove(G)$ the following result is obtained.
 #theorem(name: [Cholak and Hinman; @CholakHinman])[
-    Given any nonrecursive, r.e. set $G$ there is $dreInAbove(G)$ set $F$ not of d.r.e. degree.
+    Given any nonrecursive, r.e. set $G$ there is a $dreInAbove(G)$ set $F$ not of d.r.e. degree.
     <theorem3.5>
 ]
 This result has been strengthened by Hinman, @Hinman:
 #theorem[
-    Given a nonrecursive, r.e. set $G$ there is $dreInAbove(G)$ set $F$ not of 3-r.e. degree.
+    Given a nonrecursive, r.e. set $G$ there is a $dreInAbove(G)$ set $F$ not of 3-r.e. degree.
     <theorem3.6>
 ]
 
 Can we avoid 4-r.e. degrees _via_ $dreInAbove(G)$ sets in this way? $n$-r.e. degrees in general?
-We cannot answer this question at the moment. However, if we drop the requirement that
+We cannot answer these questions at the moment. However, if we drop the requirement that
 the constructed set be Turing-above $G$, we can avoid $n$-r.e. degrees, and at the same time
 place the "base set" $G$ (which we now call $D$) in a prescribed r.e.~interval.
 #theorem[
@@ -1829,7 +1829,7 @@ separate $C$- and $A$-uses. Thus we will actually be enumerating into r.e. sets 
 of the form $angletup(x, Z_1, Z_2)$, where are $Z_1$ and $Z_2$ are finite sets thought of as
 initial segments (correct at some stage $s$) of $C$ and $A$ respectively.
 
-Where the structure $D = C join A$ of $D$ is important, we will write it out in full.
+Where the structure $D = C join A$ is important, we will write it out in full.
 In other places we will just use $D$.
 
 
