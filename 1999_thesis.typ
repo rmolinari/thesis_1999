@@ -2302,7 +2302,7 @@ We have the same proposition as before.
 ]
 
 So, inductively assume 1, 2, 3 and 4 for $n = eta - 1$ and let $alpha = restr(f, eta)$.
-Fix a #stg($s_0$) so larger that $alpha$ is not cancelled after~$s_0$; and for for every
+Fix a #stg($s_0$) so large that $alpha$ is not cancelled after~$s_0$; and for for every
 $C$-true stage $t > s_0$, $alpha subset f_t$, $rho(alpha, t) = liminf_s rho(alpha, s)$,
 and $tilde(rho)(alpha, t) = liminf_s tilde(rho)(alpha, s)$.
 
