@@ -2209,7 +2209,7 @@ argument as was used for the #trans(3,4) transition in #chapRef(2).
 ]
 
 #lemma[
-    Given $j$, if cycles $chi, chi' in cal(S)_j$ are both in #state(5) at stage~$s$ then
+    Given $j$, if cycles $chi, chi' in row(j)$ are both in #state(5) at stage~$s$ then
     $(mu(x(chi)))[s] = (mu(x(chi')))[s]$.
     <lemma3.10>
 ]
@@ -2242,10 +2242,10 @@ validPattern = setconcat(finseq(prelimRow), angletup(finalRow)).
 $
 
 As in #chapRef(2) we define by $pattern(s)(alpha)$ the cycle-state arrangement of the #stalpha at stage~$s$.
-We also refer to the cycle arrangements of individual slices as "patterns".
+We also refer to the cycle arrangements of individual rows as "patterns".
 
 #lemma[
-    If #stalpha has at least one cycle not in #state(0) at #stg($s$), $pattern(s) in validPattern$.
+    If #stalpha has at least one cycle not in #state(0) at #stg($s$), $pattern(s)(alpha) in validPattern$.
     <lemma3.11>
 ]
 #proof[
@@ -2255,7 +2255,7 @@ We also refer to the cycle arrangements of individual slices as "patterns".
 
 === Consistency of the functions $Gamma_j(C)$ and $Delta(C)$
 
-Now for the consistency of the constructed functions $Gamma_j(C)$ and $Delta(C)$.
+Now we prove the consistency of the constructed functions $Gamma_j(C)$ and $Delta(C)$.
 The proofs need little beyond the corresponding ones in #chapRef(2). The only change necessary is typically
 a slightly more involved exhaustion of possibilities brought about by the fact that each
 cycle has five outcomes corresponding to it, rather than the two of the earlier chapter.
