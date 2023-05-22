@@ -2257,7 +2257,7 @@ We also refer to the cycle arrangements of individual rows as "patterns".
 
 Now we prove the consistency of the constructed functions $Gamma_j(C)$ and $Delta(C)$.
 The proofs need little beyond the corresponding ones in #chapRef(2). The only change necessary is typically
-// p.47
+// p.44
 a slightly more involved exhaustion of possibilities brought about by the fact that each
 cycle has five outcomes corresponding to it, rather than the two of the earlier chapter.
 
@@ -2324,6 +2324,7 @@ We have the same proposition as before.
 
     + #strat($restr(f, n)$) satisfies requirement $R_n$;
 
+    // p.45
     + for all sufficiently large $C$-true stages $t$, $restr(f, (n+1)) subset f_t$.
     <prop3.17>
 ]
@@ -2395,14 +2396,15 @@ Thus all of the requirements are satisfied, and we have constructed r.e. $D gt.e
 two r.e.[$D$] sets $U^D$ and~$V^D$ such that $D join (udvd)$ is not of 4-r.e. degree.
 It remains only to show that in fact $D leq_T G$. We use the same method as we did in #chapRef(2).
 
+// p.46
 For $alpha in T$ we set
 $
-e^alpha = max ( {j, l | (exists beta in T, i = 1, dots 5)[concatone(beta, ((j, k), i)) subset alpha]} //) sic
+e^alpha = max ( {j, l | (exists beta in T, i = 1, dots, 5)[concatone(beta, ((j, k), i)) subset alpha]})
 $
 the largest number which occurs in the path leading to $alpha$ and which may be called upon
 by a cycle of some strategy on that path to be a witness to a $G$-change. We set
 $
-s^alpha = min { s | restr(G_s, e^alpha) = restr(G, e^alpha)}.
+s^alpha = min { s | restr(G_s, e^alpha) = restr(G, e^alpha)}
 $
 and recall that $lambda alpha [s^alpha]$ is $G$-recursive.
 
@@ -2426,14 +2428,13 @@ and recall that $lambda alpha [s^alpha]$ is $G$-recursive.
     As #lemmaRef(<lemma2.25>).
 ]
 
-We can now prove that the delayed permitting worked.
+We can now prove that the delayed permitting works.
 
 #lemma[
     $A leqt G$.
     <lemma3.27>
 ]
 #proof[
-    \
     Let $y in omega$. As the construction always picks levers to be larger than the current stage,
     if $y$ has not been chosen as a lever by #stg($y$) it never will be and $y in.not A$. Otherwise,
     suppose that $y$ is chosen at #stg($s_0$) to be a lever for cycle~$chi = (j,k)$ of #stalpha.
@@ -2452,9 +2453,10 @@ We can now prove that the delayed permitting worked.
     and will never get a chance after $t$ to be enumerated.
     If $chi$ is in #state(3) then, since $G_t(k) = 1$, $y$ will never be enumerated into~$A$.
     If $chi$ is in #state(6), 7, or~8 then by construction, $y in A_t$.
-    Otherwise we apply #lemmaRef(<lemma3.25>) to see that #cycle($nu$) must act at #stg($t$)
-    if it ever will without first being reset, and lever~$y$ is lost..
+    Otherwise we apply #lemmaRef(<lemma3.25>) to see that #cycle($xi$) must act at #stg($t$)
+    if it ever will without first being reset, and lever~$y$ is lost.
 
+    // p.47
     If $y$ is chosen as $lambda^2_(s_0)(x(chi))$ the argument is similar, with $j$ replacing $k$.
 ]
 
