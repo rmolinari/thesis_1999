@@ -2257,6 +2257,7 @@ We also refer to the cycle arrangements of individual rows as "patterns".
 
 Now we prove the consistency of the constructed functions $Gamma_j(C)$ and $Delta(C)$.
 The proofs need little beyond the corresponding ones in #chapRef(2). The only change necessary is typically
+// p.47
 a slightly more involved exhaustion of possibilities brought about by the fact that each
 cycle has five outcomes corresponding to it, rather than the two of the earlier chapter.
 
@@ -2328,9 +2329,11 @@ We have the same proposition as before.
 ]
 
 So, inductively assume 1, 2, 3, and 4 for $n = eta - 1$ and let $alpha = restr(f, eta)$.
-Fix a #stg($s_0$) so larger that $alpha$ is not cancelled after~$s_0$; and for for every
-$C$-true stage $t > s_0$, $alpha subset f_t$, $rho(alpha, t) = liminf_s rho(alpha, s)$,
-and $tilde(rho)(alpha, t) = liminf_s tilde(rho)(alpha, s)$.
+Fix a #stg($s_0$) so larger that $alpha$ is not cancelled after~$s_0$ and that for for every
+$C$-true stage $t > s_0$, $alpha subset f_t$.
+// This notation is mystifying. See github ticket #48
+//, $rho(alpha, t) = liminf_s rho(alpha, s)$,
+//and $tilde(rho)(alpha, t) = liminf_s tilde(rho)(alpha, s)$.
 
 Recall that we say _$alpha$ acts finitely_ if there is a stage after which no cycle of #stalpha acts,
 and otherwise we say that _$alpha$ acts infinitely_.
@@ -2384,7 +2387,7 @@ from the definition of $nu_eta$.
     For all sufficiently large $C$-true stages $t$, $restr(f, (eta+1)) = concatone(alpha, epsilon) subset f_t$. <lemma3.24>
 ]
 
-These results establish parts 1-4 of the Proposition and complete the inductive step.
+These results establish parts 2-4 of the Proposition and complete the inductive step.
 #thmref(<prop3.17>)[Proposition] is proved. #qed
 
 
