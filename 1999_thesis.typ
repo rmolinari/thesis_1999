@@ -170,17 +170,6 @@
 #let sand = $#h(0.5em) and #h(0.5em)$
 
 ////////////////////////////////////////
-// Placeholder for things that aren't supported yet or that I don't know how to do
-
-#let footnote(body) = {
-    set text(
-        fill: blue,
-        size: 0.8em
-    )
-    [ ^(#body) ]
-}
-
-////////////////////////////////////////
 // Global formatting
 #set par(justify: true)
 
@@ -288,6 +277,11 @@ University possible, and whose unfailing hospitality made me feel welcome.
       #it.body
       #v(0.8in)
     ]
+
+    // We number footnotes by chapter.
+    // This doesn't really belong here, in a formatting function, but where else?
+    // Maybe define a new function #chapter that makes the header and resets this counter.
+    counter(footnote).update(0)
 }
 
 = Introduction
