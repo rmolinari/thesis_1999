@@ -2272,7 +2272,7 @@ Again we assume that we have a specific strategy, $alpha$, in mind.
 ]
 
 #lemma[
-    If some cycle $chi = (j, k)$ acts at #stg($s$) to define $Delta(C\; j)$ then for each
+    If some cycle $(j, k)$ acts at #stg($s$) to define $Delta(C\; j)$ then for each
     $i < j$, $(Delta(C\; i))[s] converge$.
     <lemma3.13>
 ]
@@ -2280,16 +2280,16 @@ Again we assume that we have a specific strategy, $alpha$, in mind.
     As #lemmaRef(<lemma2.8>).
 ]
 
-Similarly we have.
+Similarly we have
 #lemma[
-    If some cycle $chi = (j, k)$ acts at #stg($s$) to define $Gamma_j(C; k)$ then for each
+    If some cycle $(j, k)$ acts at #stg($s$) to define $Gamma_j(C; k)$ then for each
     $i < k$, $(Gamma_j(C; i))[s] converge$.
     <lemma3.14>
 ]
 
 The consistency of $Delta(C)$ and $Gamma_j(C)$ are proved just as they were in #chapRef(2).
 #lemma[
-    For all $j in omega$, Row~$row(j)$ defines a computation for $Delta(C\; j)$ only when no
+    For all $j in omega$, row~$row(j)$ defines a computation for $Delta(C\; j)$ only when no
     other such computation is currently defined.
     <lemma3.15>
 ]
@@ -2319,7 +2319,7 @@ We have the same proposition as before.
     For all $n in omega$
     + $f(n)$ is defined;
 
-    + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
+    + $restr(f, (n+1))$ is cancelled only finitely often (note that $restr(f, 0) = emptyset$ is never cancelled);
 
     + #strat($restr(f, n)$) satisfies requirement $R_n$;
 
