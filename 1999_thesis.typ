@@ -2629,6 +2629,7 @@ that must be considered in the proof of #lemmaRef(<lemma3.18>) (which is really 
 
 The author has been unable to turn a failure of this type into a demonstration that $G leqt C$.
 In the $dreInAbove(D)$ construction, possibility~(A), say, of #lemmaRef(<lemma3.18>) (actually of #lemmaRef(<lemma2.17>))
+// p.51
 led to computation of $G$ from $C$ "along the first component". In general, for any $n$, a failure of
 the $dreInAbove(D)$ computation leads a computation of $G$ along one of the components. Outcome ($infinity$) allows no
 such computation.
@@ -2675,15 +2676,16 @@ which corresponds to #thmref(<theorem3.29>) just as #thmref(<theorem3.30>) corre
     <theorem3.31>
 ]
 
+// p.52
 === A related result
 
-In @ALS1998 the following is proved
+In @ALS1998 the following is proved.
 
 #theorem(name: [Arslanov, LaForte, and Slaman])[
     Any $omega$-r.e. set with is 2-REA is actually of 2-r.e. degree.
     <theorem3.32>
 ]
-The question then occurs: does the behaviour occur for numbers greater than 2?
+The question then occurs: does the behavior occur for numbers greater than 2?
 The same paper answers the question negatively:
 #theorem(name: [Arslanov, LaForte, and Slaman])[
     There is a set F which is both 3-REA and $(n+1)$-r.e. but fails to be of $n$-r.e. degree.
