@@ -2630,7 +2630,7 @@ that must be considered in the proof of #lemmaRef(<lemma3.18>) (which is really 
 The author has been unable to turn a failure of this type into a demonstration that $G leqt C$.
 In the $dreInAbove(D)$ construction, possibility~(A), say, of #lemmaRef(<lemma3.18>) (actually of #lemmaRef(<lemma2.17>))
 led to computation of $G$ from $C$ "along the first component". In general, for any $n$, a failure of
-the $dreInAbove(C)$ computation leads a computation of $G$ along one of the components. Outcome ($infinity$) allows no
+the $dreInAbove(D)$ computation leads a computation of $G$ along one of the components. Outcome ($infinity$) allows no
 such computation.
 
 The same problems occur, even when we allow $F$ to be $dreInAbove(D)$, if we try to avoid $omega$-r.e. degrees,
