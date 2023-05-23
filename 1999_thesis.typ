@@ -2631,7 +2631,7 @@ The author has been unable to turn a failure of this type into a demonstration t
 In the $dreInAbove(D)$ construction, possibility~(A), say, of #lemmaRef(<lemma3.18>) (actually of #lemmaRef(<lemma2.17>))
 led to computation of $G$ from $C$ "along the first component". In general, for any $n$, a failure of
 // p.51
-the $dreInAbove(D)$ computation leads a computation of $D$ along one of the components. Outcome ($infinity$) allows no
+the $dreInAbove(D)$ computation leads a computation of $G$ along one of the components. Outcome ($infinity$) allows no
 such computation.
 
 The same problems occur, even when we allow $F$ to be $dreInAbove(D)$, if we try to avoid $omega$-r.e. degrees,
@@ -2648,15 +2648,15 @@ At no time would a #cycle($chi$) need to return to an earlier numbered state due
 So long as it is not reset, $chi$ will only ever make progress, or (at worst) stay put.
 This means that no strategy will act infinitely often.
 (Otherwise, by Lemmas~#thmref(<lemma3.18>) and~#thmref(<lemma3.19>),
- some cycle would act infinitely without being reset infinitely often).
+ some cycle would act infinitely without being reset infinitely often.)
 In other words, _each strategy causes only finitely much injury._
 Once we have a finite injury argument, we can do away with the entire apparatus of the priority tree.
 
 The finite injury nature of the construction also means that the functionals $Gamma_j$ and $Delta$
 do not need to be constructed "on the fly", but can be extracted without too much trouble after the face, in the verification,
-under the assumption that the construction has failed. This allowed us to completely avoid the problems of
+under the assumption that the construction has failed. This allows us to completely avoid the problems of
 $Delta$-inconsistency in the original Cooper, Lempp, and Watson method.
-Hence there was no need for the special method we used above
+Hence there was no need for the special method we used above.
 
 An interest artifact of the finite injury construction is that witnesses are enumerated out of our set~$F$ only
 when we want them to be, in forcing the opponent set, $E$, to change. That is, when avoiding an $n$-r.e. set,
