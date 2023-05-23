@@ -2594,11 +2594,11 @@ $E$ must change each and every time. As we know how many times $E(y)$ can change
 put a bound, _before any cycle of the strategy starts_, on how many times we will have to flip-flop.
 
 Consider what would happen here if we tried to construct $F = C join A join V^D$, an $reInAbove(D)$ set.
-At our equivalent of #state(1) we would choose a lever $lambda_1(x)$ larger than $tilde(u)$
-and enumerate $x$ into $V^D$ with use $lambda_1(x) + 1$.  Then, when we see the next stage of agreement, $s_2$,
+At our equivalent of #state(1) we would choose a lever $lambda^1(x)$ larger than $tilde(u)$
+and enumerate $x$ into $V^D$ with use $lambda^1(x) + 1$.  Then, when we see $s_2$, the next stage of agreement,
 with total use $tilde(v)$, we would (after waiting for permission) kick $x$ out of $V^D$ by pulling the
-lever~$lambda_1(x)$. However, it is impossible for us to restrain $restr(A, tilde(v))$ from #stg($s_2$)
-onwards, as we cannot be sure that $lambda_1(x) > v$. The very act of returning $V^D$ to its $s_1$ shape
+lever~$lambda^1(x)$. However, it is impossible for us to restrain $restr(A, tilde(v))$ from #stg($s_2$)
+onwards, as we cannot be sure that $lambda^1(x) > v$. The very act of returning $V^D$ to its $s_1$ shape
 may change $restr(A, tilde(v))$. Thus, instead of two anchor-points, we will only have one,
 $restr(E_(s_1), phi_(s_1)(x))$, to which we can be sure of returning each time. Thus, while we can say each time that
 $
@@ -2607,15 +2607,15 @@ $
 there is no coordination between $E$ at the $s_("even")$
 stages,#footnote[Of course, $s_("even")$ should in no way be confused with #[_s_]even or even _seven_.]
 and we cannot be sure that $E$ changes on the same element each time.
-Thus, instead of the number of changes in $restr(E, phi_(s_1)(x))$ that we must wait for being bound in advance by~$n$,
+Thus, instead of the number of changes in $restr(E, phi_(s_1)(x))$ that we must wait for being bounded in advance by~$n$,
 we must allow $E$ (potentially) to change $n$ times on each element less than $phi_(s_1)(x)$. Thus, instead of
 needing to change our constructed set $n+1$ times, we may need to change it
 $m(x) = m(x, s_1) = (1 + n dot phi_(s_1)(x))$ times for the witness~$x$.
 This bound is clearly not known before the cycle starts: we have to wait until stage~$s_1$ to find it.
 
-This, of course, is where the problems start. Before we knew that all the witnesses chosen by a given strategy
+This, of course, is where the problems start. Before, we knew that all the witnesses chosen by a given strategy
 would be content with just $n+1$ changes and could therefore do with an $omega^(floor(n\/2))$ cycle structure.
-Now, as we chose larger and larger witnesses for the various cycles, the potential number of times that we must seek
+Now, as we choose larger and larger witnesses for the various cycles, the potential number of times that we must seek
 permission may grow without bound. This fact by itself does not make the construction impossible: we can
 use $omega^(< omega)$ (ordered lexicographically) to organize our cycles, and we can speak of slices of all finite
 dimensions. Define the _slice dimension_ of a #cycle($chi$) as the dimension of the smallest
@@ -2630,6 +2630,7 @@ that must be considered in the proof of #lemmaRef(<lemma3.18>) (which is really 
 The author has been unable to turn a failure of this type into a demonstration that $G leqt C$.
 In the $dreInAbove(D)$ construction, possibility~(A), say, of #lemmaRef(<lemma3.18>) (actually of #lemmaRef(<lemma2.17>))
 led to computation of $G$ from $C$ "along the first component". In general, for any $n$, a failure of
+// p.51
 the $dreInAbove(D)$ computation leads a computation of $D$ along one of the components. Outcome ($infinity$) allows no
 such computation.
 
