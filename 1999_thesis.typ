@@ -2506,6 +2506,7 @@ Thus, given any $n$, we need permission $m = floor(n\/2)$ times for a given witn
 (Notice that in the $n=4$ case we seek permission $2 = floor(4\/2)$ times for each witness.)
 
 Suppose that $n=7$. What needs to be done to adapt the basic $n=4$ module?
+// p.48
 Well, most obviously, the cycle structure will now be an $(omega^3)$-sequence of cycles $chi = (j, k, l)$,
 to accommodate the 3 layers of permission that we will (potentially) need for each witness.
 Secondly, in addition to constructing functions $Gamma_j(C)$ and $Delta(C)$ we will need a third tier,
@@ -2514,7 +2515,7 @@ With the extra dimension, we need a more general concept than "row".
 In general, for the $n$-dimensional structure $omega^n$, we define an $(n-i)$-dimensional _slice_
 by specifying the first $i < n$ components:
 $
-slice(c_1, dots, c_i) = {(c_1, dots, c_i, c_(i+1), dots, c_n) | c_(i+1), dots, c_n in omega}
+slice(c_1, dots, c_i) = {(c_1, dots, c_i, c_(i+1), dots, c_n) | c_(i+1), dots, c_n in omega}.
 $
 
 Just as before we had a $Delta$-protecting, "waiting" state, 5, which was used to prevent the over-eager
@@ -2524,7 +2525,7 @@ Before, the trigger for entering #state(5) was the existence of some cycle of sl
 To allow us some abstraction, call this double state the _endgame for $Delta$_.
 In the new construction, there will be endgames for $Gamma_j$ and $Delta$.
 In each case, the endgame consists of the two states immediately following the definition
-of $Gamma_j(C;k)$ and $Delta(C\; j)$, respectively, in which the value of the functional value
+of $Gamma_j(C;k)$ and $Delta(C\; j)$, respectively, in which the functional value
 just defined is still valid, and remains and important part of our overall approach.
 While some cycle is in an endgame like this we cannot have cycles to the left acting impetuously,
 compromising the consistency of $Gamma_j(C)$ and $Delta(C)$.
@@ -2553,7 +2554,8 @@ to a $G$-change. In this case we need only keep an eye out for $Delta$-endgames.
  _three_ states immediately following the functional definition. We lied before.)
 
 Apart from that, the same construction will work for $n=7$, and may be adapted for any $n > 4$.
-Every time an increase in $n$ requires the addition an extra dimension to the cycle-structure
+// p.49
+Every time an increase in $n$ requires the addition of an extra dimension to the cycle-structure
 (that is, every time $n$ is incresed from $2m-1$ to $2m$), we just "bolt" one to the front:
 add an extra tier of functionals, with a corresponding waiting stage to protect all of the existing tiers.
 
