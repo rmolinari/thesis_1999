@@ -2739,7 +2739,7 @@ This (and even the weaker version in which we allow $D = F$) is false because of
 ]
 However, we can succeed if $C$ is high:
 #theorem[
-    If $C$ is r.e. and high and $G ltt H$ are r.e. with $C leqt H$ there are $reInAbove(C)$ sets
+    If $C$ is r.e. and high and $G ltt H$ are r.e. with $C ltt H$ there are $reInAbove(C)$ sets
     $D ltt F$ such that $turinginterval(D, F) subset turinginterval(G, H)$ and there is no r.e. set $E$ with
     $E in turinginterval(D, F)$. Furthermore, $D$ and $F$ may be chosen to be d.r.e.
     <theorem4.3>
@@ -2750,7 +2750,7 @@ However, we can succeed if $C$ is high:
 The proof we give is derived from one given in @ALS1996 of the similar statement
 // This appears to be Thm 2.1 in the other paper
 #theorem[
-    If $C leqt H$ are r.e. and high (that is, $C' equivt H' equivt emptyset'$), there is a d.r.e. set
+    If $C ltt H$ are r.e. and high (that is, $C' equivt H' equivt emptyset dubpr$), there is a d.r.e. set
     $E$ which is $reInAbove(C)$ but not of r.e. degree such that $C ltt E ltt H$.
     <theorem4.4>
 ]
