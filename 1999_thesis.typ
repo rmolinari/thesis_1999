@@ -2556,32 +2556,22 @@ to a $G$-change. In this case we need only keep an eye out for $Delta$-endgames.
 Apart from that, the same construction will work for $n=7$, and may be adapted for any $n > 4$.
 // p.49
 Every time an increase in $n$ requires the addition of an extra dimension to the cycle-structure
-(that is, every time $n$ is incresed from $2m-1$ to $2m$), we just "bolt" one to the front:
+(that is, every time $n$ is increased from $2m-1$ to $2m$), we just "bolt" one to the front:
 add an extra tier of functionals, with a corresponding waiting stage to protect all of the existing tiers.
 
 == Further comments
 
-As all of the strategies are self-contained, it does not hurt to combine strategies corresponding to
-different values of $n$, so long as we associate their enumerations with different $dreInAbove(D)$ sets.
-So, those strategies concerning themselves with avoiding 5-r.e. degrees (say) work with the set
-$C join A join (setdiff(U^(D,5), V^(D,5)))$, while those avoiding 13-r.e. degrees work with the separate
-$C join A join (setdiff(U^(D,13), V^(D,13)))$. A description of the priority tree then
-becomes more complicated (as different nodes will have different successor-sequences),
-but in principle the construction is no different. Indeed, as all of the strategies for all $n$
-can be combined, we can actually construct a single $D leqt G$ for which, given $n$, there is
-a $dreInAbove(D)$ set not of $n$-r.e. degree:
-#theorem[
-    Given r.e. sets $C ltt G$ there is r.e. $D in turinginterval(C, G)$ such that for all $n in omega$
-    there is a $dreInAbove(D)$ set $F_n$ not of $n$-r.e. degree.
-    <theorem3.28>
-]
-In fact, there is no need to keep enumerations for different values of $n$ separate: we can
-construct a single $dreInAbove(D)$ set $F$ with is not $n$-r.e. for any $n$:
-#theorem[
-    Given r.e. sets $C ltt G$ there is r.e. $D in turinginterval(C, G)$ and a $dreInAbove(D)$ set $F$
-    not of $n$-r.e. degree for any $n in omega$.
-    <theorem3.29>
-]
+As all of the strategies are self-contained, it does not hurt to combine strategies corresponding to different values of $n$, so
+long as we associate their enumerations with different $dreInAbove(D)$ sets.  So, those strategies concerning themselves with
+avoiding 5-r.e. degrees (say) work with the set $C join A join (setdiff(U^(D_5)_5, V^(D_5)_5))$, while those avoiding
+13-r.e. degrees work with the separate $C join A join (setdiff(U^(D_(13))_13, V^(D_(13))_13))$. A description of the priority tree then
+becomes more complicated (as different nodes will have different successor-sequences), but in principle the construction is no
+different. Indeed, as all of the strategies for all $n$ can be combined, we can actually construct a single $D leqt G$ for which,
+given $n$, there is a $dreInAbove(D)$ set not of $n$-r.e. degree: #theorem[ Given r.e. sets $C ltt G$ there is r.e. $D in
+turinginterval(C, G)$ such that for all $n in omega$ there is a $dreInAbove(D)$ set $F_n$ not of $n$-r.e. degree.  <theorem3.28> ]
+In fact, there is no need to keep enumerations for different values of $n$ separate: we can construct a single $dreInAbove(D)$ set
+$F$ with is not $n$-r.e. for any $n$: #theorem[ Given r.e. sets $C ltt G$ there is r.e. $D in turinginterval(C, G)$ and a
+$dreInAbove(D)$ set $F$ not of $n$-r.e. degree for any $n in omega$.  <theorem3.29> ]
 
 It is also interesting to note that the sets $F_n$ we construct are just barely $dreInAbove(D)$.
 In the construction, elements are only ever enumerated into $U^D$ once, at least modulo "unwanted"
