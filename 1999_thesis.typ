@@ -2849,9 +2849,9 @@ Cycle~$k$ proceeds as follows.
 + Wait for a stage $s'$ at which either
 
   + $restr(G_(s'), u) neq restr(G_(s_1), u)$, or
-  + $H_(s')(k) neq H_(s_1)(k)$
+  + $H_(s')(k) neq H_(s_1)(k)$.
 
-  On reaching $s'$, reset all cycles $k' > k$ of #stalpha. Then
+  On reaching $s'$, reset all cycles $k' > k$ of the strategy. Then
 
   + if $restr(G, u)$ changes first, drop the $A$- and $B$-restraints of #cycle($k$) back to 0
     and return to #state(1).
@@ -2870,7 +2870,7 @@ Cycle~$k$ proceeds as follows.
   + $restr(G_(s_2), u) neq restr(G_(s_1), u)$; or
   + $restr(G_(s_2), u) = restr(G_(s_1), u)$ and $Eq(x, s_2)$.
 
-  Note that if such a $s_2$ does not exist, $x$ again witnesses our success.
+  Note that if such an $s_2$ does not exist, $x$ again witnesses our success.
 
   It in entirely possible that while we are waiting for $s_2$, $C$ changes below $xi(x)$, ejecting $x$ from $A$.
   We want $x$ to remain in $A$ for now, so we "artificially" keep it there by enumerating new axioms
