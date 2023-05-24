@@ -2913,7 +2913,7 @@ Cycle~$k$ proceeds as follows.
 + Wait for $restr(G, u) neq restr(G_(s_1), u)$. If this never happens, the strategy succeeds by the argument in #state(4),
   above. If it does happen, reset all cycles $k' > k$ and advance to #state(6) to redefine $Gamma(G\; k)$ as a value
   we now know to be correct, and abandon the cycle.
-  (Note that the change in $G$ automatically undefines any values $Gamma(G\; k+1), Gamma(G\; k+2), dots$ which where
+  (Note that the change in $G$ automatically undefines any values $Gamma(G\; k+1), Gamma(G\; k+2), dots$ which here
    defined while #cycle($k$) was waiting in #state(4). Thus, so long as we don't get permanently stuck in~4, the
    extraneous $Gamma$ values that are defined while we wait for the $G$-change don't persist. Of course, leaving~4
    but failing to reach 6 means we get stuck in 5, which leads to success.)
@@ -2922,7 +2922,7 @@ Cycle~$k$ proceeds as follows.
 
 ==== The $N_e$ requirements
 
-The requirements $N_e$ are simpler that those of the first kind, are we implement a standard
+The requirements $N_e$ are simpler than those of the first kind, are we implement a standard
 diagonalization approach to satisfy them.  This is slightly complicated by the fact that we must
 ensure that $B leqt H$, but we can just us a stripped-down version of the Cooper, Lempp and Watson method.
 
@@ -2931,7 +2931,7 @@ structure as that for $R_e$. Cycle~0 starts first. We again threaten to show $H 
 constructing a functional $Delta(G) = H$. We don't need any auxiliary function like~$m$.
 _Starting_, _resetting_, _abandoning_, and _acting_ all have the same definitions as before.
 
-Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds as follows.
+Cycle~$k$ proceeds as follows.
 
 // p.58
 #show: doc => setupenum(doc, prefix: "N")
