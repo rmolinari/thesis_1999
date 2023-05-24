@@ -2755,9 +2755,9 @@ The proof we give is derived from one given in @ALS1996 of the similar statement
     <theorem4.4>
 ]
 // p.54
-That proof suffers from several flaws. It is based on the original proof of #theoremRef(<theorem2.1>) given in @CLW1989,
+That proof suffers from several flaws. It is based on the original proof of #theoremRef(<theorem2.1>) given in~@CLW1989,
 and hence has the same problems: injury caused by "weaker" strategies (noted and fixed by LaForte) and $Delta$-inconsistency.
-It also has a flaw all its own (see @section4.4[Section] below)
+It also has a flaw all its own (see @section4.4[Section] below).
 
 As well as strengthening #theoremRef(<theorem4.4>) we simplify the argument, fixing at a stroke
 both the $Delta$-consistency and local problems. The method of previous chapters is used for the remaining obstacle.
