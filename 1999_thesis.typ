@@ -3160,7 +3160,7 @@ This establishes part 1 of the Proposition, and we assume we have a value $k_eta
 This establishes part 2 of the Proposition for $n = eta$.
 
 #lemma[
-    #stalpha satisfies requirement the corresponding requirement.
+    #stalpha satisfies its corresponding requirement.
     <lemma4.9>
 ]
 #proof[
