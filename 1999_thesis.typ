@@ -3385,15 +3385,15 @@ $T = {f in finseq(Lambda) st n "odd" arrow.r.double f(n) in {0, 1} }$,
 with the standard partial ordering $<_L$.
 If $alpha in T$ has even length $|alpha| = 2e$ then $alpha$ aims to satisfy requirement~$R_e$, while
 if $|alpha| = 2e + 1$ it works towards satisfying~$P_e$.
-(Hence the definition of the priority tree: strategies for satisfying $P_e$ will have just two outcomes: 0 and~1.)
-As before we make no distinction between a node on the tree and (the instance of)
+(Hence the definition of the priority tree: strategies for satisfying $P_e$ will have just two outcomes, 0 and~1.)
+As before we make no distinction between a node in the tree and (the instance of)
 the strategy.
 An $R$-strategy is cancelled by resetting all of its cycles.
-A $P$-strategy is cancelled merely by putting it into #pstate(0) and discarding its witness.
+A $P$-strategy is cancelled merely by discarding its witness, reducing its restraint to zero, and putting it into #pstate(0).
 
 The construction proceeds as follows.
 
-Stage 0: #h(1em) All strategies are cancelled.
+Stage 0: #h(1em) All strategies start in #state(0)/P0 with entirely undefined functionals and witnesses.
 
 Stage $s+1$: #h(1em) We define, in substages $t < s$, a finite path $f_(s+1)$, through the tree, of length~$s$.
 So, suppose $alpha = restr(f_(s+1), t) in T$ is defined.
@@ -3425,7 +3425,7 @@ Otherwise, if $alpha$ is able to make a state transition #trans("P1", "P2") or #
 If the latter transition was made we cancel all strategies $beta supset concatone(alpha, 1)$.
 
 In any case, let $f_(s+1)(t) = 0$ if $alpha$ is now in #pstate(1), and $f_(s+1)(t) = 1$ otherwise
-(that is, if $alpha$ is in #pstate(2).)
+(that is, if $alpha$ is in #pstate(2)).
 
 If $t + 1 < s$ advance to substage $t+1$.
 
