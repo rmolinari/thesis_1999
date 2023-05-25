@@ -2946,6 +2946,7 @@ Cycle~$k$ proceeds as follows.
   $
   and let $v = hat(theta)_(s_1)(y)$, the use of the $hat(Theta)(G join A)$ computation. Restrain $restr(A, v)$
   from now on. Set $Delta(G\; k) = H_(s_1)(k)$ with use $delta(k) = v$ and start cycle $k+1$ to run simultaneously.
+  Advance to #nstate(2).
 
 + Wait for a stage $s'$ at which
 
@@ -2955,7 +2956,7 @@ Cycle~$k$ proceeds as follows.
   On reaching $s'$, reset all cycles $k' > k$. Then
   + if $restr(G, v)$ changes first, return the $A$-restraint of this cycle to 0 and return to #nstate(1).
     (As before, the $G$-change undefined $Delta(G\; k')$ for $k' > k$.) While
-  + if $H(k)$ changes first and enumerate $y$ into $B$. This has just been permitted by the change in $restr(H, y)$.
+  + if $H(k)$ changes first then enumerate $y$ into $B$. This has just been permitted by the change in $restr(H, y)$.
     Proceed to #nstate(3).
 
 + Wait for a stage $s_2$ at which
@@ -2972,11 +2973,11 @@ Cycle~$k$ proceeds as follows.
   By the restraint on $A$, $restr(A_(s_1), v) = restr(A_(s_2), v)$, so we must have $restr(G_(s_1), v) neq restr(G_(s_2), v)$.
   We reset all cycles $k' > k$ and advance to #nstate(4).
   Note that the $G$-change has undefined all computations for $Delta(k')$, $k' > k$, except those computations with 0 use
-  (which are correct anyway.)
+  (which are correct anyway).
 
-+ We set $Delta(G\; k) = 1$ (with use 0) a value we now know to be correct, start cycle $k+1$, and abandon #cycle($k$).
++ Set $Delta(G\; k) = 1$ (with use 0), a value we now know to be correct. Start cycle $k+1$ and abandon #cycle($k$).
 
-Note that at all times, $Delta(G)$ is defined consistently.
+Note that $Delta(G)$ is defined consistently at all times.
 
 // p.59
 === Combining the modules
