@@ -3099,7 +3099,7 @@ acts. Otherwise, we way that $alpha$ _acts infinitely_.
     contradicting the assumption that $G ltt H$. Hence we need only consider the case in which infinitely
     many cycles get stuck in #state(4). We show that this leads to a contradiction.
 
-    In this case, each of these cycles will have defined a value for the function~$m$ (this is done in #state(3).)
+    In this case, each of these cycles will have defined a value for the function~$m$ (this is done in #state(3)).
     As each cycle chooses its~$p$ to be the least without an $m$-value the construction ensures that function~$m$
     will be _total_ recursive, and hence dominated by $c_C$.
     For each #cycle($k$) that gets stuck in~4, let $x_k$ be the last witness it ever
@@ -3123,7 +3123,7 @@ acts. Otherwise, we way that $alpha$ _acts infinitely_.
     restr(C_(s_(2,k_0)), xi(x_(k_0))) neq restr(C, xi(x_(k_0))),
     $
     so #cycle($k_0$) does in fact see a $C$-change after #stg($s_(2,k_0)$).
-    Let $q$ be the first $G$-true stage after after $q'$, the first $C$-true stage after $s_(2,k_0)$.
+    Let $q$ be the first $G$-true stage after $q'$, the first $C$-true stage after $s_(2,k_0)$.
     As $q'$ involves a $C$-change on the smallest element for which a change is still to take place,
     it must involve a change in $C$ below $xi(x_(k_0))$.
     By assumption, $alpha$ will be accessible after $q'$ no later than #stg($q$), and so #cycle($k_0$)
