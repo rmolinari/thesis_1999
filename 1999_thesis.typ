@@ -1403,7 +1403,7 @@ acts. Otherwise we say that $alpha$ _acts infinitely_.
     The lemma is proved.
 ]
 
-We extract part of the proof of the preceeding lemma as a separate result.
+We extract part of the proof of the preceding lemma as a separate result.
 #lemma[
     Given s #stalpha, if $chi$ is the leftmost cycle of #stalpha to act infinitely
     often then only finitely often can _any_ cycle to the left of $chi$ act.
