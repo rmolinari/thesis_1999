@@ -3295,11 +3295,12 @@ Fix $e geq 0$ and write $angletup(Phi_0, Phi_1, Psi_0, Psi_1, E_0, E_1)$
 for $angletup(Phi_(e,0), Phi_(e,1), Psi_(e,0), Psi_(e,1), E_(e,0), E_(e,1))$.
 
 The basic module again consists of cycles, this time in an $omega$-sequence, each
-trying simplistically to satisfy requirement~$R_e$. As noted below (@section5.2.3[section])
-we do not need to observe path restraint as we did in earlier constructions.
+trying simplistically to satisfy requirement~$R_e$.
+// As noted below (@section5.2.3[section])
+// we do not need to observe path restraint as we did in earlier constructions.
 Cycle~0 starts first. Cycle~$k$ may start cycle $k+1$ and stop all cycles $k' > k$
 In addition, if $k > 0$, cycle $k$ may instruct cycle $k-1$ to perform an enumeration. This is detailed below.
-Even numbered cycles will enumerate witnesses into $A_0$, while the odd numbered will enumerate into $A_1$.
+Even-numbered cycles will enumerate witnesses into $A_0$, while the odd-numbered will enumerate into $A_1$.
 To this end it will be useful to use the notation $pi(l)$ for the parity of $l$.
 
 All cycles begin in #state(0). A cycle is _started_ by letting it pass from #state(0) to #state(1),
@@ -3317,8 +3318,8 @@ Cycle $k$ proceeds as follows.
 
 + Denote by $Eq(x, s)$ the condition
 $
-and.big_(k=0,1) [(restr(A_k, x + 1))[s] = (restr(Phi_(e,k)(E_(e,k)), x+1))[s] and
-                 (restr(E_(e,k), hat(phi)(x)))[s] = (restr(hat(Psi)_(e,k)(C join A_k join B_k), hat(phi)(x)))[s]],
+and.big_(i=0,1) [(restr(A_i, x + 1))[s] = (restr(Phi_(e,i)(E_(e,i)), x+1))[s] and
+                 (restr(E_(e,i), hat(phi)(x)))[s] = (restr(hat(Psi)_(e,i)(C join A_i join B_i), hat(phi)(x)))[s]],
 $
 where $phi_s(x) = max{phi_(0,s)(x), phi_(1,s)(x)}$. (Note that $Eq(x, s)$ implies $Eq(y, s)$ for all $y < x$.)
 
@@ -3327,7 +3328,7 @@ $
 v = max{(hat(psi)_0(phi(x)))[s_1], (hat(psi)_1(phi(x)))[s_1]}.
 $
 If $k > 0$ then instruct cycle $k-1$ to enumerate its witness $x(k-1)$ into $A_(pi(k-1))$ with use $v(k)$.
-Restrain $restr((A_i join B_i), v(k))$ for $i = 0, 1$, start cycle $(k+1)$ to run simultaneously, and advance to #state(2).
+Restrain $restr((A_i join B_i), v(k))$ for $i = 0, 1$, start cycle $k+1$ to run simultaneously, and advance to #state(2).
 
 [If there is no such stage then the requirement is satisfied.]
 
