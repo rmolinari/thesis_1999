@@ -3277,7 +3277,7 @@ satisfies the requirements of the theorem, without knowing which one.
 
 We will satisfy all requirements
 $
-R_e:      quad & or.big_(i=0,1) [A_k neq Phi_(e,i)(E_(e,i)) or E_(e,i) neq Psi_(e,i)(C join A_i join B_i)],\
+R_e:      quad & or.big_(i=0,1) [A_i neq Phi_(e,i)(E_(e,i)) or E_(e,i) neq Psi_(e,i)(C join A_i join B_i)],\
 P_(2e):   quad & B_0 neq Theta_e(C join A_0),\
 P_(2e+1): quad & B_1 neq Theta_e(C join A_1).
 $
