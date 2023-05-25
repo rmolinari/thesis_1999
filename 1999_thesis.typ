@@ -3225,7 +3225,7 @@ Now permitting follows much as it did before.
 
 As well as simplifying it, the proof of #theoremRef(<theorem4.3>) given above appears to correct an error
 in the proof of #theoremRef(<theorem4.4>) given in @ALS1996.
-That proof adopts the two levels of $H$-permission that are used in @CLW1989 and #chapRef(2) of this thesis.,
+That proof adopts the two levels of $H$-permission that are used in @CLW1989 and #chapRef(2) of this thesis,
 and the two-dimensional cycle structure.
 But the second layer of $H$-permission is redundant, as the $C$-permitting actions of #state(4) give default
 $H$-permission, as $C leqt H$ by assumption.
@@ -3238,8 +3238,8 @@ As well as being redundant, this seems to break the $C$-permission argument, or 
 that $C$-permission does not interfere with our attempts to threaten $H leqt C$.
 We must be able to show that we don't get stuck infinitely often in #state(4).
 To do this, in the original proof of~@ALS1996, we must show that (apart from finitely many cases)
-we get a $C$-change after the _last_ time that we pass out of #state(3)
-(since we can have several $restr(C, u_2)$ changes, we may jump from 3.5 back to 3 several times).
+we get a $C$-change after the _last_ time that we pass out of #state(3).
+(Since we can have several $restr(C, u_2)$ changes, we may jump from 3.5 back to 3 several times.)
 But this is now a problem: we know that $c_C$ dominates the function $m$, but $m$ no longer records
 the _last_ time we find a stage $s_2$ in 3, but merely the first.
 We can't redefine $m(p)$ each time we return to~3, as the $m$ must be recursive.
