@@ -2555,7 +2555,7 @@ to a $G$-change. In this case we need only keep an eye out for $Delta$-endgames.
 
 Apart from that, the same construction will work for $n=7$, and may be adapted for any $n > 4$.
 // p.49
-Every time an increase in $n$ requires the addition of an extra dimension to the cycle-structure
+Every time an increase in $n$ requires the addition of an extra dimension to the cycle structure
 (that is, every time $n$ is increased from $2m-1$ to $2m$), we just "bolt" one to the front:
 add an extra tier of functionals, with a corresponding waiting stage to protect all of the existing tiers.
 
@@ -2584,7 +2584,7 @@ Using the present technique, the answer is "no".
 The key point in the construction is that we know, ahead of time, how many times we will have to
 change the membership of a particular witness in the set $udvd$, and hence the number of times we
 will have to ask for corresponding $G$-permissions. This means that, for a specific basic module,
-we can specify ahead of time what the cycle-structure is going to look like, $omega^(floor(n\/2))$,
+we can specify ahead of time what the cycle structure is going to look like, $omega^(floor(n\/2))$,
 and hence what the possible outcomes will be. All of this is possible because for each witness we have
 two _anchor-points_, $restr(E_(s_1), phi_(s_1)(x))$ and $restr(E_(s_2), phi_(s_2)(x))$, to which
 we return over and over. Since we force $restr(E, phi_(s_1)(x))$ to repeatedly flip-flop between
@@ -3138,7 +3138,7 @@ acts. Otherwise, we way that $alpha$ _acts infinitely_.
 ]
 
 The rest of the verification follows just as in #chapRef(2). The arguments are somewhat simpler,
-as we have only a one-dimensional cycle-structure to worry about.
+as we have only a one-dimensional cycle structure to worry about.
 #lemma[
     Some (leftmost) successor of $alpha$ is accessible infinitely often.
     <lemma4.7>
@@ -3357,7 +3357,7 @@ exactly $setconcat(finseq({3}), {angletup(2, 1)})$.
 
 Consider the requirement $P_(2e)$. (The $P_(2e+1)$ is the same, with $A_0$ and $B_0$ replaced with $A_1$ and $B_1$.)
 Write $Theta$ for~$Theta_e$.
-The strategy for satisfying $P_(2e)$ has no cycle-structure, but has 3 internal states.
+The strategy for satisfying $P_(2e)$ has no cycle structure, but has 3 internal states.
 
 #show: doc => setupenum(doc, prefix: "P")
 0. Wait for the strategy to be started.
