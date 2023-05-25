@@ -3047,16 +3047,16 @@ To show that all the requirements are satisfied we prove the following, now fami
 
     + $f(n)$ is defined;
 
-    + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
+    + $restr(f, (n+1))$ is cancelled only finitely often (note that $restr(f, 0) = emptyset$ is never cancelled);
 
-    + #strat($restr(f, n)$) satisfies the requirement towards which it was working;
+    + #strat($restr(f, n)$) satisfies the requirement towards which it works; and
 
     + for all sufficiently large $G$-true stages $t$, $restr(f, (n+1)) subset f_t$.
     <proposition4.5>
 ]
 
-So, inductively assume the proposition for $n = eta - 1$, let $alpha = restr(f, eta)$
-and let $s_0$ be a stage so large that $alpha$ is not cancelled after~$s_0$, and for every $G$-true stage
+So, inductively assume the proposition for $n = eta - 1$. Let $alpha = restr(f, eta)$
+and let $s_0$ be a stage so large that $alpha$ is not cancelled after~$s_0$ and that for every $G$-true stage
 $t > s_0$, $alpha subset f_t$.
 
 We say that #stalpha _acts finitely_ if there is a #stg($s$) after which no cycle of $alpha$
