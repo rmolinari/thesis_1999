@@ -3443,7 +3443,7 @@ Our verification follows Cholak and Hinman, @CholakHinman.
 
 #lemma[
     #show: doc => setupenum(doc, formats: ("(i)",))
-    For $alpha, beta in T$, where $|alpha| = 2e$ and $|beta| = 2e' + 1$ we have:
+    For $alpha, beta in T$ with $|alpha| = 2e$ and $|beta| = 2e' + 1$ we have:
     + $x_s(alpha, k) in A_(pi(k),s)$ iff #cycle($k$) of #stalpha is in #state(3) at #stg($s$).
       Similarly, $y_s(beta) in B_(pi(e'),s)$ iff #strat($beta$) is in #pstate(2) at #stg($s$).
     + For stages $t < s$, if $x_t(alpha, k)$ is defined, and either $x_t(alpha, k) neq x_s(alpha, k)$,
@@ -3467,19 +3467,19 @@ Our verification follows Cholak and Hinman, @CholakHinman.
 
       But $v(l) < x_s(alpha, k) leq v(k) < v(k+1)$ as before, so again $x_s(alpha, k)$ is ejected from $A_(pi(k))$.
 
-    + Strategy $alpha$ is cancelled by some cycle $beta subset.neq alpha$ or $beta <_L alpha$ seeing a $C$-change
-      below $v(beta, l)$ for some~$l$ (or below $w(beta)$, as appropriate.)
+    + Strategy $alpha$ is cancelled by some cycle $gamma subset.neq alpha$ or $gamma <_L alpha$ seeing a $C$-change
+      below $v(gamma, l)$ for some~$l$ (or below $w(gamma)$, as appropriate.)
 
-      We consider the case where $|beta|$ is even, so that the $C$-change is below $v(beta, l)$.
-      The $|beta|$ odd case is the same.
-      If $beta subset.neq alpha$ then, by construction, $x_s(alpha, k)$ is chosen to be larger than $v(beta, l)$,
-      as $alpha$ becomes accessible only after #cycle($l$) of #strat($beta$) imposes restraint and defines $v(beta, l)$.
-      But now, as above, $v(alpha, k+1) > v(beta, l)$ and $x_s(alpha, k)$ is again ejected.
+      We consider the case where $|gamma|$ is even, so that the $C$-change is below $v(gamma, l)$.
+      The $|gamma|$ odd case is the same.
+      If $gamma subset.neq alpha$ then, by construction, $x_s(alpha, k)$ is chosen to be larger than $v(gamma, l)$,
+      as $alpha$ becomes accessible only after #cycle($l$) of #strat($gamma$) imposes restraint and defines $v(gamma, l)$.
+      But now, as above, $v(alpha, k+1) > v(gamma, l)$ and $x_s(alpha, k)$ is again ejected.
 
-      If $beta <_L alpha$ then let $gamma$ be the longest common initial segment of $alpha$ and~$beta$.
-      At the stage $t < s$ when $v(beta, l)$ is defined, either the action of #strat($gamma$) cancelled #stalpha,
+      If $gamma <_L alpha$ then let $delta$ be the longest common initial segment of $alpha$ and~$gamma$.
+      At the stage $t < s$ when $v(gamma, l)$ is defined, either the action of #strat($delta$) cancelled #stalpha,
       or no cycle of $alpha$ had been started since #stalpha was last cancelled.
-      Thus $x_s(alpha, k)$ is chosen after $v(beta, l)$ is defined, so $x_s(alpha, k) > v(beta, l)$, and
+      Thus $x_s(alpha, k)$ is chosen after $v(gamma, l)$ is defined, so $x_s(alpha, k) > v(gamma, l)$, and
       as before we have the result we want.
 
     // p.69
