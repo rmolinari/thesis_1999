@@ -2946,7 +2946,7 @@ Call a node at which this strategy is being pursued $alpha$. Cycle~$k$ proceeds 
   By the restraint on $A$, $restr(A_(s_1), v) = restr(A_(s_2), v)$, so we must have $restr(G_(s_1), v) neq restr(G_(s_2), v)$.
   We reset all cycles $k' > k$ and advance to #nstate(4).
   Note that the $G$-change has undefined all computations for $Delta(k')$, $k' > k$, except those computations with 0 use
-  (which are correct anyway).
+  (which are correct anyway.)
 
 + We set $Delta(G\; k) = 1$ (with use 0) a value we now know to be correct, start cycle $k+1$, and abandon #cycle($k$).
 
