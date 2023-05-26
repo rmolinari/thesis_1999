@@ -2698,7 +2698,7 @@ In the present paper we also construct such a set, $F$. Our $F$ is certainly 3-R
 an r.e. set $D$. By using the construction corresponding to #thmref(<theorem3.30>)[Theorem] we can
 take $F$ to be $(n+1)$-r.e. and the whole point of $F$ is that it is not of $n$-r.e. degree.
 
-The proof in @ALS1998 of #thmref(<theorem3.33>)[Theorem] is of finite injury, and involves a construction using two anchor-points.
+The proof in @ALS1998 of #theoremRef(<theorem3.33>) is of finite injury, and involves a construction using two anchor-points.
 Thus an adaption is possible, involving cycles, which will find the d.r.e. set $D$ below any previously given, non-recursive,
 r.e. set~$G$. Therefore Theorem~11 in @ALS1998 may be slightly strengthened to read
 #theorem[
@@ -3875,7 +3875,7 @@ A stronger conclusion is possible from a weaker assumption, with a simpler proof
 
 == The construction
 
-As pointed out in @CDJF, theorem~#thmref(<theorem6.2>) may be proved as follows.
+As pointed out in @CDJF, #theoremRef(<theorem6.2>) may be proved as follows.
 By Corollary~4.2 in @JockuschShore1983 we have
 #theorem[
     For any low r.e. set $L$ and any pseudojump operator~$V$, there is an r.e. set
@@ -3884,7 +3884,7 @@ By Corollary~4.2 in @JockuschShore1983 we have
 ]
 
 Now, using the Sacks splitting theorem we can split $K$ into two low r.e. sets $L_1$ and~$L_2$.
-Taking a pseudojump~$V$ which acts non-trivially on the all r.e. sets and applying theorem~#thmref(<theorem6.4>)
+Taking a pseudojump~$V$ which acts non-trivially on the all r.e. sets and applying #theoremRef(<theorem6.4>)
 to $L_1$ and $L_2$ in turn we obtain r.e. sets $A_1$ and $A_2$ such that $A_1 join A_2 equivt K$
 and $pseudojump(A_i, V) equivt K$.
 We have that $A_1$ and $A_2$ are incomparable, because if, say, $A_1 leqt A_2$ then $A_2 equivt K$ and
@@ -3901,19 +3901,19 @@ We will construct for each $i in omega$ an r.e. set $D_i = A_i join B_i join C_i
 The sets~$A_i$ will receive the elements of $K$ along the lines of the splitting theorem in such a way that
 if $0 leq i < j$ we have $A_i union A_j = K$ so $K equivt A_i join A_j$ and $K equivt D_i join D_j$.
 The sets $C_i$ will receive trace-markers which will attempt to encode $K$ into each $D_i$ separately,
-using the method of @JockuschShore1984.
-The sets $B_i$ receive enumerations of a technical nature, needed for the recovery of these encodings.
+using the method of @JockuschShore1983.
+The sets $B_i$ receive enumerations needed for the recovery of these encodings.
 
 We represent elements $(x, y)$ of $omega times omega$ using the standard pairing function $pair(x, y)$.
 Note that for all $i in omega$ we have $x < y implies pair(i, x) < pair(i,y)$.
 
-We aim to satisfy the following requirements, for all $i, x in omega$
+We aim to satisfy the following requirements, for all $i, x in omega$.
 $
 N_(i,x): quad & (exists^infinity s)[x in V^(D_i)[s]] implies x in V^(D_i),\
 P_x:     quad & x in K iff x "is missing from at most one of" A_0, A_1, A_2, dots,\
 R_(i,x): quad & x in K iff (exists y leq h(i,x))[y in column(omega, x) sand y in C_i],
 $
-where $lambda x[h(i,x)] leqt pseudojump(D_i, V)$.
+where $h(i,x)$ is a function satisfying $lambda x[h(i,x)] leqt pseudojump(D_i, V)$.
 
 We assume that we have an enumeration ${K_s}_(s geq 0)$ such that
 $(forall s)[thin |setdiff(K_(s+1), K_s)| leq 1]$.
