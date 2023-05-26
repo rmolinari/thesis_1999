@@ -3724,7 +3724,7 @@ From now on we consider both $eta$ even and $eta$ odd.
     of which there are infinitely many.
 
     If $eta$ is even and $alpha$ acts infinitely, then by #lemmaRef(<lemma5.9>) some leftmost #cycle($k$) changes
-    state infinitely often. Strategy~$alpha$ is not cancelled after #stg($s$), so it must be that either
+    state infinitely often. Strategy~$alpha$ is not cancelled after #stg($s_0$), so it must be that either
     (a)~#cycle($k$) eventually switches infinitely often between states 2 and~3, and is never in another state; or
     (b)~$k = 0$ and #cycle($k$) returns infinitely often to #state(1).
     In case~(a), $concatone(alpha, k)$ is accessible infinitely often, while
@@ -3735,7 +3735,7 @@ From now on we consider both $eta$ even and $eta$ odd.
     $
     h = cases(
         0\, quad & "if" stalpha "is in" pstate(1) "infinitely often,",
-        1\, quad & "otherwise, (that is, if" alpha "is in" pstate(2) "cofinitely often)".
+        1\, quad & "otherwise (that is, if" alpha "is in" pstate(2) "cofinitely often)".
     )
     $
     Then $concatone(alpha, h)$ is accessible infinitely often.
@@ -3755,7 +3755,7 @@ value $epsilon$ for $f(n)$.
     only if $epsilon geq 0$, and even then only when #cycle($epsilon$) of #stalpha is reset or returns to #state(1).
     The argument in the proof of #lemmaRef(<lemma5.10>) shows that this happens only finitely often.
 
-    If $epsilon$ is even, then if $epsilon = 0$, #strat($concatone(alpha, epsilon)$) is never cancelled after #stg($s_0$).
+    If $eta$ is odd, then if $epsilon = 0$, #strat($concatone(alpha, epsilon)$) is never cancelled after #stg($s_0$).
     If $epsilon = 1$ then there is a stage $s > s_0$ after which #stalpha is never in a state other than #pstate(2),
     and $concatone(alpha, 1)$ is not cancelled after #stg($s$).
 ]
@@ -3772,7 +3772,7 @@ This establishes part 2 of the Proposition.
     If $alpha$ acts only finitely, then $alpha$'s #cycle($epsilon + 1$) must get permanently stuck in #state(1).
     In particular, it never reaches its instance of $blankEq$.
     Thus either $A_i neq Phi_(e,i)(E_(e,i))$ or
-    $E_(e,i) neq Psi_(e,i)(C join A_i join B_i)$ (for some $i = 0,1,$) and the requirement is satisfied.
+    $E_(e,i) neq Psi_(e,i)(C join A_i join B_i)$ (for some $i = 0,1$) and the requirement is satisfied.
 
     If $alpha$ acts infinitely, let $s > s_0$ be so larger than that #cycle($epsilon + 1$) of #stalpha
     is not reset after #stg($s$).
