@@ -325,7 +325,7 @@ hat(phi)(x,s) = cases(
 )
 $
 The point of all this is the following. If $Phi\(C; x) converge$, then cofinitely often $hat(Phi)_s(C; x) converge$, and for every
-$C$-true stage $s$, $hat(Phi)_s(C_s; x) arrow.r.double hat(Phi)(C; x) converge$. The hattrick serves to weed out at $C$-true stages
+$C$-true stage $s$, $hat(Phi)_s(C_s; x) arrow.r.double hat(Phi)(C; x) converge$. The hat-trick serves to weed out at $C$-true stages
 all but the correct computations.
 
 Finite sequences are denoted variously with parentheses, $(x_0, dots, x_(n-1))$ and angle brackets $angle.l x_0, dots, x_(n-1)
