@@ -3828,7 +3828,7 @@ This concludes the proof of the Proposition, and of #theoremRef(<theorem5.2>).
 == Introduction
 
 In previous chapters we have typically been given a starting r.e. set $X$ and have constructed
-an $reInAbove(C)$ set~$Y$ by specifying an algorithm to do so.
+an $reInAbove(X)$ set~$Y$ by specifying an algorithm to do so.
 In each case we have (essentially explicitly) specified a pseudojump operator~$V$ such that
 $Y = pseudojump(X, V)$.
 In #chapRef(3) we also constructed our base set~$X$; we only had to ensure
@@ -3855,7 +3855,7 @@ Jockusch and Shore, in @JockuschShore1983[Thm 3.1], show the following.
     <theorem6.1>
 ]
 
-This is generalized in @CDJF to obtain.
+This is generalized in @CDJF to obtain
 #theorem[
     Given a pseudojump operator $V$ such that $V^X notleqt X$ for all r.e. sets $X$,
     there exist incomparable r.e. sets $A$ and $B$ such that
