@@ -3788,10 +3788,12 @@ This establishes part 2 of the Proposition.
     Since $alpha$ is not cancelled after #stg($s_0$), the strategy works with the same witnesses, $y$,
     forever after~$s_0$.
     If $epsilon = 0$ then $alpha$ is infinitely often in #pstate(1).
-    Thus either $Theta_(e')(C join A_0; y) converge$, but converges to something other than~0,
-    (if only finitely often does #stalpha advance to #pstate(2)); or $Theta_(e')(C join A_0; j) diverge$.
+    Thus either $Theta_(e')(C join A_0; y)$ converges to something other than~0,
+    (if only finitely often does #stalpha advance to #pstate(2)); or it diverges.
     But if $alpha$ is in #pstate(1) infinitely often, then $y in.not B_0$, so either way
-    $Theta_(e')(C join A_0) neq B_0(y)$.
+    $Theta_(e')(C join A_0; y) neq B_0(y)$.
+    If $epsilon = 1$ then there is a state $s > s_0$ after which #stalpha remains in #pstate(2).
+    Then $Theta_(e')(C join A_0; y) = 0 neq 1 = B_0(y)$.
 ]
 
 This establishes part 3 of the Proposition. Only one part now remains.
@@ -3803,7 +3805,7 @@ This establishes part 3 of the Proposition. Only one part now remains.
 #proof[
     First suppose that $eta$ is even.
 
-    Let $s > s_0$ be a stage so large that #cycle($epsilon + 1$) is not reset after #stg($s$),
+    Let $s > s_0$ be a stage so large that #cycle($epsilon + 1$) is not reset after #stg($s$)
     and is in a state other than~0 at #stg($s$).
     Suppose $t > s$ is a $C$-true stage such that #cycle($epsilon + 1$) finished #stg($t$) in a
     state numbered greater than~1.
@@ -3814,7 +3816,7 @@ This establishes part 3 of the Proposition. Only one part now remains.
     But this is a contradiction, as by construction #cycle($epsilon + 1$) is infinitely often in #state(1).
 
     If $eta$ is odd then a similar argument shows that (with #stg($s$) defined as above) #stalpha
-    every $C$-true #stg($t$) after $s$ in #state($epsilon$).
+    ends every $C$-true #stg($t$) after $s$ in #state($epsilon$).
 ]
 
 This concludes the proof of the Proposition, and of #theoremRef(<theorem5.2>).
