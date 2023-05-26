@@ -3644,17 +3644,16 @@ The following result is vitally important, if tedious to prove.
 
     - $beta = alpha$
 
-      If $k > l+1$ we just use #lemmaRef(<lemma5.3>) (ii). No $x_t(alpha, l+1)$ is ever in $A_(pi(l))$,
+      If $j > l+1$ we just use #lemmaRef(<lemma5.3>) (ii). No $x_t(alpha, l+1)$ is ever in $A_(pi(l))$,
       as $pi(l+1) neq pi(l)$.
       If $j leq l$, $t < s(l)$, and $x_t(alpha, j) neq macron(x)(alpha, j)$ then again we use #lemmaRef(<lemma5.3>) (ii).
-      So we are just left to consider the witnesses $macron(x)(alpha, j)$ for $j leq l$, and by parity,
+      So we are just left to consider the witnesses $macron(x)(alpha, j)$ for $j leq l$ and, by parity,
       we need only consider those with $j ident l thin (mod 2)$.
 
       Well, for such $j leq l - 2$, $macron(x)(alpha, j) in A_(pi(l), s)$ for all $s geq s(l)$ by #lemmaRef(<lemma5.5>) (iv).
-      Now $alpha$'s #cycle($l$) is in #state(1) at #stg($s(l)$), so by #lemmaRef(<lemma5.3>);(i),
+      Now $alpha$'s #cycle($l$) is in #state(1) at #stg($s(l)$) so, by #lemmaRef(<lemma5.3>);(i),
       $macron(x)(alpha, l) in.not A_(pi(l), s(l))$.
       By #lemmaRef(<lemma5.5>) (v), $macron(x)(alpha, l) in.not A_(pi(l),s(l+1))$.
-
 ]
 This result is used to prove the crucial
 // p.72
