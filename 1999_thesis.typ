@@ -3661,8 +3661,8 @@ This result is used to prove the crucial
     #show: doc => setupenum(doc, formats: ("(i)",))
     + If $s(l+1)$ exists then $restr(E_(pi(l), s(l+1)), macron(u)(alpha, l)) = restr(E_(pi(l), s(l)), macron(u)(alpha, l))$.
 
-    + If $s(l+2)$ exists then there is an $s > s(l)$ such that
-      $restr(E_(pi(l), s), macron(u)(alpha, l)) neq restr(E_(pi(l), s(l)), macron(u)(alpha, l))$, and if $t(l)$ is the least such~$s$,
+    + If $s(l+2)$ exists then there is a $t > s(l)$ such that
+      $restr(E_(pi(l), t), macron(u)(alpha, l)) neq restr(E_(pi(l), s(l)), macron(u)(alpha, l))$, and if $t(l)$ is the least such~$t$,
       then $s(l+1) < t(l)$.
     <lemma5.8>
 ]
@@ -3691,7 +3691,7 @@ This result is used to prove the crucial
 ]
 
 #lemma[
-    If $alpha$ acts infinitely (that is, if infinitely often some cycle of #stalpha changes state,)
+    If $alpha$ acts infinitely (that is, if infinitely often some cycle of #stalpha changes state)
     then some (leftmost) cycle of $alpha$ must change state infinitely often.
     <lemma5.9>
 ]
@@ -3701,7 +3701,7 @@ This result is used to prove the crucial
 
     But $s(-1) = 0$ and
     $s(l+1) = (mu s < t(l))[Eq(macron(x)(alpha, l+1), s) sand restr(C_s, v_s(alpha, l+1)) = restr(C_(t(l)), v_s(alpha, l+1))]$.
-    Moreover by Lemmas~#thmref(<lemma5.8>);(ii) and~#thmref(<lemma5.5>);(i) both $t(l)$ and $macron(x)(alpha, l)$ are
+    Moreover; by Lemmas~#thmref(<lemma5.8>);(ii) and~#thmref(<lemma5.5>);(i) both $t(l)$ and $macron(x)(alpha, l)$ are
     recursively computable from $s(l)$, so the function $lambda l[s(l)]$ is recursive.
 
     But $restr(C_(s(l)), macron(v)(alpha, l)) = restr(C, macron(v)(alpha, l))$ by #lemmaRef(<lemma5.5>);(iii),
