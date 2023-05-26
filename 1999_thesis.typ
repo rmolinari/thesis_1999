@@ -3486,7 +3486,7 @@ Our verification follows Cholak and Hinman, @CholakHinman.
     A similar argument establishes the result for the $y$-witness.
 
     For (ii), notice that the witness $x(alpha, k)$ changes or becomes undefined only when
-    #stalpha's #cycle($k$) is reset. When this occurs, #cycle($k$) leaves #state(3) (if it was there,)
+    #stalpha's #cycle($k$) is reset. When this occurs, #cycle($k$) leaves #state(3) (if it was there)
     so by part~(i), $x(alpha, k)$ certainly leaves $A_(pi(k))$.
     As it will never again be chosen as a witness, it never reenters $A_(pi(k))$.
 ]
@@ -3503,9 +3503,9 @@ We have the following (now familiar) result.
 
     + $f(n)$ is defined;
 
-    + $restr(f, (n+1))$ is cancelled only finitely often, (note that $restr(f, 0) = emptyset$ is never cancelled);
+    + $restr(f, (n+1))$ is cancelled only finitely often (note that $restr(f, 0) = emptyset$ is never cancelled);
 
-    + #strat($restr(f, n)$) satisfies the requirement towards which it works;
+    + #strat($restr(f, n)$) satisfies the requirement towards which it works; and
 
     + for all sufficiently large $C$-true stages $t$, $restr(f, (n+1)) subset f_t$.
     <proposition5.4>
@@ -3525,18 +3525,18 @@ When it exists, $s(l)$ has all sorts of nice properties.
 
 #lemma[
     #show: doc => setupenum(doc, formats: ("(i)",))
-    If $s(l)$ exists then
+    Suppose $s(l)$ exists then
 
-    + for each $k leq l$, $x_t(alpha, k)$, $u_t(alpha, k)$, and $v_t(alpha, k)$ have the same values for all $t > s(l)$,
-      (these fixed values will be referred to as $macron(x)(alpha, k)$, $macron(u)(alpha, k)$, and $macron(v)(alpha, k)$);
+    + for each $k leq l$, $x_t(alpha, k)$, $u_t(alpha, k)$, and $v_t(alpha, k)$ have the same values for all $t > s(l)$ ---
+      these fixed values will be referred to as $macron(x)(alpha, k)$, $macron(u)(alpha, k)$, and $macron(v)(alpha, k)$;
 
     + $Eq(macron(x)(alpha, l), s(l))$ holds;
 
     + $restr(C_(s(l)), macron(v)(alpha, l)) = restr(C, macron(v)(alpha, l))$;
 
-    + for all $s geq s(l)$ and $k leq l - 2$, $macron(x)(alpha, k) in A_(pi(l),s)$;
+    + for all $s geq s(l)$ and $0 leq k leq l - 2$, $macron(x)(alpha, k) in A_(pi(l),s)$; and
 
-    + If $l > 0$ then $macron(x)(alpha, l - 1) in.not A_(pi(l-1), s(l))$ but for all $s > s(l)$,
+    + if $l > 0$ then $macron(x)(alpha, l - 1) in.not A_(pi(l-1), s(l))$ but for all $s > s(l)$,
       $macron(x)(alpha, l - 1) in A_(pi(l-1), s)$.
     <lemma5.5>
 ]
