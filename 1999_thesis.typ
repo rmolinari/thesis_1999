@@ -114,7 +114,9 @@
 #let setconcat(M, N) = $#M\; #N$
 
 //  Inline 1/2. Typst does a bad job with fractions inline, insisting on using a vertical layout. It is surprising.
-#let half = $1\/2$
+#let inlinefrac(n,m) = $#n #h(0em) \/ #h(0em) #m$
+#let halfof(n) = inlinefrac(n,2)
+#let half = halfof(1)
 
 // "Finite sequences of"
 #let finseq(a) = $#a^(< infinity)$
@@ -2499,11 +2501,11 @@ pushing $x$ in and out of $V^D$. Only the "out of $V^D$" action requires $G$-per
 )
 ]
 There are thus $m+1$ pairs of actions, each (except the first) needing exactly one "layer" of $G$-permission.
-Thus the number of times that we must ask for $G$-permission is just $m = (n-1)\/2$.
+Thus the number of times that we must ask for $G$-permission is just $m = halfof((n-1))$.
 In the case that $n = 2m$ is even, the only change to the table above is the removal of the
 $(2m+2)$nd line, and we sill need permission $m$ times.
-Thus, given any $n$, we need permission $m = floor(n\/2)$ times for a given witness.
-(Notice that in the $n=4$ case we seek permission $2 = floor(4\/2)$ times for each witness.)
+Thus, given any $n$, we need permission $m = floor(halfof(n))$ times for a given witness.
+(Notice that in the $n=4$ case we seek permission $2 = floor(halfof(4))$ times for each witness.)
 
 Suppose that $n=7$. What needs to be done to adapt the basic $n=4$ module?
 // p.48
@@ -2584,7 +2586,7 @@ Using the present technique, the answer is "no".
 The key point in the construction is that we know, ahead of time, how many times we will have to
 change the membership of a particular witness in the set $udvd$, and hence the number of times we
 will have to ask for corresponding $G$-permissions. This means that, for a specific basic module,
-we can specify ahead of time what the cycle structure is going to look like, $omega^(floor(n\/2))$,
+we can specify ahead of time what the cycle structure is going to look like, $omega^(floor(halfof(n)))$,
 and hence what the possible outcomes will be. All of this is possible because for each witness we have
 two _anchor-points_, $restr(E_(s_1), phi_(s_1)(x))$ and $restr(E_(s_2), phi_(s_2)(x))$, to which
 we return over and over. Since we force $restr(E, phi_(s_1)(x))$ to repeatedly flip-flop between
@@ -3919,7 +3921,7 @@ We assume that we have an enumeration ${K_s}_(s geq 0)$ such that
 $(forall s)[thin |setdiff(K_(s+1), K_s)| leq 1]$.
 Following~@CDJF we also assume that the pseudojump $V$ has the property that for all r.e.
 // p.77
-sets $X$ given $x$, $s$, and $t > s$:
+sets $X$ and all $x$, $s$, and $t > s$:
 $
 [x in V^X[s] sand restr(X_t, r_X(x, s)) neq restr(X_s, r_X(x, s))]
 implies
@@ -3930,14 +3932,15 @@ Essentially , we identify $V$ with its hat-trick counterpart,~$hat(V)$.
 
 The construction progresses as follows.
 
-#let stage-hdr-local(name) = [#smallcaps[Stage] #name: #h(1em)]
-#stage-hdr-local($s = 0$) For $i in omega$, $A_i = B_i = C_i = emptyset$.
+#let stage-hdr-local(name) = [Stage #name: #h(1em)]
+#stage-hdr-local(0) For $i in omega$, $A_i = B_i = C_i = emptyset$.
 Also, for all $i, s, x in omega$ put (as boundary conditions)
 $h(i, x, -1) = l(i, x, -1) = 0$ and $h(i, -1, s) = -1$.
 
+#let shalf = $s + half$ // See #88
 #stage-hdr-local($s+1$) Each stage has two "phases". The first aims to satisfy
 the requirements $P_x$ and the second to satisfy the $R_(i,x)$. We will call the point between the two phases
-stage $s + 1\/2$.
+stage $shalf$.
 
 If $setdiff(K_(s+1), K_s) = emptyset$ then there is nothing to do.
 Otherwise let $setdiff(K_(s+1), K_s) = {k}$ and proceed as described.
@@ -3957,33 +3960,33 @@ $
 l(i,x,s) = (mu y) [ y in column(omega, x) sand y in.not B_(i,s) sand y geq l(i, x, s-1) sand y > rho^-(i, x, s)].
 $
 Let $pair(i_0, x_0)$ be the least pair $pair(i, x)$ such that $k leq r(i, x, s)$.
-We now mimic the proof of Sacks' Splitting Theorem and"protect" the pair $pair(i_0, x_0)$ by
+We now mimic the proof of the splitting theorem and "protect" the pair $pair(i_0, x_0)$ by
 enumerating $k$ "everywhere else". For each $j neq i_0$ do the following:
 
 #show: doc => setupenum(doc)
-+ Enumerate $k$ into $A_(j, s + half)$,
-+ Let $z$ be least such that $k leq r(j, z, s)$ and enumerate $l(j, z, s)$ into $B_(j, s+ 1\/2)$.
++ Enumerate $k$ into $A_(j, shalf)$,
++ Let $z$ be least such that $k leq r(j, z, s)$ and enumerate $l(j, z, s)$ into $B_(j, shalf)$.
   If there is no such $z$, do nothing here.#footnote[
       Strictly speaking, we are being a little loose. After all, it is not $k$ that gets enumerated into $D_j$, but its
       encoding, $2k$, and we are only concerned with things if _this_ enumeration injures some restraint $r(j, z, s)$.
       However, if $2k < r(j, z, s)$ then certainly $k < r(j, z, s)$, and it does not seem worth the trouble to keep track
-      of the difference between $k in A_i$ and what that means to $D_i$.
+      of the difference between $k in A_i$ and what that means to $D_j$.
 ]
 
 (This is the purpose of the enumerations into $B_j^([z])$: they witness the fact that $N_(j,z)$ was injured by
  an enumeration forced on us to protect a higher-priority pair. We do this only for the least pair $pair(j, z)$
  so affected, because if $pair(j, z') > pair(j, z)$ is also affected, this can be detected
- ($pseudojump(D_i, V)$)-recursively _via_ the implied change in $h(j, z, s)$. See lemma~#thmref(<lemma6.7>) below.)
+ ($pseudojump(D_i, V)$)-recursively _via_ the implied change in $h(j, z, s)$. See #lemmaRef(<lemma6.7>) below.)
 
 
-If there is no such $pair(i_0, x_0)$, then just enumerate $k$ into $A_(i,s + half)$ for every $i in omega$.
+If there is no such $pair(i_0, x_0)$, then just enumerate $k$ into $A_(i,shalf)$ for every $i in omega$.
 In this case there is no enumeration into any $B_i$.
 
 // p.78
 #phase("II") For every $i$ such that $A_i$ just received an enumeration, we recompute $r(i, x, s)$,
-and hence $rho(i, x, s)$ based on $D_(i,s+half)$.
+and hence $rho(i, x, s)$ based on $D_(i,shalf)$.
 (Even in the case where $k$ doesn't thereby injure anything we might get a new element in
- $setdiff(V^(D_i)[s+half], V^(D_i)[s])$, so we may as well recompute.)
+ $setdiff(V^(D_i)[shalf], V^(D_i)[s])$, so we may as well recompute.)
 Now, for all $i, x in omega$, (even~$i_0, x_0$) put
 $
 h(i, x, s) = (mu y)[ y in column(omega,x) sand y > h(i, x-1, s) sand y geq h(i, x, s-1) sand y > rho(i, x, s)]
