@@ -53,9 +53,6 @@
 #let leq = sym.lt.eq  // greater than or equal
 #let geq = sym.gt.eq  // less than or equal
 #let st = sym.bar.v   // vertical bar: "such that"
-#let dubpr = sym.prime.double // double primes
-#let trippr = sym.prime.triple // triple!
-
 
 ////////////////////////////////////////
 // Some standard notation
@@ -66,11 +63,12 @@
 #let turinginterval(a, b) = $[#a, #b]_T$
 // Turing less than and leq. Note that we have extra space after this symbol. See https://github.com/typst/typst/issues/877. The
 // workaround is to specify 0 space ourselves.
-#let ltt = $<_T$
-#let leqt = $lt.eq_T$
-#let notleqt = $lt.eq.not_T$
-#let equivt = $ident_T$
-#let emptyset = $nothing$
+#let ltt = $scripts(<)_T$
+#let leqt = $scripts(lt.eq)_T$
+#let geqt = $scripts(gt.eq)_T$
+#let notleqt = $scripts(lt.eq.not)_T$
+#let equivt = $scripts(equiv)_T$
+#let notequivt = $scripts(equiv.not)_T$
 // "Zero jump"
 #let zerojump = $emptyset'$
 // Pseudojump V applied to X
@@ -393,13 +391,13 @@ we are stuck with it. Write $Delta(j)$ for $Delta(emptyset \;  j)$.
 We first show that 1 does not hold.
 
 Consider the situation in which, at stage $t$, cycle $(j,k)$ is in state (5), cycle $(j, k+1)$ is in state (10) and cycle $(j+1,0)$
-is in state (7). Now suppose that there are stages $t < s < s' < s dubpr$, which are the next three stages and which any of the
+is in state (7). Now suppose that there are stages $t < s < s' < s''$, which are the next three stages and which any of the
 cycles of the strategy act, such that those actions are:
 
 - Stage $s$:   #h(1em) Cycle $(j+1, 0)$ defines $Delta(j+1)$ with use $v$.
 - Stage $s'$:  #h(1em) Cycle $(j, k)$ sees the $G$-permission it has been waiting for and stops cycles $(j, k+1)$ and $(j+1, 0)$.
   At this point, cycle $(j,k)$ advances to state (7).
-- Stage $s dubpr$: #h(1em) Cycle $(j,k)$ sees the stage (which it calls $s_2$) it has been waiting for, and so (re)starts cycle $(j+1, 0)$.
+- Stage $s''$: #h(1em) Cycle $(j,k)$ sees the stage (which it calls $s_2$) it has been waiting for, and so (re)starts cycle $(j+1, 0)$.
 The value for $Delta(j+1)$ that cycle $(j+1, 0)$ defined at stage $s$ has not become undefined, and claim 1 is false.
 
 #v(1em)
@@ -409,19 +407,19 @@ construction. We show that it still may be that the functional $Delta$ is not de
 a given value $j$, any of the cycles $(j, k)$ (for $k in omega$) may define $Delta(j)$, and it is these definitions which clash.
 
 So consider the situation in which, at stage $t$, cycle $(j, k)$ is in state (5) and cycle $(j, k+1)$ is in state (7). Suppose
-also that there are stages $t < s < s' < s dubpr$, which are the next three stages at which any of the cycles of the strategy act,
+also that there are stages $t < s < s' < s''$, which are the next three stages at which any of the cycles of the strategy act,
 such that these actions are:
 
 - Stage $s$:   #h(1em) Cycle $(j, k+1)$ sees the stage (called $s_2$) it is waiting for, and so defines $Delta(j)$ with use $v'$,
   advancing to state (10).
 - Stage $s'$:  #h(1em) Cycle $(j, k)$ gets the $G$-permission it has been waiting for and advances to state (7), stopping cycle
   $(j, k+1)$.
-- Stage $s dubpr$: #h(1em) Cycle $(j, k)$ sees _its_ version of stage $s_2$ (this is what it waits for in state (7)), and so attempts
+- Stage $s''$: #h(1em) Cycle $(j, k)$ sees _its_ version of stage $s_2$ (this is what it waits for in state (7)), and so attempts
   to define its own value of $Delta(j)$.
 
-We further suppose that $G_s(j) neq G_(s dubpr)(j)$ (this assumption is independent of any of the activity at stages $s$, $s'$ and
-$s dubpr$). Then the values of $Delta(j)$ that cycles $(j,k)$ and $(j, k+1)$ define will differ, but will both be present at stage
-$s dubpr$.
+We further suppose that $G_s(j) neq G_(s'')(j)$ (this assumption is independent of any of the activity at stages $s$, $s'$ and
+$s''$). Then the values of $Delta(j)$ that cycles $(j,k)$ and $(j, k+1)$ define will differ, but will both be present at stage
+$s''$.
 
 When boiled down, the problem is the tension between the definitions of the functions $Delta(C)$ and $Gamma_j(C)$.  The apparent
 need to keep the definition of $Gamma_j(C)$ synchronized with enumerations into the set $G$ conflicts with the more subdued approach
@@ -801,30 +799,30 @@ It will be convenient to refer to a cycle with is in either stage 5 or state~6 a
 
     If $(j, k')$ is reset at $t$ by the action of a cycle to the left of $(j, k)$, cycle $(j, k)$ is reset also.
 
-    Thus, aiming for a contradiction, we need only consider the case in which for some $k dubpr$ with
-    $k < k dubpr < k'$, cycle $(j, k dubpr)$ acts at stage $t$,
+    Thus, aiming for a contradiction, we need only consider the case in which for some $k''$ with
+    $k < k'' < k'$, cycle $(j, k'')$ acts at stage $t$,
     but $restr(C, v_t(j, k'))$ does not change at stage $t$. (Note that $v_t(j, k') = v_s(j, k')$.)
     Without loss of generality we may assume that $t$ is minimal in witnessing the failure of this lemma.
-    Since cycle $(j, k')$ is "awake" (that is, in a state other than 0) between stages $s$ and $t$, cycle $(j, k dubpr)$
+    Since cycle $(j, k')$ is "awake" (that is, in a state other than 0) between stages $s$ and $t$, cycle $(j, k'')$
     must be in one of the states 2, 3 or 7, and cannot change states (other than going from 2 to 3) during this time, for otherwise
-    cycle $(j, k')$ would be reset. We may may immediately discount the possibility that $(j, k dubpr)$ in state~7,
-    because a cycle in this state cannot act. Thus, as stage $t$ starts, cycle $(j, k dubpr)$ is in state~2 or state~3.
+    cycle $(j, k')$ would be reset. We may may immediately discount the possibility that $(j, k'')$ in state~7,
+    because a cycle in this state cannot act. Thus, as stage $t$ starts, cycle $(j, k'')$ is in state~2 or state~3.
 
-    We first claim that $(j, k dubpr)$ can't make the transition from state~2 to state~1. Indeed, such a transition indicates a change
-    in $restr(C, u(j, k dubpr))$. But cycle $(j, k')$ starts after cycle $(j, k dubpr)$ enters state~2, so by construction,
-    $v_t(j, k') > x(j, k') > u(j, k dubpr)$, and we have a change in $restr(C, v_t(j, k'))$ at stage $t$, which is a contradiction.
+    We first claim that $(j, k'')$ can't make the transition from state~2 to state~1. Indeed, such a transition indicates a change
+    in $restr(C, u(j, k''))$. But cycle $(j, k')$ starts after cycle $(j, k'')$ enters state~2, so by construction,
+    $v_t(j, k') > x(j, k') > u(j, k'')$, and we have a change in $restr(C, v_t(j, k'))$ at stage $t$, which is a contradiction.
 
-    Cycle $(j, k dubpr)$ can't go from state~2 to state~3 at stage $t$, as this does not count as an action, so the only remaining
-    possibility is the $3 arrow.r.bar 4$ transition, so that there is a change in $restr(C, mu_t(x(j, k dubpr)))$.
-    We claim that $mu_t(x(j, k dubpr)) = v_t(j, k')$, and obtain the contradiction of a change in $restr(C, v_t(j, k'))$.
+    Cycle $(j, k'')$ can't go from state~2 to state~3 at stage $t$, as this does not count as an action, so the only remaining
+    possibility is the $3 arrow.r.bar 4$ transition, so that there is a change in $restr(C, mu_t(x(j, k'')))$.
+    We claim that $mu_t(x(j, k'')) = v_t(j, k')$, and obtain the contradiction of a change in $restr(C, v_t(j, k'))$.
 
-    Suppose otherwise, so that $(j, k dubpr)$ enters state~3 for the sake of yet another cycle $(j, k trippr)$ being
+    Suppose otherwise, so that $(j, k'')$ enters state~3 for the sake of yet another cycle $(j, k''')$ being
     in state~5/6, or for another "incarnation" of cycle $(j, k')$; that is, for the sake of cycle $(j, k')$ being in state~5/6
-    based on another computation. Well, if we are in the former case, cycle $(j, k trippr)$ must leave state~5/6 by stage $s$,
-    by #lemmaRef(<lemma2.3>), forcing cycle $(j, k dubpr)$ out of state~3, by the assumption of the minimality of $t$.
-    The same argument applies to another "incarnation" of cycle $(j, k')$. Thus, cycle $(j, k dubpr)$ enters state~3 for
+    based on another computation. Well, if we are in the former case, cycle $(j, k''')$ must leave state~5/6 by stage $s$,
+    by #lemmaRef(<lemma2.3>), forcing cycle $(j, k'')$ out of state~3, by the assumption of the minimality of $t$.
+    The same argument applies to another "incarnation" of cycle $(j, k')$. Thus, cycle $(j, k'')$ enters state~3 for
     the sake of the same $(j, k')$-related computations that force cycle $(j, k)$ to do likewise, and
-    $mu_t(x(j, k dubpr)) = mu_s(x(j, k')) = v_s(j, k') = v_t(j, k')$. We are done.
+    $mu_t(x(j, k'')) = mu_s(x(j, k')) = v_s(j, k') = v_t(j, k')$. We are done.
 ]
 #lemma[
     For all $j$, if cycles $(j, k) neq (j, k')$ are both in state~3 at stage $s$, then
@@ -1737,7 +1735,7 @@ Soare and Stob prove (see @SoareStob1982)
 A question arises: what other sorts of degrees can we avoid in this way? For example, can
 we always construct $F$ to be not of d.r.e. degree? The answer is no:
 #theorem(name: [Arslanov, LaForte, and Slaman; @ALS1998])[
-    There exists an r.e. set $G ident.not_T emptyset$ such that every $reInAbove(G)$ set $F$ is of d.r.e. degree.
+    There exists an r.e. set $G notequivt emptyset$ such that every $reInAbove(G)$ set $F$ is of d.r.e. degree.
     <theorem3.2>
 ]
 
@@ -1747,7 +1745,7 @@ free (see @JockuschShore1984[Thm1.6a]). That is, $F$ is required only to be 2-RE
 _some_ r.e. set~$G$, which we are free to construct:
 #theorem(name: [Jockusch and Shore])[
     Let $A_0, A_1, dots$ be uniformly recursive in $zerojump$. Then there is a 2-REA set $F leqt zerojump$
-    such that for all $i geq 0$, $F ident.not A_i$.
+    such that for all $i geq 0$, $F equiv.not A_i$.
     <theorem3.3>
 ]
 Here "uniformly recursive in $zerojump$" means that there is a $zerojump$-recursive function $f$ such that
@@ -2164,19 +2162,19 @@ or #state(11) (if that $C$-change is seen while in #state(9).)
 In either case there is a change in $restr(C, mu(x(chi)))$, and cycle~$chi$ will change state,
 or be reset by the action of a cycle to its left.
 
-The case left to consider is that there is a third cycle, $chi dubpr$ with $chi < chi dubpr < chi'$,
+The case left to consider is that there is a third cycle, $chi''$ with $chi < chi'' < chi'$,
 which acts at stage~$t$.
 To reach a contradiction we assume that this action is not accompanied by a change in $restr(C, tilde(v)_t(chi'))$.
 Without loss of generality we may assume that $t$ is minimal in witnessing the failure of the lemma in this way.
-Now, as cycle~$chi'$ is not in #state(0) at stage~$s$, cycle~$chi dubpr$ must be in one of the following
+Now, as cycle~$chi'$ is not in #state(0) at stage~$s$, cycle~$chi''$ must be in one of the following
 states at that time: 4, 5, or~10.
-Cycle~$chi dubpr$ cannot change state between stages~$s$ and~$t$ (except for the transition~#trans(4,5))
+Cycle~$chi''$ cannot change state between stages~$s$ and~$t$ (except for the transition~#trans(4,5))
 as to do so would reset cycle~$chi'$, contradicting the definition of~$t$. We may discard the possibility
-that $chi dubpr$ is in #state(10) at stage~$s$, as such a cycle can never act again without first
-being reset. Cycle $chi dubpr$ can't make the transition~#trans(4,5) at stage~$t$, as such a transition
-doesn't count as an action. The transitions~#trans(4,1), and~#trans(4,2), entail a change in $restr(C, tilde(v)_t(chi dubpr))$.
-But $tilde(v)_t(chi dubpr) < tilde(v)_t(chi')$ since cycle~$chi'$ starts after $chi dubpr$ reaches #state(2)
-and $tilde(v)_t(chi dubpr)$ is defined. Thus such a $C$-change is impossible.
+that $chi''$ is in #state(10) at stage~$s$, as such a cycle can never act again without first
+being reset. Cycle $chi''$ can't make the transition~#trans(4,5) at stage~$t$, as such a transition
+doesn't count as an action. The transitions~#trans(4,1), and~#trans(4,2), entail a change in $restr(C, tilde(v)_t(chi''))$.
+But $tilde(v)_t(chi'') < tilde(v)_t(chi')$ since cycle~$chi'$ starts after $chi''$ reaches #state(2)
+and $tilde(v)_t(chi'')$ is defined. Thus such a $C$-change is impossible.
 
 Thus, the only possible transition left is~#trans(5,6). That this is impossible follows from the same
 argument as was used for the #trans(3,4) transition in #chapRef(2).
@@ -2362,9 +2360,9 @@ These results establish parts 1-4 of the Proposition and complete the inductive 
 #thmref(<prop3.17>)[Proposition] is proved. #qed
 
 
-Thus all of the requirements are satisfied, and we have constructed r.e. $D gt.eq_T G$ and
+Thus all of the requirements are satisfied, and we have constructed r.e. $D geqt G$ and
 two r.e.[$D$] sets $U^D$ and~$V^D$ such that $D join (udvd)$ is not of 4-r.e. degree.
-It remains only to show that in fact $D leq_T G$. We use the same method as we did in #chapRef(2).
+It remains only to show that in fact $D leqt G$. We use the same method as we did in #chapRef(2).
 
 For $alpha in T$ we set
 $
@@ -2638,7 +2636,7 @@ when we want them to be, in forcing the opponent set, $E$, to change. That is, w
 the value of $(udvd)(x)$, for a given witness, will change at most $n+1$ times: the constructed set will be $(n+1)$-r.e.
 Hence we have the following.
 #theorem[
-    Given an r.e. set $G ident.not_T emptyset$, there is r.e. $D leqt G$ such that for all $n in omega$
+    Given an r.e. set $G notequivt emptyset$, there is r.e. $D leqt G$ such that for all $n in omega$
     there is a set $F$ which is simultaneously $dreInAbove(D)$ and $(n+1)$-r.e. but not of $n$-r.e. degree.
     <theorem3.30>
 ]
@@ -2646,7 +2644,7 @@ When combining requirements corresponding to different values of $n$ we can tell
 witness $x$ was chosen, and hence the maximum number of times that $(udvd)(x)$ will change. We therefore have the following result,
 which corresponds to #thmref(<theorem3.29>) just as #thmref(<theorem3.30>) corresponds to #thmref(<theorem3.28>)[Theorem].
 #theorem[
-    Given an r.e. set $G ident.not_T emptyset$, there is r.e. $D leqt G$ and a set $F$ which is
+    Given an r.e. set $G notequivt emptyset$, there is r.e. $D leqt G$ and a set $F$ which is
     simultaneously $dreInAbove(D)$ and $omega$-r.e., but not of $n$-r.e. degree for any $n in omega$.
     <theorem3.31>
 ]
@@ -2867,7 +2865,7 @@ Cycle~$k$ proceeds as follows.
    We will argue that such multiple definitions only persist when #cycle($k$) gets permanently stuck
    in #state(4) and this will only happen to finitely many cycles.)
 
-+ Wait for a #stg($s dubpr$) at which $restr(C, xi(x))$ changes. Let this change in $C$ remove $x$ from A,
++ Wait for a #stg($s''$) at which $restr(C, xi(x))$ changes. Let this change in $C$ remove $x$ from A,
   reset all cycles $k' > k$ and go to #state(5).
 
   Now if $restr(G, u) = restr(G_(s_1), u)$, $x$ finally witnesses the success of our strategy, since
@@ -3619,7 +3617,7 @@ The following result is vitally important, if tedious to prove.
       as $pi(l+1) neq pi(l)$.
       If $j leq l$, $t < s(l)$ and $x_t(alpha, j) neq macron(x)(alpha, j)$ then again we use #lemmaRef(<lemma5.3>) (ii).
       So we are just left to consider the witnesses $macron(x)(alpha, j)$ for $j leq l$, and by parity,
-      we need only consider those with $j ident l thin (mod 2)$.
+      we need only consider those with $j equiv l thin (mod 2)$.
 
       Well, for such $j leq l - 2$, $macron(x)(alpha, j) in A_(pi(l), s)$ for all $s geq s(l)$ by #lemmaRef(<lemma5.5>) (iv).
       Now $alpha$'s #cycle($l$) is in #state(1) at #stg($s(l)$), so by #lemmaRef(<lemma5.3>);(i),
@@ -3839,7 +3837,7 @@ A stronger conclusion is possible from a weaker assumption, with a simpler proof
 #theorem[
     Given a pseudojump operator $V$ such that $V^X notleqt X$ for all recursively enumerable sets $X equivt K$,
     there exist pairwise incomparable r.e. sets $D_0, D_1, D_2, dots$ such that
-    for each $i$, $pseudojump(D_i, V) ident_T K$.
+    for each $i$, $pseudojump(D_i, V) equivt K$.
     <theorem6.3>
 ]
 
@@ -3849,7 +3847,7 @@ As pointed out in @CDJF, theorem~#thmref(<theorem6.2>) may be proved as follows.
 By Corollary~4.2 in @JockuschShore1983 we have
 #theorem[
     For any low r.e. set $L$ and any pseudojump operator~$V$, there is an r.e. set
-    $A geq_T L$ such that $pseudojump(A, V) equivt K$.
+    $A geqt L$ such that $pseudojump(A, V) equivt K$.
     <theorem6.4>
 ]
 
