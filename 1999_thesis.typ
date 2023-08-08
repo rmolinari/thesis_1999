@@ -1362,7 +1362,7 @@ acts. Otherwise we say that $alpha$ _acts infinitely_.
     abandoned in #state(7). In the latter case, $Gamma_j (C; k)$ is correctly defined to be
     $1 = G(k)$ with use~0. We claim that the cycles which get permanently stuck in #state(2) also
     compute a correct value. Well, suppose that $(j, k)$ gets so stuck. It must be that
-    $restr(C, u(j,k)) = restr(C_(s_1 (j,k)), u(j, k))$ _and_ $G(k) = G_(s_1 (j,k))(k)$. But then
+    $restr(C, u(j,k)) = restr(C_(s_1(j,k)), u(j, k))$ _and_ $G(k) = G_(s_1(j,k))(k)$. But then
     $
     Gamma_j (C; k) &= (Gamma_j (C; k))[s_1] \
                   &= (G(k))[s_1] \
@@ -2569,11 +2569,11 @@ $E$ must change each and every time. As we know how many times $E(y)$ can change
 put a bound, _before any cycle of the strategy starts_, on how many times we will have to flip-flop.
 
 Consider what would happen here if we tried to construct $F = C join A join V^D$, an $reInAbove(D)$ set.
-At our equivalent of #state(1) we would choose a lever $lambda_1 (x)$ larger than $tilde(u)$,
-and enumerate $x$ into $V^D$ with use $lambda_1 (x) + 1$.  Then, when we see the next stage of agreement, $s_2$,
+At our equivalent of #state(1) we would choose a lever $lambda_1(x)$ larger than $tilde(u)$,
+and enumerate $x$ into $V^D$ with use $lambda_1(x) + 1$.  Then, when we see the next stage of agreement, $s_2$,
 with total use $tilde(v)$, we would (after waiting for permission) kick $x$ out of $V^D$ by pulling the
-lever~$lambda_1 (x)$. However, it is impossible for us to restrain $restr(A, tilde(v))$ from #stg($s_2$)
-onwards, as we cannot be sure that $lambda_1 (x) > v$. The very act of returning $V^D$ to its $s_1$ shape
+lever~$lambda_1(x)$. However, it is impossible for us to restrain $restr(A, tilde(v))$ from #stg($s_2$)
+onwards, as we cannot be sure that $lambda_1(x) > v$. The very act of returning $V^D$ to its $s_1$ shape
 may change $restr(A, tilde(v))$. Thus, instead of two anchor-points, we will only have one,
 $restr(E_(s_1), phi_(s_1)(x))$, to which we can be sure of returning each time. Thus, while we can say each time that
 $
@@ -3294,7 +3294,7 @@ Cycle $k$ proceeds as follows.
 
   Wait for a stage $s_1$ at which $Eq(x, s_1)$ holds. Set $u = phi_(s_1)(x)$ and put
   $
-  v = max{(hat(psi)_0 (phi(x)))[s_1], (hat(psi)_1 (phi(x)))[s_1]}.
+  v = max{(hat(psi)_0(phi(x)))[s_1], (hat(psi)_1(phi(x)))[s_1]}.
   $
   If $k > 0$ then instruct cycle $k-1$ to enumerate its witness $x(k-1)$ into $A_(pi(k-1))$ with use $v(k)$.
   Restrain $restr((A_i join B_i), v(k))$ for $i = 0, 1$, start cycle $(k+1)$ to run simultaneously, and advance to #state(2).
@@ -3762,7 +3762,7 @@ This establishes part 2 of the Proposition.
     Thus either $Theta_(e')(C join A_0; y) converge$, but converges to something other than~0,
     (if only finitely often does #stalpha advance to #pstate(2)); or $Theta_(e')(C join A_0; j) diverge$.
     But if $alpha$ is in #pstate(1) infinitely often, then $y in.not B_0$, so either way
-    $Theta_(e')(C join A_0) neq B_0 (y)$.
+    $Theta_(e')(C join A_0) neq B_0(y)$.
 ]
 
 This establishes part 3 of the Proposition. Only one part now remains.
