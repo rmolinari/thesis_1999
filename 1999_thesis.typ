@@ -14,12 +14,12 @@
 #import "tablex.typ": tablex, gridx, hlinex, colspanx
 
 #let myresult = thmbox.with(
-    base_level: 1,
-    titlefmt: strong,
-    bodyfmt: emph,
-    inset: 0em,
-    padding: (top: 0.0em),
-    separator: [#h(0.5em)] // using my change to theorems.typ - pull requested
+  base_level: 1,
+  titlefmt: strong,
+  bodyfmt: emph,
+  inset: 0em,
+  padding: (top: 0.0em),
+  separator: [#h(0.5em)] // using my change to theorems.typ - pull requested
 )
 
 #let theorem = myresult("theorem", "Theorem")
@@ -29,15 +29,15 @@
 
 #let qed = [#h(1fr) $square$]
 #let proof = thmplain(
-    none,
-    "Proof",
-    titlefmt: strong,
-    bodyfmt: body => [
-        #body #qed
-    ],
-    padding: (top: 0em, bottom: 0em),
-    inset: 0em,
-    separator: [:#h(1em)]
+  none,
+  "Proof",
+  titlefmt: strong,
+  bodyfmt: body => [
+    #body #qed
+  ],
+  padding: (top: 0em, bottom: 0em),
+  inset: 0em,
+  separator: [:#h(1em)]
 ).with(numbering: none)
 
 #let theoremRef(name) = thmref(name)[Theorem]
@@ -184,24 +184,24 @@
 // Based on an answer in the Discord from PgSuper (2023-04-13 1:43 PM)
 // See issue #9 on my GitHub
 #let setupenum(doc, prefix: "", formats: ("1.", "(a)", "i.")) = {
-    set enum(
-        full: true,
-        numbering: (..n) => {
-            let n = n.pos()
-            if n.len() > 2 {
-                numbering(formats.at(2), n.last())
-            } else if n.len() == 2 {
-                numbering(formats.at(1), n.last())
-            } else {
-                numbering(prefix + formats.at(0), ..n)
-}
-}
-)
-doc
+  set enum(
+    full: true,
+    numbering: (..n) => {
+      let n = n.pos()
+      if n.len() > 2 {
+        numbering(formats.at(2), n.last())
+      } else if n.len() == 2 {
+        numbering(formats.at(1), n.last())
+      } else {
+        numbering(prefix + formats.at(0), ..n)
+      }
+    }
+  )
+  doc
 }
 
 #let defEnum(..fmts) = {
-    show: doc => setupenum(doc, formats: fmts)
+  show: doc => setupenum(doc, formats: fmts)
 }
 
 #show: doc => setupenum(doc)
@@ -209,49 +209,49 @@ doc
 ////////////////////////////////////////
 // Title page
 #align(horizon + center)[
-    #[
-        #set text(weight: "bold", size: 16pt)
-        #thesis_title
+  #[
+    #set text(weight: "bold", size: 16pt)
+    #thesis_title
+  ]
+  #v(1in)
+  by \
+  #author
+
+  #v(1in)
+  A dissertation submitted in partial fulfillment \
+  of the requirements for the degree of \
+  Doctor of Philosophy \
+  (Mathematics) \
+  in The University of Michigan \
+  1999
+
+  #v(1in)
+  #box(
+    width: 3in
+  )[
+    #align(left)[
+      #set par(hanging-indent: 0.5in)
+      Doctoral Committee: \
+      Professor Peter Hinman, Chair \
+      Professor Andreas Blass, \
+      Professor Philip Hanlon, \
+      Assistant Professor Peter Selinger, \
+      Associate Professor Jamie Tappenden
     ]
-    #v(1in)
-    by \
-    #author
+  ]
 
-    #v(1in)
-    A dissertation submitted in partial fulfillment \
-    of the requirements for the degree of \
-    Doctor of Philosophy \
-    (Mathematics) \
-    in The University of Michigan \
-    1999
+  #pagebreak()
+  #pagebreak()
 
-    #v(1in)
-    #box(
-        width: 3in
-    )[
-        #align(left)[
-            #set par(hanging-indent: 0.5in)
-            Doctoral Committee: \
-            Professor Peter Hinman, Chair \
-            Professor Andreas Blass, \
-            Professor Philip Hanlon, \
-            Assistant Professor Peter Selinger, \
-            Associate Professor Jamie Tappenden
-        ]
+  #grid(
+    columns: (0.5in, 2in),
+    sym.copyright,
+    align(horizon + left)[
+      #underline[Rory Molinari] #h(1em) 1999 \
+      All Rights Reserved
     ]
-
-    #pagebreak()
-    #pagebreak()
-
-    #grid(
-        columns: (0.5in, 2in),
-        sym.copyright,
-        align(horizon + left)[
-          #underline[Rory Molinari] #h(1em) 1999 \
-          All Rights Reserved
-       ]
-    )
-    #pagebreak()
+  )
+  #pagebreak()
 ]
 
 #heading(numbering: none, "ACKNOWLEDGEMENTS")
@@ -273,21 +273,21 @@ University possible, and whose unfailing hospitality made me feel welcome.
 // Experimental. Based on something I found it in the Discord from user Heinenen 04/05/2023
 #set heading(numbering: "1.")
 #show heading.where(level: 1): it => {
-    set heading(numbering: "I")
-    pagebreak(weak: true)
-    v(2in)
-    set text(weight: "bold")
-    align(center)[
-      CHAPTER #counter(heading).display()\
-      #v(0.5em)
-      #it.body
-      #v(0.8in)
-    ]
+  set heading(numbering: "I")
+  pagebreak(weak: true)
+  v(2in)
+  set text(weight: "bold")
+  align(center)[
+    CHAPTER #counter(heading).display()\
+    #v(0.5em)
+    #it.body
+    #v(0.8in)
+  ]
 
-    // We number footnotes by chapter.
-    // This doesn't really belong here, in a formatting function, but where else?
-    // Maybe define a new function #chapter that makes the header and resets this counter.
-    counter(footnote).update(0)
+  // We number footnotes by chapter.
+  // This doesn't really belong here, in a formatting function, but where else?
+  // Maybe define a new function #chapter that makes the header and resets this counter.
+  counter(footnote).update(0)
 }
 
 = Introduction
