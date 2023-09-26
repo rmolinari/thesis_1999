@@ -608,7 +608,7 @@ Cycle $(j,k)$ of the strategy proceeds as follows.
   for technical reasons to reset every cycle in row $row(j)$, put cycle $(j, 0)$ into stage 8, and start cycle $(j+1, 0)$.
 
   The same comments as in state~7 just above apply here, but the result of the failure of cycle $(j, k)$ is even more stark. Now we
-  have defined a correct value for $Delta(C; j)$, and have seen (and "wasted") the only change in $G(j)$ that will ever occur. Thus
+  have defined a correct value for $Delta(C\; j)$, and have seen (and "wasted") the only change in $G(j)$ that will ever occur. Thus
   all cycles which rely on a change in $G(j)$ at some point are our of luck in the future, and we may as well not bother with
   them. These cycles include _all_ of row $row(j)$, which is why we permanently abandon this whole row. We content ourselves now
   with the single correct value $Delta(C\; j)$.
