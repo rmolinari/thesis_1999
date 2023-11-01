@@ -91,7 +91,7 @@ CholakHinman:
   date: 1994
 
 Hinman:
-  type: Unpublished Notes
+  type: misc
   author: Hinman, Peter G.
   title: More iterated relative recursive enumerability
 
@@ -119,7 +119,7 @@ Robinson:
     volume: 14
 
 CDJF:
-  type: Preprint
+  type: manuscript
   author:
     - Coles, Richard
     - Downey, Rod
